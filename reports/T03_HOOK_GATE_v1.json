@@ -1,0 +1,69 @@
+{
+  "schema_version": "1.0",
+  "type": "evidence_aggregation_not_runtime_credential",
+  "status": "passed_under_gate_split_v1",
+  "effective": true,
+  "amendment": "reports/T03_GATE_SPLIT_AMENDMENT_v1.yaml",
+  "approval_sidecar": "reports/T03_GATE_SPLIT_AMENDMENT_v1_APPROVAL.json",
+  "model_lock": {
+    "path": "artifacts/model/MODEL_MANIFEST.json",
+    "sha256": "96985947DA620361AED5A16D5352CE507EFC68B769CC5E5FF360DDEC1E34FB46",
+    "revision_sha": "62b9b3bd4308e72905c5bce38c1d6689549c525d",
+    "chat_template_sha256": "cc945752db555d60949b16989df4ccfeb52a313d6b4b5c5229dd786e2e9fcf1c"
+  },
+  "historical_T03_bf16_gate": "failed",
+  "T03_NUMERICS": "failed_limit_recorded",
+  "does_not_unlock_T04_automatically": true,
+  "does_not_rewrite_complete_T03_as_passed": true,
+  "conditions": [
+    {
+      "condition": "no_hook_identity_zero_self_patch",
+      "status": "passed_under_split_gate",
+      "evidence": "artifacts/hooks/HOOK_VALIDATION_CPU_ABC_OFFICIAL_BF16_20260914.json:identity_max_abs,zero_alpha_max_abs,self_patch_max_abs",
+      "limitation": "CPU/path control evidence; historical GPU BF16 numerical failure remains."
+    },
+    {
+      "condition": "kv_identity",
+      "status": "passed_under_split_gate",
+      "evidence": "artifacts/hooks/HOOK_VALIDATION_CPU_ABC_OFFICIAL_BF16_20260914.json:kv_identity_max_abs",
+      "limitation": "GPU artifact does not contain a kv_identity hook field; its B≡C and C cache-growth records are reported only as cache-path consistency, not hook identity."
+    },
+    {
+      "condition": "padding_position_decode_accounting",
+      "status": "passed_under_split_gate",
+      "evidence": "artifacts/hooks/HOOK_VALIDATION_GPU_ABC_REAL_C_20260914.json:position_ids,cache_position,extended_mask,C_call_sequence; tests/test_check_hooks_kv.py",
+      "limitation": "Bounded recorded paths only."
+    },
+    {
+      "condition": "prefill_and_decode_hook_coverage",
+      "status": "passed_under_split_gate",
+      "evidence": "artifacts/hooks/HOOK_VALIDATION_CPU_ABC_OFFICIAL_BF16_20260914.json:projection_hook_manifest.forward_count=2,decode_forward_count=1",
+      "limitation": "Official locked-model CPU hook counts cover the recorded prefill/decode paths; GPU C_call_sequence is not used as proof of hook trigger counts."
+    },
+    {
+      "condition": "weight_hash_unchanged",
+      "status": "passed_under_split_gate",
+      "evidence": "artifacts/hooks/HOOK_VALIDATION_CPU_ABC_OFFICIAL_BF16_20260914.json:weights_before_sha256,weights_after_sha256; artifacts/hooks/HOOK_VALIDATION_GPU_ABC_REAL_C_20260914.json:weights_before_sha256,weights_after_sha256",
+      "limitation": "Run-specific integrity evidence."
+    },
+    {
+      "condition": "finite_values",
+      "status": "passed_under_split_gate",
+      "evidence": "artifacts/hooks/HOOK_VALIDATION_GPU_ABC_REAL_C_20260914.json:finite checks; reports/T03_FP32_CONTROL_PLAN.md:§4.2–§4.3",
+      "limitation": "Future runs still require runtime guards."
+    },
+    {
+      "condition": "controlled_information_replacement_with_predeclared_target_toy_test",
+      "status": "passed_under_split_gate",
+      "evidence": "tests/test_hooks.py:84-89:ToyModel PatchSpec [100,-100,0], fixed layer/position, argmax 2->0",
+      "limitation": "ToyModel engineering control only; no official-model mechanism or complete mechanism-preservation claim."
+    }
+  ],
+  "scope": {
+    "new_full_cache_threshold": null,
+    "fp32_characterization_is_validation_credential": false,
+    "gpu_execution_this_turn": false,
+    "T04_execution_this_turn": false,
+    "T04_requires_separate_explicit_approval": true
+  }
+}

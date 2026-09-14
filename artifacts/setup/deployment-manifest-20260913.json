@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "created_at": "2026-09-13",
+  "scope": "T00-T04 framework merge only",
+  "remote_host": "sh-aiserver01",
+  "remote_root": "/home/jybai/research/MiniCPM5_Research_Plan_v1/minicpm5_research_plan",
+  "model_inference": "not_run",
+  "gpu_execution": "not_run",
+  "t_runner_preserved": true,
+  "backup": "artifacts/setup/merge-backups/20260913T143729Z",
+  "runner_sha256": "6d64985979f024b56f8c4b90841bf0f6c6180b0a0ac20873588ffff30c4f1bd5",
+  "parser_sha256": "1d0db0972176a5f7bd19014093e860684083c858ef0cb6bdd517ed79db2d2511",
+  "evaluation_sha256": "e511a128c8b70d566c96feb8b609f557916781d50e5356d582ec49727b82462b",
+  "validation": {"unittest": {"exit_code": 0, "tests": 83, "skipped": 1}, "pilot_dry_run": {"exit_code": 0, "tasks": ["V", "T"], "selected_examples": 7}, "compileall": {"exit_code": 0}, "pytest": {"exit_code": 1, "reason": "pytest unavailable"}}
+}

@@ -1,0 +1,2 @@
+{"at":"2026-09-14T09:26:53.813284+00:00","attempt":"1789378013813193341-3358564","event":"attempt_started","gpu_execution":true,"pid":3358564}
+{"at":"2026-09-14T09:27:57.476804+00:00","attempt":"1789378013813193341-3358564","elapsed_seconds":63.66359595954418,"error":"GPU free memory is below requested budget plus 12 GiB reserve","error_type":"ResourceError","event":"attempt_failed"}

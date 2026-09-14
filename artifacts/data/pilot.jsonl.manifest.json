@@ -1,0 +1,31 @@
+{
+  "C_controls": "NOT_IMPLEMENTED",
+  "data_sha256": "ecbcc6bf91822dd44547289dca429dc4b381f2c5549b452201fc29789e5f2782",
+  "gpu_execution": "未运行",
+  "human_gold_audit": "pending_two_independent_reviewers",
+  "label_tokenization": "A_B_C_single_token_in_locked_template_anchor_context",
+  "length_and_negation_matching": "requires_pilot_audit",
+  "native_tool_parser_validation": "native_xml_v1_implemented_unit_validated; real_model_output_validation_pending_gpu",
+  "safety_manipulation_check": "NOT_IMPLEMENTED_pending_licensed_S_and_independent_audit",
+  "schema_version": "pilot-v1",
+  "scope": "synthetic_V_T_pilot_only",
+  "sealed_test_created": false,
+  "seed": 20260912,
+  "source_sha256": {
+    "data.py": "20e38da820a7366088f9379fe6ed116482d3b2315c15fcc77de9dbfa363642d8",
+    "sandbox.py": "bba3ad359ae6516efce5d5dc091fcd67891af2e403b2c3d6faf5e83c023677a0",
+    "verifier.py": "d77a8142a04188832893c3c25d4ea4332ccecc5faeaab121939197d0b3ff2d34"
+  },
+  "tool_families": 60,
+  "unseen_formal_templates": "not_created_pilot_only",
+  "validation": {
+    "cross_split_leakage": false,
+    "examples": 600,
+    "families": 180,
+    "gold_verified": true,
+    "splits": [
+      "pilot"
+    ]
+  },
+  "verdict_families": 120
+}

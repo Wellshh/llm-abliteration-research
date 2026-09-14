@@ -1,0 +1,2 @@
+{"at":"2026-09-14T09:25:32.082291+00:00","attempt":"1789377932082246845-3346665","event":"attempt_started","gpu_execution":true,"pid":3346665}
+{"at":"2026-09-14T09:26:34.456389+00:00","attempt":"1789377932082246845-3346665","elapsed_seconds":62.37412022985518,"error":"Existing CUDA_VISIBLE_DEVICES conflicts or is not a verified single UUID; it will not be overridden","error_type":"ResourceError","event":"attempt_failed"}

@@ -1,0 +1,67 @@
+schema_version: '1.0-proposed'
+status: proposed_data_after_amendment
+effective: false
+proposed_at: '2026-09-14'
+approval:
+  required: true
+  approver: null
+  approved_at: null
+  approval_record: null
+  freeze_hash: null
+basis_observed_data_after:
+  bf16_gpu_batched_full_vs_cache_max_abs: 0.75
+  historical_implementation_threshold: 0.5
+  fp32_gpu_eager_characterization_max_abs: 3.77e-5
+  evidence:
+  - artifacts/hooks/HOOK_VALIDATION_GPU_ABC_REAL_C_20260914.json
+  - artifacts/hooks/KV_FULL_GPU_FP32_CONTROL_20260914.json
+  - reports/T03_FP32_CONTROL_PLAN.md
+  - reports/ALIGNMENT_T00-T04.md
+historical_status:
+  historical_T03_bf16_gate: failed
+  original_numeric_control_is_immutable: true
+  threshold_retroactive_change: false
+  fp32_is_formal_credential: false
+  historical_artifacts_and_errata_preserved: true
+split_gates:
+  T03_HOOK:
+    purpose: hook_equivalence_call_accounting_and_integrity_on_same_execution_paths
+    status: candidate_passed_pending_amendment_approval
+    allowed_status_values: [passed, failed, blocked]
+    required_conditions:
+    - no_hook_identity_zero_self_patch
+    - kv_identity
+    - padding_and_position_accounting
+    - prefill_and_decode_hook_coverage
+    - weight_hash_unchanged
+    - finite_values
+    - controlled_information_replacement_with_predeclared_target_toy_test
+    controlled_replacement_evidence: tests/test_hooks.py:84-89
+    controlled_replacement_scope: ToyModel_engineering_control_only
+    projection_logit_positive_alone_sufficient: false
+  T03_NUMERICS:
+    purpose: record_dtype_backend_and_shape_sensitivity
+    status: failed_limit_recorded
+    allowed_status_values: [failed_limit_recorded]
+    bf16_primary_failure_preserved: true
+    new_full_cache_pass_threshold: null
+    fp32_role: characterization_only
+conditional_T04:
+  unlocked_by_amendment: false
+  requires_separate_root_user_approval: true
+  allowed_conditions: [baseline, identity_hook]
+  intervention_selection: forbidden
+  generation_cache_path: one_locked_cache_path
+  split: pilot_only
+  preserve_all_format_truncation_loop_and_failure_rows: true
+  results_may_change_threshold: false
+  may_be_run_this_turn: false
+scope_limits:
+  checkpoint_dtype_backend_shapes: locked_only
+  kernel_root_cause_claim_without_trace: forbidden
+  sdpa_or_threshold_scan: excluded
+freeze:
+  required_before_any_conditional_T04_run: true
+  effective: false
+  timestamp: null
+  manifest_hash: null

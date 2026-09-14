@@ -1,0 +1,26 @@
+{
+  "status": "failed",
+  "started_at": "2026-09-14T03:14:44.503716+00:00",
+  "command": [
+    "scripts/check_hooks.py",
+    "--device",
+    "cuda:0",
+    "--dtype",
+    "bfloat16",
+    "--model-lock",
+    "artifacts/model/MODEL_MANIFEST.json",
+    "--gpu-uuid",
+    "GPU-e5c246b7-afc2-cccd-e66d-fa1ca4eb089e",
+    "--budget-gib",
+    "32",
+    "--output",
+    "artifacts/hooks/HOOK_VALIDATION_GPU_DIAG_LUNA_20260914.json"
+  ],
+  "device": "cuda:0",
+  "dtype": "bfloat16",
+  "attention_backend": "eager",
+  "model_manifest_sha256": "96985947da620361aed5a16d5352ce507efc68b769cc5e5ff360ddec1e34fb46",
+  "error_type": "ResourceError",
+  "error": "GPU free memory is below requested budget plus 12 GiB reserve",
+  "finished_at": "2026-09-14T03:15:48.178199+00:00"
+}

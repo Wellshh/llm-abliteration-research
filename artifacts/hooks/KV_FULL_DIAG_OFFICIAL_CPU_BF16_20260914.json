@@ -1,0 +1,124 @@
+{
+  "status": "passed",
+  "started_at": "2026-09-14T03:09:47.050908+00:00",
+  "command": [
+    "scripts/diagnose_kv_full.py",
+    "--dtype",
+    "bfloat16",
+    "--model-lock",
+    "artifacts/model/MODEL_MANIFEST.json",
+    "--output",
+    "artifacts/hooks/KV_FULL_DIAG_OFFICIAL_CPU_BF16_20260914.json"
+  ],
+  "device": "cpu",
+  "dtype": "bfloat16",
+  "evidence": {
+    "input_ids": [
+      [
+        0,
+        0,
+        5,
+        6
+      ],
+      [
+        7,
+        8,
+        9,
+        10
+      ]
+    ],
+    "attention_mask": [
+      [
+        0,
+        0,
+        1,
+        1
+      ],
+      [
+        1,
+        1,
+        1,
+        1
+      ]
+    ],
+    "position_ids": [
+      [
+        0,
+        0,
+        0,
+        1
+      ],
+      [
+        0,
+        1,
+        2,
+        3
+      ]
+    ],
+    "decode_position_ids": [
+      [
+        2
+      ],
+      [
+        4
+      ]
+    ],
+    "cache_position": [
+      4
+    ],
+    "extended_mask": [
+      [
+        0,
+        0,
+        1,
+        1,
+        1
+      ],
+      [
+        1,
+        1,
+        1,
+        1,
+        1
+      ]
+    ],
+    "next_token": [
+      [
+        49
+      ],
+      [
+        350
+      ]
+    ],
+    "dtype": "torch.bfloat16",
+    "model_class": "LlamaForCausalLM",
+    "rows": [
+      {
+        "row": 0,
+        "abs_max": 0.0,
+        "abs_mean": 0.0,
+        "argmax_full": 644,
+        "argmax_kv": 644,
+        "argmax_equal": true,
+        "full_argmax_logit": 15.0625,
+        "kv_at_full_argmax": 15.0625,
+        "full_at_kv_argmax": 15.0625
+      },
+      {
+        "row": 1,
+        "abs_max": 0.0,
+        "abs_mean": 0.0,
+        "argmax_full": 9,
+        "argmax_kv": 9,
+        "argmax_equal": true,
+        "full_argmax_logit": 17.75,
+        "kv_at_full_argmax": 17.75,
+        "full_at_kv_argmax": 17.75
+      }
+    ],
+    "overall_abs_max": 0.0,
+    "overall_abs_mean": 0.0,
+    "weights_sha256": "408029f95b4b068d67f63f51fb795f47b59861b6086daf91df36332be4105604"
+  },
+  "finished_at": "2026-09-14T03:10:00.096626+00:00"
+}

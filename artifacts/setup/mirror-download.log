@@ -1,0 +1,3 @@
+{"repo_id": "openbmb/MiniCPM5-2B", "revision_sha": "62b9b3bd4308e72905c5bce38c1d6689549c525d", "endpoint": "https://hf-mirror.com"}
+Fetching 8 files:   0%|          | 0/8 [00:00<?, ?it/s]Fetching 8 files:  25%|██▌       | 2/8 [00:01<00:04,  1.48it/s]Fetching 8 files:  50%|█████     | 4/8 [00:02<00:02,  1.71it/s]Fetching 8 files:  75%|███████▌  | 6/8 [00:04<00:01,  1.24it/s]Fetching 8 files:  88%|████████▊ | 7/8 [00:20<00:02,  2.86s/it]Fetching 8 files: 100%|██████████| 8/8 [14:20<00:00, 107.57s/it]Fetching 8 files: 100%|██████████| 8/8 [14:20<00:00, 107.57s/it]
+DOWNLOAD_COMPLETE .cache/huggingface/models--openbmb--MiniCPM5-2B/snapshots/62b9b3bd4308e72905c5bce38c1d6689549c525d

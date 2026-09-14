@@ -1,0 +1,61 @@
+{
+  "status": "computed_budget_estimates_not_empirical_measurements",
+  "config_on_host_verified": false,
+  "assumed_config": {
+    "parameters": 2516756480,
+    "layers": 42,
+    "hidden": 2048,
+    "query_heads": 16,
+    "kv_heads": 2,
+    "head_dim": 128
+  },
+  "memory": {
+    "BF16_weights_only": {
+      "bytes": 5033512960,
+      "GB": 5.03351296,
+      "GiB": 4.687824249267578,
+      "TiB": 0.004577953368425369
+    },
+    "residual_cache_10k_inputs_3_anchors": {
+      "bytes": 5160960000,
+      "GB": 5.16096,
+      "GiB": 4.8065185546875,
+      "TiB": 0.004693865776062012
+    },
+    "residual_cache_10k_inputs_all_2048_tokens": {
+      "bytes": 3523215360000,
+      "GB": 3523.21536,
+      "GiB": 3281.25,
+      "TiB": 3.204345703125
+    },
+    "KV_cache_batch4_sequence2048": {
+      "bytes": 352321536,
+      "GB": 0.352321536,
+      "GiB": 0.328125,
+      "TiB": 0.0003204345703125
+    },
+    "KV_cache_batch4_sequence4096": {
+      "bytes": 704643072,
+      "GB": 0.704643072,
+      "GiB": 0.65625,
+      "TiB": 0.000640869140625
+    }
+  },
+  "power_approximation": {
+    "delta": 0.05,
+    "discordance": 0.2,
+    "power": 0.8,
+    "n_alpha_05": 628,
+    "n_alpha_05_div3": 838,
+    "limitations": "Independent paired binary units; no clustering, invalid output adjustment or empirical power simulation."
+  },
+  "gpu_hours_budget_caps_not_predictions": {
+    "P0": 5,
+    "P1": 10,
+    "P2": 25,
+    "P3": 40,
+    "P4": 20,
+    "P5": 20,
+    "total": 120
+  }
+}

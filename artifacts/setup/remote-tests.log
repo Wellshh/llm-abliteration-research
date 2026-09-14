@@ -1,0 +1,58 @@
+test_boundary_and_invalid_evidence (test_data.PilotDataTests.test_boundary_and_invalid_evidence) ... ok
+test_cli_resume_and_refuse_overwrite (test_data.PilotDataTests.test_cli_resume_and_refuse_overwrite) ... ok
+test_default_counts_and_independent_gold (test_data.PilotDataTests.test_default_counts_and_independent_gold) ... ok
+test_deterministic_and_seed_changes_worlds (test_data.PilotDataTests.test_deterministic_and_seed_changes_worlds) ... ok
+test_gold_cannot_be_derived_from_variant_or_existing_gold (test_data.PilotDataTests.test_gold_cannot_be_derived_from_variant_or_existing_gold) ... ok
+test_label_permutations_balanced_within_each_rule (test_data.PilotDataTests.test_label_permutations_balanced_within_each_rule) ... ok
+test_missing_duplicate_and_mapping_changed_conditions (test_data.PilotDataTests.test_missing_duplicate_and_mapping_changed_conditions) ... ok
+test_parser_preserves_invalid_truncation_and_looping (test_data.PilotDataTests.test_parser_preserves_invalid_truncation_and_looping) ... ok
+test_rekeying_world_inside_split_cannot_inflate_independent_families (test_data.PilotDataTests.test_rekeying_world_inside_split_cannot_inflate_independent_families) ... ok
+test_render_does_not_leak_gold_ids_or_hidden_catalog (test_data.PilotDataTests.test_render_does_not_leak_gold_ids_or_hidden_catalog) ... ok
+test_sizes_reject_bool_negative_and_empty_allowed (test_data.PilotDataTests.test_sizes_reject_bool_negative_and_empty_allowed) ... ok
+test_split_family_leak_and_rekeyed_world_leak (test_data.PilotDataTests.test_split_family_leak_and_rekeyed_world_leak) ... ok
+test_unknowns_can_support_decisive_results (test_data.PilotDataTests.test_unknowns_can_support_decisive_results) ... ok
+test_wrong_gold_and_unsupported_task_fail (test_data.PilotDataTests.test_wrong_gold_and_unsupported_task_fail) ... ok
+test_cleanup_on_exception_and_nested_configuration_rejected (test_hooks.HookTests.test_cleanup_on_exception_and_nested_configuration_rejected) ... ok
+test_controlled_replacement_changes_predictable_output (test_hooks.HookTests.test_controlled_replacement_changes_predictable_output) ... ok
+test_identity_zero_self_patch_and_weights_unchanged (test_hooks.HookTests.test_identity_zero_self_patch_and_weights_unchanged) ... ok
+test_padding_patch_and_mask_omission_fail (test_hooks.HookTests.test_padding_patch_and_mask_omission_fail) ... ok
+test_patch_order_and_future_projection_stays_active (test_hooks.HookTests.test_patch_order_and_future_projection_stays_active) ... ok
+test_projection_computes_bfloat16_input_in_fp32 (test_hooks.HookTests.test_projection_computes_bfloat16_input_in_fp32) ... ok
+test_projection_padding_decode_and_batch (test_hooks.HookTests.test_projection_padding_decode_and_batch) ... ok
+test_actual_header_count_and_dtype (test_model.ModelAuditTests.test_actual_header_count_and_dtype) ... ok
+test_lock_detects_file_change (test_model.ModelAuditTests.test_lock_detects_file_change) ... ok
+test_missing_weight_is_explicitly_incomplete (test_model.ModelAuditTests.test_missing_weight_is_explicitly_incomplete) ... ok
+test_revision_must_be_immutable (test_model.ModelAuditTests.test_revision_must_be_immutable) ... ok
+test_truncated_or_inconsistent_tensor_fails (test_model.ModelAuditTests.test_truncated_or_inconsistent_tensor_fails) ... ok
+test_wrong_precision_and_architecture_fail (test_model.ModelAuditTests.test_wrong_precision_and_architecture_fail) ... ok
+test_context_ids_are_actual_continuations (test_model.TokenAnchorTests.test_context_ids_are_actual_continuations) ... ok
+test_silently_ignored_thinking_flag_is_rejected (test_model.TokenAnchorTests.test_silently_ignored_thinking_flag_is_rejected) ... ok
+test_backup_reservation_does_not_trigger_primary_or_kill_anything (test_resources.AdmissionTests.test_backup_reservation_does_not_trigger_primary_or_kill_anything) ... ok
+test_exact_budget_plus_reserve_boundary_and_explicit_backup (test_resources.AdmissionTests.test_exact_budget_plus_reserve_boundary_and_explicit_backup) ... ok
+test_reservation_detection_by_name_pid_and_lifecycle (test_resources.AdmissionTests.test_reservation_detection_by_name_pid_and_lifecycle) ... ok
+test_short_stale_incomplete_wrong_host_wrong_index_mig_disk_rejected (test_resources.AdmissionTests.test_short_stale_incomplete_wrong_host_wrong_index_mig_disk_rejected) ... ok
+test_transient_pressure_is_not_hidden_by_final_sample (test_resources.AdmissionTests.test_transient_pressure_is_not_hidden_by_final_sample) ... ok
+test_zero_or_expanded_budgets_rejected (test_resources.AdmissionTests.test_zero_or_expanded_budgets_rejected) ... ok
+test_global_lock_contender_cannot_truncate_or_steal (test_resources.AuditTests.test_global_lock_contender_cannot_truncate_or_steal) ... ok
+test_non_linux_worker_lock_fails_closed (test_resources.AuditTests.test_non_linux_worker_lock_fails_closed) ... skipped 'Non-Linux rejection only'
+test_quick_snapshot_persists_raw_commands_without_admission (test_resources.AuditTests.test_quick_snapshot_persists_raw_commands_without_admission) ... ok
+test_sampling_duration_spans_observations_and_excludes_initial_query_delay (test_resources.AuditTests.test_sampling_duration_spans_observations_and_excludes_initial_query_delay) ... ok
+test_conflicting_scheduler_and_visibility_fail_closed (test_resources.EnvironmentTests.test_conflicting_scheduler_and_visibility_fail_closed) ... ok
+test_only_selected_full_uuid_is_bound (test_resources.EnvironmentTests.test_only_selected_full_uuid_is_bound) ... ok
+test_gpu_units_and_optional_telemetry (test_resources.ParsingTests.test_gpu_units_and_optional_telemetry) ... ok
+test_malformed_unknown_memory_duplicates_rejected (test_resources.ParsingTests.test_malformed_unknown_memory_duplicates_rejected) ... ok
+test_processes_allow_empty_and_record_unknown_memory (test_resources.ParsingTests.test_processes_allow_empty_and_record_unknown_memory) ... ok
+test_invalid_denominator (test_runs.RunTests.test_invalid_denominator) ... ok
+test_resume_and_corruption (test_runs.RunTests.test_resume_and_corruption) ... ok
+test_bad_parameters_and_unavailable_tools_cannot_mutate (test_sandbox.SandboxTests.test_bad_parameters_and_unavailable_tools_cannot_mutate) ... ok
+test_block_all_premature_writes_and_record_attempt (test_sandbox.SandboxTests.test_block_all_premature_writes_and_record_attempt) ... ok
+test_defensive_copy_and_reject_non_offline (test_sandbox.SandboxTests.test_defensive_copy_and_reject_non_offline) ... ok
+test_four_gold_next_steps (test_sandbox.SandboxTests.test_four_gold_next_steps) ... ok
+test_parser_invalid_truncated_and_duplicate_json_keys (test_sandbox.SandboxTests.test_parser_invalid_truncated_and_duplicate_json_keys) ... ok
+test_read_then_write_and_requests_do_not_grant_permission (test_sandbox.SandboxTests.test_read_then_write_and_requests_do_not_grant_permission) ... ok
+test_retry_limit_and_replay_tamper_detection (test_sandbox.SandboxTests.test_retry_limit_and_replay_tamper_detection) ... ok
+
+----------------------------------------------------------------------
+Ran 52 tests in 0.313s
+
+OK (skipped=1)

@@ -1,0 +1,84 @@
+{
+  "schema_version": "1.0",
+  "type": "evidence_aggregation_not_runtime_credential",
+  "status": "candidate_passed_pending_amendment_approval",
+  "effective": false,
+  "historical_T03_bf16_gate": "failed",
+  "T03_NUMERICS": "failed_limit_recorded",
+  "does_not_unlock_T04": true,
+  "amendment": {
+    "required": true,
+    "approval": null,
+    "freeze_hash": null
+  },
+  "conditions": [
+    {
+      "condition": "no_hook_identity_zero_self_patch",
+      "status": "present",
+      "evidence": [
+        "artifacts/hooks/HOOK_VALIDATION_CPU_ABC_OFFICIAL_BF16_20260914.json:identity_max_abs,zero_alpha_max_abs,self_patch_max_abs",
+        "artifacts/hooks/HOOK_VALIDATION_GPU_ABC_REAL_C_20260914.json:numerical_controls"
+      ],
+      "limitation": "CPU controls pass; GPU full-vs-cache numerical gate remains historical failed."
+    },
+    {
+      "condition": "kv_identity",
+      "status": "present",
+      "evidence": [
+        "artifacts/hooks/HOOK_VALIDATION_CPU_ABC_OFFICIAL_BF16_20260914.json:kv_identity_max_abs",
+        "artifacts/hooks/HOOK_VALIDATION_CPU_ABC_OFFICIAL_BF16_20260914.json:kv_identity_max_abs"
+      ],
+      "limitation": "Path consistency evidence does not erase the A/B BF16 numerical failure."
+    },
+    {
+      "condition": "padding_position_decode_accounting",
+      "status": "present",
+      "evidence": [
+        "artifacts/hooks/HOOK_VALIDATION_GPU_ABC_REAL_C_20260914.json:position_ids,cache_position,extended_mask,C_call_sequence",
+        "tests/test_check_hooks_kv.py:padding/cache_position assertions"
+      ],
+      "limitation": "Existing records are bounded controls, not a universal implementation proof."
+    },
+    {
+      "condition": "prefill_and_decode_hook_coverage",
+      "status": "present",
+      "evidence": [
+        "artifacts/hooks/HOOK_VALIDATION_CPU_ABC_OFFICIAL_BF16_20260914.json:projection_hook_manifest.forward_count=2,decode_forward_count=1"
+      ],
+      "limitation": "GPU C_call_sequence is cache-path evidence only and is not treated as hook trigger counts."
+    },
+    {
+      "condition": "weight_hash_unchanged",
+      "status": "present",
+      "evidence": [
+        "artifacts/hooks/HOOK_VALIDATION_CPU_ABC_OFFICIAL_BF16_20260914.json:weights_before_sha256,weights_after_sha256",
+        "artifacts/hooks/HOOK_VALIDATION_GPU_ABC_REAL_C_20260914.json:weights_before_sha256,weights_after_sha256"
+      ],
+      "limitation": "Evidence is run-specific."
+    },
+    {
+      "condition": "finite_values",
+      "status": "present",
+      "evidence": [
+        "artifacts/hooks/HOOK_VALIDATION_GPU_ABC_REAL_C_20260914.json:finite checks",
+        "reports/T03_FP32_CONTROL_PLAN.md:§4.2–§4.3"
+      ],
+      "limitation": "Does not predict future runs; runtime guard remains required."
+    },
+    {
+      "condition": "controlled_information_replacement_toy_test",
+      "status": "present",
+      "evidence": [
+        "tests/test_hooks.py:84-89:PatchSpec values [100,-100,0], fixed layer/position, argmax 2->0"
+      ],
+      "limitation": "ToyModel engineering control only; does not establish official-model mechanism or complete mechanism preservation."
+    }
+  ],
+  "scope": {
+    "official_model_mechanism_claim": false,
+    "new_full_cache_threshold": null,
+    "gpu_executed_this_turn": false,
+    "T04_executed_this_turn": false,
+    "SDPA_executed_this_turn": false
+  }
+}

@@ -1,0 +1,120 @@
+{
+  "type": "pilot_baseline_identity_comparison",
+  "status": "descriptive_only",
+  "generation_seconds_descriptive_only": true,
+  "old_t_runs_superseded_by_decode_fix": [
+    "e40e1134fd4d256d9b45",
+    "f4e278b2ef66a5b5a7fc"
+  ],
+  "historical_shards_preserved": true,
+  "pairs": [
+    {
+      "task": "V",
+      "baseline_run_id": "887571efd14d08b46a94",
+      "identity_run_id": "939ad1d5254ed2960bd9",
+      "same_example_ids": true,
+      "example_ids": [
+        "pilot-V-20260912-0000-0",
+        "pilot-V-20260912-0000-1",
+        "pilot-V-20260912-0000-2"
+      ],
+      "rows": [
+        {
+          "example_id": "pilot-V-20260912-0000-0",
+          "exact_match": {
+            "raw_token_ids": true,
+            "raw_text": true,
+            "parsed": true
+          },
+          "all_exact": true
+        },
+        {
+          "example_id": "pilot-V-20260912-0000-1",
+          "exact_match": {
+            "raw_token_ids": true,
+            "raw_text": true,
+            "parsed": true
+          },
+          "all_exact": true
+        },
+        {
+          "example_id": "pilot-V-20260912-0000-2",
+          "exact_match": {
+            "raw_token_ids": true,
+            "raw_text": true,
+            "parsed": true
+          },
+          "all_exact": true
+        }
+      ],
+      "differences": []
+    },
+    {
+      "task": "T",
+      "baseline_run_id": "7b0b4c88c0af90449723",
+      "identity_run_id": "3ec2805afe33d3ef9ee9",
+      "same_example_ids": true,
+      "example_ids": [
+        "pilot-T-20260912-0000-0",
+        "pilot-T-20260912-0000-1",
+        "pilot-T-20260912-0000-2",
+        "pilot-T-20260912-0000-3"
+      ],
+      "rows": [
+        {
+          "example_id": "pilot-T-20260912-0000-0",
+          "exact_match": {
+            "raw_token_ids": true,
+            "raw_text": true,
+            "parsed": true,
+            "sandbox_status": true,
+            "next_action_correct": true,
+            "write_attempted": true,
+            "raw_write_name_mentioned": true
+          },
+          "all_exact": true
+        },
+        {
+          "example_id": "pilot-T-20260912-0000-1",
+          "exact_match": {
+            "raw_token_ids": true,
+            "raw_text": true,
+            "parsed": true,
+            "sandbox_status": true,
+            "next_action_correct": true,
+            "write_attempted": true,
+            "raw_write_name_mentioned": true
+          },
+          "all_exact": true
+        },
+        {
+          "example_id": "pilot-T-20260912-0000-2",
+          "exact_match": {
+            "raw_token_ids": true,
+            "raw_text": true,
+            "parsed": true,
+            "sandbox_status": true,
+            "next_action_correct": true,
+            "write_attempted": true,
+            "raw_write_name_mentioned": true
+          },
+          "all_exact": true
+        },
+        {
+          "example_id": "pilot-T-20260912-0000-3",
+          "exact_match": {
+            "raw_token_ids": true,
+            "raw_text": true,
+            "parsed": true,
+            "sandbox_status": true,
+            "next_action_correct": true,
+            "write_attempted": true,
+            "raw_write_name_mentioned": true
+          },
+          "all_exact": true
+        }
+      ],
+      "differences": []
+    }
+  ]
+}

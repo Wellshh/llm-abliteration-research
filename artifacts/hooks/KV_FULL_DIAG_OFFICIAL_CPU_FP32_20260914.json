@@ -1,0 +1,124 @@
+{
+  "status": "passed",
+  "started_at": "2026-09-14T03:10:38.081035+00:00",
+  "command": [
+    "scripts/diagnose_kv_full.py",
+    "--dtype",
+    "float32",
+    "--model-lock",
+    "artifacts/model/MODEL_MANIFEST.json",
+    "--output",
+    "artifacts/hooks/KV_FULL_DIAG_OFFICIAL_CPU_FP32_20260914.json"
+  ],
+  "device": "cpu",
+  "dtype": "float32",
+  "evidence": {
+    "input_ids": [
+      [
+        0,
+        0,
+        5,
+        6
+      ],
+      [
+        7,
+        8,
+        9,
+        10
+      ]
+    ],
+    "attention_mask": [
+      [
+        0,
+        0,
+        1,
+        1
+      ],
+      [
+        1,
+        1,
+        1,
+        1
+      ]
+    ],
+    "position_ids": [
+      [
+        0,
+        0,
+        0,
+        1
+      ],
+      [
+        0,
+        1,
+        2,
+        3
+      ]
+    ],
+    "decode_position_ids": [
+      [
+        2
+      ],
+      [
+        4
+      ]
+    ],
+    "cache_position": [
+      4
+    ],
+    "extended_mask": [
+      [
+        0,
+        0,
+        1,
+        1,
+        1
+      ],
+      [
+        1,
+        1,
+        1,
+        1,
+        1
+      ]
+    ],
+    "next_token": [
+      [
+        49
+      ],
+      [
+        350
+      ]
+    ],
+    "dtype": "torch.float32",
+    "model_class": "LlamaForCausalLM",
+    "rows": [
+      {
+        "row": 0,
+        "abs_max": 1.3828277587890625e-05,
+        "abs_mean": 2.3446093564416515e-06,
+        "argmax_full": 644,
+        "argmax_kv": 644,
+        "argmax_equal": true,
+        "full_argmax_logit": 15.049903869628906,
+        "kv_at_full_argmax": 15.049908638000488,
+        "full_at_kv_argmax": 15.049903869628906
+      },
+      {
+        "row": 1,
+        "abs_max": 1.621246337890625e-05,
+        "abs_mean": 2.6650213840184733e-06,
+        "argmax_full": 9,
+        "argmax_kv": 9,
+        "argmax_equal": true,
+        "full_argmax_logit": 17.794921875,
+        "kv_at_full_argmax": 17.794918060302734,
+        "full_at_kv_argmax": 17.794921875
+      }
+    ],
+    "overall_abs_max": 1.621246337890625e-05,
+    "overall_abs_mean": 2.5048152565432247e-06,
+    "weights_sha256": "f3a401fb382daa47b8a647de41d98f04148adfb6ea9454309eab584510ac4677"
+  },
+  "finished_at": "2026-09-14T03:11:02.795333+00:00"
+}

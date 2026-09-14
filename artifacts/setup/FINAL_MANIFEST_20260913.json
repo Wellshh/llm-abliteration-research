@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "scope": "T00-T04 framework only; no GPU/model inference",
+  "remote_backup_paths": [
+    "artifacts/setup/merge-backups/20260913T143729Z",
+    "artifacts/setup/merge-backups/20260913T144937Z",
+    "artifacts/setup/merge-backups/20260913T150419Z",
+    "artifacts/setup/merge-backups/20260913T152116Z",
+    "artifacts/setup/merge-backups/20260913T152531Z"
+  ],
+  "files": {
+    "src/minicpm_research/tool_parser.py": "708ff89aaf76e7ef1b9d1f5d29f7c6dd805d19cfe753a2782bf0e0b3c9b4ce46",
+    "src/minicpm_research/evaluation.py": "740239c6ad2ba748d4a5ed8e0b65bfe71b431dc387c8d17c32a7ac2361085795",
+    "scripts/run_pilot.py": "6d64985979f024b56f8c4b90841bf0f6c6180b0a0ac20873588ffff30c4f1bd5",
+    "tests/test_parser_contract.py": "30365b0a01378c1586400c2df4ae158aaee4d571a384e140095d5ef48edee111"
+  },
+  "validation": {
+    "unittest": {"exit_code": 0, "tests": 93, "skipped": 1, "skip_reason": "tests/test_resources.py non-Linux rejection test is skipped on Linux remote host", "log": "artifacts/setup/final-validation-v2-20260913.txt"},
+    "pilot_dry_run": {"exit_code": 0, "tasks": ["V", "T"], "selected_examples": 7, "log": "artifacts/setup/final-validation-v2-20260913.txt"},
+    "compileall": {"exit_code": 0, "log": "artifacts/setup/final-validation-v2-20260913.txt"},
+    "pytest": {"exit_code": 1, "reason": "not installed; unittest used"}
+  },
+  "real_checkpoint_hook_gate": "pending; CPU mock is not evidence",
+  "gpu_execution": "not run"
+}

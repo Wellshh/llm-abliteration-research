@@ -1,0 +1,98 @@
+# =============================================================================
+# MiniCPM5 拒绝编辑研究仓库 .gitignore
+#
+# 原则（与 AGENTS.md 科研纪律一致）：
+#   1. artifacts/、reports/、docs/ 是研究证据链（运行 manifest、资源审计、失败
+#      记录、勘误、预算台账、封存 pilot 数据）——一律入库，不做整体忽略；
+#   2. 只忽略三类东西：可再生的大体积内容、运行时短暂状态、密钥凭证；
+#   3. 本仓库两个特例（勿加通用规则）：
+#      - 不忽略 build/ ：其中是已部署的受管预留组件（autoplacer-RL、
+#        gpu_reservation，共约 2MB），仓库内无完整重建来源，入库以保全部署字节；
+#      - 不全局忽略 *.log ：artifacts/setup/model-lock*.log 等是明确保留的
+#        失败/审计证据（如官方 Hub 锁失败记录），必须入库。
+# =============================================================================
+
+# --- 可再生大体积内容（合计约 10GB）---
+# Python 虚拟环境（由 bootstrap_server.sh + requirements-server.txt 重建）
+.venv/
+# HuggingFace 模型/数据集缓存（含 5GB 锁定 snapshot；由 lock_model.py 按
+# revision 62b9b3bd… 重新下载，完整性以 MODEL_MANIFEST.json 的 hash 绑定为准）
+.cache/
+# 模型权重文件本体永不入库（防误拷贝；权重只以 manifest hash 记录）
+*.safetensors
+*.gguf
+
+# --- Python 字节码与构建缓存 ---
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+# 注意：不要加裸 "build/" 规则（见文件头特例说明）
+dist/
+wheelhouse/
+
+# --- 测试与静态工具缓存 ---
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+coverage.xml
+htmlcov/
+
+# --- 原子写残留的临时文件（误留则应清理，不入库）---
+# 覆盖 runs.py 的 "<name>.<pid>.tmp"、resources.py 的 "<name>.tmp-<pid>"、
+# check_hooks.py / lock_model.py 的 "<name>.tmp"
+*.tmp
+*.tmp-*
+
+# --- 密钥与凭证（纪律：SSH 凭证从 .env 读取，禁止回显或写入日志/仓库）---
+.env
+.env.*
+# 例外：非敏感模板允许入库
+!.env.example
+*.pem
+*.key
+.netrc
+**/credentials*.json
+
+# --- 运行时短暂状态 ---
+# 预留进程 PID 文件：进程停止即删除、重启即变化，克隆中的陈旧 PID 无意义且会
+# 误导 admission 的 _reservation_pids 证据读取；生命周期证据以 *.jsonl 为准（入库）
+artifacts/reservation/*.pid
+# 全局研究 worker flock 锁（规范位置在 /tmp、仓库外；此规则仅防误放入仓库。
+# 有意不用裸 "*.lock"，避免误杀 uv.lock/poetry.lock 等依赖锁证据）
+minicpm5-refusal-decision-*.lock
+
+# --- 本地工具 / 操作系统 / 编辑器杂物 ---
+# Claude Code 本地个人设置（项目共享配置如需入库可另放 .claude/settings.json）
+.claude/settings.local.json
+# Mutagen 同步的本地守护状态（同步本身以服务器目录为准，不入 git）
+.mutagen/
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+Thumbs.db
+Desktop.ini
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# --- 杂项输出 ---
+nohup.out
+# 注意：不忽略 *.stderr / 其它捕获输出——环境失败必须可见、可入库（纪律要求）
+
+# --- 说明（有意不忽略、保持入库的内容）---
+# artifacts/reservation/*.jsonl        预留生命周期合规证据（started/stopped/心跳）
+# artifacts/reservation/*.smi|*.time   接管/释放核验快照（每个约 0.5KB）
+# artifacts/hooks/**                   hook/KV 验证产物、resource_audit、resource_events
+# artifacts/runs/**                    pilot run store（manifest、分片、事件、PILOT_BASELINE）
+# artifacts/budgets/*.json             Phase 0 GPU 时间预算台账
+# artifacts/data/pilot.jsonl*          封存 pilot 数据与 manifest（含 superseded 版本）
+# artifacts/model/MODEL_MANIFEST.json  模型锁
+# artifacts/setup/*                    requirements-resolved、model-lock 日志（失败记录）
+# build/autoplacer-RL, build/gpu_reservation  已部署受管预留组件（见文件头）
+# docs/、reports/                      runbook 与研究/对齐/勘误/门限记录

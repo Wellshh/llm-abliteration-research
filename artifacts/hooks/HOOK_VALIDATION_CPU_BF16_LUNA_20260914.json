@@ -1,0 +1,58 @@
+{
+  "status": "passed",
+  "started_at": "2026-09-14T03:08:00.576200+00:00",
+  "command": [
+    "scripts/check_hooks.py",
+    "--device",
+    "cpu",
+    "--dtype",
+    "bfloat16",
+    "--output",
+    "artifacts/hooks/HOOK_VALIDATION_CPU_BF16_LUNA_20260914.json"
+  ],
+  "device": "cpu",
+  "dtype": "bfloat16",
+  "attention_backend": "eager",
+  "baseline_repeat_max_abs": 0.0,
+  "identity_max_abs": 0.0,
+  "zero_alpha_max_abs": 0.0,
+  "self_patch_max_abs": 0.0,
+  "left_padding_batch_last_logit_max_abs": 0.0,
+  "kv_identity_max_abs": 0.0,
+  "kv_vs_full_last_logit_max_abs": 0.0,
+  "projection_logit_max_abs": 0.03369140625,
+  "projection_hook_manifest": {
+    "protocol": "postblock-rank1-runtime",
+    "alpha": 0.5,
+    "projection_layers": [
+      0,
+      1
+    ],
+    "accumulation_dtype": "float32",
+    "primary_mutates_weights": false,
+    "applies_to_padding": false,
+    "position_convention": "batch_row_and_absolute_padded_sequence_index",
+    "capture_stage": "after_patch_and_projection",
+    "capture_storage": "selected_positions_cpu",
+    "forward_count": 2,
+    "decode_forward_count": 1,
+    "projected_valid_tokens_across_layers": 16,
+    "patch_applications": []
+  },
+  "weights_before_sha256": "acb324b3ce8967d7521d14a3701a91cefa7874cd9dc2f6c19700a8928a7d4f59",
+  "weights_after_sha256": "acb324b3ce8967d7521d14a3701a91cefa7874cd9dc2f6c19700a8928a7d4f59",
+  "repeat_tolerance": 1e-06,
+  "batch_cache_dtype_tolerance": 0.5,
+  "model_class": "LlamaForCausalLM",
+  "measured_parameters": 22688,
+  "model_source": "random_tiny_llama_implementation_control_not_MiniCPM5",
+  "environment": {
+    "python": "3.12.1",
+    "torch": "2.6.0",
+    "transformers": "4.56.2",
+    "tokenizers": "0.22.2",
+    "safetensors": "0.6.2",
+    "huggingface-hub": "0.34.4"
+  },
+  "finished_at": "2026-09-14T03:08:04.526428+00:00"
+}

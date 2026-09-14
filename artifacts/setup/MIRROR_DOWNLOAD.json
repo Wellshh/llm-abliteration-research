@@ -1,0 +1,6 @@
+{
+  "repo_id": "openbmb/MiniCPM5-2B",
+  "revision_sha": "62b9b3bd4308e72905c5bce38c1d6689549c525d",
+  "endpoint": "https://hf-mirror.com",
+  "local_dir": ".cache/huggingface/models--openbmb--MiniCPM5-2B/snapshots/62b9b3bd4308e72905c5bce38c1d6689549c525d"
+}

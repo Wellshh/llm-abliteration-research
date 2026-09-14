@@ -1,0 +1,58 @@
+schema_version: '1.0'
+status: approved_data_after_amendment
+effective: true
+approved_at: '2026-09-14'
+approval_semantics: user_approved_t03_gate_split_v1_root_review_approved
+root_review: approved
+approval_sidecar: reports/T03_GATE_SPLIT_AMENDMENT_v1_APPROVAL.json
+basis_observed_data_after:
+  bf16_gpu_batched_full_vs_cache_max_abs: 0.75
+  historical_implementation_threshold: 0.5
+  fp32_gpu_eager_characterization_max_abs: 3.77e-5
+  evidence:
+  - artifacts/hooks/HOOK_VALIDATION_GPU_ABC_REAL_C_20260914.json
+  - artifacts/hooks/KV_FULL_GPU_FP32_CONTROL_20260914.json
+  - reports/T03_FP32_CONTROL_PLAN.md
+  - reports/ALIGNMENT_T00-T04.md
+historical_status:
+  historical_T03_bf16_gate: failed
+  original_numeric_control_is_immutable: true
+  threshold_retroactive_change: false
+  fp32_is_formal_credential: false
+  historical_artifacts_and_errata_preserved: true
+split_gates:
+  T03_HOOK:
+    purpose: hook_equivalence_call_accounting_and_integrity_on_same_execution_paths
+    status: passed_under_gate_split_v1
+    status_enum: [passed_under_gate_split_v1, failed_under_gate_split_v1, blocked_under_gate_split_v1]
+    candidate_evidence: reports/T03_HOOK_GATE_v1.json
+    required_conditions:
+    - no_hook_identity_zero_self_patch
+    - kv_identity
+    - padding_position_decode_accounting
+    - prefill_and_decode_hook_coverage
+    - weight_hash_unchanged
+    - finite_values
+    - controlled_information_replacement_with_predeclared_target_toy_test
+    controlled_replacement_scope: ToyModel_engineering_control_only
+    full_T03_rewritten_as_passed: false
+  T03_NUMERICS:
+    purpose: record_dtype_backend_and_shape_sensitivity
+    status: failed_limit_recorded
+    bf16_primary_failure_preserved: true
+    new_full_cache_pass_threshold: null
+    fp32_role: characterization_only
+conditional_T04:
+  unlocked_automatically: false
+  requires_separate_explicit_approval: true
+  allowed_conditions: [baseline, identity_hook]
+  intervention_selection: forbidden
+  generation_cache_path: one_locked_cache_path
+  split: pilot_only
+  preserve_all_format_truncation_loop_and_failure_rows: true
+  results_may_change_threshold: false
+  gpu_execution_this_amendment: false
+freeze:
+  effective: true
+  frozen_at: '2026-09-14'
+  yaml_sha256: recorded_in_approval_sidecar_after_final_write

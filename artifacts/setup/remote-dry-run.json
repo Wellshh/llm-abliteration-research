@@ -1,0 +1,1 @@
+{"mode": "dry_run", "validation": {"examples": 600, "families": 180, "gold_verified": true, "splits": ["pilot"], "cross_split_leakage": false}, "selected_V_examples": 36, "selected_V_families": 12, "model_inference": "未运行", "gpu_execution": "未运行", "T_model_evaluation": "blocked_pending_native_parser_validation", "metrics": null}

@@ -1,0 +1,108 @@
+{
+  "type": "resource_measurability_summary",
+  "status": "descriptive_only",
+  "gpu_uuid": "GPU-e5c246b7-afc2-cccd-e66d-fa1ca4eb089e",
+  "budget_policy": {
+    "budget_gib": 32,
+    "reserve_gib": 12
+  },
+  "n_families_per_task": 1,
+  "power_estimation": "not_estimable",
+  "peak_gpu_memory_definition": "sampled_own_gpu_memory_max_bytes is maximum matching GPU3 process memory in resource_sample events, not allocator peak; null only if no matching sample",
+  "runs": [
+    {
+      "label": "V-baseline",
+      "task": "V",
+      "run_id": "887571efd14d08b46a94",
+      "attempt_id": "1789379244587170238-3551266",
+      "pid": 3551266,
+      "examples": 3,
+      "generated_tokens": 6,
+      "generation_seconds": 0.6748637594282627,
+      "tokens_per_second": 8.890683365607208,
+      "admitted_worker_wall_seconds": 13.19856870546937,
+      "minimum_sampled_free_bytes_gpu3": 62536024064,
+      "budget_bytes": 34359738368,
+      "reserve_bytes": 12884901888,
+      "sampled_own_gpu_memory_max_bytes": 5752487936,
+      "sampled_own_gpu_memory_source": "resource_sample process matching pid and GPU3 UUID",
+      "minimum_free_source": "admission JSON minimum_sampled_free_bytes"
+    },
+    {
+      "label": "V-identity",
+      "task": "V",
+      "run_id": "939ad1d5254ed2960bd9",
+      "attempt_id": "1789379433475262438-3598387",
+      "pid": 3598387,
+      "examples": 3,
+      "generated_tokens": 6,
+      "generation_seconds": 0.7503711432218552,
+      "tokens_per_second": 7.996043097070481,
+      "admitted_worker_wall_seconds": 13.004785856232047,
+      "minimum_sampled_free_bytes_gpu3": 62536024064,
+      "budget_bytes": 34359738368,
+      "reserve_bytes": 12884901888,
+      "sampled_own_gpu_memory_max_bytes": 5752487936,
+      "sampled_own_gpu_memory_source": "resource_sample process matching pid and GPU3 UUID",
+      "minimum_free_source": "admission JSON minimum_sampled_free_bytes"
+    },
+    {
+      "label": "T-baseline",
+      "task": "T",
+      "run_id": "7b0b4c88c0af90449723",
+      "attempt_id": "1789380331207205254-3742587",
+      "pid": 3742587,
+      "examples": 4,
+      "generated_tokens": 117,
+      "generation_seconds": 3.036575358361006,
+      "tokens_per_second": 38.53024746375827,
+      "admitted_worker_wall_seconds": 16.08173410408199,
+      "minimum_sampled_free_bytes_gpu3": 62536024064,
+      "budget_bytes": 34359738368,
+      "reserve_bytes": 12884901888,
+      "sampled_own_gpu_memory_max_bytes": 5752487936,
+      "sampled_own_gpu_memory_source": "resource_sample process matching pid and GPU3 UUID",
+      "minimum_free_source": "admission JSON minimum_sampled_free_bytes"
+    },
+    {
+      "label": "T-identity",
+      "task": "T",
+      "run_id": "3ec2805afe33d3ef9ee9",
+      "attempt_id": "1789380425152284536-3756394",
+      "pid": 3756394,
+      "examples": 4,
+      "generated_tokens": 117,
+      "generation_seconds": 3.8635942582041025,
+      "tokens_per_second": 30.282682958118016,
+      "admitted_worker_wall_seconds": 16.13131378404796,
+      "minimum_sampled_free_bytes_gpu3": 62536024064,
+      "budget_bytes": 34359738368,
+      "reserve_bytes": 12884901888,
+      "sampled_own_gpu_memory_max_bytes": 5752487936,
+      "sampled_own_gpu_memory_source": "resource_sample process matching pid and GPU3 UUID",
+      "minimum_free_source": "admission JSON minimum_sampled_free_bytes"
+    }
+  ],
+  "setup_failures": {
+    "pre_admission_charged_seconds": 0.0,
+    "pre_admission_attempts": [
+      "51f6ad0cb3c6792c0104",
+      "51f6ad0cb3c6792c0104",
+      "51f6ad0cb3c6792c0104"
+    ],
+    "code_failure_charged_seconds": 13.902027543634176,
+    "code_failure_run": "27a5f2edf23fa9fd17c4",
+    "superseded_t_charged_seconds": 29.78392337448895,
+    "superseded_t_runs": [
+      "e40e1134fd4d256d9b45",
+      "f4e278b2ef66a5b5a7fc"
+    ]
+  },
+  "budget": {
+    "P0_total_charged_seconds": 234.42904100380838,
+    "T04_authoritative_charged_seconds": 58.41640244983137,
+    "T04_superseded_t_charged_seconds": 29.78392337448895,
+    "T04_setup_code_failure_charged_seconds": 13.902027543634176,
+    "T04_pre_admission_charged_seconds": 0.0
+  }
+}

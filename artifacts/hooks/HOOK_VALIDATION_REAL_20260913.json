@@ -1,0 +1,40 @@
+{
+  "status": "failed",
+  "started_at": "2026-09-13T15:41:00.189226+00:00",
+  "command": [
+    "scripts/check_hooks.py",
+    "--device",
+    "cuda:0",
+    "--dtype",
+    "bfloat16",
+    "--model-lock",
+    "artifacts/model/MODEL_MANIFEST.json",
+    "--gpu-uuid",
+    "GPU-e5c246b7-afc2-cccd-e66d-fa1ca4eb089e",
+    "--budget-gib",
+    "32",
+    "--output",
+    "artifacts/hooks/HOOK_VALIDATION_REAL_20260913.json"
+  ],
+  "device": "cuda:0",
+  "dtype": "bfloat16",
+  "attention_backend": "eager",
+  "model_manifest_sha256": "96985947da620361aed5a16d5352ce507efc68b769cc5e5ff360ddec1e34fb46",
+  "admission": {
+    "gpu_uuid": "GPU-e5c246b7-afc2-cccd-e66d-fa1ca4eb089e",
+    "physical_index": 3,
+    "logical_device": "cuda:0",
+    "budget_bytes": 34359738368,
+    "reserve_bytes": 12884901888,
+    "minimum_sampled_free_bytes": 62536024064,
+    "memory_total_bytes": 102625181696,
+    "cuda_environment": {
+      "CUDA_VISIBLE_DEVICES": "GPU-e5c246b7-afc2-cccd-e66d-fa1ca4eb089e"
+    },
+    "admitted_at": "2026-09-13T15:42:03.190463+00:00",
+    "allocator_fraction_is_hard_isolation": false
+  },
+  "error_type": "AssertionError",
+  "error": "KV-cache and full-sequence outputs disagree",
+  "finished_at": "2026-09-13T15:42:21.010564+00:00"
+}

@@ -1,0 +1,1 @@
+{"output": "artifacts/data/pilot.jsonl", "manifest": "artifacts/data/pilot.jsonl.manifest.json", "examples": 600, "families": 180, "gold_verified": true, "splits": ["pilot"], "cross_split_leakage": false}

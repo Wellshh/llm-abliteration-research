@@ -1,0 +1,37 @@
+CMD command -v python python3 python3.12 python3.11 python3.10; ls -1 /usr/bin/python* 2>/dev/null || true; ls -1 /opt/conda/bin/python* 2>/dev/null || true
+EXIT 0
+/usr/bin/python3
+/usr/bin/python3.12
+/usr/bin/python3.11
+/usr/bin/python-argcomplete-check-easy-install-script
+/usr/bin/python-argcomplete-tcsh
+/usr/bin/python3
+/usr/bin/python3-config
+/usr/bin/python3.11
+/usr/bin/python3.11-config
+/usr/bin/python3.11-x86_64-config
+/usr/bin/python3.12
+/usr/bin/python3.12-config
+/usr/bin/python3.12-x86_64-config
+/usr/bin/python3.6
+/usr/bin/python3.6-config
+/usr/bin/python3.6m
+/usr/bin/python3.6m-config
+/usr/bin/python3.6m-x86_64-config
+/usr/bin/python3.8
+/usr/bin/python3.9
+STDERR zsh:1: no matches found: /opt/conda/bin/python*
+CMD /usr/bin/python3.12 -m pytest -q tests/test_resources.py tests/test_runs.py tests/test_model.py tests/test_hooks.py tests/test_tool_parser.py
+EXIT 1
+STDERR /usr/bin/python3.12: No module named pytest
+CMD /usr/bin/python3.12 -m unittest discover -s tests -q
+EXIT 0
+STDERR ----------------------------------------------------------------------
+Ran 67 tests in 0.280s
+
+OK (skipped=8)
+CMD /usr/bin/python3.12 scripts/run_pilot.py --dry-run --task both --max-families 1
+EXIT 0
+{"mode": "dry_run", "validation": {"examples": 600, "families": 180, "gold_verified": true, "splits": ["pilot"], "cross_split_leakage": false}, "tasks": ["V", "T"], "selected_examples": 7, "selected_families": {"V": 1, "T": 1}, "model_inference": "δ����", "gpu_execution": "δ����", "T_model_evaluation": "code_ready_not_run", "native_tool_parser": "implemented_unit_validated_real_model_output_pending_gpu", "metrics": null}
+CMD /usr/bin/python3.12 -m compileall -q src scripts tests
+EXIT 0

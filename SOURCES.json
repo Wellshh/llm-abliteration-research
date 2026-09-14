@@ -1,0 +1,138 @@
+{
+  "date": "2026-09-10",
+  "scope_note": "Only retrieved primary material is used as external support. Design choices and thresholds are proposed. This is not a full systematic literature review or an on-server model validation.",
+  "sources": [
+    {
+      "id": "S1",
+      "title": "Refusal in Language Models Is Mediated by a Single Direction",
+      "url": "https://arxiv.org/abs/2406.11717",
+      "version": "v3; 2024-10-30",
+      "verification_scope": "abstract_and_metadata",
+      "supported_use": "One-direction interventions mediate measured refusal across studied models; does not guarantee semantic purity or no collateral damage."
+    },
+    {
+      "id": "S2",
+      "title": "The Geometry of Refusal in Large Language Models: Concept Cones and Representational Independence",
+      "url": "https://arxiv.org/abs/2502.17420",
+      "version": "v2; 2026-02-08",
+      "verification_scope": "abstract_and_metadata",
+      "supported_use": "Multiple independent directions; geometric orthogonality alone does not imply intervention independence."
+    },
+    {
+      "id": "S3",
+      "title": "A Unified Mechanistic Analysis of Knowledge- and Safety-Based Refusals",
+      "url": "https://arxiv.org/abs/2609.00760",
+      "version": "submitted 2026-09-01",
+      "verification_scope": "primary_arxiv_search_abstract_only; direct_full_text_fetch_failed",
+      "supported_use": "KR/SR overlap and asymmetry on 213 quadruples; full extraction/numerical details require separate version audit."
+    },
+    {
+      "id": "S4",
+      "title": "Dual-Direction Mechanistic Interpretability: author repository",
+      "url": "https://github.com/aaliyan1230/dual-direction-mech-interp",
+      "version": "main as returned; commit_not_pinned",
+      "verification_scope": "README_read",
+      "supported_use": "DIM pipeline; README lists AdvBench/Alpaca and SQuAD-v2/TriviaQA, 4-bit examples. This turn did not inspect every source file."
+    },
+    {
+      "id": "S5",
+      "title": "How Alignment Routes: Localizing, Scaling, and Controlling Policy Circuits in Language Models",
+      "url": "https://arxiv.org/abs/2604.04385",
+      "version": "v5; 2026-06-29",
+      "verification_scope": "abstract_and_metadata",
+      "supported_use": "Intermediate gate and amplifier motif; low DLA need not imply low causal contribution; no direct universal epistemic/tool-circuit guarantee."
+    },
+    {
+      "id": "S6",
+      "title": "How to use and interpret activation patching",
+      "url": "https://arxiv.org/abs/2404.15255",
+      "version": "v1; 2024-04-23",
+      "verification_scope": "abstract_and_metadata",
+      "supported_use": "Methodological anchor for protocol- and metric-dependent interpretation. Specific experimental design in this plan is proposed, not copied evidence."
+    },
+    {
+      "id": "S7",
+      "title": "Surgical Refusal Ablation: Disentangling Safety from Intelligence via Concept-Guided Spectral Cleaning",
+      "url": "https://arxiv.org/html/2601.08489v1",
+      "version": "v1",
+      "verification_scope": "HTML_methods_and_limitations_read",
+      "supported_use": "Section 3.2 lists epistemic uncertainty among Targets. Ridge on Shields+Confounds is not an established guarantee of decision preservation."
+    },
+    {
+      "id": "S8",
+      "title": "AgentAbstain: Do LLM Agents Know When Not to Act?",
+      "url": "https://arxiv.org/abs/2607.10059",
+      "version": "v1; 2026-07-11",
+      "verification_scope": "abstract_and_metadata",
+      "supported_use": "Paired should-act/should-abstain evaluation and sandbox scenarios; this plan adapts design, does not claim official benchmark results."
+    },
+    {
+      "id": "S9",
+      "title": "NVIDIA CUDA Programming Guide: CUDA Environment Variables",
+      "url": "https://docs.nvidia.com/cuda/cuda-programming-guide/05-appendices/environment-variables.html",
+      "version": "online_docs_accessed_2026-09-10",
+      "verification_scope": "official_docs",
+      "supported_use": "CUDA_VISIBLE_DEVICES limits and reorders visible devices; UUIDs supported."
+    },
+    {
+      "id": "S10",
+      "title": "PyTorch set_per_process_memory_fraction",
+      "url": "https://docs.pytorch.org/docs/2.13/generated/torch.cuda.memory.set_per_process_memory_fraction.html",
+      "version": "2.13 documentation returned by stable redirect",
+      "verification_scope": "official_docs",
+      "supported_use": "Caching allocator limit is total visible memory times fraction; not free-memory fraction or a hard whole-process isolation guarantee."
+    },
+    {
+      "id": "S11",
+      "title": "Official MiniCPM5-2B repository file list",
+      "url": "https://huggingface.co/openbmb/MiniCPM5-2B/tree/main",
+      "version": "search-indexed listing; 3497c46 shown in listing",
+      "verification_scope": "official_search_file_listing_only",
+      "supported_use": "Listing shows approximately 5.03 GB safetensors. Raw config and model-card fetch failed this turn; 42-layer/2048 budget dimensions are from prior report and require on-host pinned verification."
+    },
+    {
+      "id": "S12",
+      "title": "OpenBMB MiniCPM official repository",
+      "url": "https://github.com/OpenBMB/MiniCPM",
+      "version": "main as returned; page still focused on 1B",
+      "verification_scope": "official_README_read",
+      "supported_use": "Returned 1B documentation describes standard Llama, thinking toggle, XML tools and SFT/RL/OPD. Not treated as exact 2B config/template verification."
+    },
+    {
+      "id": "S13",
+      "title": "LLMs Encode Harmfulness and Refusal Separately",
+      "url": "https://arxiv.org/abs/2507.11878",
+      "version": "v5; 2026-07-06",
+      "verification_scope": "abstract_and_metadata",
+      "supported_use": "Harmfulness and refusal can be causally dissociated in studied settings; not proof of preserved epistemic uncertainty after every edit."
+    },
+    {
+      "id": "S14",
+      "title": "Abliteration Is Not a Scalpel",
+      "url": "https://arxiv.org/abs/2607.17427",
+      "version": "v1; 2026-07-19",
+      "verification_scope": "abstract_and_metadata",
+      "supported_use": "Behavioral side effects and provenance contamination risks. Not a circuit localization or universal no-capability-loss result."
+    }
+  ],
+  "user_reports": [
+    {
+      "label": "A",
+      "title": "拒绝编辑为何改变不确定性下的决策：从几何重叠到共享路由的机制证据、MiniCPM5 实验设计与代理工具约束.docx",
+      "drive_file_id": "1Iy3-4cPAAj-Ziu20HB2YcqCkxmVu61i5",
+      "role": "prior-turn report; plan adopts cautious claim boundaries, not every factual statement"
+    },
+    {
+      "label": "B",
+      "title": "refusal_epistemic_mechanisms_report",
+      "drive_file_id": "1jkCKyW4HkbKg9DCYQGo2qNrCbBgx3vXdLmAAbJS-WkQ",
+      "role": "fetched again in this turn; taxonomy and experiment matrix reviewed; disputed inferences corrected"
+    },
+    {
+      "label": "C",
+      "title": "LLM Refusal Mechanistic Interpretability",
+      "drive_file_id": "1c5I2fJI6lbqTc5nkG1tE561HFxn1YBqhbq-vU6HQ2I8",
+      "role": "prior-turn report; unsupported universal-circuit and MoE assumptions not adopted"
+    }
+  ]
+}

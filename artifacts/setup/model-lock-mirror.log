@@ -1,0 +1,2 @@
+{"resolved_official_revision": "62b9b3bd4308e72905c5bce38c1d6689549c525d"}
+{"manifest": "/home/jybai/research/MiniCPM5_Research_Plan_v1/minicpm5_research_plan/artifacts/model/MODEL_MANIFEST.json", "revision": "62b9b3bd4308e72905c5bce38c1d6689549c525d", "endpoint": "https://hf-mirror.com", "provenance": "mirror_file_hashes_verified", "weights_verified": true, "tensor_elements": 2516756480}

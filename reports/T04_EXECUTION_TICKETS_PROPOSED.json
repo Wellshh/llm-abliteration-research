@@ -1,0 +1,70 @@
+{
+  "schema_version": "1.0",
+  "status": "pending_user_approval",
+  "effective": false,
+  "note": "Four concrete execution tickets; none is an approved execution artifact.",
+  "shared": {
+    "split": "pilot",
+    "device": "cuda:0",
+    "gpu_uuid": "GPU-e5c246b7-afc2-cccd-e66d-fa1ca4eb089e",
+    "dtype": "bfloat16",
+    "attention_backend": "eager",
+    "data_path": "artifacts/data/pilot.jsonl",
+    "data_sha256": "ECBCC6BF91822DD44547289DCA429DC4B381F2C5549B452201FC29789E5F2782",
+    "amendment_path": "reports/T03_GATE_SPLIT_AMENDMENT_v1.yaml",
+    "amendment_sha256": "C13300DFA1B98B69416BD7E003768EF5A1D9DD73D9EFA3FC8BC637864CA7CB34",
+    "aggregation_path": "reports/T03_HOOK_GATE_v1.json",
+    "aggregation_sha256": "470E3C0485165336B770354A381ADCC5D522B5E3339381C630FC0F72434614AF",
+    "approval_sidecar_path": "reports/T03_GATE_SPLIT_AMENDMENT_v1_APPROVAL.json",
+    "approval_sidecar_sha256": "2F8B7B98C78BE3E104E680C838D9B7C4F8BE17ED53E4BBDBC241A7A21E5AE87D",
+    "execution_scope": "single_content_addressed_run_allow_resume",
+    "run_policy": "one worker; independent output and manifest per ticket; resume only same content-addressed manifest; no parameter changes"
+  },
+  "tickets": [
+    {
+      "id": "baseline-V",
+      "condition": "baseline",
+      "task": "V",
+      "max_families": 1,
+      "config_path": "configs/pilot-baseline.json",
+      "config_sha256": "19CE10EF37510189BD376C3FD7F57EBB6128AA1B4CF1C0079BD127A140E83EFC",
+      "output_dir": "artifacts/runs/t04-baseline-V",
+      "manifest_policy": "independent_content_addressed_manifest",
+      "approval": "pending"
+    },
+    {
+      "id": "baseline-T",
+      "condition": "baseline",
+      "task": "T",
+      "max_families": 1,
+      "config_path": "configs/pilot-baseline.json",
+      "config_sha256": "19CE10EF37510189BD376C3FD7F57EBB6128AA1B4CF1C0079BD127A140E83EFC",
+      "output_dir": "artifacts/runs/t04-baseline-T",
+      "manifest_policy": "independent_content_addressed_manifest",
+      "approval": "pending"
+    },
+    {
+      "id": "identity-V",
+      "condition": "identity_hook",
+      "task": "V",
+      "max_families": 1,
+      "config_path": "configs/pilot-identity.json",
+      "config_sha256": "0CC25339215F942ABD70FC7AD48F4BE3AD9A65F95E4E9B1890FFBF5F1DC020D2",
+      "output_dir": "artifacts/runs/t04-identity-V",
+      "manifest_policy": "independent_content_addressed_manifest",
+      "approval": "pending"
+    },
+    {
+      "id": "identity-T",
+      "condition": "identity_hook",
+      "task": "T",
+      "max_families": 1,
+      "config_path": "configs/pilot-identity.json",
+      "config_sha256": "0CC25339215F942ABD70FC7AD48F4BE3AD9A65F95E4E9B1890FFBF5F1DC020D2",
+      "output_dir": "artifacts/runs/t04-identity-T",
+      "manifest_policy": "independent_content_addressed_manifest",
+      "approval": "pending"
+    }
+  ],
+  "future_approval_rule": "At execution time create a separate approved artifact per ticket with status=approved, explicit user approval semantics/time, all shared and ticket bindings copied exactly, and approval_id. The runner must reject this proposal while pending."
+}

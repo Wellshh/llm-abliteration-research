@@ -1,0 +1,21 @@
+{
+  "schema": "erratum_v1",
+  "status": "erratum",
+  "issued_at": "2026-09-14T03:55:39.050029+00:00",
+  "erratum_for": "artifacts/hooks/HOOK_VALIDATION_GPU_DIAG_LUNA2_20260914.json",
+  "erratum_for_sha256": "7ab16a2c9debdfd4d4e9303cc4fe93379a9f2174584ec98e95d9d0b61add6450",
+  "original_status": "failed",
+  "original_diagnostic_status": "completed",
+  "finding": "In the original LUNA2 GPU diagnostic, kv_full_diagnostics.C_tokenwise_cache.rows is byte-identical to kv_full_diagnostics.B_single_row.rows (verified programmatically: True). The C_tokenwise_cache block was populated by copying the b_rows list, not by an independent token-by-token forward through a persistent KV cache. Its own 'comparison' field states: 'same one-token decode as B; cache length/type retained'.",
+  "implication": "C_tokenwise_cache provides NO independent evidence about the token-by-token cache path and must not be cited to support any conclusion about KV-cache vs full-sequence equivalence. It is a duplicate of B, relabeled.",
+  "what_remains_valid": {
+    "A_two_row": "genuine batched full-sequence vs batched prefill+decode comparison; valid evidence",
+    "B_single_row": "genuine per-row full-sequence vs per-row prefill+decode comparison; valid evidence",
+    "original_t03_judgment": "failed (A-B batched max abs diff 0.75 > threshold 0.5 = 64*eps_bfloat16); this judgment is independent of the fake C and remains unchanged"
+  },
+  "corrective_action": "scripts/check_hooks.py run_checks now computes a real C path: the four input tokens are fed one at a time through a single persistent DynamicCache (cache_position 0,1,2,3), then the same fixed next token is decoded (cache_position 4). Per-step cache length, position_ids, mask-prefix length and finiteness are recorded in C_call_sequence, and A-B, A-C, B-C are reported separately (batched and single-row). Diagnostic schema is kv_full_abc_v2_real_tokenwise_C. New runs supersede C_tokenwise_cache; this erratum and the original LUNA2 artifact are both preserved unchanged.",
+  "original_artifact_preserved": true,
+  "original_artifact_modified": false,
+  "c_tokenwise_cache_rows_equal_b_single_row_rows": true,
+  "discipline_note": "Per AGENTS.md, historical failures and errata are retained, not hidden. diagnostic_status stays 'completed' for the diagnostic run; this erratum does not rewrite the original T03 'failed' judgment."
+}

@@ -1,0 +1,32 @@
+{
+  "schema_version": "1.0",
+  "status": "pending_not_approved",
+  "effective": false,
+  "approval_record": {
+    "approved_at": null,
+    "approval_semantics": null,
+    "approver": null
+  },
+  "approval_id": null,
+  "execution_scope": "single_content_addressed_run_allow_resume",
+  "bindings": {
+    "amendment_path": "reports/T03_GATE_SPLIT_AMENDMENT_v1.yaml",
+    "amendment_sha256": null,
+    "aggregation_path": "reports/T03_HOOK_GATE_v1.json",
+    "aggregation_sha256": null,
+    "approval_sidecar_path": "reports/T03_GATE_SPLIT_AMENDMENT_v1_APPROVAL.json",
+    "approval_sidecar_sha256": null,
+    "config_path": null,
+    "config_sha256": null,
+    "data_path": null,
+    "data_sha256": null,
+    "output_dir": null,
+    "condition": null,
+    "task": null,
+    "max_families": null,
+    "device": null,
+    "gpu_uuid": null,
+    "approval_id": null
+  },
+  "note": "Template only. User has not approved T04 execution."
+}

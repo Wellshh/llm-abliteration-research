@@ -1,0 +1,221 @@
+{
+  "status": "failed",
+  "started_at": "2026-09-14T03:17:00.560261+00:00",
+  "command": [
+    "scripts/check_hooks.py",
+    "--device",
+    "cuda:0",
+    "--dtype",
+    "bfloat16",
+    "--model-lock",
+    "artifacts/model/MODEL_MANIFEST.json",
+    "--gpu-uuid",
+    "GPU-e5c246b7-afc2-cccd-e66d-fa1ca4eb089e",
+    "--budget-gib",
+    "32",
+    "--output",
+    "artifacts/hooks/HOOK_VALIDATION_GPU_DIAG_LUNA2_20260914.json"
+  ],
+  "device": "cuda:0",
+  "dtype": "bfloat16",
+  "attention_backend": "eager",
+  "model_manifest_sha256": "96985947da620361aed5a16d5352ce507efc68b769cc5e5ff360ddec1e34fb46",
+  "admission": {
+    "gpu_uuid": "GPU-e5c246b7-afc2-cccd-e66d-fa1ca4eb089e",
+    "physical_index": 3,
+    "logical_device": "cuda:0",
+    "budget_bytes": 34359738368,
+    "reserve_bytes": 12884901888,
+    "minimum_sampled_free_bytes": 62536024064,
+    "memory_total_bytes": 102625181696,
+    "cuda_environment": {
+      "CUDA_VISIBLE_DEVICES": "GPU-e5c246b7-afc2-cccd-e66d-fa1ca4eb089e"
+    },
+    "admitted_at": "2026-09-14T03:18:04.328654+00:00",
+    "allocator_fraction_is_hard_isolation": false
+  },
+  "error_type": "AssertionError",
+  "error": "KV-cache and full-sequence outputs disagree; structured_diagnostics={\"A_two_row\": {\"cache_type\": \"DynamicCache\", \"next_token_fixed\": [[49], [350]], \"rows\": [{\"abs_max\": 0.375, \"abs_mean\": 0.06116463616490364, \"argmax_cache\": 644, \"argmax_equal\": true, \"argmax_full\": 644, \"cache_logit_at_max\": 7.8125, \"full_logit_at_max\": 8.1875, \"max_diff_vocab_index\": 1124, \"row\": 0}, {\"abs_max\": 0.75, \"abs_mean\": 0.0519532635807991, \"argmax_cache\": 9, \"argmax_equal\": true, \"argmax_full\": 9, \"cache_logit_at_max\": 13.0625, \"full_logit_at_max\": 13.8125, \"max_diff_vocab_index\": 220, \"row\": 1}]}, \"B_single_row\": {\"next_token_fixed\": [[49], [350]], \"rows\": [{\"abs_max\": 0.28125, \"abs_mean\": 0.05997958406805992, \"argmax_cache\": 644, \"argmax_equal\": true, \"argmax_full\": 644, \"cache_logit_at_max\": -4.59375, \"cache_type\": \"DynamicCache\", \"full_logit_at_max\": -4.875, \"max_diff_vocab_index\": 35815, \"row\": 0, \"source_row\": 0}, {\"abs_max\": 0.2890625, \"abs_mean\": 0.08420553058385849, \"argmax_cache\": 9, \"argmax_equal\": true, \"argmax_full\": 9, \"cache_logit_at_max\": 1.5078125, \"cache_type\": \"DynamicCache\", \"full_logit_at_max\": 1.21875, \"max_diff_vocab_index\": 49709, \"row\": 0, \"source_row\": 1}]}, \"C_tokenwise_cache\": {\"comparison\": \"same one-token decode as B; cache length/type retained\", \"next_token_fixed\": [[49], [350]], \"rows\": [{\"abs_max\": 0.28125, \"abs_mean\": 0.05997958406805992, \"argmax_cache\": 644, \"argmax_equal\": true, \"argmax_full\": 644, \"cache_logit_at_max\": -4.59375, \"cache_type\": \"DynamicCache\", \"full_logit_at_max\": -4.875, \"max_diff_vocab_index\": 35815, \"row\": 0, \"source_row\": 0}, {\"abs_max\": 0.2890625, \"abs_mean\": 0.08420553058385849, \"argmax_cache\": 9, \"argmax_equal\": true, \"argmax_full\": 9, \"cache_logit_at_max\": 1.5078125, \"cache_type\": \"DynamicCache\", \"full_logit_at_max\": 1.21875, \"max_diff_vocab_index\": 49709, \"row\": 0, \"source_row\": 1}]}, \"attention_mask\": [[0, 0, 1, 1], [1, 1, 1, 1]], \"cache_position\": [4], \"config\": {\"hidden_size\": 2048, \"num_attention_heads\": 16, \"num_hidden_layers\": 42, \"num_key_value_heads\": 2}, \"decode_position_ids\": [[2], [4]], \"dtype\": \"torch.bfloat16\", \"extended_mask\": [[0, 0, 1, 1, 1], [1, 1, 1, 1, 1]], \"peak_memory_allocated\": 5085944320, \"peak_memory_reserved\": 5251268608, \"position_ids\": [[0, 0, 0, 1], [0, 1, 2, 3]], \"weights_after_sha256\": \"408029f95b4b068d67f63f51fb795f47b59861b6086daf91df36332be4105604\", \"weights_before_sha256\": \"408029f95b4b068d67f63f51fb795f47b59861b6086daf91df36332be4105604\"}",
+  "diagnostic_status": "completed",
+  "kv_full_diagnostics": {
+    "A_two_row": {
+      "cache_type": "DynamicCache",
+      "next_token_fixed": [
+        [
+          49
+        ],
+        [
+          350
+        ]
+      ],
+      "rows": [
+        {
+          "abs_max": 0.375,
+          "abs_mean": 0.06116463616490364,
+          "argmax_cache": 644,
+          "argmax_equal": true,
+          "argmax_full": 644,
+          "cache_logit_at_max": 7.8125,
+          "full_logit_at_max": 8.1875,
+          "max_diff_vocab_index": 1124,
+          "row": 0
+        },
+        {
+          "abs_max": 0.75,
+          "abs_mean": 0.0519532635807991,
+          "argmax_cache": 9,
+          "argmax_equal": true,
+          "argmax_full": 9,
+          "cache_logit_at_max": 13.0625,
+          "full_logit_at_max": 13.8125,
+          "max_diff_vocab_index": 220,
+          "row": 1
+        }
+      ]
+    },
+    "B_single_row": {
+      "next_token_fixed": [
+        [
+          49
+        ],
+        [
+          350
+        ]
+      ],
+      "rows": [
+        {
+          "abs_max": 0.28125,
+          "abs_mean": 0.05997958406805992,
+          "argmax_cache": 644,
+          "argmax_equal": true,
+          "argmax_full": 644,
+          "cache_logit_at_max": -4.59375,
+          "cache_type": "DynamicCache",
+          "full_logit_at_max": -4.875,
+          "max_diff_vocab_index": 35815,
+          "row": 0,
+          "source_row": 0
+        },
+        {
+          "abs_max": 0.2890625,
+          "abs_mean": 0.08420553058385849,
+          "argmax_cache": 9,
+          "argmax_equal": true,
+          "argmax_full": 9,
+          "cache_logit_at_max": 1.5078125,
+          "cache_type": "DynamicCache",
+          "full_logit_at_max": 1.21875,
+          "max_diff_vocab_index": 49709,
+          "row": 0,
+          "source_row": 1
+        }
+      ]
+    },
+    "C_tokenwise_cache": {
+      "comparison": "same one-token decode as B; cache length/type retained",
+      "next_token_fixed": [
+        [
+          49
+        ],
+        [
+          350
+        ]
+      ],
+      "rows": [
+        {
+          "abs_max": 0.28125,
+          "abs_mean": 0.05997958406805992,
+          "argmax_cache": 644,
+          "argmax_equal": true,
+          "argmax_full": 644,
+          "cache_logit_at_max": -4.59375,
+          "cache_type": "DynamicCache",
+          "full_logit_at_max": -4.875,
+          "max_diff_vocab_index": 35815,
+          "row": 0,
+          "source_row": 0
+        },
+        {
+          "abs_max": 0.2890625,
+          "abs_mean": 0.08420553058385849,
+          "argmax_cache": 9,
+          "argmax_equal": true,
+          "argmax_full": 9,
+          "cache_logit_at_max": 1.5078125,
+          "cache_type": "DynamicCache",
+          "full_logit_at_max": 1.21875,
+          "max_diff_vocab_index": 49709,
+          "row": 0,
+          "source_row": 1
+        }
+      ]
+    },
+    "attention_mask": [
+      [
+        0,
+        0,
+        1,
+        1
+      ],
+      [
+        1,
+        1,
+        1,
+        1
+      ]
+    ],
+    "cache_position": [
+      4
+    ],
+    "config": {
+      "hidden_size": 2048,
+      "num_attention_heads": 16,
+      "num_hidden_layers": 42,
+      "num_key_value_heads": 2
+    },
+    "decode_position_ids": [
+      [
+        2
+      ],
+      [
+        4
+      ]
+    ],
+    "dtype": "torch.bfloat16",
+    "extended_mask": [
+      [
+        0,
+        0,
+        1,
+        1,
+        1
+      ],
+      [
+        1,
+        1,
+        1,
+        1,
+        1
+      ]
+    ],
+    "peak_memory_allocated": 5085944320,
+    "peak_memory_reserved": 5251268608,
+    "position_ids": [
+      [
+        0,
+        0,
+        0,
+        1
+      ],
+      [
+        0,
+        1,
+        2,
+        3
+      ]
+    ],
+    "weights_after_sha256": "408029f95b4b068d67f63f51fb795f47b59861b6086daf91df36332be4105604",
+    "weights_before_sha256": "408029f95b4b068d67f63f51fb795f47b59861b6086daf91df36332be4105604"
+  },
+  "finished_at": "2026-09-14T03:18:27.991019+00:00"
+}

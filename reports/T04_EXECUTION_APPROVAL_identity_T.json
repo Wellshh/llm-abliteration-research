@@ -1,0 +1,32 @@
+{
+  "schema_version": "1.0",
+  "status": "approved",
+  "effective": true,
+  "approval_id": "t04-identity-t-8be62b424fad",
+  "execution_scope": "single_content_addressed_run_allow_resume",
+  "approval_record": {
+    "approved_at": "2026-09-14T09:24:24.477741+00:00",
+    "approval_semantics": "user_approved_t04_execution_after_final_ticket",
+    "approval_source": "this conversation, current user instruction; scope limited to this ticket"
+  },
+  "bindings": {
+    "amendment_path": "reports/T03_GATE_SPLIT_AMENDMENT_v1.yaml",
+    "amendment_sha256": "c13300dfa1b98b69416bd7e003768ef5a1d9dd73d9efa3fc8bc637864ca7cb34",
+    "aggregation_path": "reports/T03_HOOK_GATE_v1.json",
+    "aggregation_sha256": "470e3c0485165336b770354a381adcc5d522b5e3339381c630fc0f72434614af",
+    "approval_sidecar_path": "reports/T03_GATE_SPLIT_AMENDMENT_v1_APPROVAL.json",
+    "approval_sidecar_sha256": "2f8b7b98c78be3e104e680c838d9b7c4f8be17ed53e4bbdbc241a7a21e5ae87d",
+    "config_path": "configs/pilot-identity.json",
+    "config_sha256": "0cc25339215f942abd70fc7ad48f4be3ad9a65f95e4e9b1890ffbf5f1dc020d2",
+    "data_path": "artifacts/data/pilot.jsonl",
+    "data_sha256": "ecbcc6bf91822dd44547289dca429dc4b381f2c5549b452201fc29789e5f2782",
+    "output_dir": "artifacts/runs/t04-identity-T",
+    "condition": "identity_hook",
+    "task": "T",
+    "max_families": 1,
+    "device": "cuda:0",
+    "gpu_uuid": "GPU-e5c246b7-afc2-cccd-e66d-fa1ca4eb089e",
+    "approval_id": "t04-identity-t-8be62b424fad",
+    "execution_scope": "single_content_addressed_run_allow_resume"
+  }
+}
