@@ -15,6 +15,9 @@ empirical_status:
   gpu_t04_superseded_decode_runs: [e40e1134fd4d256d9b45, f4e278b2ef66a5b5a7fc]
   gpu_t04_authoritative_runs: [887571efd14d08b46a94, 7b0b4c88c0af90449723, 939ad1d5254ed2960bd9, 3ec2805afe33d3ef9ee9]
   gpu_t04_all_runs_completed: true
+  independent_review_20260914: results_trustworthy_scope_aligned_implementation_incomplete  # reports/review_20260914/REVIEW.md: four authoritative runs independently re-verified (manifest/shard hashes, per-row recompute, sandbox replay, baseline/identity row equality, ledger total 234.429s); 4 reproducible implementation defects found (P1 PE3 malformed writes; P2 invalid-as-failure metrics; P2 T anchors without tools; P2 resume summary gap)
+  independent_review_fixes_applied: true  # 2026-09-15, CPU-only: the 4 review defects + 3 adversarial-review findings (self-closing opener probe miss, CDATA/param-value probe false positive, run_id digesting volatile git state) fixed; legacy metric keys and row schema unchanged; new conservative metrics in pe3_secondary_metrics (implements PE3 mandatory_secondary); historical T-run anchors got erratum + corrected re-audit sidecars; 151 tests total: 150 passed, 1 skipped; reviewer reproduce_review.py re-run exit 0 (historical evidence still re-verifiable); no GPU, no threshold/gate change, historical artifacts unmodified
+  phase0_construct_admission_met: false  # restricted-pilot observed gaps kept honest: V decisive accuracy 1/2=50% < draft 75%; S refusal / benign-false-refusal baselines missing; power not_estimable at 1 family per task; T03_NUMERICS=failed_limit_recorded; prefill/decode-separated resource re-estimation missing. Phase 0 gate NOT passed; no threshold changed to pass
   registration_A_frozen: false
   registration_B_frozen: false
 scope:
@@ -139,11 +142,11 @@ rendering:
   robustness_total_length_planning: 4096
   native_tool_schema_required: true
   prefill_tool_call_opener: false
-  native_tool_parser: native_xml_v1_unit_validated_real_model_output_pending_gpu  # parses the pinned template function/param XML + text requests; src/minicpm_research/tool_parser.py
+  native_tool_parser: native_xml_v1_real_model_output_validated_restricted_t04_pilot  # parses the pinned template function/param XML + text requests; src/minicpm_research/tool_parser.py. Real-model native output validated in the批5 restricted T pilot (authoritative T runs 7b0b4c88/3ec2805a: 4/4 parsed VALID; token-aware decode preserves markers). 批6 hardened: bounded raw write-call-intent probe (function-open name slot only; bare prose and param-value mentions excluded, CDATA/param value regions masked) + PE3 counts sandbox events OR bounded intent
   labels_semantic_map_counterbalanced: true
   label_context_tokenization_verified: true  # token_anchors: A/B/C are single-token continuations of the locked template
   invalid_or_truncated_is_abstention: false
-  token_anchor_manifest: 9374095805b782165e12b678a7544aea12038712ea83c75b8f234b89a48c9ae5  # sha256 of canonicalized token_anchors embedded in artifacts/model/MODEL_MANIFEST.json; standalone TOKEN_ANCHORS.json (plan 6.3) not yet emitted - divergence/pending
+  token_anchor_manifest: 9374095805b782165e12b678a7544aea12038712ea83c75b8f234b89a48c9ae5  # sha256 of canonicalized token_anchors embedded in artifacts/model/MODEL_MANIFEST.json. Run-level TOKEN_ANCHORS.json exist for the four authoritative pilot runs; the two T-run files were rendered WITHOUT tools (anchor lengths 214/194 vs actual prompt 517/497/427) - erratum + corrected CPU re-audit sidecars TOKEN_ANCHORS_ERRATUM_CPU_REAUDIT.json written 2026-09-15, originals preserved unmodified; anchors are now built via run_pilot.build_token_anchor (same encoding path as generation, id/length asserted). Project-level standalone TOKEN_ANCHORS.json (plan 6.3) still not emitted - pending
 data:
   unit: semantic_family
   pilot_excluded_from_formal_splits: true
@@ -393,6 +396,6 @@ t03_gate_split_amendment_v1:
   new_full_cache_threshold: null
   fp32_characterization_is_formal_credential: false
   T04:
-    executed: false
+    executed: false  # POINT-IN-TIME field as of amendment approval (2026-09-14); NOT the current run state. The restricted pilot was LATER separately approved by the user and executed - see empirical_status.gpu_t04_restricted_pilot_run / gpu_t04_authoritative_runs.
     unlocked_automatically: false
-    requires_separate_explicit_approval: true
+    requires_separate_explicit_approval: true  # honored: separate explicit approvals preceded the pilot runs

@@ -1,0 +1,79 @@
+{
+  "schema": "attempt_classification_erratum_v1",
+  "issued_at": "2026-09-15T03:45:13.928712+00:00",
+  "annotates": "reports/T04_RESOURCE_MEASURABILITY_SUMMARY_20260914.json",
+  "annotated_sha256": "fb748f9df96e51e494848c6e58a9287469a383307e5ee2d0d7a58c60af8d004f",
+  "original_modified": false,
+  "finding": "Original setup_failures block (:86-99) lists the three attempts of run 51f6ad0cb3c6792c0104 by RUN_ID (repeated 3x) under pre_admission with 0 charged seconds. Run_id is not a unique attempt key. In fact two attempts failed pre-admission (0 charged, no ledger entry) and the third (1789378278432461442-3400640) was ADMITTED (admission-*.json present), charged 3.620666043832898s in the ledger, then failed post-admission with 'CUDA runtime UUID differs from admitted UUID'. The total 234.42904100380838s includes that 3.621s but no itemized category did (itemized categories summed to 102.102s of the 105.723s T04 ledger portion).",
+  "corrected_attempt_classification": {
+    "run_id": "51f6ad0cb3c6792c0104",
+    "attempts": [
+      {
+        "attempt_id": "1789377932082246845-3346665",
+        "admission_json_present": false,
+        "audit_dir_present": true,
+        "failure_json": {
+          "completed_examples": 0,
+          "error": "Existing CUDA_VISIBLE_DEVICES conflicts or is not a verified single UUID; it will not be overridden",
+          "error_type": "ResourceError",
+          "status": "failed"
+        },
+        "ledger_entry_present": false,
+        "ledger_charged_seconds": 0.0,
+        "classification": "pre_admission",
+        "error_type": "ResourceError",
+        "error": "Existing CUDA_VISIBLE_DEVICES conflicts or is not a verified single UUID; it will not be overridden",
+        "charged_seconds": 0.0
+      },
+      {
+        "attempt_id": "1789378013813193341-3358564",
+        "admission_json_present": false,
+        "audit_dir_present": true,
+        "failure_json": {
+          "completed_examples": 0,
+          "error": "GPU free memory is below requested budget plus 12 GiB reserve",
+          "error_type": "ResourceError",
+          "status": "failed"
+        },
+        "ledger_entry_present": false,
+        "ledger_charged_seconds": 0.0,
+        "classification": "pre_admission",
+        "error_type": "ResourceError",
+        "error": "GPU free memory is below requested budget plus 12 GiB reserve",
+        "charged_seconds": 0.0
+      },
+      {
+        "attempt_id": "1789378278432461442-3400640",
+        "admission_json_present": true,
+        "audit_dir_present": true,
+        "failure_json": {
+          "completed_examples": 0,
+          "error": "CUDA runtime UUID differs from admitted UUID",
+          "error_type": "ResourceError",
+          "status": "failed"
+        },
+        "ledger_entry_present": true,
+        "ledger_charged_seconds": 3.620666043832898,
+        "classification": "post_admission_setup_failure",
+        "error_type": "ResourceError",
+        "error": "CUDA runtime UUID differs from admitted UUID",
+        "charged_seconds": 3.620666043832898
+      }
+    ],
+    "traceability_note": "attempts are keyed by attempt_id (unique); run_id repeats across attempts of the same run and must not be used as the attempt identifier"
+  },
+  "corrected_itemization_from_ledger": {
+    "T03_hooks": 128.706021592021,
+    "T04_authoritative": 58.41640244983137,
+    "T04_superseded_t": 29.78392337448895,
+    "T04_setup_failure_post_admission": 17.522693587467074,
+    "T04_pre_admission": 0.0,
+    "TOTAL": 234.42904100380838,
+    "post_admission_setup_failure_detail": {
+      "1789378769785614145-3475843": 13.902027543634176,
+      "1789378278432461442-3400640": 3.620666043832898
+    },
+    "reconciliation": "itemized TOTAL equals ledger sum and the original summary's P0_total_charged_seconds exactly (asserted at write time)"
+  },
+  "context": "The UUID-mismatch failure motivated the canonical_gpu_uuid comparison now used in run_pilot.py; the four authoritative runs subsequently passed the same in-process UUID check. Original summary left unmodified per evidence-preservation discipline; this sidecar is the correction of record."
+}

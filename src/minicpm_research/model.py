@@ -279,11 +279,16 @@ def render_prompt(tokenizer: Any, messages: list[dict[str, Any]], *, tools: list
 
 
 def token_anchors(tokenizer: Any, messages: list[dict[str, Any]] | None = None,
-                  labels: tuple[str, ...] = ("A", "B", "C")) -> dict[str, Any]:
+                  labels: tuple[str, ...] = ("A", "B", "C"), *,
+                  tools: list[dict[str, Any]] | None = None) -> dict[str, Any]:
     messages = messages or [{"role": "user", "content": "Reply with exactly one label: A, B, or C."}]
-    prompt = render_prompt(tokenizer, messages)
-    with_thinking = tokenizer.apply_chat_template(messages, tokenize=False,
-                                                   add_generation_prompt=True, enable_thinking=True)
+    prompt = render_prompt(tokenizer, messages, tools=tools)
+    thinking_kwargs: dict[str, Any] = {"tokenize": False, "add_generation_prompt": True, "enable_thinking": True}
+    if tools is not None:
+        # The thinking-branch verification must compare the SAME tool context (review P2:
+        # T anchors rendered without tools do not describe the real generation input).
+        thinking_kwargs["tools"] = tools
+    with_thinking = tokenizer.apply_chat_template(messages, **thinking_kwargs)
     if prompt == with_thinking:
         raise ValueError("enable_thinking=False has not been verified: rendered templates are identical")
     ids = tokenizer.encode(prompt, add_special_tokens=False)

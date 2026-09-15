@@ -16,7 +16,7 @@ from typing import Any
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 from minicpm_research.evaluation import summarize
-from minicpm_research.runs import PhaseBudget, RunStore, atomic_json, environment, file_hash, now, source_state
+from minicpm_research.runs import PhaseBudget, RunStore, atomic_json, digest, environment, file_hash, now, source_state
 from minicpm_research.resources import canonical_gpu_uuid
 from minicpm_research.tool_parser import GOLD_TO_EXPECTED, NATIVE_FORMAT_SHA256, evaluate_tool_turn
 import minicpm_research.tool_parser as native_tool_parser
@@ -65,6 +65,50 @@ def decode_generated_tokens(tokenizer: Any, token_ids: list[int], task: str, eos
             ids.pop()
         return tokenizer.decode(ids, skip_special_tokens=False)
     return tokenizer.decode(ids, skip_special_tokens=True)
+
+
+def build_token_anchor(tokenizer: Any, example: dict[str, Any]) -> dict[str, Any]:
+    """Anchors from the SAME encoding path as generation, with consistency asserts.
+
+    Review P2: T prompts must be rendered WITH their tool schemas; the saved anchor
+    must equal the actual generation encoding (token IDs and length) or fail loudly.
+    Anchors that do not match the real input cannot be used for position location.
+    """
+    from minicpm_research.model import render_prompt, token_anchors
+    task = example["task"]
+    tools = example.get("tools") if task == "T" else None
+    prompt = render_prompt(tokenizer, example["messages"], tools=tools)
+    encoded = encode_generation_prompt(tokenizer, prompt)
+    ids = encoded["input_ids"][0].tolist()
+    anchor = token_anchors(tokenizer, example["messages"], tools=tools)
+    if anchor["prompt_token_ids"] != ids:
+        raise ValueError(f"token anchor content mismatch for {example['example_id']}: anchors must equal the actual generation encoding")
+    mask = encoded.get("attention_mask")
+    anchor.update({"example_id": example["example_id"], "task": task, "family_id": example.get("family_id"),
+                   "tools_present": tools is not None, "tools_sha256": digest(tools) if tools is not None else None,
+                   "attention_mask": mask[0].tolist() if mask is not None else None,
+                   "encoded_prompt_length": len(ids),
+                   "assistant_boundary_index": len(ids) - 1})
+    return anchor
+
+
+def ensure_complete_run_summary(store: Any, device: str, attempt: str) -> bool:
+    """Resume-path delivery (review P2): a fully-recovered run must end with its summary.
+
+    Regenerates PILOT_BASELINE.json deterministically from committed rows when it is
+    missing; NEVER overwrites an existing summary. device comes from the original run
+    manifest, not from this resume invocation. No samples are regenerated, no model
+    is loaded, and the completion event is appended for the audit trail.
+    """
+    summary_path = store.path / "PILOT_BASELINE.json"
+    if summary_path.exists():
+        return False
+    report = summarize(list(store.rows.values()))
+    report.update({"run_id": store.run_id, "gpu_execution": device == "cuda:0", "finished_at": now(),
+                   "summary_regenerated_on_resume": True})
+    atomic_json(summary_path, report)
+    store.event("summary_regenerated_on_resume", attempt=attempt, examples=len(store.rows))
+    return True
 
 
 def _prompt_too_long_row(example: dict[str, Any], task: str, length: int) -> dict[str, Any]:
@@ -405,7 +449,16 @@ def main() -> int:
         if not set(store.rows).issubset({e["example_id"] for e in selected}):
             raise ValueError("Completed shards contain unexpected sample IDs")
         if len(store.rows) == len(selected):
-            print(json.dumps({"status": "already_complete", "run_id": store.run_id, "path": str(store.path)}))
+            # Review P2: a crash after the last raw_result/shard but before the summary
+            # must still deliver PILOT_BASELINE.json on resume (regenerate if missing,
+            # never overwrite), and the completion path must leave an audit event.
+            resume_attempt = f"resume-{time.time_ns()}-{os.getpid()}"
+            regenerated = ensure_complete_run_summary(store, store.manifest.get("device", args.device), resume_attempt)
+            store.event("already_complete_verified", attempt=resume_attempt, examples=len(store.rows),
+                        summary_regenerated=regenerated)
+            print(json.dumps({"status": "already_complete", "run_id": store.run_id, "path": str(store.path),
+                              "summary_regenerated": regenerated,
+                              "summary_present": (store.path / "PILOT_BASELINE.json").exists()}))
             return 0
         stop = {"requested": False}
         def request_stop(signum: int, frame: Any) -> None:
@@ -444,13 +497,18 @@ def main() -> int:
                 if actual_uuid != canonical_gpu_uuid(config["gpu_uuid"]):
                     raise ResourceError("CUDA runtime UUID differs from admitted UUID")
                 torch.cuda.set_per_process_memory_fraction(admission["budget_bytes"] / properties.total_memory, 0)
-            from minicpm_research.model import load_locked_model, render_prompt, token_anchors
+            from minicpm_research.model import load_locked_model, render_prompt
             from minicpm_research.hooks import PostBlockHooks
             model, tokenizer = load_locked_model(args.model_lock, device=args.device, dtype=config["dtype"], attention_backend=config["attention_backend"])
             guard.model_loaded = True
             guard.sample()
             guard_handle = model.register_forward_pre_hook(lambda *unused: guard.check())
-            atomic_json(store.path / "TOKEN_ANCHORS.json", [token_anchors(tokenizer, e["messages"]) for e in selected[:24]])
+            # Review P2: anchors are built from the SAME encoding path as generation
+            # (T prompts rendered WITH tools) and asserted equal to it, so saved
+            # anchor positions describe the real generation input.
+            anchors = [build_token_anchor(tokenizer, e) for e in selected[:24]]
+            atomic_json(store.path / "TOKEN_ANCHORS.json", anchors)
+            anchor_lengths = {a["example_id"]: a["encoded_prompt_length"] for a in anchors}
             pending: list[dict[str, Any]] = []
             def pressure_check() -> None:
                 guard.check()
@@ -481,6 +539,9 @@ def main() -> int:
                 prompt = render_prompt(tokenizer, example["messages"], tools=tools)
                 encoded = encode_generation_prompt(tokenizer, prompt)
                 length = encoded["input_ids"].shape[-1]
+                if example["example_id"] in anchor_lengths and anchor_lengths[example["example_id"]] != length:
+                    raise ValueError(f"generation prompt length {length} diverged from saved token anchor "
+                                     f"{anchor_lengths[example['example_id']]} for {example['example_id']}")
                 max_new = config["tool_max_new_tokens"] if task == "T" else config["max_new_tokens"]
                 if length > config["max_prompt_tokens"]:
                     # No silent prompt truncation; this is a retained protocol failure.

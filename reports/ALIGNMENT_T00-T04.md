@@ -1,6 +1,6 @@
 # 框架实现与研究计划对齐报告（T00–T04）
 
-**日期：2026-09-12（批1 baseline）/ 2026-09-12（批2 native 解析器）/ 2026-09-14（批3 T03 真 C 诊断）/ 2026-09-14（批4 GPU FP32 精度对照）/ 2026-09-14（批5 受限 T04 pilot）｜范围：T00–T04｜状态：T03 BF16 主配置历史判定仍 failed；T03 split gate 已生效；批5 在人工批准后完成 GPU3 baseline/identity × V/T 受限 pilot。无 formal test 读取、无干预选择、无阈值修改。**
+**日期：2026-09-12（批1 baseline）/ 2026-09-12（批2 native 解析器）/ 2026-09-14（批3 T03 真 C 诊断）/ 2026-09-14（批4 GPU FP32 精度对照）/ 2026-09-14（批5 受限 T04 pilot）/ 2026-09-15（批6 独立评审修复）｜范围：T00–T04｜状态：T03 BF16 主配置历史判定仍 failed；T03 split gate 已生效；批5 在人工批准后完成 GPU3 baseline/identity × V/T 受限 pilot；批6 按外部独立评审修复 4 项实现缺陷（纯 CPU）。无 formal test 读取、无干预选择、无阈值修改；Phase 0 构念准入未达成（见 §6）。**
 
 本报告把 `src/minicpm_research/*`、`scripts/*`、`tests/*`、`artifacts/*` 的实际实现与 `RESEARCH_PLAN.md` / `PREREGISTRATION.yaml` / `AGENTS.md` 逐项对照，记录已对齐项、本次修复项、仍受阻的 pending 项，以及两项关键决策。计划 §15 要求 `reports/` 目录承载「审计、发现、确认与失败说明」；本文件即该目录的首份对齐审计。
 
@@ -16,7 +16,7 @@
 | T03 | hooks 与基础运行对照；identity/self-patch/零强度/padding/decode；KV-cache vs 全序列 | `hooks.py`（`PostBlockHooks`/`PatchSpec`/`rank_one_projection`）、`scripts/check_hooks.py`（真逐 token C）、`tests/test_hooks.py`、`tests/test_check_hooks_kv.py` | `reports/T03_GATE_SPLIT_AMENDMENT_v1.yaml`、`reports/T03_GATE_SPLIT_AMENDMENT_v1_APPROVAL.json`、`reports/T03_HOOK_GATE_v1.json`；历史 `HOOK_VALIDATION_GPU_ABC_REAL_C_20260914.json`（GPU3 **failed**，diagnostic_status=completed）与勘误均保留 | **拆分 gate 生效**：`T03_HOOK=passed_under_gate_split_v1`（工程控制/调用与完整性范围内；prefill/decode hook counts 仅引用官方 CPU artifact `projection_hook_manifest.forward_count=2,decode_forward_count=1`）；`historical_T03_bf16_gate=failed`、`T03_NUMERICS=failed_limit_recorded`；不称完整 T03 passed，不自动解锁 T04 |
 | T04 | pilot 与功效/资源重估；完整失败分布 | `scripts/run_pilot.py`、`evaluation.py`、`runs.py`、`tool_parser.py` | 四个 authoritative run manifest/PILOT_BASELINE；资源与对比摘要见 `reports/T04_RESOURCE_MEASURABILITY_SUMMARY_20260914.json`、`reports/T04_BASELINE_IDENTITY_COMPARISON_20260914.json` | **受限 pilot 已完成**；结果不进入 formal test、阈值或干预选择 |
 
-跨切面模块均与计划一致：`runs.py`（内容寻址 manifest + append-only 分片 + 续跑，§15）、`sandbox.py`（离线可重放、记录 raw intent，§10/PREREG `sandbox`）、`evaluation.py`（保留 malformed/truncated + 混淆分解，§8.2/§13.4）。本轮权威远程命令 `CUDA_VISIBLE_DEVICES="" PYTHONPATH=src .venv/bin/python -m unittest discover -s tests -q`：**135 项通过**，1 skipped。
+跨切面模块均与计划一致：`runs.py`（内容寻址 manifest + append-only 分片 + 续跑，§15；批6 起 git 证据限定源码 pathspec 以保证 run_id 确定）、`sandbox.py`（离线可重放、记录 raw intent，§10/PREREG `sandbox`）、`evaluation.py`（保留 malformed/truncated + 混淆分解，§8.2/§13.4；批6 增 `pe3_secondary_metrics` 保守口径）。测试：批5 远程权威 **135 通过**；批6 修复后本地 **151 项：150 通过、1 skipped**（评审者本地环境曾报 108 通过/28 跳过，系 torch/transformers 缺失的跳过差异）。
 
 ---
 
@@ -48,7 +48,7 @@
 | K | `scripts/make_pilot_data.py` + 重生成 manifest | `native_tool_parser_validation`/`label_tokenization` 字段更新；旧 manifest 保留为 `pilot.jsonl.manifest.superseded-20260912.json`；`data_sha256` 不变（`pilot.jsonl` 字节相同）。 |
 | L | `tests/test_tool_parser.py`（新增 15 测试） | 解析器（有效写/读、CDATA、文本请求、坏/缺/多参数、越界、未知工具、未闭合+截断、prose no-action、多调用）+ `evaluate_tool_turn`（各 gold 正确动作、premature write 记录非隐藏、malformed write 仍计 attempt）+ T 指标/PE3。 |
 
-测试：全套 **72 通过**（+15），1 skipped。dry-run（`--task both`）选中 V+T、`T_model_evaluation=code_ready_not_run`、`model_inference/gpu_execution=未运行`。**T 评估代码就绪；真模型 native 输出验证与 GPU pilot 仍未运行。**
+（历史批次记录）测试：全套 **72 通过**（+15），1 skipped。dry-run（`--task both`）选中 V+T、`T_model_evaluation=code_ready_not_run`、`model_inference/gpu_execution=未运行`。T 评估代码就绪；真模型 native 输出验证与 GPU pilot 当时未运行——**均已于批5 完成**（authoritative T runs `7b0b4c88`/`3ec2805a`，4/4 native 格式解析 VALID）。
 
 ## 2.2 增量（2026-09-14 第三批）：T03 真逐 token C 对照 + 一次有界 GPU 诊断（T03 门限 failed）
 
@@ -94,16 +94,32 @@ GPU FP32 三路径：A−B 3.72e-5/3.77e-5、A−C 4.05e-5/4.10e-5、B−C 1.55e
 
 （历史批次）**T03/T04 状态不变**：BF16 主配置 A−B=0.75>0.5 → **T03 保持 failed**；FP32 为 characterization，故当时 **T04 不解锁**。该历史状态不改变当前已人工批准并完成的受限 pilot。
 
+## 2.4 增量（2026-09-15 第六批）：独立评审修复（纯 CPU，无 GPU，历史产物零修改）
+
+外部独立评审（`reports/review_20260914/REVIEW.md`，只读、未跑 GPU）复核批5 四个 authoritative run：manifest/shard 哈希、逐行重算、sandbox 重放、baseline/identity 除耗时外逐行相等、账本总数 234.429s **全部通过**，结论「受限 pilot 结果可信、与获批范围对齐」，同时定位 4 项可复现实现缺陷；本批对抗审核再确认 3 项。全部修复：
+
+| # | 缺陷 | 修复 |
+|---|---|---|
+| P1 | PE3 漏计畸形写调用（无引号/单引号/截断 `set_stock` 记为未尝试） | 三分离：受限原始意图探针 `detect_raw_write_call_intent`（仅 function-open 名称槽；引号任意/未闭合/≥3 字符前缀截断；裸词与参数值提及排除）＋解析回退提取名称进 calls→sandbox 精确标记＋PE3=事件∨受限意图。评审 3 反例 **PE3 0→1/1** |
+| P2a | 失败调用（截断读、缺参写→sandbox INVALID）仍计动作正确；缺预注册保守指标 | 遗留 `metrics` 四键语义**不变**（历史 PILOT_BASELINE 仍可比）；新顶层 `pe3_secondary_metrics`：端到端严格正确率（意图正确∧执行成功）、invalid-as-failure、gold 固定分母的授权写入/只读成功率、`paired_act_abstain_accuracy`、counts+definitions+命名说明——补齐 PREREG PE3 `mandatory_secondary` |
+| P2b | T 锚点漏传 tools（[214,214,194,194] vs 实际 [517,517,497,427]，不能用于位置定位） | `model.token_anchors(tools=…)`；`run_pilot.build_token_anchor` 与生成**同一编码路径**＋ID/长度一致断言＋example_id/tools_sha256/mask/assistant 边界；生成循环内长度交叉断言；两个历史 T run 补 **`TOKEN_ANCHORS_ERRATUM_CPU_REAUDIT.json` 旁注**（锁定 tokenizer CPU 重审，修正锚==实际 prompt_tokens；原文件未动、sha 已记） |
+| P2c | 最后一条落盘后中断，恢复返回 already_complete 却不产汇总 | `ensure_complete_run_summary`：仅在缺失时从已提交行确定性重建、**绝不覆盖**、device 取自原 manifest、补 `summary_regenerated_on_resume`/`already_complete_verified` 审计事件 |
+| 审① | 探针漏报 `<function name=set_stock/>` 及尾随标点族（`set_stock.`/`set_stock,`） | 标识符核心提取（`_IDENT_CORE`）归一化，探针与回退 calls 同步；`set_stockx` 仍正确排除 |
+| 审② | CDATA/参数值内嵌 opener 翻转 VALID 只读行、误触发 PE3 | 探测前掩蔽值区域（CDATA 跨度＋param 内部；截断时掩蔽至文末，注释为设计边界） |
+| 审③(major) | run_id 摘要含易变 git 全树状态（tracked 心跳日志每分钟变化＋run 自身未跟踪输出）→ **resume/already_complete 实际不可达** | `runs.source_state` 的 git diff/status 限定到源码 pathspecs（与 `source_sha256` 同域）＋`git_scope_note`；实测 2s 真实心跳 churn 下 run_id 稳定；历史 stored manifest 与 `reproduce_review.py` 校验不受影响 |
+
+验证：本地全套 **151 项：150 通过、1 skipped**（总数以本次unittest实际发现为准；目标修复覆盖见tests/test_review_fixes.py）；评审者 `reproduce_review.py` 修复后**重跑 exit 0**（历史四 run 完整性/逐行重算/重放/四键汇总/条件等价/账本全不变→历史证据链在修复后代码下仍可复核）；行 schema 无新键（历史行可重算）；dry-run 正常。**已知边界（已注释）**：未闭合 param 值内再嵌套 opener 的退化情形仅保留 `raw_write_name_mentioned` 诊断、不计意图；`selected[:24]` 锚点在默认 both 模式全为 V（既有设计，`--task T` 运行时全为 T；批5 两个 T run 不受影响），留作可选改进。**本批零 GPU 操作；阈值/gate/历史产物均未动（仅新增旁注）。**
+
 ## 3. 偏差与缺口（8 项）
 
 1. **T01 代码-环境不匹配（本次已修）。** 原 `model.py` 用裸 `HfApi()`→`huggingface.co`，本服务器不可达（`model-lock.log`: Network unreachable），权重系带外经 mirror 下载、仓库代码无 endpoint 支持。→ 已加 endpoint 支持并改用 tree 端点完成绑定。
-2. **Phase 0 产物不全（§6.3）。** 现有：`RESOURCE_AUDIT.json`、`MODEL_MANIFEST.json`（批1）、`tiny_cpu_v1.json`、批3 的 `HOOK_VALIDATION_CPU_ABC_OFFICIAL_BF16_20260914.json`（官方模型 CPU passed）与 `HOOK_VALIDATION_GPU_ABC_REAL_C_20260914.json`（GPU3，diagnostic_status=completed）。仍缺：`ENVIRONMENT.json`（环境信息目前内嵌于 audit/manifest，无独立产物）、独立 `TOKEN_ANCHORS.json`（token anchors 内嵌于 MODEL_MANIFEST.json，未单独产出）、**status=passed 的真模型 `HOOK_VALIDATION.json`**（批3 GPU T03 对照诊断的 KV-vs-全序列门限 failed，故尚无通过的真模型 hook 验证产物）、`PILOT_BASELINE.json`、`RESOURCE_PROFILE.json`（**连生产代码都没有**，§14 要求实测 token/s 重估；`estimate_resources.py`/`RESOURCE_ESTIMATES.json` 仅假设值）。多数下游依赖 GPU pilot（正确标记「未运行」）。
+2. **Phase 0 产物不全（§6.3）——按批5/批6 后现状更新。** 已有：`RESOURCE_AUDIT.json`、`MODEL_MANIFEST.json`（批1）、`tiny_cpu_v1.json`、批3 CPU/GPU A/B/C 诊断、批4 FP32 characterization、**批5 四个 authoritative run 的 run 级 `TOKEN_ANCHORS.json` 与 `PILOT_BASELINE.json`**、`reports/T04_RESOURCE_MEASURABILITY_SUMMARY_20260914.json`（实测总生成 token/s、准入 worker wall time、采样显存）。仍缺：`ENVIRONMENT.json` 独立产物（信息内嵌于 audit/manifest）；**项目级**独立 `TOKEN_ANCHORS.json`（§6.3 列表项；run 级已存在——注意两个 T run 的原始锚**存在但不正确**（漏 tools 渲染），已出勘误+CPU 重审修正旁注，原文件保留）；status=passed 的真模型 `HOOK_VALIDATION.json`（历史 BF16 数值门 failed；拆分 gate 的 `T03_HOOK` 聚合是证据汇总、非运行 credential）；`RESOURCE_PROFILE.json` 完整生产代码（**prefill/decode 分开、forward/s 及据此的预算重估仍缺**，现有摘要不替代）。
 3. **数据范围缺口（S、C 家族）。** 计划 §5.2 pilot = S80/V120/T60/C40；实现仅 V120/T60。manifest 已记 `safety_manipulation_check`/`C_controls`=NOT_IMPLEMENTED。这阻塞 §7.1 的 S 拒绝操纵检查（选干预需验证集拒绝下降 ≥20pp）与 H3/H4 的 C 控制。S 需经许可/审计的安全数据，**不能伪造**（AGENTS.md）。
-4. **T 行为评估：native parser 已实现（见 §2.1），解析器阻塞解除。** 原 `run_pilot` 只跑 V、`sandbox.parse_action_json` 仅诊断用。本批新增 `tool_parser.py`（revision-audited native XML 解析 + schema 类型校正 + `evaluate_tool_turn`）、`run_pilot` T 分支、`evaluation` T/PE3 指标，全套 72 测试通过。T 评估**代码就绪**；真模型 native 输出验证与 GPU pilot 仍「未运行」。
+4. **T 行为评估（历史批次记录，现状已更新）。** 批2 实现 `tool_parser.py`/`run_pilot` T 分支/`evaluation` T 指标（当时 72 测试、真模型输出未跑）。**现状**：批5 已在真模型上验证 native 输出（4/4 解析 VALID，token-aware decode 保留标记）；批6 修复评审 P1/P2a（PE3 畸形写漏计、保守失败指标缺失），并如实记录：`next_action_accuracy`/`parse_valid_rate` 是意图类别/结构有效性诊断口径，保守端到端口径在 `pe3_secondary_metrics`。
 5. **结构与计划 §15 不一致（见 §5 映射）。** 计划列 `src/data,src/model,src/eval,src/stats,reports/`；实际为扁平 `src/minicpm_research/`，本次补 `reports/`，无 `src/stats/`。
 6. **PREREGISTRATION 状态曾 overstated（批1 已更正；批3/批5 据实补记）。** 批3记录真模型 CUDA T03 数值对照诊断；批5进一步记录四项受限 T04 行为 pilot，故当前 `gpu_experiments_run: true`，同时明确无 formal test、干预选择或阈值修改。
-7. **预留组件源码不在仓库。** `build/autoplacer-RL`、`build/gpu_reservation` 是预编译二进制（各 ~1MB），`src/`/`scripts/` 无源码。运行心跳（`gpu{3,5}_reservation.jsonl`：`process_name=autoplacer-RL`、UUID、`allocated_bytes=34359738368`=32GiB、每分钟心跳）合规，但仓库无法审计其逻辑；`gpu_reservation` 角色未文档化（AGENTS.md 只认 `autoplacer-RL`）。标记为**外部组件**。
-8. **次要。** `build_deployment.py` glob 了不存在的 `docs/RUNNING.md`（部署清单静默省略该 runbook）；`estimate_resources.py` 为假设值非实测。
+7. **预留组件源码——部分纳仓（更新）。** `src/ops/gpu_reservation.cu` **已纳仓**（含 UUID 强校验、SIGTERM/SIGINT 优雅释放、准入失败记录、心跳与 stopped 事件、pid 文件生命周期）；但 `build/autoplacer-RL`、`build/gpu_reservation` 两个预编译二进制与该源码的**字节对应性未经重建验证**，`gpu_reservation` 二进制的角色仍未文档化（AGENTS.md 只认 `autoplacer-RL`）。运行心跳合规（UUID、32GiB、每分钟）。剩余动作：重建比对或明确标注二进制为外部预编译产物。
+8. **次要（更新）。** `docs/RUNNING.md` **已存在**（原「被 build_deployment glob 引用但不存在」已解决）；`estimate_resources.py`/`RESOURCE_ESTIMATES.json` 仍为假设值——批5 的 `T04_RESOURCE_MEASURABILITY_SUMMARY` 提供了部分实测（总生成 token/s、worker wall time、采样显存），但 §14 要求的 prefill/decode 分开与 forward/s 实测及据此的预算重估仍缺。资源摘要 attempt 分类不一致（UUID-mismatch attempt `1789378278432461442-3400640` 已准入计费 3.62s 却按 run_id 列为 pre-admission 计 0）**已出旁注修正**：`…ATTEMPT_CLASSIFICATION_ERRATUM.json`（按 attempt_id 分类、分项对账与账本及原摘要总数精确闭合、原摘要保留未改）。
 
 ---
 
@@ -132,27 +148,27 @@ GPU FP32 三路径：A−B 3.72e-5/3.77e-5、A−C 4.05e-5/4.10e-5、B−C 1.55e
 
 ---
 
-## 6. Pending 清单（受阻/延后，均「未运行」或「未实现」）
+## 6. Pending 清单（批6 更新：仅列当前待办；已解决项见表后）
 
 | 项 | 阻塞原因 | 解锁条件 |
 |---|---|---|
 | 官方 Hub provenance 复核 | `huggingface.co` 网络不可达 | 网络可达后用官方 endpoint 重跑 `verify_official_file_hashes`，provenance 升 official |
 | S 安全家族 + 拒绝操纵检查 | 需经许可/审计的安全数据，不能伪造 | 取得授权数据 + 独立准则审计 |
-| C 语言/迎合控制家族 | 本次 baseline 范围外 | 后续票据合成生成 |
-| 真模型 native 工具输出验证 + T GPU pilot | 解析器已实现并单测（§2.1）；真模型输出/GPU 未跑 | 资源准入后跑 T pilot，核验真模型输出确为 native function/param 格式 |
-| status=passed 的真模型 `HOOK_VALIDATION.json` | 历史 GPU BF16 数值门槛仍 failed；拆分 gate 已批准并生效，但 `T03_HOOK` 聚合是 evidence aggregation，不是运行 credential；FP32 仍 characterization | 不新增 full/cache 阈值；若 T04 runner 要求真实 `HOOK_VALIDATION`，需 root 审核最小适配或保持 blocked；不把聚合 JSON 伪造成运行产物 |
-| GPU pilot / `PILOT_BASELINE.json` | 历史记录曾为尚未跑模型实验 | 批5 已完成四个 authoritative baseline/identity pilot run |
-| `RESOURCE_PROFILE.json` 生产代码 | 无实测 profiling 代码 | 实现 token/s、forward/s、prefill/decode 实测并重估预算（§14） |
-| 独立 `TOKEN_ANCHORS.json` | 现内嵌于 MODEL_MANIFEST.json | 如需 §6.3 独立产物，增加单独导出（小改动） |
-| `ENVIRONMENT.json` 独立产物 | 环境信息内嵌于 audit/manifest | 如需 §6.3 独立产物，增加导出 |
-| `docs/RUNNING.md` | 不存在（被 build_deployment glob 引用） | 补操作 runbook |
-| `build/autoplacer-RL` 源码纳仓 | 仅二进制 | 如需审计其生命周期逻辑，纳入源码 |
+| C 语言/迎合控制家族 | 超出已完成批次范围 | 后续票据合成生成 |
+| **Phase 0 构念准入（阶段门）** | 受限 pilot 观察：V decisive accuracy 1/2=**50% < 草案 75%**；S 拒绝/良性误拒绝基线缺失；T 缺充分退化基线比较；每任务 1 family 功效 **not_estimable**；T03_NUMERICS=failed_limit_recorded | 按计划 §6.3 流程：先查模板/checkpoint/解析/长度/任务难度，最多两轮 pilot 修订（保留日志）；仍不过则按预规则宣布该构念当前协议下不适合或转对照模型——**不为过门改阈值** |
+| 功效重估 + 完整资源重估 | 1 family/task 不足以估功效；资源摘要缺 prefill/decode 分开、forward/s 及据此的预算重估（600 行已生成≠600 行已跑） | 扩样后按计划 §14 实测重估 |
+| status=passed 的真模型 `HOOK_VALIDATION.json` | 历史 GPU BF16 数值门 failed；拆分 gate 的 `T03_HOOK` 聚合是证据汇总、非运行 credential；FP32 仅 characterization | T03 门槛处理方案**单独审核**（用户已指定该顺序：先审方案，再决定 SDPA 对照或预注册式阈值修订）；不新增 full/cache 阈值、不把聚合 JSON 伪造成运行产物 |
+| 项目级独立 `TOKEN_ANCHORS.json` / `ENVIRONMENT.json` | §6.3 独立产物未产出（run 级 anchors 已存在；环境信息内嵌于 audit/manifest） | 小导出改动，按需执行 |
+| `build/` 二进制与源码对应性验证 | `src/ops/gpu_reservation.cu` 已纳仓，但两个预编译二进制未经重建比对 | 重建比对，或明确标注为外部预编译产物 |
+| 两位独立人工 gold 审核 | 未做 | 分层抽样 + 分歧解决后方可冻结 split |
+
+**已解决（移出 pending）**：真模型 native 输出验证 + T GPU pilot（批5，4/4 VALID）；GPU pilot / `PILOT_BASELINE.json`（批5 四个 authoritative run）；`docs/RUNNING.md`（已存在）；T 锚点漏 tools（批6 代码修复 + 历史 run 勘误/CPU 重审旁注）；恢复缺汇总（批6）；run_id 易变致 resume 不可达（批6）；PE3 畸形写漏计与保守指标缺失（批6）；**资源摘要 attempt 分类旁注（批6：`T04_RESOURCE_MEASURABILITY_SUMMARY_20260914.ATTEMPT_CLASSIFICATION_ERRATUM.json`，按 attempt_id 修正分类，分项对账==账本==原摘要总数 234.42904100380838s 精确闭合，原摘要未改写）**。
 
 ---
 
 ## 7. 纪律声明
 
-- 批1/2 **未运行任何 GPU 模型实验**。**批3 经用户审核批准后跑了一次有界 GPU T03 数值对照诊断**（单 worker·仅 GPU3·释放并恢复受管预留·心跳确认·本批仅一次·未换卡/未多卡）；**无任何正式实验/干预/行为 run/pilot**，模型推理（V/T/S/C 行为）与 GPU pilot 仍「未运行」。
+- 批1/2 **未运行任何 GPU 模型实验**（时点声明）。**批3 经用户审核批准后跑了一次有界 GPU T03 数值对照诊断**（单 worker·仅 GPU3·释放并恢复受管预留·心跳确认·本批仅一次·未换卡/未多卡）；截至批3 无任何正式实验/干预/行为 run/pilot。**批5 经逐项人工批准后完成四次受限 T04 行为 pilot**（见下）；**批6 为纯 CPU 评审修复，零 GPU 操作**。
 - 批3 T03 KV-vs-全序列门限 **failed 且未放宽阈值、未用通过的子对照（CPU/单样本/argmax/B≡C）替换原 A−B 检查**；`diagnostic_status=completed`，**未**写成 T03 passed。GPU3 释放前校验进程身份、GPU5/SenseVoice 及其他用户进程全程未碰。
 - 无伪造 metrics；所有回填值来自 `MODEL_MANIFEST.json`、本地文件实测 hash 与真实运行产物。批3 三路径数值均来自实际 GPU/CPU 运行产物。
 - 原始权重只读；未做永久权重改写/LoRA/SFT/SAE；未解封任何 test；运行时 hooks 优先。
@@ -161,3 +177,4 @@ GPU FP32 三路径：A−B 3.72e-5/3.77e-5、A−C 4.05e-5/4.10e-5、B−C 1.55e
 - 2026-09-14 用户批准 `t03_gate_split_v1` amendment 后，拆分 gate 正式生效；该批准本身不改写历史 BF16 failed。随后用户另行批准四张 T04 票据，受限 pilot 已完成；不新增数值阈值、不进行干预选择。
 - 2026-09-14 用户随后明确批准四项受限 T04 pilot 票据；baseline/identity × V/T 均已在 GPU3 独立运行并完成，run_id 分别为 `887571efd14d08b46a94`、`e40e1134fd4d256d9b45`、`939ad1d5254ed2960bd9`、`f4e278b2ef66a5b5a7fc`。结果仍属 pilot-only，不改写历史 T03 BF16 failed、不用于阈值或干预选择；四项均保留独立 manifest 与原始输出。
 - T 原始 decode 诊断发现 `skip_special_tokens=True` 丢失 native markers；CPU replay 后已用 token-aware decode 修正并仅重跑 T：baseline-T `7b0b4c88c0af90449723`、identity-T `3ec2805afe33d3ef9ee9`。旧 T runs 保留并标记 superseded；V 未重跑。T corrected output 已从 native-output pending 中移除。
+- 批6（2026-09-15）：外部独立评审确认批5 结果可信后，修复其 4 项实现缺陷与本批对抗审核 3 项确认缺陷（§2.4）；**零 GPU 操作**；历史产物**仅新增旁注、零修改**；阈值/gate/权威状态全部不变；`reproduce_review.py` 重跑 exit 0 证明历史证据链在修复后代码下仍可复核。PREREG 同步：`native_tool_parser`（真模型输出已验证）、`token_anchor_manifest` 注（run 级 anchors + T 勘误旁注）、amendment `T04.executed` 标注为时点字段、新增 `independent_review_*` 与 `phase0_construct_admission_met: false`。

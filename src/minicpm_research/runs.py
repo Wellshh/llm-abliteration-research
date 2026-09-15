@@ -44,9 +44,18 @@ def atomic_json(path: Path, value: Any) -> None:
     os.replace(temporary, path)
 
 
+SOURCE_PATTERNS = ("src/**/*.py", "scripts/*.py", "configs/*.json", "pyproject.toml", "AGENTS.md", "PREREGISTRATION.yaml", "RESEARCH_PLAN.md", "SOURCES.json")
+# Same scope as SOURCE_PATTERNS, expressed as git pathspecs. Run identity must be
+# deterministic while the SOURCE is unchanged: high-churn tracked artifacts (the
+# reservation heartbeat logs append every 60s) and a run's own outputs must never
+# perturb run_id, or the resume/already_complete path becomes unreachable (review
+# finding). Full-tree VCS churn is provenance noise, not source identity.
+SOURCE_PATHSPECS = ("src", "scripts", "configs", "pyproject.toml", "AGENTS.md", "PREREGISTRATION.yaml", "RESEARCH_PLAN.md", "SOURCES.json")
+
+
 def source_state(root: Path) -> dict[str, Any]:
     files = {}
-    for pattern in ("src/**/*.py", "scripts/*.py", "configs/*.json", "pyproject.toml", "AGENTS.md", "PREREGISTRATION.yaml", "RESEARCH_PLAN.md", "SOURCES.json"):
+    for pattern in SOURCE_PATTERNS:
         for path in sorted(root.glob(pattern)):
             files[path.relative_to(root).as_posix()] = file_hash(path)
     def git(*args: str) -> subprocess.CompletedProcess[str]:
@@ -56,8 +65,11 @@ def source_state(root: Path) -> dict[str, Any]:
         if head.returncode:
             return {"git_available": False, "git_commit": None, "git_diff": None,
                     "reason": "directory has no Git commit; source hashes are the reproducibility fallback", "source_sha256": files}
-        return {"git_available": True, "git_commit": head.stdout.strip(), "git_diff": git("diff", "HEAD", "--no-ext-diff").stdout,
-                "git_status": git("status", "--porcelain").stdout, "source_sha256": files}
+        return {"git_available": True, "git_commit": head.stdout.strip(),
+                "git_diff": git("diff", "HEAD", "--no-ext-diff", "--", *SOURCE_PATHSPECS).stdout,
+                "git_status": git("status", "--porcelain", "--", *SOURCE_PATHSPECS).stdout,
+                "git_scope_note": "git_diff/git_status scoped to SOURCE_PATHSPECS; artifact/reservation churn excluded from run identity",
+                "source_sha256": files}
     except FileNotFoundError:
         return {"git_available": False, "git_commit": None, "git_diff": None, "source_sha256": files}
 

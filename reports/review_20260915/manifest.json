@@ -1,0 +1,37 @@
+{
+  "type": "batch6_commit_verification_manifest",
+  "base_commit": "7e65e16a457f456ba830d93e0931522f3824b613",
+  "gpu_execution": "not_run",
+  "test_command": "CUDA_VISIBLE_DEVICES='' PYTHONPATH=src OMP_NUM_THREADS=4 .venv/bin/python -m unittest discover -s tests -q",
+  "tests": {
+    "total": 151,
+    "passed": 150,
+    "skipped": 1,
+    "failed": 0,
+    "exit_code": 0
+  },
+  "verification_exit_code": 0,
+  "source_sha256": {
+    ".gitignore": "2220bede6a1b34d0ddb453f854292d36f79cc6e1cac918e9cbbe71f6355af6e8",
+    "PREREGISTRATION.yaml": "d48844dafb6700ad1c8102f4bcb62eaacb993ee7ecf38e1dbd66e8ada31caec0",
+    "reports/ALIGNMENT_T00-T04.md": "61da98587e68a9b0472c3866c6e1c6a8942bfbecdc6433263e70f68975a5b186",
+    "scripts/run_pilot.py": "57f94361c68230cccbb7c9bcaf82702a206a5852b06f5e0ad8a52c958b4d5d15",
+    "src/minicpm_research/evaluation.py": "5cdcf7e440f3d29ffe08dd4d57007f32f7d1e5ee0b1ca8e9de1a80323335f6f9",
+    "src/minicpm_research/model.py": "28014514a1d29530fbc7e4d66935d980178e34aa694f187b01eabe4f462407fc",
+    "src/minicpm_research/runs.py": "ce4d46b86ea2157ce13ff8390b6b30795ba2fc0d0e14d005889b80d2778d01b3",
+    "src/minicpm_research/tool_parser.py": "93c21abfebde125bb95c37fcf9167a3099e3ff21dea63d9622153bb20df0237f",
+    "tests/test_review_fixes.py": "c0be8511ce233ac29045a717f51236821f2ae3fde8ecbceeb607cb52cac1aa06"
+  },
+  "evidence_sha256": {
+    "CLOSEOUT.md": "7e4b8ca22545bb86ab8850f7125bf84bfb073235dd0547b8914e0675efcb469e",
+    "finalize_record.py": "bcf682f46715bda4af411402a2ae391fe01e7b431d93407f0b23675a8fe602e2",
+    "historical_replay.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "historical_replay.stdout.json": "5d1ac5cfaf45f959eee20771cd780dec04b906914cec1ca9772246d24f2449a7",
+    "verification.json": "94b39f66da811a65cf116513ee188d3afa5d9c4366e51e2f65b5cf283e7f645b",
+    "verify_closeout.py": "4fad0cb2f6eab43618eadd0a1fa6881fc1013bd81be38a0cb2d1c9db28314a8a"
+  },
+  "excluded_from_commit": [
+    "artifacts/reservation/gpu3_reservation.jsonl",
+    "artifacts/reservation/gpu5_reservation.jsonl"
+  ]
+}

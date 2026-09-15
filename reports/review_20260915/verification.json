@@ -1,0 +1,48 @@
+{
+  "type": "batch6_independent_cpu_closeout",
+  "at": "2026-09-15T03:54:06.697660+00:00",
+  "base_commit": "7e65e16a457f456ba830d93e0931522f3824b613",
+  "gpu_execution": "not_run",
+  "model_weights_loaded": false,
+  "summary_sha256": "fb748f9df96e51e494848c6e58a9287469a383307e5ee2d0d7a58c60af8d004f",
+  "erratum_sha256": "d7ba6d84b95b6a6fffda9d91ebbd9a68e467f2429fb175cf55df200aa1f4a69d",
+  "attempt_classification_verified": true,
+  "ledger_buckets": {
+    "T03_hooks": 128.706021592021,
+    "T04_authoritative": 58.41640244983137,
+    "T04_superseded_t": 29.78392337448895,
+    "T04_setup_failure_post_admission": 17.522693587467074,
+    "T04_pre_admission": 0.0
+  },
+  "ledger_total_seconds": 234.42904100380838,
+  "token_anchors": [
+    {
+      "run_id": "3ec2805afe33d3ef9ee9",
+      "lengths": [
+        517,
+        517,
+        497,
+        427
+      ],
+      "full_anchor_cpu_equality": true
+    },
+    {
+      "run_id": "7b0b4c88c0af90449723",
+      "lengths": [
+        517,
+        517,
+        497,
+        427
+      ],
+      "full_anchor_cpu_equality": true
+    }
+  ],
+  "historical_replay_command": [
+    "/home/jybai/research/MiniCPM5_Research_Plan_v1/minicpm5_research_plan/.venv/bin/python",
+    "reports/review_20260914/reproduce_review.py"
+  ],
+  "historical_replay_exit_code": 0,
+  "diff_check_exit_code": 0,
+  "diff_check_note": "cr-at-eol permits the existing CRLF source file; no source normalization performed",
+  "original_run_and_budget_artifacts_changed": false
+}

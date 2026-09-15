@@ -1,0 +1,24 @@
+Review date: 2026-09-14
+Working directory: E:\minicpm
+Scope: local CPU review; no GPU/model/remote execution.
+
+Command: $env:CUDA_VISIBLE_DEVICES=''; $env:PYTHONPATH='src'; py -3.12 -m unittest discover -s tests -q
+Exit code: 0
+Tool output (transcribed verbatim):
+----------------------------------------------------------------------
+Ran 136 tests in 5.198s
+
+OK (skipped=28)
+
+Command: py -3.12 reports\review_20260914\reproduce_review.py > reports\review_20260914\evidence.json
+Exit code: 0
+
+Command: py -3.12 scripts\run_pilot.py --config configs\pilot-baseline.json --task T --max-families 1 --hook-gate-split --dry-run > reports\review_20260914\dry-run.json
+Exit code: 0
+
+Command: git rev-parse --show-toplevel
+Git exit code: 128 (shell batch result 1)
+fatal: not a git repository (or any of the parent directories): .git
+
+Dependency presence: torch=false, transformers=false, yaml=true.
+Review evidence counterexamples are synthetic CPU fixtures, not new model outputs.

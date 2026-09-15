@@ -21,6 +21,12 @@
 # 模型权重文件本体永不入库（防误拷贝；权重只以 manifest hash 记录）
 *.safetensors
 *.gguf
+# HF 缓存布局兜底（审核确认项）：真实权重字节在 models--*/blobs/<sha>（无扩展名），
+# *.safetensors 只能拦到 snapshots/ 下的符号链接；而缓存目录名由 lock_model.py
+# --cache-dir 自由指定（docs/RUNNING.md 有记载），保护不能只依赖父目录恰好叫 .cache。
+# 按 HF 自身命名兜底，无论 --cache-dir 指向何处都生效（已验证 264 个待入库路径零误伤）。
+models--*/
+datasets--*/
 
 # --- Python 字节码与构建缓存 ---
 __pycache__/
