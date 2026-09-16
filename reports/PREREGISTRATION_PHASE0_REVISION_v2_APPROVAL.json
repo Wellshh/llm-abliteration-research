@@ -1,0 +1,35 @@
+{
+  "schema_version": "2.0",
+  "type": "protocol_approval_sidecar",
+  "protocol_path": "reports/PREREGISTRATION_PHASE0_REVISION_v2.yaml",
+  "protocol_sha256": "6225cfd49904110aca6560b94d7d8c38348a5c6262928d51e6e5ac86fc4b2d73",
+  "status": "pending_approval",
+  "approval_record": null,
+  "freeze": {
+    "frozen_at": null,
+    "effective": false,
+    "yaml_self_hash_not_embedded": true
+  },
+  "supersedes": {
+    "protocol_path": "reports/PREREGISTRATION_PHASE0_REVISION_v1.yaml",
+    "protocol_sha256": "5afe02a5a423be9c9ffef0e198bbda0544611f017c7eab7fcd7eb13e98f939a5",
+    "sidecar_path": "reports/PREREGISTRATION_PHASE0_REVISION_v1_APPROVAL.json",
+    "sidecar_sha256": "84aaffd78f31e92722ab998636c411cb1fa488078db3e324fcceb0c45f988aaa",
+    "status_at_supersede": "proposed_not_approved",
+    "reason": "pre-approval read-only review required 4 substantive fixes + 2 wording fixes; v1 preserved unmodified"
+  },
+  "based_on": {
+    "diagnostic": "reports/PHASE0_CONSTRUCT_DIAGNOSTIC_v1.md",
+    "diagnostic_json_sha256": "1d6d6ac275c37291a9d62d3e423899c91b3976ef1704af6c1aa5a21f3c443b06",
+    "baseline_commit": "3943fc8f34858f2fe116d0b42473dd7ac3d71d04"
+  },
+  "review_response_map": {
+    "fix1_T_dual_gates": "t_round_gate.gate_A_should_act_success + gate_B_write_avoidance_recognition (gold-fixed denominators, success events, degenerate scoring, decision rules); overall-intent rule demoted to supplementary_not_gating",
+    "fix2_reproducible_baselines": "degenerate_baselines_T.payload_rules + scoring + freeze_artifacts (tools/args rules, action list order, probabilities, sampling API, illegal-args/multi-action/parse-failure scoring, same-sandbox strict, payload+scorer version freeze)",
+    "fix3_C_definitions": "c_round_gate.taxonomy_pinning (5 independent categories vs variant attributes) + semantic_accuracy (macro primary, decoded-semantic comparison, invalid handling) + label_swap_consistency (pair set, missing pairs, consistent-but-wrong dual-count)",
+    "fix4_contrast_model": "contrast_model_rule.evaluation_scope (ONE frozen-protocol evaluation, loop never reopened) + candidate_determination_before_switch (2x2516756480=5033512960, filters, ordering, unique selection, no-candidate stop)",
+    "wording_preconditions": "batch10_execution_preconditions_round1 now requirement+status(not_started)+completion_record(null) structure",
+    "wording_design_choices": "design_choice_provenance + integer implications for every new numeric gate"
+  },
+  "issued_at": "2026-09-15T05:28:07.198915+00:00"
+}

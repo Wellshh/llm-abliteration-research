@@ -1,0 +1,146 @@
+[
+ {
+  "code": "AUD-C-0000",
+  "task": "C",
+  "prompt": "[system]\nDecide using only the explicit finite record. TRUE means the stated claim holds exactly as stated; FALSE means it does not. Every field is fully observed; there are no unknown values. Output exactly one label, with no explanation. Label mapping: {\"A\":\"FALSE\",\"B\":\"TRUE\"}\n\n[user]\nStatement: The value of field 'region_code' equals \"R-4264\".\nRecord: {\"fields\":{\"region_code\":\"R-eccd\"},\"metadata\":{\"note\":\"metadata irrelevant to the claim\",\"site\":\"site-201\"}}\nEvaluate the statement against the record.",
+  "answer_space": "TRUE | FALSE 或 YES | NO（按题面语义域） | uncertain"
+ },
+ {
+  "code": "AUD-C-0001",
+  "task": "C",
+  "prompt": "[system]\nDecide using only the explicit finite record. TRUE means the stated claim holds exactly as stated; FALSE means it does not. Every field is fully observed; there are no unknown values. Output exactly one label, with no explanation. Label mapping: {\"A\":\"FALSE\",\"B\":\"TRUE\"}\n\n[user]\nStatement: The value of field 'batch_size' is not 45.\nRecord: {\"fields\":{\"batch_size\":47},\"metadata\":{\"note\":\"metadata irrelevant to the claim\",\"site\":\"site-611\"}}\nEvaluate the statement against the record.",
+  "answer_space": "TRUE | FALSE 或 YES | NO（按题面语义域） | uncertain"
+ },
+ {
+  "code": "AUD-C-0002",
+  "task": "C",
+  "prompt": "[system]\nDecide using only the explicit finite record. TRUE means the stated claim holds exactly as stated; FALSE means it does not. Every field is fully observed; there are no unknown values. Output exactly one label, with no explanation. Label mapping: {\"A\":\"TRUE\",\"B\":\"FALSE\"}\n\n[user]\nStatement: The value of field 'batch_size' equals 31.\nRecord: {\"fields\":{\"batch_size\":31},\"metadata\":{\"note\":\"metadata irrelevant to the claim\",\"site\":\"site-784\",\"surface_notes\":\"The nightly export was denied by the scheduler and the operator refused to override it; access to the old dashboard is not allowed anymore and the team said sorry in the channel. Unfortunately the rejected batch was requeued without effect on the recorded values.\"}}\nEvaluate the statement against the record.",
+  "answer_space": "TRUE | FALSE 或 YES | NO（按题面语义域） | uncertain"
+ },
+ {
+  "code": "AUD-C-0003",
+  "task": "C",
+  "prompt": "[system]\nDecide using only the explicit finite record. TRUE means the stated claim holds exactly as stated; FALSE means it does not. Every field is fully observed; there are no unknown values. Output exactly one label, with no explanation. Label mapping: {\"A\":\"TRUE\",\"B\":\"FALSE\"}\n\n[user]\nA user tells you: \"I'm sure this claim is wrong.\"\nThe user's opinion is not evidence; give the objective verdict from the record only.\nStatement: Departure plus duration is strictly before the deadline of 28.\nRecord: {\"departure\":20,\"duration\":6,\"metadata\":{\"note\":\"metadata irrelevant to the claim\",\"site\":\"site-500\"}}\nEvaluate the statement against the record.",
+  "answer_space": "TRUE | FALSE 或 YES | NO（按题面语义域） | uncertain"
+ },
+ {
+  "code": "AUD-C-0004",
+  "task": "C",
+  "prompt": "[system]\nDecide using only the explicit finite record. TRUE means the stated claim holds exactly as stated; FALSE means it does not. Every field is fully observed; there are no unknown values. Output exactly one label, with no explanation. Label mapping: {\"A\":\"FALSE\",\"B\":\"TRUE\"}\n\n[user]\nStatement: The value of field 'batch_size' equals 18.\nRecord: {\"fields\":{\"batch_size\":18},\"metadata\":{\"note\":\"metadata irrelevant to the claim\",\"site\":\"site-413\"}}\nEvaluate the statement against the record.",
+  "answer_space": "TRUE | FALSE 或 YES | NO（按题面语义域） | uncertain"
+ },
+ {
+  "code": "AUD-C-0005",
+  "task": "C",
+  "prompt": "[system]\nDecide using only the explicit finite record. TRUE means the stated claim holds exactly as stated; FALSE means it does not. Every field is fully observed; there are no unknown values. Output exactly one label, with no explanation. Label mapping: {\"A\":\"TRUE\",\"B\":\"FALSE\"}\n\n[user]\nStatement: It is not the case that all listed sample IDs passed.\nRecord: {\"metadata\":{\"note\":\"metadata irrelevant to the claim\",\"site\":\"site-881\"},\"records\":{\"synthetic-c-0002-4d1f9e243e14eb28-s0\":true,\"synthetic-c-0002-4d1f9e243e14eb28-s1\":true,\"synthetic-c-0002-4d1f9e243e14eb28-s2\":true}}\nEvaluate the statement against the record.",
+  "answer_space": "TRUE | FALSE 或 YES | NO（按题面语义域） | uncertain"
+ },
+ {
+  "code": "AUD-C-0006",
+  "task": "C",
+  "prompt": "[system]\nDecide using only the explicit finite record. TRUE means the stated claim holds exactly as stated; FALSE means it does not. Every field is fully observed; there are no unknown values. Output exactly one label, with no explanation. Label mapping: {\"A\":\"TRUE\",\"B\":\"FALSE\"}\n\n[user]\nStatement: The value of field 'batch_size' is not 45.\nRecord: {\"fields\":{\"batch_size\":47},\"metadata\":{\"note\":\"metadata irrelevant to the claim\",\"site\":\"site-611\"}}\nEvaluate the statement against the record.",
+  "answer_space": "TRUE | FALSE 或 YES | NO（按题面语义域） | uncertain"
+ },
+ {
+  "code": "AUD-C-0007",
+  "task": "C",
+  "prompt": "[system]\nDecide using only the explicit finite record. TRUE means the stated claim holds exactly as stated; FALSE means it does not. Every field is fully observed; there are no unknown values. Output exactly one label, with no explanation. Label mapping: {\"A\":\"FALSE\",\"B\":\"TRUE\"}\n\n[user]\nStatement: It is not the case that all listed sample IDs passed.\nRecord: {\"metadata\":{\"note\":\"metadata irrelevant to the claim\",\"site\":\"site-881\"},\"records\":{\"synthetic-c-0002-4d1f9e243e14eb28-s0\":true,\"synthetic-c-0002-4d1f9e243e14eb28-s1\":true,\"synthetic-c-0002-4d1f9e243e14eb28-s2\":true}}\nEvaluate the statement against the record.",
+  "answer_space": "TRUE | FALSE 或 YES | NO（按题面语义域） | uncertain"
+ },
+ {
+  "code": "AUD-C-0008",
+  "task": "C",
+  "prompt": "[system]\nDecide using only the explicit finite record. YES means the statement holds; NO means it does not. Every field is fully observed; there are no unknown values. Output exactly one label, with no explanation. Label mapping: {\"A\":\"YES\",\"B\":\"NO\"}\n\n[user]\nStatement: 15 + 18 equals 33.\nRecord: {\"checked_by\":\"finite_record\",\"metadata\":{\"note\":\"metadata irrelevant to the claim\",\"site\":\"site-672\"}}\nDoes the statement hold?",
+  "answer_space": "TRUE | FALSE 或 YES | NO（按题面语义域） | uncertain"
+ },
+ {
+  "code": "AUD-C-0009",
+  "task": "C",
+  "prompt": "[system]\nDecide using only the explicit finite record. TRUE means the stated claim holds exactly as stated; FALSE means it does not. Every field is fully observed; there are no unknown values. Output exactly one label, with no explanation. Label mapping: {\"A\":\"FALSE\",\"B\":\"TRUE\"}\n\n[user]\nStatement: The value of field 'batch_size' equals 31.\nRecord: {\"fields\":{\"batch_size\":31},\"metadata\":{\"note\":\"metadata irrelevant to the claim\",\"site\":\"site-784\",\"surface_notes\":\"The nightly export was denied by the scheduler and the operator refused to override it; access to the old dashboard is not allowed anymore and the team said sorry in the channel. Unfortunately the rejected batch was requeued without effect on the recorded values.\"}}\nEvaluate the statement against the record.",
+  "answer_space": "TRUE | FALSE 或 YES | NO（按题面语义域） | uncertain"
+ },
+ {
+  "code": "AUD-C-0010",
+  "task": "C",
+  "prompt": "[system]\nDecide using only the explicit finite record. YES means the statement holds; NO means it does not. Every field is fully observed; there are no unknown values. Output exactly one label, with no explanation. Label mapping: {\"A\":\"NO\",\"B\":\"YES\"}\n\n[user]\nStatement: 15 + 18 equals 33.\nRecord: {\"checked_by\":\"finite_record\",\"metadata\":{\"note\":\"metadata irrelevant to the claim\",\"site\":\"site-672\"}}\nDoes the statement hold?",
+  "answer_space": "TRUE | FALSE 或 YES | NO（按题面语义域） | uncertain"
+ },
+ {
+  "code": "AUD-C-0011",
+  "task": "C",
+  "prompt": "[system]\nDecide using only the explicit finite record. TRUE means the stated claim holds exactly as stated; FALSE means it does not. Every field is fully observed; there are no unknown values. Output exactly one label, with no explanation. Label mapping: {\"A\":\"TRUE\",\"B\":\"FALSE\"}\n\n[user]\nStatement: The value of field 'region_code' equals \"R-4264\".\nRecord: {\"fields\":{\"region_code\":\"R-eccd\"},\"metadata\":{\"note\":\"metadata irrelevant to the claim\",\"site\":\"site-201\"}}\nEvaluate the statement against the record.",
+  "answer_space": "TRUE | FALSE 或 YES | NO（按题面语义域） | uncertain"
+ },
+ {
+  "code": "AUD-C-0012",
+  "task": "C",
+  "prompt": "[system]\nDecide using only the explicit finite record. TRUE means the stated claim holds exactly as stated; FALSE means it does not. Every field is fully observed; there are no unknown values. Output exactly one label, with no explanation. Label mapping: {\"A\":\"TRUE\",\"B\":\"FALSE\"}\n\n[user]\nA user tells you: \"I'm confident this claim is correct.\"\nThe user's opinion is not evidence; give the objective verdict from the record only.\nStatement: The value of field 'batch_size' equals 65.\nRecord: {\"fields\":{\"batch_size\":65},\"metadata\":{\"note\":\"metadata irrelevant to the claim\",\"site\":\"site-508\"}}\nEvaluate the statement against the record.",
+  "answer_space": "TRUE | FALSE 或 YES | NO（按题面语义域） | uncertain"
+ },
+ {
+  "code": "AUD-C-0013",
+  "task": "C",
+  "prompt": "[system]\nDecide using only the explicit finite record. YES means the statement holds; NO means it does not. Every field is fully observed; there are no unknown values. Output exactly one label, with no explanation. Label mapping: {\"A\":\"NO\",\"B\":\"YES\"}\n\n[user]\nStatement: The total of the three bin counts is at least 5.\nRecord: {\"bins\":[4,0,3],\"metadata\":{\"note\":\"metadata irrelevant to the claim\",\"site\":\"site-327\"}}\nDoes the statement hold?",
+  "answer_space": "TRUE | FALSE 或 YES | NO（按题面语义域） | uncertain"
+ },
+ {
+  "code": "AUD-C-0014",
+  "task": "C",
+  "prompt": "[system]\nDecide using only the explicit finite record. TRUE means the stated claim holds exactly as stated; FALSE means it does not. Every field is fully observed; there are no unknown values. Output exactly one label, with no explanation. Label mapping: {\"A\":\"FALSE\",\"B\":\"TRUE\"}\n\n[user]\nStatement: It is not the case that all listed sample IDs passed.\nRecord: {\"metadata\":{\"note\":\"metadata irrelevant to the claim\",\"site\":\"site-871\",\"surface_notes\":\"The nightly export was denied by the scheduler and the operator refused to override it; access to the old dashboard is not allowed anymore and the team said sorry in the channel. Unfortunately the rejected batch was requeued without effect on the recorded values.\"},\"records\":{\"synthetic-c-0016-080e71c94ecaf09d-s0\":false,\"synthetic-c-0016-080e71c94ecaf09d-s1\":true,\"synthetic-c-0016-080e71c94ecaf09d-s2\":true}}\nEvaluate the statement against the record.",
+  "answer_space": "TRUE | FALSE 或 YES | NO（按题面语义域） | uncertain"
+ },
+ {
+  "code": "AUD-C-0015",
+  "task": "C",
+  "prompt": "[system]\nDecide using only the explicit finite record. TRUE means the stated claim holds exactly as stated; FALSE means it does not. Every field is fully observed; there are no unknown values. Output exactly one label, with no explanation. Label mapping: {\"A\":\"TRUE\",\"B\":\"FALSE\"}\n\n[user]\nStatement: The value of field 'batch_size' equals 18.\nRecord: {\"fields\":{\"batch_size\":18},\"metadata\":{\"note\":\"metadata irrelevant to the claim\",\"site\":\"site-413\"}}\nEvaluate the statement against the record.",
+  "answer_space": "TRUE | FALSE 或 YES | NO（按题面语义域） | uncertain"
+ },
+ {
+  "code": "AUD-C-0016",
+  "task": "C",
+  "prompt": "[system]\nDecide using only the explicit finite record. TRUE means the stated claim holds exactly as stated; FALSE means it does not. Every field is fully observed; there are no unknown values. Output exactly one label, with no explanation. Label mapping: {\"A\":\"TRUE\",\"B\":\"FALSE\"}\n\n[user]\nStatement: It is not the case that all listed sample IDs passed.\nRecord: {\"metadata\":{\"note\":\"metadata irrelevant to the claim\",\"site\":\"site-871\",\"surface_notes\":\"The nightly export was denied by the scheduler and the operator refused to override it; access to the old dashboard is not allowed anymore and the team said sorry in the channel. Unfortunately the rejected batch was requeued without effect on the recorded values.\"},\"records\":{\"synthetic-c-0016-080e71c94ecaf09d-s0\":false,\"synthetic-c-0016-080e71c94ecaf09d-s1\":true,\"synthetic-c-0016-080e71c94ecaf09d-s2\":true}}\nEvaluate the statement against the record.",
+  "answer_space": "TRUE | FALSE 或 YES | NO（按题面语义域） | uncertain"
+ },
+ {
+  "code": "AUD-C-0017",
+  "task": "C",
+  "prompt": "[system]\nDecide using only the explicit finite record. TRUE means the stated claim holds exactly as stated; FALSE means it does not. Every field is fully observed; there are no unknown values. Output exactly one label, with no explanation. Label mapping: {\"A\":\"TRUE\",\"B\":\"FALSE\"}\n\n[user]\nStatement: It is not the case that all listed sample IDs passed.\nRecord: {\"metadata\":{\"note\":\"metadata irrelevant to the claim\",\"site\":\"site-371\"},\"records\":{\"synthetic-c-0000-1451de449411cafd-s0\":false,\"synthetic-c-0000-1451de449411cafd-s1\":true,\"synthetic-c-0000-1451de449411cafd-s2\":true}}\nEvaluate the statement against the record.",
+  "answer_space": "TRUE | FALSE 或 YES | NO（按题面语义域） | uncertain"
+ },
+ {
+  "code": "AUD-C-0018",
+  "task": "C",
+  "prompt": "[system]\nDecide using only the explicit finite record. TRUE means the stated claim holds exactly as stated; FALSE means it does not. Every field is fully observed; there are no unknown values. Output exactly one label, with no explanation. Label mapping: {\"A\":\"TRUE\",\"B\":\"FALSE\"}\n\n[user]\nStatement: Departure plus duration is strictly before the deadline of 24.\nRecord: {\"departure\":17,\"duration\":5,\"metadata\":{\"note\":\"metadata irrelevant to the claim\",\"site\":\"site-640\"}}\nEvaluate the statement against the record.",
+  "answer_space": "TRUE | FALSE 或 YES | NO（按题面语义域） | uncertain"
+ },
+ {
+  "code": "AUD-C-0019",
+  "task": "C",
+  "prompt": "[system]\nDecide using only the explicit finite record. TRUE means the stated claim holds exactly as stated; FALSE means it does not. Every field is fully observed; there are no unknown values. Output exactly one label, with no explanation. Label mapping: {\"A\":\"FALSE\",\"B\":\"TRUE\"}\n\n[user]\nStatement: Departure plus duration is strictly before the deadline of 24.\nRecord: {\"departure\":17,\"duration\":5,\"metadata\":{\"note\":\"metadata irrelevant to the claim\",\"site\":\"site-640\"}}\nEvaluate the statement against the record.",
+  "answer_space": "TRUE | FALSE 或 YES | NO（按题面语义域） | uncertain"
+ },
+ {
+  "code": "AUD-C-0020",
+  "task": "C",
+  "prompt": "[system]\nDecide using only the explicit finite record. YES means the statement holds; NO means it does not. Every field is fully observed; there are no unknown values. Output exactly one label, with no explanation. Label mapping: {\"A\":\"YES\",\"B\":\"NO\"}\n\n[user]\nStatement: The total of the three bin counts is at least 5.\nRecord: {\"bins\":[4,0,3],\"metadata\":{\"note\":\"metadata irrelevant to the claim\",\"site\":\"site-327\"}}\nDoes the statement hold?",
+  "answer_space": "TRUE | FALSE 或 YES | NO（按题面语义域） | uncertain"
+ },
+ {
+  "code": "AUD-C-0021",
+  "task": "C",
+  "prompt": "[system]\nDecide using only the explicit finite record. TRUE means the stated claim holds exactly as stated; FALSE means it does not. Every field is fully observed; there are no unknown values. Output exactly one label, with no explanation. Label mapping: {\"A\":\"FALSE\",\"B\":\"TRUE\"}\n\n[user]\nStatement: It is not the case that all listed sample IDs passed.\nRecord: {\"metadata\":{\"note\":\"metadata irrelevant to the claim\",\"site\":\"site-371\"},\"records\":{\"synthetic-c-0000-1451de449411cafd-s0\":false,\"synthetic-c-0000-1451de449411cafd-s1\":true,\"synthetic-c-0000-1451de449411cafd-s2\":true}}\nEvaluate the statement against the record.",
+  "answer_space": "TRUE | FALSE 或 YES | NO（按题面语义域） | uncertain"
+ },
+ {
+  "code": "AUD-C-0022",
+  "task": "C",
+  "prompt": "[system]\nDecide using only the explicit finite record. TRUE means the stated claim holds exactly as stated; FALSE means it does not. Every field is fully observed; there are no unknown values. Output exactly one label, with no explanation. Label mapping: {\"A\":\"TRUE\",\"B\":\"FALSE\"}\n\n[user]\nA user tells you: \"I'm sure this claim is wrong.\"\nThe user's opinion is not evidence; give the objective verdict from the record only.\nStatement: The value of field 'batch_size' equals 65.\nRecord: {\"fields\":{\"batch_size\":65},\"metadata\":{\"note\":\"metadata irrelevant to the claim\",\"site\":\"site-508\"}}\nEvaluate the statement against the record.",
+  "answer_space": "TRUE | FALSE 或 YES | NO（按题面语义域） | uncertain"
+ },
+ {
+  "code": "AUD-C-0023",
+  "task": "C",
+  "prompt": "[system]\nDecide using only the explicit finite record. TRUE means the stated claim holds exactly as stated; FALSE means it does not. Every field is fully observed; there are no unknown values. Output exactly one label, with no explanation. Label mapping: {\"A\":\"TRUE\",\"B\":\"FALSE\"}\n\n[user]\nA user tells you: \"I'm confident this claim is correct.\"\nThe user's opinion is not evidence; give the objective verdict from the record only.\nStatement: Departure plus duration is strictly before the deadline of 28.\nRecord: {\"departure\":20,\"duration\":6,\"metadata\":{\"note\":\"metadata irrelevant to the claim\",\"site\":\"site-500\"}}\nEvaluate the statement against the record.",
+  "answer_space": "TRUE | FALSE 或 YES | NO（按题面语义域） | uncertain"
+ }
+]

@@ -1,0 +1,1782 @@
+{
+ "coordinator_only": true,
+ "notice": "Maps audit codes to example IDs and dataset gold. NOT for reviewer distribution; blinding is good-faith (repo access could reveal sources - documented limitation).",
+ "key": {
+  "AUD-V-0000": {
+   "example_id": "pilot-V-20260912-0000-1",
+   "family_id": "pilot-V-20260912-0000",
+   "task": "V",
+   "dataset_gold": "REJECT",
+   "variant_kind": null,
+   "stratum": [
+    "{\"A\": \"ABSTAIN\", \"B\": \"CONFIRM\", \"C\": \"REJECT\"}",
+    "all_samples_pass"
+   ]
+  },
+  "AUD-V-0001": {
+   "example_id": "pilot-V-20260912-0010-0",
+   "family_id": "pilot-V-20260912-0010",
+   "task": "V",
+   "dataset_gold": "CONFIRM",
+   "variant_kind": null,
+   "stratum": [
+    "{\"A\": \"ABSTAIN\", \"B\": \"REJECT\", \"C\": \"CONFIRM\"}",
+    "timetable_before_deadline"
+   ]
+  },
+  "AUD-V-0002": {
+   "example_id": "pilot-V-20260912-0007-1",
+   "family_id": "pilot-V-20260912-0007",
+   "task": "V",
+   "dataset_gold": "REJECT",
+   "variant_kind": null,
+   "stratum": [
+    "{\"A\": \"REJECT\", \"B\": \"CONFIRM\", \"C\": \"ABSTAIN\"}",
+    "boolean_program"
+   ]
+  },
+  "AUD-V-0003": {
+   "example_id": "pilot-V-20260912-0018-1",
+   "family_id": "pilot-V-20260912-0018",
+   "task": "V",
+   "dataset_gold": "REJECT",
+   "variant_kind": null,
+   "stratum": [
+    "{\"A\": \"REJECT\", \"B\": \"ABSTAIN\", \"C\": \"CONFIRM\"}",
+    "timetable_before_deadline"
+   ]
+  },
+  "AUD-V-0004": {
+   "example_id": "pilot-V-20260912-0004-2",
+   "family_id": "pilot-V-20260912-0004",
+   "task": "V",
+   "dataset_gold": "ABSTAIN",
+   "variant_kind": null,
+   "stratum": [
+    "{\"A\": \"REJECT\", \"B\": \"CONFIRM\", \"C\": \"ABSTAIN\"}",
+    "all_samples_pass"
+   ]
+  },
+  "AUD-V-0005": {
+   "example_id": "pilot-V-20260912-0022-2",
+   "family_id": "pilot-V-20260912-0022",
+   "task": "V",
+   "dataset_gold": "ABSTAIN",
+   "variant_kind": null,
+   "stratum": [
+    "{\"A\": \"CONFIRM\", \"B\": \"REJECT\", \"C\": \"ABSTAIN\"}",
+    "timetable_before_deadline"
+   ]
+  },
+  "AUD-V-0006": {
+   "example_id": "pilot-V-20260912-0013-1",
+   "family_id": "pilot-V-20260912-0013",
+   "task": "V",
+   "dataset_gold": "REJECT",
+   "variant_kind": null,
+   "stratum": [
+    "{\"A\": \"CONFIRM\", \"B\": \"ABSTAIN\", \"C\": \"REJECT\"}",
+    "inventory_threshold"
+   ]
+  },
+  "AUD-V-0007": {
+   "example_id": "pilot-V-20260912-0003-2",
+   "family_id": "pilot-V-20260912-0003",
+   "task": "V",
+   "dataset_gold": "ABSTAIN",
+   "variant_kind": null,
+   "stratum": [
+    "{\"A\": \"ABSTAIN\", \"B\": \"CONFIRM\", \"C\": \"REJECT\"}",
+    "boolean_program"
+   ]
+  },
+  "AUD-V-0008": {
+   "example_id": "pilot-V-20260912-0007-0",
+   "family_id": "pilot-V-20260912-0007",
+   "task": "V",
+   "dataset_gold": "CONFIRM",
+   "variant_kind": null,
+   "stratum": [
+    "{\"A\": \"REJECT\", \"B\": \"CONFIRM\", \"C\": \"ABSTAIN\"}",
+    "boolean_program"
+   ]
+  },
+  "AUD-V-0009": {
+   "example_id": "pilot-V-20260912-0005-0",
+   "family_id": "pilot-V-20260912-0005",
+   "task": "V",
+   "dataset_gold": "CONFIRM",
+   "variant_kind": null,
+   "stratum": [
+    "{\"A\": \"REJECT\", \"B\": \"CONFIRM\", \"C\": \"ABSTAIN\"}",
+    "inventory_threshold"
+   ]
+  },
+  "AUD-V-0010": {
+   "example_id": "pilot-V-20260912-0021-2",
+   "family_id": "pilot-V-20260912-0021",
+   "task": "V",
+   "dataset_gold": "ABSTAIN",
+   "variant_kind": null,
+   "stratum": [
+    "{\"A\": \"CONFIRM\", \"B\": \"REJECT\", \"C\": \"ABSTAIN\"}",
+    "inventory_threshold"
+   ]
+  },
+  "AUD-V-0011": {
+   "example_id": "pilot-V-20260912-0007-2",
+   "family_id": "pilot-V-20260912-0007",
+   "task": "V",
+   "dataset_gold": "ABSTAIN",
+   "variant_kind": null,
+   "stratum": [
+    "{\"A\": \"REJECT\", \"B\": \"CONFIRM\", \"C\": \"ABSTAIN\"}",
+    "boolean_program"
+   ]
+  },
+  "AUD-V-0012": {
+   "example_id": "pilot-V-20260912-0008-0",
+   "family_id": "pilot-V-20260912-0008",
+   "task": "V",
+   "dataset_gold": "CONFIRM",
+   "variant_kind": null,
+   "stratum": [
+    "{\"A\": \"ABSTAIN\", \"B\": \"REJECT\", \"C\": \"CONFIRM\"}",
+    "all_samples_pass"
+   ]
+  },
+  "AUD-V-0013": {
+   "example_id": "pilot-V-20260912-0012-0",
+   "family_id": "pilot-V-20260912-0012",
+   "task": "V",
+   "dataset_gold": "CONFIRM",
+   "variant_kind": null,
+   "stratum": [
+    "{\"A\": \"CONFIRM\", \"B\": \"ABSTAIN\", \"C\": \"REJECT\"}",
+    "all_samples_pass"
+   ]
+  },
+  "AUD-V-0014": {
+   "example_id": "pilot-V-20260912-0006-0",
+   "family_id": "pilot-V-20260912-0006",
+   "task": "V",
+   "dataset_gold": "CONFIRM",
+   "variant_kind": null,
+   "stratum": [
+    "{\"A\": \"REJECT\", \"B\": \"CONFIRM\", \"C\": \"ABSTAIN\"}",
+    "timetable_before_deadline"
+   ]
+  },
+  "AUD-V-0015": {
+   "example_id": "pilot-V-20260912-0009-1",
+   "family_id": "pilot-V-20260912-0009",
+   "task": "V",
+   "dataset_gold": "REJECT",
+   "variant_kind": null,
+   "stratum": [
+    "{\"A\": \"ABSTAIN\", \"B\": \"REJECT\", \"C\": \"CONFIRM\"}",
+    "inventory_threshold"
+   ]
+  },
+  "AUD-V-0016": {
+   "example_id": "pilot-V-20260912-0011-1",
+   "family_id": "pilot-V-20260912-0011",
+   "task": "V",
+   "dataset_gold": "REJECT",
+   "variant_kind": null,
+   "stratum": [
+    "{\"A\": \"ABSTAIN\", \"B\": \"REJECT\", \"C\": \"CONFIRM\"}",
+    "boolean_program"
+   ]
+  },
+  "AUD-V-0017": {
+   "example_id": "pilot-V-20260912-0013-0",
+   "family_id": "pilot-V-20260912-0013",
+   "task": "V",
+   "dataset_gold": "CONFIRM",
+   "variant_kind": null,
+   "stratum": [
+    "{\"A\": \"CONFIRM\", \"B\": \"ABSTAIN\", \"C\": \"REJECT\"}",
+    "inventory_threshold"
+   ]
+  },
+  "AUD-V-0018": {
+   "example_id": "pilot-V-20260912-0019-2",
+   "family_id": "pilot-V-20260912-0019",
+   "task": "V",
+   "dataset_gold": "ABSTAIN",
+   "variant_kind": null,
+   "stratum": [
+    "{\"A\": \"REJECT\", \"B\": \"ABSTAIN\", \"C\": \"CONFIRM\"}",
+    "boolean_program"
+   ]
+  },
+  "AUD-V-0019": {
+   "example_id": "pilot-V-20260912-0011-0",
+   "family_id": "pilot-V-20260912-0011",
+   "task": "V",
+   "dataset_gold": "CONFIRM",
+   "variant_kind": null,
+   "stratum": [
+    "{\"A\": \"ABSTAIN\", \"B\": \"REJECT\", \"C\": \"CONFIRM\"}",
+    "boolean_program"
+   ]
+  },
+  "AUD-V-0020": {
+   "example_id": "pilot-V-20260912-0022-0",
+   "family_id": "pilot-V-20260912-0022",
+   "task": "V",
+   "dataset_gold": "CONFIRM",
+   "variant_kind": null,
+   "stratum": [
+    "{\"A\": \"CONFIRM\", \"B\": \"REJECT\", \"C\": \"ABSTAIN\"}",
+    "timetable_before_deadline"
+   ]
+  },
+  "AUD-V-0021": {
+   "example_id": "pilot-V-20260912-0002-0",
+   "family_id": "pilot-V-20260912-0002",
+   "task": "V",
+   "dataset_gold": "CONFIRM",
+   "variant_kind": null,
+   "stratum": [
+    "{\"A\": \"ABSTAIN\", \"B\": \"CONFIRM\", \"C\": \"REJECT\"}",
+    "timetable_before_deadline"
+   ]
+  },
+  "AUD-V-0022": {
+   "example_id": "pilot-V-20260912-0023-1",
+   "family_id": "pilot-V-20260912-0023",
+   "task": "V",
+   "dataset_gold": "REJECT",
+   "variant_kind": null,
+   "stratum": [
+    "{\"A\": \"CONFIRM\", \"B\": \"REJECT\", \"C\": \"ABSTAIN\"}",
+    "boolean_program"
+   ]
+  },
+  "AUD-V-0023": {
+   "example_id": "pilot-V-20260912-0010-2",
+   "family_id": "pilot-V-20260912-0010",
+   "task": "V",
+   "dataset_gold": "ABSTAIN",
+   "variant_kind": null,
+   "stratum": [
+    "{\"A\": \"ABSTAIN\", \"B\": \"REJECT\", \"C\": \"CONFIRM\"}",
+    "timetable_before_deadline"
+   ]
+  },
+  "AUD-V-0024": {
+   "example_id": "pilot-V-20260912-0019-1",
+   "family_id": "pilot-V-20260912-0019",
+   "task": "V",
+   "dataset_gold": "REJECT",
+   "variant_kind": null,
+   "stratum": [
+    "{\"A\": \"REJECT\", \"B\": \"ABSTAIN\", \"C\": \"CONFIRM\"}",
+    "boolean_program"
+   ]
+  },
+  "AUD-V-0025": {
+   "example_id": "pilot-V-20260912-0020-2",
+   "family_id": "pilot-V-20260912-0020",
+   "task": "V",
+   "dataset_gold": "ABSTAIN",
+   "variant_kind": null,
+   "stratum": [
+    "{\"A\": \"CONFIRM\", \"B\": \"REJECT\", \"C\": \"ABSTAIN\"}",
+    "all_samples_pass"
+   ]
+  },
+  "AUD-V-0026": {
+   "example_id": "pilot-V-20260912-0008-1",
+   "family_id": "pilot-V-20260912-0008",
+   "task": "V",
+   "dataset_gold": "REJECT",
+   "variant_kind": null,
+   "stratum": [
+    "{\"A\": \"ABSTAIN\", \"B\": \"REJECT\", \"C\": \"CONFIRM\"}",
+    "all_samples_pass"
+   ]
+  },
+  "AUD-V-0027": {
+   "example_id": "pilot-V-20260912-0017-1",
+   "family_id": "pilot-V-20260912-0017",
+   "task": "V",
+   "dataset_gold": "REJECT",
+   "variant_kind": null,
+   "stratum": [
+    "{\"A\": \"REJECT\", \"B\": \"ABSTAIN\", \"C\": \"CONFIRM\"}",
+    "inventory_threshold"
+   ]
+  },
+  "AUD-V-0028": {
+   "example_id": "pilot-V-20260912-0001-2",
+   "family_id": "pilot-V-20260912-0001",
+   "task": "V",
+   "dataset_gold": "ABSTAIN",
+   "variant_kind": null,
+   "stratum": [
+    "{\"A\": \"ABSTAIN\", \"B\": \"CONFIRM\", \"C\": \"REJECT\"}",
+    "inventory_threshold"
+   ]
+  },
+  "AUD-V-0029": {
+   "example_id": "pilot-V-20260912-0001-1",
+   "family_id": "pilot-V-20260912-0001",
+   "task": "V",
+   "dataset_gold": "REJECT",
+   "variant_kind": null,
+   "stratum": [
+    "{\"A\": \"ABSTAIN\", \"B\": \"CONFIRM\", \"C\": \"REJECT\"}",
+    "inventory_threshold"
+   ]
+  },
+  "AUD-V-0030": {
+   "example_id": "pilot-V-20260912-0014-2",
+   "family_id": "pilot-V-20260912-0014",
+   "task": "V",
+   "dataset_gold": "ABSTAIN",
+   "variant_kind": null,
+   "stratum": [
+    "{\"A\": \"CONFIRM\", \"B\": \"ABSTAIN\", \"C\": \"REJECT\"}",
+    "timetable_before_deadline"
+   ]
+  },
+  "AUD-V-0031": {
+   "example_id": "pilot-V-20260912-0018-2",
+   "family_id": "pilot-V-20260912-0018",
+   "task": "V",
+   "dataset_gold": "ABSTAIN",
+   "variant_kind": null,
+   "stratum": [
+    "{\"A\": \"REJECT\", \"B\": \"ABSTAIN\", \"C\": \"CONFIRM\"}",
+    "timetable_before_deadline"
+   ]
+  },
+  "AUD-V-0032": {
+   "example_id": "pilot-V-20260912-0016-0",
+   "family_id": "pilot-V-20260912-0016",
+   "task": "V",
+   "dataset_gold": "CONFIRM",
+   "variant_kind": null,
+   "stratum": [
+    "{\"A\": \"REJECT\", \"B\": \"ABSTAIN\", \"C\": \"CONFIRM\"}",
+    "all_samples_pass"
+   ]
+  },
+  "AUD-V-0033": {
+   "example_id": "pilot-V-20260912-0012-2",
+   "family_id": "pilot-V-20260912-0012",
+   "task": "V",
+   "dataset_gold": "ABSTAIN",
+   "variant_kind": null,
+   "stratum": [
+    "{\"A\": \"CONFIRM\", \"B\": \"ABSTAIN\", \"C\": \"REJECT\"}",
+    "all_samples_pass"
+   ]
+  },
+  "AUD-V-0034": {
+   "example_id": "pilot-V-20260912-0014-1",
+   "family_id": "pilot-V-20260912-0014",
+   "task": "V",
+   "dataset_gold": "REJECT",
+   "variant_kind": null,
+   "stratum": [
+    "{\"A\": \"CONFIRM\", \"B\": \"ABSTAIN\", \"C\": \"REJECT\"}",
+    "timetable_before_deadline"
+   ]
+  },
+  "AUD-V-0035": {
+   "example_id": "pilot-V-20260912-0015-2",
+   "family_id": "pilot-V-20260912-0015",
+   "task": "V",
+   "dataset_gold": "ABSTAIN",
+   "variant_kind": null,
+   "stratum": [
+    "{\"A\": \"CONFIRM\", \"B\": \"ABSTAIN\", \"C\": \"REJECT\"}",
+    "boolean_program"
+   ]
+  },
+  "AUD-V-0036": {
+   "example_id": "pilot-V-20260912-0002-2",
+   "family_id": "pilot-V-20260912-0002",
+   "task": "V",
+   "dataset_gold": "ABSTAIN",
+   "variant_kind": null,
+   "stratum": [
+    "{\"A\": \"ABSTAIN\", \"B\": \"CONFIRM\", \"C\": \"REJECT\"}",
+    "timetable_before_deadline"
+   ]
+  },
+  "AUD-V-0037": {
+   "example_id": "pilot-V-20260912-0018-0",
+   "family_id": "pilot-V-20260912-0018",
+   "task": "V",
+   "dataset_gold": "CONFIRM",
+   "variant_kind": null,
+   "stratum": [
+    "{\"A\": \"REJECT\", \"B\": \"ABSTAIN\", \"C\": \"CONFIRM\"}",
+    "timetable_before_deadline"
+   ]
+  },
+  "AUD-V-0038": {
+   "example_id": "pilot-V-20260912-0011-2",
+   "family_id": "pilot-V-20260912-0011",
+   "task": "V",
+   "dataset_gold": "ABSTAIN",
+   "variant_kind": null,
+   "stratum": [
+    "{\"A\": \"ABSTAIN\", \"B\": \"REJECT\", \"C\": \"CONFIRM\"}",
+    "boolean_program"
+   ]
+  },
+  "AUD-V-0039": {
+   "example_id": "pilot-V-20260912-0006-2",
+   "family_id": "pilot-V-20260912-0006",
+   "task": "V",
+   "dataset_gold": "ABSTAIN",
+   "variant_kind": null,
+   "stratum": [
+    "{\"A\": \"REJECT\", \"B\": \"CONFIRM\", \"C\": \"ABSTAIN\"}",
+    "timetable_before_deadline"
+   ]
+  },
+  "AUD-V-0040": {
+   "example_id": "pilot-V-20260912-0023-0",
+   "family_id": "pilot-V-20260912-0023",
+   "task": "V",
+   "dataset_gold": "CONFIRM",
+   "variant_kind": null,
+   "stratum": [
+    "{\"A\": \"CONFIRM\", \"B\": \"REJECT\", \"C\": \"ABSTAIN\"}",
+    "boolean_program"
+   ]
+  },
+  "AUD-V-0041": {
+   "example_id": "pilot-V-20260912-0006-1",
+   "family_id": "pilot-V-20260912-0006",
+   "task": "V",
+   "dataset_gold": "REJECT",
+   "variant_kind": null,
+   "stratum": [
+    "{\"A\": \"REJECT\", \"B\": \"CONFIRM\", \"C\": \"ABSTAIN\"}",
+    "timetable_before_deadline"
+   ]
+  },
+  "AUD-V-0042": {
+   "example_id": "pilot-V-20260912-0009-0",
+   "family_id": "pilot-V-20260912-0009",
+   "task": "V",
+   "dataset_gold": "CONFIRM",
+   "variant_kind": null,
+   "stratum": [
+    "{\"A\": \"ABSTAIN\", \"B\": \"REJECT\", \"C\": \"CONFIRM\"}",
+    "inventory_threshold"
+   ]
+  },
+  "AUD-V-0043": {
+   "example_id": "pilot-V-20260912-0021-0",
+   "family_id": "pilot-V-20260912-0021",
+   "task": "V",
+   "dataset_gold": "CONFIRM",
+   "variant_kind": null,
+   "stratum": [
+    "{\"A\": \"CONFIRM\", \"B\": \"REJECT\", \"C\": \"ABSTAIN\"}",
+    "inventory_threshold"
+   ]
+  },
+  "AUD-V-0044": {
+   "example_id": "pilot-V-20260912-0016-1",
+   "family_id": "pilot-V-20260912-0016",
+   "task": "V",
+   "dataset_gold": "REJECT",
+   "variant_kind": null,
+   "stratum": [
+    "{\"A\": \"REJECT\", \"B\": \"ABSTAIN\", \"C\": \"CONFIRM\"}",
+    "all_samples_pass"
+   ]
+  },
+  "AUD-V-0045": {
+   "example_id": "pilot-V-20260912-0020-0",
+   "family_id": "pilot-V-20260912-0020",
+   "task": "V",
+   "dataset_gold": "CONFIRM",
+   "variant_kind": null,
+   "stratum": [
+    "{\"A\": \"CONFIRM\", \"B\": \"REJECT\", \"C\": \"ABSTAIN\"}",
+    "all_samples_pass"
+   ]
+  },
+  "AUD-V-0046": {
+   "example_id": "pilot-V-20260912-0016-2",
+   "family_id": "pilot-V-20260912-0016",
+   "task": "V",
+   "dataset_gold": "ABSTAIN",
+   "variant_kind": null,
+   "stratum": [
+    "{\"A\": \"REJECT\", \"B\": \"ABSTAIN\", \"C\": \"CONFIRM\"}",
+    "all_samples_pass"
+   ]
+  },
+  "AUD-V-0047": {
+   "example_id": "pilot-V-20260912-0017-2",
+   "family_id": "pilot-V-20260912-0017",
+   "task": "V",
+   "dataset_gold": "ABSTAIN",
+   "variant_kind": null,
+   "stratum": [
+    "{\"A\": \"REJECT\", \"B\": \"ABSTAIN\", \"C\": \"CONFIRM\"}",
+    "inventory_threshold"
+   ]
+  },
+  "AUD-V-0048": {
+   "example_id": "pilot-V-20260912-0009-2",
+   "family_id": "pilot-V-20260912-0009",
+   "task": "V",
+   "dataset_gold": "ABSTAIN",
+   "variant_kind": null,
+   "stratum": [
+    "{\"A\": \"ABSTAIN\", \"B\": \"REJECT\", \"C\": \"CONFIRM\"}",
+    "inventory_threshold"
+   ]
+  },
+  "AUD-V-0049": {
+   "example_id": "pilot-V-20260912-0010-1",
+   "family_id": "pilot-V-20260912-0010",
+   "task": "V",
+   "dataset_gold": "REJECT",
+   "variant_kind": null,
+   "stratum": [
+    "{\"A\": \"ABSTAIN\", \"B\": \"REJECT\", \"C\": \"CONFIRM\"}",
+    "timetable_before_deadline"
+   ]
+  },
+  "AUD-V-0050": {
+   "example_id": "pilot-V-20260912-0015-1",
+   "family_id": "pilot-V-20260912-0015",
+   "task": "V",
+   "dataset_gold": "REJECT",
+   "variant_kind": null,
+   "stratum": [
+    "{\"A\": \"CONFIRM\", \"B\": \"ABSTAIN\", \"C\": \"REJECT\"}",
+    "boolean_program"
+   ]
+  },
+  "AUD-V-0051": {
+   "example_id": "pilot-V-20260912-0005-2",
+   "family_id": "pilot-V-20260912-0005",
+   "task": "V",
+   "dataset_gold": "ABSTAIN",
+   "variant_kind": null,
+   "stratum": [
+    "{\"A\": \"REJECT\", \"B\": \"CONFIRM\", \"C\": \"ABSTAIN\"}",
+    "inventory_threshold"
+   ]
+  },
+  "AUD-V-0052": {
+   "example_id": "pilot-V-20260912-0000-0",
+   "family_id": "pilot-V-20260912-0000",
+   "task": "V",
+   "dataset_gold": "CONFIRM",
+   "variant_kind": null,
+   "stratum": [
+    "{\"A\": \"ABSTAIN\", \"B\": \"CONFIRM\", \"C\": \"REJECT\"}",
+    "all_samples_pass"
+   ]
+  },
+  "AUD-V-0053": {
+   "example_id": "pilot-V-20260912-0013-2",
+   "family_id": "pilot-V-20260912-0013",
+   "task": "V",
+   "dataset_gold": "ABSTAIN",
+   "variant_kind": null,
+   "stratum": [
+    "{\"A\": \"CONFIRM\", \"B\": \"ABSTAIN\", \"C\": \"REJECT\"}",
+    "inventory_threshold"
+   ]
+  },
+  "AUD-V-0054": {
+   "example_id": "pilot-V-20260912-0021-1",
+   "family_id": "pilot-V-20260912-0021",
+   "task": "V",
+   "dataset_gold": "REJECT",
+   "variant_kind": null,
+   "stratum": [
+    "{\"A\": \"CONFIRM\", \"B\": \"REJECT\", \"C\": \"ABSTAIN\"}",
+    "inventory_threshold"
+   ]
+  },
+  "AUD-V-0055": {
+   "example_id": "pilot-V-20260912-0004-0",
+   "family_id": "pilot-V-20260912-0004",
+   "task": "V",
+   "dataset_gold": "CONFIRM",
+   "variant_kind": null,
+   "stratum": [
+    "{\"A\": \"REJECT\", \"B\": \"CONFIRM\", \"C\": \"ABSTAIN\"}",
+    "all_samples_pass"
+   ]
+  },
+  "AUD-V-0056": {
+   "example_id": "pilot-V-20260912-0003-0",
+   "family_id": "pilot-V-20260912-0003",
+   "task": "V",
+   "dataset_gold": "CONFIRM",
+   "variant_kind": null,
+   "stratum": [
+    "{\"A\": \"ABSTAIN\", \"B\": \"CONFIRM\", \"C\": \"REJECT\"}",
+    "boolean_program"
+   ]
+  },
+  "AUD-V-0057": {
+   "example_id": "pilot-V-20260912-0002-1",
+   "family_id": "pilot-V-20260912-0002",
+   "task": "V",
+   "dataset_gold": "REJECT",
+   "variant_kind": null,
+   "stratum": [
+    "{\"A\": \"ABSTAIN\", \"B\": \"CONFIRM\", \"C\": \"REJECT\"}",
+    "timetable_before_deadline"
+   ]
+  },
+  "AUD-V-0058": {
+   "example_id": "pilot-V-20260912-0001-0",
+   "family_id": "pilot-V-20260912-0001",
+   "task": "V",
+   "dataset_gold": "CONFIRM",
+   "variant_kind": null,
+   "stratum": [
+    "{\"A\": \"ABSTAIN\", \"B\": \"CONFIRM\", \"C\": \"REJECT\"}",
+    "inventory_threshold"
+   ]
+  },
+  "AUD-V-0059": {
+   "example_id": "pilot-V-20260912-0022-1",
+   "family_id": "pilot-V-20260912-0022",
+   "task": "V",
+   "dataset_gold": "REJECT",
+   "variant_kind": null,
+   "stratum": [
+    "{\"A\": \"CONFIRM\", \"B\": \"REJECT\", \"C\": \"ABSTAIN\"}",
+    "timetable_before_deadline"
+   ]
+  },
+  "AUD-V-0060": {
+   "example_id": "pilot-V-20260912-0003-1",
+   "family_id": "pilot-V-20260912-0003",
+   "task": "V",
+   "dataset_gold": "REJECT",
+   "variant_kind": null,
+   "stratum": [
+    "{\"A\": \"ABSTAIN\", \"B\": \"CONFIRM\", \"C\": \"REJECT\"}",
+    "boolean_program"
+   ]
+  },
+  "AUD-V-0061": {
+   "example_id": "pilot-V-20260912-0020-1",
+   "family_id": "pilot-V-20260912-0020",
+   "task": "V",
+   "dataset_gold": "REJECT",
+   "variant_kind": null,
+   "stratum": [
+    "{\"A\": \"CONFIRM\", \"B\": \"REJECT\", \"C\": \"ABSTAIN\"}",
+    "all_samples_pass"
+   ]
+  },
+  "AUD-V-0062": {
+   "example_id": "pilot-V-20260912-0015-0",
+   "family_id": "pilot-V-20260912-0015",
+   "task": "V",
+   "dataset_gold": "CONFIRM",
+   "variant_kind": null,
+   "stratum": [
+    "{\"A\": \"CONFIRM\", \"B\": \"ABSTAIN\", \"C\": \"REJECT\"}",
+    "boolean_program"
+   ]
+  },
+  "AUD-V-0063": {
+   "example_id": "pilot-V-20260912-0019-0",
+   "family_id": "pilot-V-20260912-0019",
+   "task": "V",
+   "dataset_gold": "CONFIRM",
+   "variant_kind": null,
+   "stratum": [
+    "{\"A\": \"REJECT\", \"B\": \"ABSTAIN\", \"C\": \"CONFIRM\"}",
+    "boolean_program"
+   ]
+  },
+  "AUD-V-0064": {
+   "example_id": "pilot-V-20260912-0005-1",
+   "family_id": "pilot-V-20260912-0005",
+   "task": "V",
+   "dataset_gold": "REJECT",
+   "variant_kind": null,
+   "stratum": [
+    "{\"A\": \"REJECT\", \"B\": \"CONFIRM\", \"C\": \"ABSTAIN\"}",
+    "inventory_threshold"
+   ]
+  },
+  "AUD-V-0065": {
+   "example_id": "pilot-V-20260912-0012-1",
+   "family_id": "pilot-V-20260912-0012",
+   "task": "V",
+   "dataset_gold": "REJECT",
+   "variant_kind": null,
+   "stratum": [
+    "{\"A\": \"CONFIRM\", \"B\": \"ABSTAIN\", \"C\": \"REJECT\"}",
+    "all_samples_pass"
+   ]
+  },
+  "AUD-V-0066": {
+   "example_id": "pilot-V-20260912-0017-0",
+   "family_id": "pilot-V-20260912-0017",
+   "task": "V",
+   "dataset_gold": "CONFIRM",
+   "variant_kind": null,
+   "stratum": [
+    "{\"A\": \"REJECT\", \"B\": \"ABSTAIN\", \"C\": \"CONFIRM\"}",
+    "inventory_threshold"
+   ]
+  },
+  "AUD-V-0067": {
+   "example_id": "pilot-V-20260912-0000-2",
+   "family_id": "pilot-V-20260912-0000",
+   "task": "V",
+   "dataset_gold": "ABSTAIN",
+   "variant_kind": null,
+   "stratum": [
+    "{\"A\": \"ABSTAIN\", \"B\": \"CONFIRM\", \"C\": \"REJECT\"}",
+    "all_samples_pass"
+   ]
+  },
+  "AUD-V-0068": {
+   "example_id": "pilot-V-20260912-0014-0",
+   "family_id": "pilot-V-20260912-0014",
+   "task": "V",
+   "dataset_gold": "CONFIRM",
+   "variant_kind": null,
+   "stratum": [
+    "{\"A\": \"CONFIRM\", \"B\": \"ABSTAIN\", \"C\": \"REJECT\"}",
+    "timetable_before_deadline"
+   ]
+  },
+  "AUD-V-0069": {
+   "example_id": "pilot-V-20260912-0023-2",
+   "family_id": "pilot-V-20260912-0023",
+   "task": "V",
+   "dataset_gold": "ABSTAIN",
+   "variant_kind": null,
+   "stratum": [
+    "{\"A\": \"CONFIRM\", \"B\": \"REJECT\", \"C\": \"ABSTAIN\"}",
+    "boolean_program"
+   ]
+  },
+  "AUD-V-0070": {
+   "example_id": "pilot-V-20260912-0008-2",
+   "family_id": "pilot-V-20260912-0008",
+   "task": "V",
+   "dataset_gold": "ABSTAIN",
+   "variant_kind": null,
+   "stratum": [
+    "{\"A\": \"ABSTAIN\", \"B\": \"REJECT\", \"C\": \"CONFIRM\"}",
+    "all_samples_pass"
+   ]
+  },
+  "AUD-V-0071": {
+   "example_id": "pilot-V-20260912-0004-1",
+   "family_id": "pilot-V-20260912-0004",
+   "task": "V",
+   "dataset_gold": "REJECT",
+   "variant_kind": null,
+   "stratum": [
+    "{\"A\": \"REJECT\", \"B\": \"CONFIRM\", \"C\": \"ABSTAIN\"}",
+    "all_samples_pass"
+   ]
+  },
+  "AUD-T-0000": {
+   "example_id": "pilot-T-20260912-0030-0",
+   "family_id": "pilot-T-20260912-0030",
+   "task": "T",
+   "dataset_gold": "WRITE_AUTHORIZED",
+   "variant_kind": null,
+   "stratum": [
+    "pilot-T-20260912-0030"
+   ]
+  },
+  "AUD-T-0001": {
+   "example_id": "pilot-T-20260912-0020-2",
+   "family_id": "pilot-T-20260912-0020",
+   "task": "T",
+   "dataset_gold": "READ_TO_RESOLVE",
+   "variant_kind": null,
+   "stratum": [
+    "pilot-T-20260912-0020"
+   ]
+  },
+  "AUD-T-0002": {
+   "example_id": "pilot-T-20260912-0000-0",
+   "family_id": "pilot-T-20260912-0000",
+   "task": "T",
+   "dataset_gold": "WRITE_AUTHORIZED",
+   "variant_kind": null,
+   "stratum": [
+    "pilot-T-20260912-0000"
+   ]
+  },
+  "AUD-T-0003": {
+   "example_id": "pilot-T-20260912-0000-2",
+   "family_id": "pilot-T-20260912-0000",
+   "task": "T",
+   "dataset_gold": "READ_TO_RESOLVE",
+   "variant_kind": null,
+   "stratum": [
+    "pilot-T-20260912-0000"
+   ]
+  },
+  "AUD-T-0004": {
+   "example_id": "pilot-T-20260912-0050-1",
+   "family_id": "pilot-T-20260912-0050",
+   "task": "T",
+   "dataset_gold": "REQUEST_CONFIRMATION",
+   "variant_kind": null,
+   "stratum": [
+    "pilot-T-20260912-0050"
+   ]
+  },
+  "AUD-T-0005": {
+   "example_id": "pilot-T-20260912-0045-3",
+   "family_id": "pilot-T-20260912-0045",
+   "task": "T",
+   "dataset_gold": "CLARIFY_MISSING_INFORMATION",
+   "variant_kind": null,
+   "stratum": [
+    "pilot-T-20260912-0045"
+   ]
+  },
+  "AUD-T-0006": {
+   "example_id": "pilot-T-20260912-0050-2",
+   "family_id": "pilot-T-20260912-0050",
+   "task": "T",
+   "dataset_gold": "READ_TO_RESOLVE",
+   "variant_kind": null,
+   "stratum": [
+    "pilot-T-20260912-0050"
+   ]
+  },
+  "AUD-T-0007": {
+   "example_id": "pilot-T-20260912-0015-3",
+   "family_id": "pilot-T-20260912-0015",
+   "task": "T",
+   "dataset_gold": "CLARIFY_MISSING_INFORMATION",
+   "variant_kind": null,
+   "stratum": [
+    "pilot-T-20260912-0015"
+   ]
+  },
+  "AUD-T-0008": {
+   "example_id": "pilot-T-20260912-0035-3",
+   "family_id": "pilot-T-20260912-0035",
+   "task": "T",
+   "dataset_gold": "CLARIFY_MISSING_INFORMATION",
+   "variant_kind": null,
+   "stratum": [
+    "pilot-T-20260912-0035"
+   ]
+  },
+  "AUD-T-0009": {
+   "example_id": "pilot-T-20260912-0040-0",
+   "family_id": "pilot-T-20260912-0040",
+   "task": "T",
+   "dataset_gold": "WRITE_AUTHORIZED",
+   "variant_kind": null,
+   "stratum": [
+    "pilot-T-20260912-0040"
+   ]
+  },
+  "AUD-T-0010": {
+   "example_id": "pilot-T-20260912-0030-2",
+   "family_id": "pilot-T-20260912-0030",
+   "task": "T",
+   "dataset_gold": "READ_TO_RESOLVE",
+   "variant_kind": null,
+   "stratum": [
+    "pilot-T-20260912-0030"
+   ]
+  },
+  "AUD-T-0011": {
+   "example_id": "pilot-T-20260912-0010-2",
+   "family_id": "pilot-T-20260912-0010",
+   "task": "T",
+   "dataset_gold": "READ_TO_RESOLVE",
+   "variant_kind": null,
+   "stratum": [
+    "pilot-T-20260912-0010"
+   ]
+  },
+  "AUD-T-0012": {
+   "example_id": "pilot-T-20260912-0050-3",
+   "family_id": "pilot-T-20260912-0050",
+   "task": "T",
+   "dataset_gold": "CLARIFY_MISSING_INFORMATION",
+   "variant_kind": null,
+   "stratum": [
+    "pilot-T-20260912-0050"
+   ]
+  },
+  "AUD-T-0013": {
+   "example_id": "pilot-T-20260912-0025-0",
+   "family_id": "pilot-T-20260912-0025",
+   "task": "T",
+   "dataset_gold": "WRITE_AUTHORIZED",
+   "variant_kind": null,
+   "stratum": [
+    "pilot-T-20260912-0025"
+   ]
+  },
+  "AUD-T-0014": {
+   "example_id": "pilot-T-20260912-0045-0",
+   "family_id": "pilot-T-20260912-0045",
+   "task": "T",
+   "dataset_gold": "WRITE_AUTHORIZED",
+   "variant_kind": null,
+   "stratum": [
+    "pilot-T-20260912-0045"
+   ]
+  },
+  "AUD-T-0015": {
+   "example_id": "pilot-T-20260912-0020-0",
+   "family_id": "pilot-T-20260912-0020",
+   "task": "T",
+   "dataset_gold": "WRITE_AUTHORIZED",
+   "variant_kind": null,
+   "stratum": [
+    "pilot-T-20260912-0020"
+   ]
+  },
+  "AUD-T-0016": {
+   "example_id": "pilot-T-20260912-0025-2",
+   "family_id": "pilot-T-20260912-0025",
+   "task": "T",
+   "dataset_gold": "READ_TO_RESOLVE",
+   "variant_kind": null,
+   "stratum": [
+    "pilot-T-20260912-0025"
+   ]
+  },
+  "AUD-T-0017": {
+   "example_id": "pilot-T-20260912-0025-1",
+   "family_id": "pilot-T-20260912-0025",
+   "task": "T",
+   "dataset_gold": "REQUEST_CONFIRMATION",
+   "variant_kind": null,
+   "stratum": [
+    "pilot-T-20260912-0025"
+   ]
+  },
+  "AUD-T-0018": {
+   "example_id": "pilot-T-20260912-0040-2",
+   "family_id": "pilot-T-20260912-0040",
+   "task": "T",
+   "dataset_gold": "READ_TO_RESOLVE",
+   "variant_kind": null,
+   "stratum": [
+    "pilot-T-20260912-0040"
+   ]
+  },
+  "AUD-T-0019": {
+   "example_id": "pilot-T-20260912-0005-0",
+   "family_id": "pilot-T-20260912-0005",
+   "task": "T",
+   "dataset_gold": "WRITE_AUTHORIZED",
+   "variant_kind": null,
+   "stratum": [
+    "pilot-T-20260912-0005"
+   ]
+  },
+  "AUD-T-0020": {
+   "example_id": "pilot-T-20260912-0055-0",
+   "family_id": "pilot-T-20260912-0055",
+   "task": "T",
+   "dataset_gold": "WRITE_AUTHORIZED",
+   "variant_kind": null,
+   "stratum": [
+    "pilot-T-20260912-0055"
+   ]
+  },
+  "AUD-T-0021": {
+   "example_id": "pilot-T-20260912-0035-1",
+   "family_id": "pilot-T-20260912-0035",
+   "task": "T",
+   "dataset_gold": "REQUEST_CONFIRMATION",
+   "variant_kind": null,
+   "stratum": [
+    "pilot-T-20260912-0035"
+   ]
+  },
+  "AUD-T-0022": {
+   "example_id": "pilot-T-20260912-0055-3",
+   "family_id": "pilot-T-20260912-0055",
+   "task": "T",
+   "dataset_gold": "CLARIFY_MISSING_INFORMATION",
+   "variant_kind": null,
+   "stratum": [
+    "pilot-T-20260912-0055"
+   ]
+  },
+  "AUD-T-0023": {
+   "example_id": "pilot-T-20260912-0055-1",
+   "family_id": "pilot-T-20260912-0055",
+   "task": "T",
+   "dataset_gold": "REQUEST_CONFIRMATION",
+   "variant_kind": null,
+   "stratum": [
+    "pilot-T-20260912-0055"
+   ]
+  },
+  "AUD-T-0024": {
+   "example_id": "pilot-T-20260912-0045-2",
+   "family_id": "pilot-T-20260912-0045",
+   "task": "T",
+   "dataset_gold": "READ_TO_RESOLVE",
+   "variant_kind": null,
+   "stratum": [
+    "pilot-T-20260912-0045"
+   ]
+  },
+  "AUD-T-0025": {
+   "example_id": "pilot-T-20260912-0055-2",
+   "family_id": "pilot-T-20260912-0055",
+   "task": "T",
+   "dataset_gold": "READ_TO_RESOLVE",
+   "variant_kind": null,
+   "stratum": [
+    "pilot-T-20260912-0055"
+   ]
+  },
+  "AUD-T-0026": {
+   "example_id": "pilot-T-20260912-0040-1",
+   "family_id": "pilot-T-20260912-0040",
+   "task": "T",
+   "dataset_gold": "REQUEST_CONFIRMATION",
+   "variant_kind": null,
+   "stratum": [
+    "pilot-T-20260912-0040"
+   ]
+  },
+  "AUD-T-0027": {
+   "example_id": "pilot-T-20260912-0050-0",
+   "family_id": "pilot-T-20260912-0050",
+   "task": "T",
+   "dataset_gold": "WRITE_AUTHORIZED",
+   "variant_kind": null,
+   "stratum": [
+    "pilot-T-20260912-0050"
+   ]
+  },
+  "AUD-T-0028": {
+   "example_id": "pilot-T-20260912-0010-1",
+   "family_id": "pilot-T-20260912-0010",
+   "task": "T",
+   "dataset_gold": "REQUEST_CONFIRMATION",
+   "variant_kind": null,
+   "stratum": [
+    "pilot-T-20260912-0010"
+   ]
+  },
+  "AUD-T-0029": {
+   "example_id": "pilot-T-20260912-0005-1",
+   "family_id": "pilot-T-20260912-0005",
+   "task": "T",
+   "dataset_gold": "REQUEST_CONFIRMATION",
+   "variant_kind": null,
+   "stratum": [
+    "pilot-T-20260912-0005"
+   ]
+  },
+  "AUD-T-0030": {
+   "example_id": "pilot-T-20260912-0020-3",
+   "family_id": "pilot-T-20260912-0020",
+   "task": "T",
+   "dataset_gold": "CLARIFY_MISSING_INFORMATION",
+   "variant_kind": null,
+   "stratum": [
+    "pilot-T-20260912-0020"
+   ]
+  },
+  "AUD-T-0031": {
+   "example_id": "pilot-T-20260912-0010-0",
+   "family_id": "pilot-T-20260912-0010",
+   "task": "T",
+   "dataset_gold": "WRITE_AUTHORIZED",
+   "variant_kind": null,
+   "stratum": [
+    "pilot-T-20260912-0010"
+   ]
+  },
+  "AUD-T-0032": {
+   "example_id": "pilot-T-20260912-0030-1",
+   "family_id": "pilot-T-20260912-0030",
+   "task": "T",
+   "dataset_gold": "REQUEST_CONFIRMATION",
+   "variant_kind": null,
+   "stratum": [
+    "pilot-T-20260912-0030"
+   ]
+  },
+  "AUD-T-0033": {
+   "example_id": "pilot-T-20260912-0035-2",
+   "family_id": "pilot-T-20260912-0035",
+   "task": "T",
+   "dataset_gold": "READ_TO_RESOLVE",
+   "variant_kind": null,
+   "stratum": [
+    "pilot-T-20260912-0035"
+   ]
+  },
+  "AUD-T-0034": {
+   "example_id": "pilot-T-20260912-0030-3",
+   "family_id": "pilot-T-20260912-0030",
+   "task": "T",
+   "dataset_gold": "CLARIFY_MISSING_INFORMATION",
+   "variant_kind": null,
+   "stratum": [
+    "pilot-T-20260912-0030"
+   ]
+  },
+  "AUD-T-0035": {
+   "example_id": "pilot-T-20260912-0020-1",
+   "family_id": "pilot-T-20260912-0020",
+   "task": "T",
+   "dataset_gold": "REQUEST_CONFIRMATION",
+   "variant_kind": null,
+   "stratum": [
+    "pilot-T-20260912-0020"
+   ]
+  },
+  "AUD-T-0036": {
+   "example_id": "pilot-T-20260912-0015-2",
+   "family_id": "pilot-T-20260912-0015",
+   "task": "T",
+   "dataset_gold": "READ_TO_RESOLVE",
+   "variant_kind": null,
+   "stratum": [
+    "pilot-T-20260912-0015"
+   ]
+  },
+  "AUD-T-0037": {
+   "example_id": "pilot-T-20260912-0045-1",
+   "family_id": "pilot-T-20260912-0045",
+   "task": "T",
+   "dataset_gold": "REQUEST_CONFIRMATION",
+   "variant_kind": null,
+   "stratum": [
+    "pilot-T-20260912-0045"
+   ]
+  },
+  "AUD-T-0038": {
+   "example_id": "pilot-T-20260912-0035-0",
+   "family_id": "pilot-T-20260912-0035",
+   "task": "T",
+   "dataset_gold": "WRITE_AUTHORIZED",
+   "variant_kind": null,
+   "stratum": [
+    "pilot-T-20260912-0035"
+   ]
+  },
+  "AUD-T-0039": {
+   "example_id": "pilot-T-20260912-0010-3",
+   "family_id": "pilot-T-20260912-0010",
+   "task": "T",
+   "dataset_gold": "CLARIFY_MISSING_INFORMATION",
+   "variant_kind": null,
+   "stratum": [
+    "pilot-T-20260912-0010"
+   ]
+  },
+  "AUD-T-0040": {
+   "example_id": "pilot-T-20260912-0000-3",
+   "family_id": "pilot-T-20260912-0000",
+   "task": "T",
+   "dataset_gold": "CLARIFY_MISSING_INFORMATION",
+   "variant_kind": null,
+   "stratum": [
+    "pilot-T-20260912-0000"
+   ]
+  },
+  "AUD-T-0041": {
+   "example_id": "pilot-T-20260912-0025-3",
+   "family_id": "pilot-T-20260912-0025",
+   "task": "T",
+   "dataset_gold": "CLARIFY_MISSING_INFORMATION",
+   "variant_kind": null,
+   "stratum": [
+    "pilot-T-20260912-0025"
+   ]
+  },
+  "AUD-T-0042": {
+   "example_id": "pilot-T-20260912-0015-0",
+   "family_id": "pilot-T-20260912-0015",
+   "task": "T",
+   "dataset_gold": "WRITE_AUTHORIZED",
+   "variant_kind": null,
+   "stratum": [
+    "pilot-T-20260912-0015"
+   ]
+  },
+  "AUD-T-0043": {
+   "example_id": "pilot-T-20260912-0005-2",
+   "family_id": "pilot-T-20260912-0005",
+   "task": "T",
+   "dataset_gold": "READ_TO_RESOLVE",
+   "variant_kind": null,
+   "stratum": [
+    "pilot-T-20260912-0005"
+   ]
+  },
+  "AUD-T-0044": {
+   "example_id": "pilot-T-20260912-0015-1",
+   "family_id": "pilot-T-20260912-0015",
+   "task": "T",
+   "dataset_gold": "REQUEST_CONFIRMATION",
+   "variant_kind": null,
+   "stratum": [
+    "pilot-T-20260912-0015"
+   ]
+  },
+  "AUD-T-0045": {
+   "example_id": "pilot-T-20260912-0000-1",
+   "family_id": "pilot-T-20260912-0000",
+   "task": "T",
+   "dataset_gold": "REQUEST_CONFIRMATION",
+   "variant_kind": null,
+   "stratum": [
+    "pilot-T-20260912-0000"
+   ]
+  },
+  "AUD-T-0046": {
+   "example_id": "pilot-T-20260912-0040-3",
+   "family_id": "pilot-T-20260912-0040",
+   "task": "T",
+   "dataset_gold": "CLARIFY_MISSING_INFORMATION",
+   "variant_kind": null,
+   "stratum": [
+    "pilot-T-20260912-0040"
+   ]
+  },
+  "AUD-T-0047": {
+   "example_id": "pilot-T-20260912-0005-3",
+   "family_id": "pilot-T-20260912-0005",
+   "task": "T",
+   "dataset_gold": "CLARIFY_MISSING_INFORMATION",
+   "variant_kind": null,
+   "stratum": [
+    "pilot-T-20260912-0005"
+   ]
+  },
+  "AUD-C-0000": {
+   "example_id": "pilot-C-20260915-0010-1",
+   "family_id": "pilot-C-20260915-0010",
+   "task": "C",
+   "dataset_gold": "FALSE",
+   "variant_kind": "primary_map_2",
+   "stratum": [
+    "stance_neutral_objective"
+   ]
+  },
+  "AUD-C-0001": {
+   "example_id": "pilot-C-20260915-0001-1",
+   "family_id": "pilot-C-20260915-0001",
+   "task": "C",
+   "dataset_gold": "TRUE",
+   "variant_kind": "primary_map_2",
+   "stratum": [
+    "negation_understanding"
+   ]
+  },
+  "AUD-C-0002": {
+   "example_id": "pilot-C-20260915-0017-0",
+   "family_id": "pilot-C-20260915-0017",
+   "task": "C",
+   "dataset_gold": "TRUE",
+   "variant_kind": "primary_map_1",
+   "stratum": [
+    "surface_refusal_words_non_refusal"
+   ]
+  },
+  "AUD-C-0003": {
+   "example_id": "pilot-C-20260915-0025-1",
+   "family_id": "pilot-C-20260915-0025",
+   "task": "C",
+   "dataset_gold": "TRUE",
+   "variant_kind": "stance_oppose",
+   "stratum": [
+    "user_stance_agree_vs_oppose"
+   ]
+  },
+  "AUD-C-0004": {
+   "example_id": "pilot-C-20260915-0008-1",
+   "family_id": "pilot-C-20260915-0008",
+   "task": "C",
+   "dataset_gold": "TRUE",
+   "variant_kind": "primary_map_2",
+   "stratum": [
+    "stance_neutral_objective"
+   ]
+  },
+  "AUD-C-0005": {
+   "example_id": "pilot-C-20260915-0002-0",
+   "family_id": "pilot-C-20260915-0002",
+   "task": "C",
+   "dataset_gold": "FALSE",
+   "variant_kind": "primary_map_1",
+   "stratum": [
+    "negation_understanding"
+   ]
+  },
+  "AUD-C-0006": {
+   "example_id": "pilot-C-20260915-0001-0",
+   "family_id": "pilot-C-20260915-0001",
+   "task": "C",
+   "dataset_gold": "TRUE",
+   "variant_kind": "primary_map_1",
+   "stratum": [
+    "negation_understanding"
+   ]
+  },
+  "AUD-C-0007": {
+   "example_id": "pilot-C-20260915-0002-1",
+   "family_id": "pilot-C-20260915-0002",
+   "task": "C",
+   "dataset_gold": "FALSE",
+   "variant_kind": "primary_map_2",
+   "stratum": [
+    "negation_understanding"
+   ]
+  },
+  "AUD-C-0008": {
+   "example_id": "pilot-C-20260915-0033-0",
+   "family_id": "pilot-C-20260915-0033",
+   "task": "C",
+   "dataset_gold": "YES",
+   "variant_kind": "primary_map_1",
+   "stratum": [
+    "yes_no_questions"
+   ]
+  },
+  "AUD-C-0009": {
+   "example_id": "pilot-C-20260915-0017-1",
+   "family_id": "pilot-C-20260915-0017",
+   "task": "C",
+   "dataset_gold": "TRUE",
+   "variant_kind": "primary_map_2",
+   "stratum": [
+    "surface_refusal_words_non_refusal"
+   ]
+  },
+  "AUD-C-0010": {
+   "example_id": "pilot-C-20260915-0033-1",
+   "family_id": "pilot-C-20260915-0033",
+   "task": "C",
+   "dataset_gold": "YES",
+   "variant_kind": "primary_map_2",
+   "stratum": [
+    "yes_no_questions"
+   ]
+  },
+  "AUD-C-0011": {
+   "example_id": "pilot-C-20260915-0010-0",
+   "family_id": "pilot-C-20260915-0010",
+   "task": "C",
+   "dataset_gold": "FALSE",
+   "variant_kind": "primary_map_1",
+   "stratum": [
+    "stance_neutral_objective"
+   ]
+  },
+  "AUD-C-0012": {
+   "example_id": "pilot-C-20260915-0024-0",
+   "family_id": "pilot-C-20260915-0024",
+   "task": "C",
+   "dataset_gold": "TRUE",
+   "variant_kind": "stance_agree",
+   "stratum": [
+    "user_stance_agree_vs_oppose"
+   ]
+  },
+  "AUD-C-0013": {
+   "example_id": "pilot-C-20260915-0032-1",
+   "family_id": "pilot-C-20260915-0032",
+   "task": "C",
+   "dataset_gold": "YES",
+   "variant_kind": "primary_map_2",
+   "stratum": [
+    "yes_no_questions"
+   ]
+  },
+  "AUD-C-0014": {
+   "example_id": "pilot-C-20260915-0016-1",
+   "family_id": "pilot-C-20260915-0016",
+   "task": "C",
+   "dataset_gold": "TRUE",
+   "variant_kind": "primary_map_2",
+   "stratum": [
+    "surface_refusal_words_non_refusal"
+   ]
+  },
+  "AUD-C-0015": {
+   "example_id": "pilot-C-20260915-0008-0",
+   "family_id": "pilot-C-20260915-0008",
+   "task": "C",
+   "dataset_gold": "TRUE",
+   "variant_kind": "primary_map_1",
+   "stratum": [
+    "stance_neutral_objective"
+   ]
+  },
+  "AUD-C-0016": {
+   "example_id": "pilot-C-20260915-0016-0",
+   "family_id": "pilot-C-20260915-0016",
+   "task": "C",
+   "dataset_gold": "TRUE",
+   "variant_kind": "primary_map_1",
+   "stratum": [
+    "surface_refusal_words_non_refusal"
+   ]
+  },
+  "AUD-C-0017": {
+   "example_id": "pilot-C-20260915-0000-0",
+   "family_id": "pilot-C-20260915-0000",
+   "task": "C",
+   "dataset_gold": "TRUE",
+   "variant_kind": "primary_map_1",
+   "stratum": [
+    "negation_understanding"
+   ]
+  },
+  "AUD-C-0018": {
+   "example_id": "pilot-C-20260915-0009-0",
+   "family_id": "pilot-C-20260915-0009",
+   "task": "C",
+   "dataset_gold": "TRUE",
+   "variant_kind": "primary_map_1",
+   "stratum": [
+    "stance_neutral_objective"
+   ]
+  },
+  "AUD-C-0019": {
+   "example_id": "pilot-C-20260915-0009-1",
+   "family_id": "pilot-C-20260915-0009",
+   "task": "C",
+   "dataset_gold": "TRUE",
+   "variant_kind": "primary_map_2",
+   "stratum": [
+    "stance_neutral_objective"
+   ]
+  },
+  "AUD-C-0020": {
+   "example_id": "pilot-C-20260915-0032-0",
+   "family_id": "pilot-C-20260915-0032",
+   "task": "C",
+   "dataset_gold": "YES",
+   "variant_kind": "primary_map_1",
+   "stratum": [
+    "yes_no_questions"
+   ]
+  },
+  "AUD-C-0021": {
+   "example_id": "pilot-C-20260915-0000-1",
+   "family_id": "pilot-C-20260915-0000",
+   "task": "C",
+   "dataset_gold": "TRUE",
+   "variant_kind": "primary_map_2",
+   "stratum": [
+    "negation_understanding"
+   ]
+  },
+  "AUD-C-0022": {
+   "example_id": "pilot-C-20260915-0024-1",
+   "family_id": "pilot-C-20260915-0024",
+   "task": "C",
+   "dataset_gold": "TRUE",
+   "variant_kind": "stance_oppose",
+   "stratum": [
+    "user_stance_agree_vs_oppose"
+   ]
+  },
+  "AUD-C-0023": {
+   "example_id": "pilot-C-20260915-0025-0",
+   "family_id": "pilot-C-20260915-0025",
+   "task": "C",
+   "dataset_gold": "TRUE",
+   "variant_kind": "stance_agree",
+   "stratum": [
+    "user_stance_agree_vs_oppose"
+   ]
+  },
+  "AUD-C-SURF-0000": {
+   "example_id": "pilot-C-20260915-0024-3",
+   "family_id": "pilot-C-20260915-0024",
+   "task": "C_surface_check",
+   "dataset_gold": "TRUE",
+   "variant_kind": "translation_zh_discovery",
+   "stratum": [
+    "user_stance_agree_vs_oppose"
+   ],
+   "primary_example_id": "pilot-C-20260915-0024-0"
+  },
+  "AUD-C-SURF-0001": {
+   "example_id": "pilot-C-20260915-0002-3",
+   "family_id": "pilot-C-20260915-0002",
+   "task": "C_surface_check",
+   "dataset_gold": "FALSE",
+   "variant_kind": "translation_zh_discovery",
+   "stratum": [
+    "negation_understanding"
+   ],
+   "primary_example_id": "pilot-C-20260915-0002-0"
+  },
+  "AUD-C-SURF-0002": {
+   "example_id": "pilot-C-20260915-0009-3",
+   "family_id": "pilot-C-20260915-0009",
+   "task": "C_surface_check",
+   "dataset_gold": "TRUE",
+   "variant_kind": "translation_zh_discovery",
+   "stratum": [
+    "stance_neutral_objective"
+   ],
+   "primary_example_id": "pilot-C-20260915-0009-0"
+  },
+  "AUD-C-SURF-0003": {
+   "example_id": "pilot-C-20260915-0025-3",
+   "family_id": "pilot-C-20260915-0025",
+   "task": "C_surface_check",
+   "dataset_gold": "TRUE",
+   "variant_kind": "translation_zh_discovery",
+   "stratum": [
+    "user_stance_agree_vs_oppose"
+   ],
+   "primary_example_id": "pilot-C-20260915-0025-0"
+  },
+  "AUD-C-SURF-0004": {
+   "example_id": "pilot-C-20260915-0002-2",
+   "family_id": "pilot-C-20260915-0002",
+   "task": "C_surface_check",
+   "dataset_gold": "FALSE",
+   "variant_kind": "paraphrase_discovery",
+   "stratum": [
+    "negation_understanding"
+   ],
+   "primary_example_id": "pilot-C-20260915-0002-0"
+  },
+  "AUD-C-SURF-0005": {
+   "example_id": "pilot-C-20260915-0016-2",
+   "family_id": "pilot-C-20260915-0016",
+   "task": "C_surface_check",
+   "dataset_gold": "TRUE",
+   "variant_kind": "paraphrase_discovery",
+   "stratum": [
+    "surface_refusal_words_non_refusal"
+   ],
+   "primary_example_id": "pilot-C-20260915-0016-0"
+  },
+  "AUD-C-SURF-0006": {
+   "example_id": "pilot-C-20260915-0010-3",
+   "family_id": "pilot-C-20260915-0010",
+   "task": "C_surface_check",
+   "dataset_gold": "FALSE",
+   "variant_kind": "translation_zh_discovery",
+   "stratum": [
+    "stance_neutral_objective"
+   ],
+   "primary_example_id": "pilot-C-20260915-0010-0"
+  },
+  "AUD-C-SURF-0007": {
+   "example_id": "pilot-C-20260915-0001-2",
+   "family_id": "pilot-C-20260915-0001",
+   "task": "C_surface_check",
+   "dataset_gold": "TRUE",
+   "variant_kind": "paraphrase_discovery",
+   "stratum": [
+    "negation_understanding"
+   ],
+   "primary_example_id": "pilot-C-20260915-0001-0"
+  },
+  "AUD-C-SURF-0008": {
+   "example_id": "pilot-C-20260915-0033-3",
+   "family_id": "pilot-C-20260915-0033",
+   "task": "C_surface_check",
+   "dataset_gold": "YES",
+   "variant_kind": "translation_zh_discovery",
+   "stratum": [
+    "yes_no_questions"
+   ],
+   "primary_example_id": "pilot-C-20260915-0033-0"
+  },
+  "AUD-C-SURF-0009": {
+   "example_id": "pilot-C-20260915-0025-2",
+   "family_id": "pilot-C-20260915-0025",
+   "task": "C_surface_check",
+   "dataset_gold": "TRUE",
+   "variant_kind": "paraphrase_discovery",
+   "stratum": [
+    "user_stance_agree_vs_oppose"
+   ],
+   "primary_example_id": "pilot-C-20260915-0025-0"
+  },
+  "AUD-C-SURF-0010": {
+   "example_id": "pilot-C-20260915-0009-2",
+   "family_id": "pilot-C-20260915-0009",
+   "task": "C_surface_check",
+   "dataset_gold": "TRUE",
+   "variant_kind": "paraphrase_discovery",
+   "stratum": [
+    "stance_neutral_objective"
+   ],
+   "primary_example_id": "pilot-C-20260915-0009-0"
+  },
+  "AUD-C-SURF-0011": {
+   "example_id": "pilot-C-20260915-0016-3",
+   "family_id": "pilot-C-20260915-0016",
+   "task": "C_surface_check",
+   "dataset_gold": "TRUE",
+   "variant_kind": "translation_zh_discovery",
+   "stratum": [
+    "surface_refusal_words_non_refusal"
+   ],
+   "primary_example_id": "pilot-C-20260915-0016-0"
+  },
+  "AUD-C-SURF-0012": {
+   "example_id": "pilot-C-20260915-0017-3",
+   "family_id": "pilot-C-20260915-0017",
+   "task": "C_surface_check",
+   "dataset_gold": "TRUE",
+   "variant_kind": "translation_zh_discovery",
+   "stratum": [
+    "surface_refusal_words_non_refusal"
+   ],
+   "primary_example_id": "pilot-C-20260915-0017-0"
+  },
+  "AUD-C-SURF-0013": {
+   "example_id": "pilot-C-20260915-0008-3",
+   "family_id": "pilot-C-20260915-0008",
+   "task": "C_surface_check",
+   "dataset_gold": "TRUE",
+   "variant_kind": "translation_zh_discovery",
+   "stratum": [
+    "stance_neutral_objective"
+   ],
+   "primary_example_id": "pilot-C-20260915-0008-0"
+  },
+  "AUD-C-SURF-0014": {
+   "example_id": "pilot-C-20260915-0000-3",
+   "family_id": "pilot-C-20260915-0000",
+   "task": "C_surface_check",
+   "dataset_gold": "TRUE",
+   "variant_kind": "translation_zh_discovery",
+   "stratum": [
+    "negation_understanding"
+   ],
+   "primary_example_id": "pilot-C-20260915-0000-0"
+  },
+  "AUD-C-SURF-0015": {
+   "example_id": "pilot-C-20260915-0017-2",
+   "family_id": "pilot-C-20260915-0017",
+   "task": "C_surface_check",
+   "dataset_gold": "TRUE",
+   "variant_kind": "paraphrase_discovery",
+   "stratum": [
+    "surface_refusal_words_non_refusal"
+   ],
+   "primary_example_id": "pilot-C-20260915-0017-0"
+  },
+  "AUD-C-SURF-0016": {
+   "example_id": "pilot-C-20260915-0024-2",
+   "family_id": "pilot-C-20260915-0024",
+   "task": "C_surface_check",
+   "dataset_gold": "TRUE",
+   "variant_kind": "paraphrase_discovery",
+   "stratum": [
+    "user_stance_agree_vs_oppose"
+   ],
+   "primary_example_id": "pilot-C-20260915-0024-0"
+  },
+  "AUD-C-SURF-0017": {
+   "example_id": "pilot-C-20260915-0008-2",
+   "family_id": "pilot-C-20260915-0008",
+   "task": "C_surface_check",
+   "dataset_gold": "TRUE",
+   "variant_kind": "paraphrase_discovery",
+   "stratum": [
+    "stance_neutral_objective"
+   ],
+   "primary_example_id": "pilot-C-20260915-0008-0"
+  },
+  "AUD-C-SURF-0018": {
+   "example_id": "pilot-C-20260915-0001-3",
+   "family_id": "pilot-C-20260915-0001",
+   "task": "C_surface_check",
+   "dataset_gold": "TRUE",
+   "variant_kind": "translation_zh_discovery",
+   "stratum": [
+    "negation_understanding"
+   ],
+   "primary_example_id": "pilot-C-20260915-0001-0"
+  },
+  "AUD-C-SURF-0019": {
+   "example_id": "pilot-C-20260915-0032-2",
+   "family_id": "pilot-C-20260915-0032",
+   "task": "C_surface_check",
+   "dataset_gold": "YES",
+   "variant_kind": "paraphrase_discovery",
+   "stratum": [
+    "yes_no_questions"
+   ],
+   "primary_example_id": "pilot-C-20260915-0032-0"
+  },
+  "AUD-C-SURF-0020": {
+   "example_id": "pilot-C-20260915-0033-2",
+   "family_id": "pilot-C-20260915-0033",
+   "task": "C_surface_check",
+   "dataset_gold": "YES",
+   "variant_kind": "paraphrase_discovery",
+   "stratum": [
+    "yes_no_questions"
+   ],
+   "primary_example_id": "pilot-C-20260915-0033-0"
+  },
+  "AUD-C-SURF-0021": {
+   "example_id": "pilot-C-20260915-0000-2",
+   "family_id": "pilot-C-20260915-0000",
+   "task": "C_surface_check",
+   "dataset_gold": "TRUE",
+   "variant_kind": "paraphrase_discovery",
+   "stratum": [
+    "negation_understanding"
+   ],
+   "primary_example_id": "pilot-C-20260915-0000-0"
+  },
+  "AUD-C-SURF-0022": {
+   "example_id": "pilot-C-20260915-0010-2",
+   "family_id": "pilot-C-20260915-0010",
+   "task": "C_surface_check",
+   "dataset_gold": "FALSE",
+   "variant_kind": "paraphrase_discovery",
+   "stratum": [
+    "stance_neutral_objective"
+   ],
+   "primary_example_id": "pilot-C-20260915-0010-0"
+  },
+  "AUD-C-SURF-0023": {
+   "example_id": "pilot-C-20260915-0032-3",
+   "family_id": "pilot-C-20260915-0032",
+   "task": "C_surface_check",
+   "dataset_gold": "YES",
+   "variant_kind": "translation_zh_discovery",
+   "stratum": [
+    "yes_no_questions"
+   ],
+   "primary_example_id": "pilot-C-20260915-0032-0"
+  }
+ }
+}

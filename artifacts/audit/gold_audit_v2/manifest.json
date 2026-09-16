@@ -1,0 +1,300 @@
+{
+ "schema": "gold_audit_package_manifest_v2",
+ "ticket": "B9-03",
+ "supersedes_package": {
+  "path": "artifacts/audit/gold_audit_v1",
+  "status": "retained_unmodified",
+  "reason": "second review: full header bindings, script/items/sheets binding, acceptance levels, coverage report, deterministic naming"
+ },
+ "generated_at": "2026-09-15T07:50:33.308732+00:00",
+ "seed": 20260915,
+ "seed_role": "presentation order (item shuffle + code assignment) ONLY; family selection is lexicographic/systematic/round-robin and seed-independent",
+ "mode": "agent_prepared_materials_only; human signing and adjudication are human tasks",
+ "inputs": {
+  "pilot_jsonl_sha256": "ecbcc6bf91822dd44547289dca429dc4b381f2c5549b452201fc29789e5f2782",
+  "pilot_c_v2_jsonl_sha256": "e66fbd2659ef745a13280decf610f84aa4375630a66981b79c077a643f8cf302",
+  "forms_sha256": {
+   "DATA_GOLD_AUDIT_FORM_v1.md": "4eb178b0b86e7bbe87f2cb7d710548679372bc1c78cef79d06f35c71ca962a02",
+   "DISAGREEMENT_AND_ADJUDICATION_FORM_v1.md": "e04c131da9e35435617b263a0bc326c9f077b77032ddcf8f27baab30f7265d4c",
+   "OUTPUT_SCORING_FORM_v1.md": "46846f6205f248fe9a40ceb2aad13c34f38edd2761837fc34f14889147e50280",
+   "OUTPUT_SCORING_FORM_v2.md": "45b41280f4605a41b08dbe433b9a6bf301a2335e5ae75f33ebaa6f459faf0c13"
+  },
+  "form_separation": "data gold audit (DATA_GOLD_AUDIT_FORM_v1) and future model-output scoring (OUTPUT_SCORING_FORM_v2) are DIFFERENT forms and must never be mixed"
+ },
+ "generator_script": {
+  "path": "scripts/make_audit_packages.py",
+  "sha256": "c7c1a481fdb9ad7f7bb8d3f713611ae5f214fc203bc131243335be5e20ca6e95"
+ },
+ "items_sha256": {
+  "V": "1e5298d94ff7b50e37eb6689355770529969bd99e644cd849e5de0ebe3d0aec2",
+  "T": "bf5f8570d16a0bcae2a3f5e87c552d5f566db38d0fcc9d09cb73a0eb2d6ecc31",
+  "C": "1c0f64f258cd871c4f96a4a17a35bfaca3f18851ac71ea430af4700e9c9319fc",
+  "C_surface": "da691db552ca6239497cb96d3a5718161155c2b8f3b484a0ec41878b2d73997e"
+ },
+ "sheets_sha256": {
+  "sheet_V_R1.md": "cee85c9c9ab39e0fc9473f5103120c53160aac448224ee987dcdac8ae5bffef4",
+  "sheet_T_R1.md": "0dec4258825f6b5aa371358fab39fe1918aa3c8bd152a2154190e59cb52f7fec",
+  "sheet_C_R1.md": "3fdf4976ba98197ead33df21d7e9dd425f11d4ac4d05ae9585ddce4fe38367f6",
+  "sheet_C_surface_R1.md": "3f38a3c0907706478417a0d58317a9bc33909ed410e9fe3715ccf4377fa408c5",
+  "sheet_V_R2.md": "1e6df9f130c2040d02e7429022b416e46ca6ac64648bae0d495903915b852e3e",
+  "sheet_T_R2.md": "6c1cc97255f8c2be074ed9d4dc77e270a0cf45ee7c8bc87f61dbd46b2f9bdfc4",
+  "sheet_C_R2.md": "687c27a964ff59792ab5a0ddcb93df1538425d4ace3fbd959502ee0575f5a5f7",
+  "sheet_C_surface_R2.md": "486ac2164b09eb02a071dfb1dcf4d5425ca6c8e7c3f795eb293feeb03b0f4d50"
+ },
+ "sealed_key_sha256": "4981fc92ea8e2c9d3244e6c7ec7958760f246e7580eb75632685cfda9ea64eef",
+ "acceptance_levels": {
+  "level_A_pool_spot_audit": {
+   "this_package": true,
+   "scope": "data-pool quality on a stratified deterministic sample",
+   "unlocks_runs": false,
+   "proves_in_round_files_audited": false
+  },
+  "level_B_pre_freeze_full_audit": {
+   "this_package": false,
+   "scope": "100% of the FINAL in-round prompt/gold files after round data freeze (B7-02 v2 + approved revisions)",
+   "required_before": "any round execution",
+   "status": "future_package"
+  }
+ },
+ "selection_rules": {
+  "method_naming": "stratified DETERMINISTIC sampling (NOT random): lexicographic cell-minimum (V), fixed stride (T), category round-robin (C)",
+  "V": "one family per (label_map, rule) cell (24 cells, lexicographically smallest per cell) = 24 families / 72 items (20% of V pilot families)",
+  "T": "systematic every 5th of sorted family IDs = 12 families / 48 items (20%)",
+  "C": "round-robin over sorted categories (3,3,2,2,2) = 12 families / 24 primary items + 24 surface-check items",
+  "S": "EMPTY template only - blocked until S_DATA_PROTOCOL_v3 approval + intake"
+ },
+ "coverage_report": {
+  "proposed_round_overlap": {
+   "V_round_1": {
+    "proposed": 12,
+    "covered_by_this_spot_audit": [
+     "pilot-V-20260912-0001",
+     "pilot-V-20260912-0002",
+     "pilot-V-20260912-0004",
+     "pilot-V-20260912-0005",
+     "pilot-V-20260912-0008",
+     "pilot-V-20260912-0009",
+     "pilot-V-20260912-0012",
+     "pilot-V-20260912-0013",
+     "pilot-V-20260912-0016",
+     "pilot-V-20260912-0017",
+     "pilot-V-20260912-0020",
+     "pilot-V-20260912-0021"
+    ],
+    "not_covered": []
+   },
+   "V_round_2": {
+    "proposed": 12,
+    "covered_by_this_spot_audit": [
+     "pilot-V-20260912-0003",
+     "pilot-V-20260912-0006",
+     "pilot-V-20260912-0007",
+     "pilot-V-20260912-0010",
+     "pilot-V-20260912-0011",
+     "pilot-V-20260912-0014",
+     "pilot-V-20260912-0015",
+     "pilot-V-20260912-0018",
+     "pilot-V-20260912-0019",
+     "pilot-V-20260912-0022",
+     "pilot-V-20260912-0023"
+    ],
+    "not_covered": [
+     "pilot-V-20260912-0024"
+    ]
+   },
+   "T_round_1": {
+    "proposed": 12,
+    "covered_by_this_spot_audit": [
+     "pilot-T-20260912-0005",
+     "pilot-T-20260912-0010"
+    ],
+    "not_covered": [
+     "pilot-T-20260912-0001",
+     "pilot-T-20260912-0002",
+     "pilot-T-20260912-0003",
+     "pilot-T-20260912-0004",
+     "pilot-T-20260912-0006",
+     "pilot-T-20260912-0007",
+     "pilot-T-20260912-0008",
+     "pilot-T-20260912-0009",
+     "pilot-T-20260912-0011",
+     "pilot-T-20260912-0012"
+    ]
+   },
+   "T_round_2": {
+    "proposed": 12,
+    "covered_by_this_spot_audit": [
+     "pilot-T-20260912-0015",
+     "pilot-T-20260912-0020"
+    ],
+    "not_covered": [
+     "pilot-T-20260912-0013",
+     "pilot-T-20260912-0014",
+     "pilot-T-20260912-0016",
+     "pilot-T-20260912-0017",
+     "pilot-T-20260912-0018",
+     "pilot-T-20260912-0019",
+     "pilot-T-20260912-0021",
+     "pilot-T-20260912-0022",
+     "pilot-T-20260912-0023",
+     "pilot-T-20260912-0024"
+    ]
+   },
+   "C_round_1": {
+    "proposed": 12,
+    "covered_by_this_spot_audit": [
+     "pilot-C-20260915-0000",
+     "pilot-C-20260915-0001",
+     "pilot-C-20260915-0002",
+     "pilot-C-20260915-0008",
+     "pilot-C-20260915-0016",
+     "pilot-C-20260915-0024",
+     "pilot-C-20260915-0032"
+    ],
+    "not_covered": [
+     "pilot-C-20260915-0003",
+     "pilot-C-20260915-0011",
+     "pilot-C-20260915-0019",
+     "pilot-C-20260915-0027",
+     "pilot-C-20260915-0035"
+    ]
+   },
+   "C_round_2": {
+    "proposed": 12,
+    "covered_by_this_spot_audit": [
+     "pilot-C-20260915-0009",
+     "pilot-C-20260915-0010",
+     "pilot-C-20260915-0017",
+     "pilot-C-20260915-0025",
+     "pilot-C-20260915-0033"
+    ],
+    "not_covered": [
+     "pilot-C-20260915-0004",
+     "pilot-C-20260915-0007",
+     "pilot-C-20260915-0012",
+     "pilot-C-20260915-0015",
+     "pilot-C-20260915-0018",
+     "pilot-C-20260915-0026",
+     "pilot-C-20260915-0034"
+    ]
+   }
+  },
+  "V": {
+   "map_rule_cells_covered": "24/24",
+   "per_family_gold_coverage": "complete by construction (each V family carries all three golds)",
+   "families_covered": "24/120"
+  },
+  "T": {
+   "families_covered": "12/60",
+   "per_family_gold_coverage": "complete by construction (each T family carries all four golds)"
+  },
+  "C": {
+   "families_covered": "12/40",
+   "category_rule_gold_cells_covered": "12/20",
+   "uncovered_cells": [
+    "negation_understanding|c_field_not_equals|FALSE",
+    "stance_neutral_objective|c_timetable_strictly_before|FALSE",
+    "surface_refusal_words_non_refusal|c_field_equals|FALSE",
+    "surface_refusal_words_non_refusal|c_not_all_passed|FALSE",
+    "user_stance_agree_vs_oppose|c_field_equals|FALSE",
+    "user_stance_agree_vs_oppose|c_timetable_strictly_before|FALSE",
+    "yes_no_questions|c_arithmetic_equals|NO",
+    "yes_no_questions|c_sum_at_least|NO"
+   ],
+   "note": "uncovered cells are expected for a 12-of-40 spot audit; Level B pre-freeze audit covers the actual in-round set in full"
+  }
+ },
+ "selected_families": {
+  "V": [
+   "pilot-V-20260912-0000",
+   "pilot-V-20260912-0001",
+   "pilot-V-20260912-0002",
+   "pilot-V-20260912-0003",
+   "pilot-V-20260912-0004",
+   "pilot-V-20260912-0005",
+   "pilot-V-20260912-0006",
+   "pilot-V-20260912-0007",
+   "pilot-V-20260912-0008",
+   "pilot-V-20260912-0009",
+   "pilot-V-20260912-0010",
+   "pilot-V-20260912-0011",
+   "pilot-V-20260912-0012",
+   "pilot-V-20260912-0013",
+   "pilot-V-20260912-0014",
+   "pilot-V-20260912-0015",
+   "pilot-V-20260912-0016",
+   "pilot-V-20260912-0017",
+   "pilot-V-20260912-0018",
+   "pilot-V-20260912-0019",
+   "pilot-V-20260912-0020",
+   "pilot-V-20260912-0021",
+   "pilot-V-20260912-0022",
+   "pilot-V-20260912-0023"
+  ],
+  "T": [
+   "pilot-T-20260912-0000",
+   "pilot-T-20260912-0005",
+   "pilot-T-20260912-0010",
+   "pilot-T-20260912-0015",
+   "pilot-T-20260912-0020",
+   "pilot-T-20260912-0025",
+   "pilot-T-20260912-0030",
+   "pilot-T-20260912-0035",
+   "pilot-T-20260912-0040",
+   "pilot-T-20260912-0045",
+   "pilot-T-20260912-0050",
+   "pilot-T-20260912-0055"
+  ],
+  "C": [
+   "pilot-C-20260915-0000",
+   "pilot-C-20260915-0008",
+   "pilot-C-20260915-0016",
+   "pilot-C-20260915-0024",
+   "pilot-C-20260915-0032",
+   "pilot-C-20260915-0001",
+   "pilot-C-20260915-0009",
+   "pilot-C-20260915-0017",
+   "pilot-C-20260915-0025",
+   "pilot-C-20260915-0033",
+   "pilot-C-20260915-0002",
+   "pilot-C-20260915-0010"
+  ]
+ },
+ "counts": {
+  "gold_items": {
+   "V": 72,
+   "T": 48,
+   "C": 24
+  },
+  "surface_items": 24,
+  "sealed_key_entries": 168
+ },
+ "blinding": {
+  "reviewer_facing_fields": [
+   "code",
+   "task",
+   "prompt",
+   "answer_space",
+   "primary_prompt",
+   "variant_prompt",
+   "instruction"
+  ],
+  "forbidden_fields_verified_absent": [
+   "gold",
+   "family_id",
+   "example_id",
+   "variant",
+   "variant_kind",
+   "rule",
+   "label_map",
+   "condition",
+   "raw_text",
+   "sandbox_state",
+   "baseline",
+   "identity_hook"
+  ],
+  "no_model_outputs_no_conditions": true,
+  "good_faith_limitation": "reviewers with repository access could consult source data files; sheets themselves display no gold/output/condition"
+ },
+ "s_template_item_count": 0
+}

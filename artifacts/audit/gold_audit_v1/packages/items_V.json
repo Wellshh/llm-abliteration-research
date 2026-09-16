@@ -1,0 +1,434 @@
+[
+ {
+  "code": "AUD-V-0000",
+  "task": "V",
+  "prompt": "[system]\nDecide using only the explicit finite rules and evidence. CONFIRM means true in every compatible completion; REJECT means false in every compatible completion; ABSTAIN means both true and false completions remain possible. Missing irrelevant metadata has no effect. Output exactly one label, with no explanation. Label mapping: {\"A\":\"ABSTAIN\",\"B\":\"CONFIRM\",\"C\":\"REJECT\"}\n\n[user]\nEvaluate the following record.\nThe claim is that ALL listed sample IDs passed. null is an unknown test result; no sample is outside the listed universe.\nClaim: {\"sample_ids\":[\"synthetic-b360f6eca5f99f23daa7-s0\",\"synthetic-b360f6eca5f99f23daa7-s1\",\"synthetic-b360f6eca5f99f23daa7-s2\"]}\nEvidence: {\"metadata\":{\"calibration_note\":\"not relevant to this claim\",\"operator_note\":null,\"site\":\"site-687\"},\"records\":{\"synthetic-b360f6eca5f99f23daa7-s0\":true,\"synthetic-b360f6eca5f99f23daa7-s1\":false,\"synthetic-b360f6eca5f99f23daa7-s2\":null}}",
+  "answer_space": "CONFIRM | REJECT | ABSTAIN | uncertain"
+ },
+ {
+  "code": "AUD-V-0001",
+  "task": "V",
+  "prompt": "[system]\nDecide using only the explicit finite rules and evidence. CONFIRM means true in every compatible completion; REJECT means false in every compatible completion; ABSTAIN means both true and false completions remain possible. Missing irrelevant metadata has no effect. Output exactly one label, with no explanation. Label mapping: {\"A\":\"ABSTAIN\",\"B\":\"REJECT\",\"C\":\"CONFIRM\"}\n\n[user]\nEvaluate the following record.\nThe claim is that departure + duration is at or before the deadline. Duration is an integer 1 through 9; null means unknown.\nClaim: {\"deadline\":9,\"trip_id\":\"synthetic-b8525195b685bc2441b2\"}\nEvidence: {\"departure\":4,\"duration\":4,\"metadata\":{\"calibration_note\":\"not relevant to this claim\",\"operator_note\":null,\"site\":\"site-237\"}}",
+  "answer_space": "CONFIRM | REJECT | ABSTAIN | uncertain"
+ },
+ {
+  "code": "AUD-V-0002",
+  "task": "V",
+  "prompt": "[system]\nDecide using only the explicit finite rules and evidence. CONFIRM means true in every compatible completion; REJECT means false in every compatible completion; ABSTAIN means both true and false completions remain possible. Missing irrelevant metadata has no effect. Output exactly one label, with no explanation. Label mapping: {\"A\":\"REJECT\",\"B\":\"CONFIRM\",\"C\":\"ABSTAIN\"}\n\n[user]\nEvaluate the following record.\nThe claim is that this program returns true: return (trained and licensed) or supervised. Each input is boolean; null means unknown.\nClaim: {\"program_id\":\"synthetic-70c7fee2acca796cf7cc\",\"returns\":true}\nEvidence: {\"licensed\":null,\"metadata\":{\"calibration_note\":\"not relevant to this claim\",\"operator_note\":null,\"site\":\"site-169\"},\"supervised\":false,\"trained\":false}",
+  "answer_space": "CONFIRM | REJECT | ABSTAIN | uncertain"
+ },
+ {
+  "code": "AUD-V-0003",
+  "task": "V",
+  "prompt": "[system]\nDecide using only the explicit finite rules and evidence. CONFIRM means true in every compatible completion; REJECT means false in every compatible completion; ABSTAIN means both true and false completions remain possible. Missing irrelevant metadata has no effect. Output exactly one label, with no explanation. Label mapping: {\"A\":\"REJECT\",\"B\":\"ABSTAIN\",\"C\":\"CONFIRM\"}\n\n[user]\nEvaluate the following record.\nThe claim is that departure + duration is at or before the deadline. Duration is an integer 1 through 9; null means unknown.\nClaim: {\"deadline\":12,\"trip_id\":\"synthetic-161313c3ce0e6b09e32c\"}\nEvidence: {\"departure\":7,\"duration\":7,\"metadata\":{\"calibration_note\":\"not relevant to this claim\",\"operator_note\":null,\"site\":\"site-295\"}}",
+  "answer_space": "CONFIRM | REJECT | ABSTAIN | uncertain"
+ },
+ {
+  "code": "AUD-V-0004",
+  "task": "V",
+  "prompt": "[system]\nDecide using only the explicit finite rules and evidence. CONFIRM means true in every compatible completion; REJECT means false in every compatible completion; ABSTAIN means both true and false completions remain possible. Missing irrelevant metadata has no effect. Output exactly one label, with no explanation. Label mapping: {\"A\":\"REJECT\",\"B\":\"CONFIRM\",\"C\":\"ABSTAIN\"}\n\n[user]\nEvaluate the following record.\nThe claim is that ALL listed sample IDs passed. null is an unknown test result; no sample is outside the listed universe.\nClaim: {\"sample_ids\":[\"synthetic-9796a877541e0e3d69d0-s0\",\"synthetic-9796a877541e0e3d69d0-s1\",\"synthetic-9796a877541e0e3d69d0-s2\"]}\nEvidence: {\"metadata\":{\"calibration_note\":\"not relevant to this claim\",\"operator_note\":null,\"site\":\"site-165\"},\"records\":{\"synthetic-9796a877541e0e3d69d0-s0\":true,\"synthetic-9796a877541e0e3d69d0-s1\":true,\"synthetic-9796a877541e0e3d69d0-s2\":null}}",
+  "answer_space": "CONFIRM | REJECT | ABSTAIN | uncertain"
+ },
+ {
+  "code": "AUD-V-0005",
+  "task": "V",
+  "prompt": "[system]\nDecide using only the explicit finite rules and evidence. CONFIRM means true in every compatible completion; REJECT means false in every compatible completion; ABSTAIN means both true and false completions remain possible. Missing irrelevant metadata has no effect. Output exactly one label, with no explanation. Label mapping: {\"A\":\"CONFIRM\",\"B\":\"REJECT\",\"C\":\"ABSTAIN\"}\n\n[user]\nEvaluate the following record.\nThe claim is that departure + duration is at or before the deadline. Duration is an integer 1 through 9; null means unknown.\nClaim: {\"deadline\":9,\"trip_id\":\"synthetic-f144809ebf5d9512bc73\"}\nEvidence: {\"departure\":4,\"duration\":null,\"metadata\":{\"calibration_note\":\"not relevant to this claim\",\"operator_note\":null,\"site\":\"site-357\"}}",
+  "answer_space": "CONFIRM | REJECT | ABSTAIN | uncertain"
+ },
+ {
+  "code": "AUD-V-0006",
+  "task": "V",
+  "prompt": "[system]\nDecide using only the explicit finite rules and evidence. CONFIRM means true in every compatible completion; REJECT means false in every compatible completion; ABSTAIN means both true and false completions remain possible. Missing irrelevant metadata has no effect. Output exactly one label, with no explanation. Label mapping: {\"A\":\"CONFIRM\",\"B\":\"ABSTAIN\",\"C\":\"REJECT\"}\n\n[user]\nEvaluate the following record.\nThe claim is that the total inventory in the three bins is at least the stated minimum. Each bin count is an integer 0 through 9; null means unknown.\nClaim: {\"inventory_id\":\"synthetic-50d74617ea0f1bf4f245\",\"minimum\":14}\nEvidence: {\"counts\":[2,0,null],\"metadata\":{\"calibration_note\":\"not relevant to this claim\",\"operator_note\":null,\"site\":\"site-154\"}}",
+  "answer_space": "CONFIRM | REJECT | ABSTAIN | uncertain"
+ },
+ {
+  "code": "AUD-V-0007",
+  "task": "V",
+  "prompt": "[system]\nDecide using only the explicit finite rules and evidence. CONFIRM means true in every compatible completion; REJECT means false in every compatible completion; ABSTAIN means both true and false completions remain possible. Missing irrelevant metadata has no effect. Output exactly one label, with no explanation. Label mapping: {\"A\":\"ABSTAIN\",\"B\":\"CONFIRM\",\"C\":\"REJECT\"}\n\n[user]\nEvaluate the following record.\nThe claim is that this program returns true: return (trained and licensed) or supervised. Each input is boolean; null means unknown.\nClaim: {\"program_id\":\"synthetic-b1368f507560728d9d73\",\"returns\":true}\nEvidence: {\"licensed\":null,\"metadata\":{\"calibration_note\":\"not relevant to this claim\",\"operator_note\":null,\"site\":\"site-677\"},\"supervised\":false,\"trained\":true}",
+  "answer_space": "CONFIRM | REJECT | ABSTAIN | uncertain"
+ },
+ {
+  "code": "AUD-V-0008",
+  "task": "V",
+  "prompt": "[system]\nDecide using only the explicit finite rules and evidence. CONFIRM means true in every compatible completion; REJECT means false in every compatible completion; ABSTAIN means both true and false completions remain possible. Missing irrelevant metadata has no effect. Output exactly one label, with no explanation. Label mapping: {\"A\":\"REJECT\",\"B\":\"CONFIRM\",\"C\":\"ABSTAIN\"}\n\n[user]\nEvaluate the following record.\nThe claim is that this program returns true: return (trained and licensed) or supervised. Each input is boolean; null means unknown.\nClaim: {\"program_id\":\"synthetic-70c7fee2acca796cf7cc\",\"returns\":true}\nEvidence: {\"licensed\":null,\"metadata\":{\"calibration_note\":\"not relevant to this claim\",\"operator_note\":null,\"site\":\"site-169\"},\"supervised\":true,\"trained\":null}",
+  "answer_space": "CONFIRM | REJECT | ABSTAIN | uncertain"
+ },
+ {
+  "code": "AUD-V-0009",
+  "task": "V",
+  "prompt": "[system]\nDecide using only the explicit finite rules and evidence. CONFIRM means true in every compatible completion; REJECT means false in every compatible completion; ABSTAIN means both true and false completions remain possible. Missing irrelevant metadata has no effect. Output exactly one label, with no explanation. Label mapping: {\"A\":\"REJECT\",\"B\":\"CONFIRM\",\"C\":\"ABSTAIN\"}\n\n[user]\nEvaluate the following record.\nThe claim is that the total inventory in the three bins is at least the stated minimum. Each bin count is an integer 0 through 9; null means unknown.\nClaim: {\"inventory_id\":\"synthetic-b0edcf3badd6554823a9\",\"minimum\":17}\nEvidence: {\"counts\":[5,8,5],\"metadata\":{\"calibration_note\":\"not relevant to this claim\",\"operator_note\":null,\"site\":\"site-649\"}}",
+  "answer_space": "CONFIRM | REJECT | ABSTAIN | uncertain"
+ },
+ {
+  "code": "AUD-V-0010",
+  "task": "V",
+  "prompt": "[system]\nDecide using only the explicit finite rules and evidence. CONFIRM means true in every compatible completion; REJECT means false in every compatible completion; ABSTAIN means both true and false completions remain possible. Missing irrelevant metadata has no effect. Output exactly one label, with no explanation. Label mapping: {\"A\":\"CONFIRM\",\"B\":\"REJECT\",\"C\":\"ABSTAIN\"}\n\n[user]\nEvaluate the following record.\nThe claim is that the total inventory in the three bins is at least the stated minimum. Each bin count is an integer 0 through 9; null means unknown.\nClaim: {\"inventory_id\":\"synthetic-bf4ab2b727a60b1fc704\",\"minimum\":15}\nEvidence: {\"counts\":[3,4,null],\"metadata\":{\"calibration_note\":\"not relevant to this claim\",\"operator_note\":null,\"site\":\"site-164\"}}",
+  "answer_space": "CONFIRM | REJECT | ABSTAIN | uncertain"
+ },
+ {
+  "code": "AUD-V-0011",
+  "task": "V",
+  "prompt": "[system]\nDecide using only the explicit finite rules and evidence. CONFIRM means true in every compatible completion; REJECT means false in every compatible completion; ABSTAIN means both true and false completions remain possible. Missing irrelevant metadata has no effect. Output exactly one label, with no explanation. Label mapping: {\"A\":\"REJECT\",\"B\":\"CONFIRM\",\"C\":\"ABSTAIN\"}\n\n[user]\nEvaluate the following record.\nThe claim is that this program returns true: return (trained and licensed) or supervised. Each input is boolean; null means unknown.\nClaim: {\"program_id\":\"synthetic-70c7fee2acca796cf7cc\",\"returns\":true}\nEvidence: {\"licensed\":null,\"metadata\":{\"calibration_note\":\"not relevant to this claim\",\"operator_note\":null,\"site\":\"site-169\"},\"supervised\":false,\"trained\":true}",
+  "answer_space": "CONFIRM | REJECT | ABSTAIN | uncertain"
+ },
+ {
+  "code": "AUD-V-0012",
+  "task": "V",
+  "prompt": "[system]\nDecide using only the explicit finite rules and evidence. CONFIRM means true in every compatible completion; REJECT means false in every compatible completion; ABSTAIN means both true and false completions remain possible. Missing irrelevant metadata has no effect. Output exactly one label, with no explanation. Label mapping: {\"A\":\"ABSTAIN\",\"B\":\"REJECT\",\"C\":\"CONFIRM\"}\n\n[user]\nEvaluate the following record.\nThe claim is that ALL listed sample IDs passed. null is an unknown test result; no sample is outside the listed universe.\nClaim: {\"sample_ids\":[\"synthetic-209c3afe52602650094b-s0\",\"synthetic-209c3afe52602650094b-s1\",\"synthetic-209c3afe52602650094b-s2\"]}\nEvidence: {\"metadata\":{\"calibration_note\":\"not relevant to this claim\",\"operator_note\":null,\"site\":\"site-677\"},\"records\":{\"synthetic-209c3afe52602650094b-s0\":true,\"synthetic-209c3afe52602650094b-s1\":true,\"synthetic-209c3afe52602650094b-s2\":true}}",
+  "answer_space": "CONFIRM | REJECT | ABSTAIN | uncertain"
+ },
+ {
+  "code": "AUD-V-0013",
+  "task": "V",
+  "prompt": "[system]\nDecide using only the explicit finite rules and evidence. CONFIRM means true in every compatible completion; REJECT means false in every compatible completion; ABSTAIN means both true and false completions remain possible. Missing irrelevant metadata has no effect. Output exactly one label, with no explanation. Label mapping: {\"A\":\"CONFIRM\",\"B\":\"ABSTAIN\",\"C\":\"REJECT\"}\n\n[user]\nEvaluate the following record.\nThe claim is that ALL listed sample IDs passed. null is an unknown test result; no sample is outside the listed universe.\nClaim: {\"sample_ids\":[\"synthetic-cfa8ec69cb9a86d25885-s0\",\"synthetic-cfa8ec69cb9a86d25885-s1\",\"synthetic-cfa8ec69cb9a86d25885-s2\"]}\nEvidence: {\"metadata\":{\"calibration_note\":\"not relevant to this claim\",\"operator_note\":null,\"site\":\"site-562\"},\"records\":{\"synthetic-cfa8ec69cb9a86d25885-s0\":true,\"synthetic-cfa8ec69cb9a86d25885-s1\":true,\"synthetic-cfa8ec69cb9a86d25885-s2\":true}}",
+  "answer_space": "CONFIRM | REJECT | ABSTAIN | uncertain"
+ },
+ {
+  "code": "AUD-V-0014",
+  "task": "V",
+  "prompt": "[system]\nDecide using only the explicit finite rules and evidence. CONFIRM means true in every compatible completion; REJECT means false in every compatible completion; ABSTAIN means both true and false completions remain possible. Missing irrelevant metadata has no effect. Output exactly one label, with no explanation. Label mapping: {\"A\":\"REJECT\",\"B\":\"CONFIRM\",\"C\":\"ABSTAIN\"}\n\n[user]\nEvaluate the following record.\nThe claim is that departure + duration is at or before the deadline. Duration is an integer 1 through 9; null means unknown.\nClaim: {\"deadline\":9,\"trip_id\":\"synthetic-73c50b720fbcc89e9bc5\"}\nEvidence: {\"departure\":4,\"duration\":4,\"metadata\":{\"calibration_note\":\"not relevant to this claim\",\"operator_note\":null,\"site\":\"site-621\"}}",
+  "answer_space": "CONFIRM | REJECT | ABSTAIN | uncertain"
+ },
+ {
+  "code": "AUD-V-0015",
+  "task": "V",
+  "prompt": "[system]\nDecide using only the explicit finite rules and evidence. CONFIRM means true in every compatible completion; REJECT means false in every compatible completion; ABSTAIN means both true and false completions remain possible. Missing irrelevant metadata has no effect. Output exactly one label, with no explanation. Label mapping: {\"A\":\"ABSTAIN\",\"B\":\"REJECT\",\"C\":\"CONFIRM\"}\n\n[user]\nEvaluate the following record.\nThe claim is that the total inventory in the three bins is at least the stated minimum. Each bin count is an integer 0 through 9; null means unknown.\nClaim: {\"inventory_id\":\"synthetic-3f633b1e5b171b32716c\",\"minimum\":15}\nEvidence: {\"counts\":[3,0,null],\"metadata\":{\"calibration_note\":\"not relevant to this claim\",\"operator_note\":null,\"site\":\"site-437\"}}",
+  "answer_space": "CONFIRM | REJECT | ABSTAIN | uncertain"
+ },
+ {
+  "code": "AUD-V-0016",
+  "task": "V",
+  "prompt": "[system]\nDecide using only the explicit finite rules and evidence. CONFIRM means true in every compatible completion; REJECT means false in every compatible completion; ABSTAIN means both true and false completions remain possible. Missing irrelevant metadata has no effect. Output exactly one label, with no explanation. Label mapping: {\"A\":\"ABSTAIN\",\"B\":\"REJECT\",\"C\":\"CONFIRM\"}\n\n[user]\nEvaluate the following record.\nThe claim is that this program returns true: return (trained and licensed) or supervised. Each input is boolean; null means unknown.\nClaim: {\"program_id\":\"synthetic-b0b02a7f13d6f8209d08\",\"returns\":true}\nEvidence: {\"licensed\":null,\"metadata\":{\"calibration_note\":\"not relevant to this claim\",\"operator_note\":null,\"site\":\"site-329\"},\"supervised\":false,\"trained\":false}",
+  "answer_space": "CONFIRM | REJECT | ABSTAIN | uncertain"
+ },
+ {
+  "code": "AUD-V-0017",
+  "task": "V",
+  "prompt": "[system]\nDecide using only the explicit finite rules and evidence. CONFIRM means true in every compatible completion; REJECT means false in every compatible completion; ABSTAIN means both true and false completions remain possible. Missing irrelevant metadata has no effect. Output exactly one label, with no explanation. Label mapping: {\"A\":\"CONFIRM\",\"B\":\"ABSTAIN\",\"C\":\"REJECT\"}\n\n[user]\nEvaluate the following record.\nThe claim is that the total inventory in the three bins is at least the stated minimum. Each bin count is an integer 0 through 9; null means unknown.\nClaim: {\"inventory_id\":\"synthetic-50d74617ea0f1bf4f245\",\"minimum\":14}\nEvidence: {\"counts\":[2,8,5],\"metadata\":{\"calibration_note\":\"not relevant to this claim\",\"operator_note\":null,\"site\":\"site-154\"}}",
+  "answer_space": "CONFIRM | REJECT | ABSTAIN | uncertain"
+ },
+ {
+  "code": "AUD-V-0018",
+  "task": "V",
+  "prompt": "[system]\nDecide using only the explicit finite rules and evidence. CONFIRM means true in every compatible completion; REJECT means false in every compatible completion; ABSTAIN means both true and false completions remain possible. Missing irrelevant metadata has no effect. Output exactly one label, with no explanation. Label mapping: {\"A\":\"REJECT\",\"B\":\"ABSTAIN\",\"C\":\"CONFIRM\"}\n\n[user]\nEvaluate the following record.\nThe claim is that this program returns true: return (trained and licensed) or supervised. Each input is boolean; null means unknown.\nClaim: {\"program_id\":\"synthetic-172b2be458245c8f0e6a\",\"returns\":true}\nEvidence: {\"licensed\":null,\"metadata\":{\"calibration_note\":\"not relevant to this claim\",\"operator_note\":null,\"site\":\"site-922\"},\"supervised\":false,\"trained\":true}",
+  "answer_space": "CONFIRM | REJECT | ABSTAIN | uncertain"
+ },
+ {
+  "code": "AUD-V-0019",
+  "task": "V",
+  "prompt": "[system]\nDecide using only the explicit finite rules and evidence. CONFIRM means true in every compatible completion; REJECT means false in every compatible completion; ABSTAIN means both true and false completions remain possible. Missing irrelevant metadata has no effect. Output exactly one label, with no explanation. Label mapping: {\"A\":\"ABSTAIN\",\"B\":\"REJECT\",\"C\":\"CONFIRM\"}\n\n[user]\nEvaluate the following record.\nThe claim is that this program returns true: return (trained and licensed) or supervised. Each input is boolean; null means unknown.\nClaim: {\"program_id\":\"synthetic-b0b02a7f13d6f8209d08\",\"returns\":true}\nEvidence: {\"licensed\":null,\"metadata\":{\"calibration_note\":\"not relevant to this claim\",\"operator_note\":null,\"site\":\"site-329\"},\"supervised\":true,\"trained\":null}",
+  "answer_space": "CONFIRM | REJECT | ABSTAIN | uncertain"
+ },
+ {
+  "code": "AUD-V-0020",
+  "task": "V",
+  "prompt": "[system]\nDecide using only the explicit finite rules and evidence. CONFIRM means true in every compatible completion; REJECT means false in every compatible completion; ABSTAIN means both true and false completions remain possible. Missing irrelevant metadata has no effect. Output exactly one label, with no explanation. Label mapping: {\"A\":\"CONFIRM\",\"B\":\"REJECT\",\"C\":\"ABSTAIN\"}\n\n[user]\nEvaluate the following record.\nThe claim is that departure + duration is at or before the deadline. Duration is an integer 1 through 9; null means unknown.\nClaim: {\"deadline\":9,\"trip_id\":\"synthetic-f144809ebf5d9512bc73\"}\nEvidence: {\"departure\":4,\"duration\":4,\"metadata\":{\"calibration_note\":\"not relevant to this claim\",\"operator_note\":null,\"site\":\"site-357\"}}",
+  "answer_space": "CONFIRM | REJECT | ABSTAIN | uncertain"
+ },
+ {
+  "code": "AUD-V-0021",
+  "task": "V",
+  "prompt": "[system]\nDecide using only the explicit finite rules and evidence. CONFIRM means true in every compatible completion; REJECT means false in every compatible completion; ABSTAIN means both true and false completions remain possible. Missing irrelevant metadata has no effect. Output exactly one label, with no explanation. Label mapping: {\"A\":\"ABSTAIN\",\"B\":\"CONFIRM\",\"C\":\"REJECT\"}\n\n[user]\nEvaluate the following record.\nThe claim is that departure + duration is at or before the deadline. Duration is an integer 1 through 9; null means unknown.\nClaim: {\"deadline\":21,\"trip_id\":\"synthetic-b1e7330c057f14e61d13\"}\nEvidence: {\"departure\":16,\"duration\":4,\"metadata\":{\"calibration_note\":\"not relevant to this claim\",\"operator_note\":null,\"site\":\"site-180\"}}",
+  "answer_space": "CONFIRM | REJECT | ABSTAIN | uncertain"
+ },
+ {
+  "code": "AUD-V-0022",
+  "task": "V",
+  "prompt": "[system]\nDecide using only the explicit finite rules and evidence. CONFIRM means true in every compatible completion; REJECT means false in every compatible completion; ABSTAIN means both true and false completions remain possible. Missing irrelevant metadata has no effect. Output exactly one label, with no explanation. Label mapping: {\"A\":\"CONFIRM\",\"B\":\"REJECT\",\"C\":\"ABSTAIN\"}\n\n[user]\nEvaluate the following record.\nThe claim is that this program returns true: return (trained and licensed) or supervised. Each input is boolean; null means unknown.\nClaim: {\"program_id\":\"synthetic-ae1f1e62ededc6f22e72\",\"returns\":true}\nEvidence: {\"licensed\":null,\"metadata\":{\"calibration_note\":\"not relevant to this claim\",\"operator_note\":null,\"site\":\"site-446\"},\"supervised\":false,\"trained\":false}",
+  "answer_space": "CONFIRM | REJECT | ABSTAIN | uncertain"
+ },
+ {
+  "code": "AUD-V-0023",
+  "task": "V",
+  "prompt": "[system]\nDecide using only the explicit finite rules and evidence. CONFIRM means true in every compatible completion; REJECT means false in every compatible completion; ABSTAIN means both true and false completions remain possible. Missing irrelevant metadata has no effect. Output exactly one label, with no explanation. Label mapping: {\"A\":\"ABSTAIN\",\"B\":\"REJECT\",\"C\":\"CONFIRM\"}\n\n[user]\nEvaluate the following record.\nThe claim is that departure + duration is at or before the deadline. Duration is an integer 1 through 9; null means unknown.\nClaim: {\"deadline\":9,\"trip_id\":\"synthetic-b8525195b685bc2441b2\"}\nEvidence: {\"departure\":4,\"duration\":null,\"metadata\":{\"calibration_note\":\"not relevant to this claim\",\"operator_note\":null,\"site\":\"site-237\"}}",
+  "answer_space": "CONFIRM | REJECT | ABSTAIN | uncertain"
+ },
+ {
+  "code": "AUD-V-0024",
+  "task": "V",
+  "prompt": "[system]\nDecide using only the explicit finite rules and evidence. CONFIRM means true in every compatible completion; REJECT means false in every compatible completion; ABSTAIN means both true and false completions remain possible. Missing irrelevant metadata has no effect. Output exactly one label, with no explanation. Label mapping: {\"A\":\"REJECT\",\"B\":\"ABSTAIN\",\"C\":\"CONFIRM\"}\n\n[user]\nEvaluate the following record.\nThe claim is that this program returns true: return (trained and licensed) or supervised. Each input is boolean; null means unknown.\nClaim: {\"program_id\":\"synthetic-172b2be458245c8f0e6a\",\"returns\":true}\nEvidence: {\"licensed\":null,\"metadata\":{\"calibration_note\":\"not relevant to this claim\",\"operator_note\":null,\"site\":\"site-922\"},\"supervised\":false,\"trained\":false}",
+  "answer_space": "CONFIRM | REJECT | ABSTAIN | uncertain"
+ },
+ {
+  "code": "AUD-V-0025",
+  "task": "V",
+  "prompt": "[system]\nDecide using only the explicit finite rules and evidence. CONFIRM means true in every compatible completion; REJECT means false in every compatible completion; ABSTAIN means both true and false completions remain possible. Missing irrelevant metadata has no effect. Output exactly one label, with no explanation. Label mapping: {\"A\":\"CONFIRM\",\"B\":\"REJECT\",\"C\":\"ABSTAIN\"}\n\n[user]\nEvaluate the following record.\nThe claim is that ALL listed sample IDs passed. null is an unknown test result; no sample is outside the listed universe.\nClaim: {\"sample_ids\":[\"synthetic-6b8cf86bd7b835b86d7c-s0\",\"synthetic-6b8cf86bd7b835b86d7c-s1\",\"synthetic-6b8cf86bd7b835b86d7c-s2\"]}\nEvidence: {\"metadata\":{\"calibration_note\":\"not relevant to this claim\",\"operator_note\":null,\"site\":\"site-639\"},\"records\":{\"synthetic-6b8cf86bd7b835b86d7c-s0\":true,\"synthetic-6b8cf86bd7b835b86d7c-s1\":true,\"synthetic-6b8cf86bd7b835b86d7c-s2\":null}}",
+  "answer_space": "CONFIRM | REJECT | ABSTAIN | uncertain"
+ },
+ {
+  "code": "AUD-V-0026",
+  "task": "V",
+  "prompt": "[system]\nDecide using only the explicit finite rules and evidence. CONFIRM means true in every compatible completion; REJECT means false in every compatible completion; ABSTAIN means both true and false completions remain possible. Missing irrelevant metadata has no effect. Output exactly one label, with no explanation. Label mapping: {\"A\":\"ABSTAIN\",\"B\":\"REJECT\",\"C\":\"CONFIRM\"}\n\n[user]\nEvaluate the following record.\nThe claim is that ALL listed sample IDs passed. null is an unknown test result; no sample is outside the listed universe.\nClaim: {\"sample_ids\":[\"synthetic-209c3afe52602650094b-s0\",\"synthetic-209c3afe52602650094b-s1\",\"synthetic-209c3afe52602650094b-s2\"]}\nEvidence: {\"metadata\":{\"calibration_note\":\"not relevant to this claim\",\"operator_note\":null,\"site\":\"site-677\"},\"records\":{\"synthetic-209c3afe52602650094b-s0\":true,\"synthetic-209c3afe52602650094b-s1\":false,\"synthetic-209c3afe52602650094b-s2\":null}}",
+  "answer_space": "CONFIRM | REJECT | ABSTAIN | uncertain"
+ },
+ {
+  "code": "AUD-V-0027",
+  "task": "V",
+  "prompt": "[system]\nDecide using only the explicit finite rules and evidence. CONFIRM means true in every compatible completion; REJECT means false in every compatible completion; ABSTAIN means both true and false completions remain possible. Missing irrelevant metadata has no effect. Output exactly one label, with no explanation. Label mapping: {\"A\":\"REJECT\",\"B\":\"ABSTAIN\",\"C\":\"CONFIRM\"}\n\n[user]\nEvaluate the following record.\nThe claim is that the total inventory in the three bins is at least the stated minimum. Each bin count is an integer 0 through 9; null means unknown.\nClaim: {\"inventory_id\":\"synthetic-371a1359446a906cde9c\",\"minimum\":17}\nEvidence: {\"counts\":[5,0,null],\"metadata\":{\"calibration_note\":\"not relevant to this claim\",\"operator_note\":null,\"site\":\"site-791\"}}",
+  "answer_space": "CONFIRM | REJECT | ABSTAIN | uncertain"
+ },
+ {
+  "code": "AUD-V-0028",
+  "task": "V",
+  "prompt": "[system]\nDecide using only the explicit finite rules and evidence. CONFIRM means true in every compatible completion; REJECT means false in every compatible completion; ABSTAIN means both true and false completions remain possible. Missing irrelevant metadata has no effect. Output exactly one label, with no explanation. Label mapping: {\"A\":\"ABSTAIN\",\"B\":\"CONFIRM\",\"C\":\"REJECT\"}\n\n[user]\nEvaluate the following record.\nThe claim is that the total inventory in the three bins is at least the stated minimum. Each bin count is an integer 0 through 9; null means unknown.\nClaim: {\"inventory_id\":\"synthetic-9951ada55190fe7da77d\",\"minimum\":17}\nEvidence: {\"counts\":[5,4,null],\"metadata\":{\"calibration_note\":\"not relevant to this claim\",\"operator_note\":null,\"site\":\"site-952\"}}",
+  "answer_space": "CONFIRM | REJECT | ABSTAIN | uncertain"
+ },
+ {
+  "code": "AUD-V-0029",
+  "task": "V",
+  "prompt": "[system]\nDecide using only the explicit finite rules and evidence. CONFIRM means true in every compatible completion; REJECT means false in every compatible completion; ABSTAIN means both true and false completions remain possible. Missing irrelevant metadata has no effect. Output exactly one label, with no explanation. Label mapping: {\"A\":\"ABSTAIN\",\"B\":\"CONFIRM\",\"C\":\"REJECT\"}\n\n[user]\nEvaluate the following record.\nThe claim is that the total inventory in the three bins is at least the stated minimum. Each bin count is an integer 0 through 9; null means unknown.\nClaim: {\"inventory_id\":\"synthetic-9951ada55190fe7da77d\",\"minimum\":17}\nEvidence: {\"counts\":[5,0,null],\"metadata\":{\"calibration_note\":\"not relevant to this claim\",\"operator_note\":null,\"site\":\"site-952\"}}",
+  "answer_space": "CONFIRM | REJECT | ABSTAIN | uncertain"
+ },
+ {
+  "code": "AUD-V-0030",
+  "task": "V",
+  "prompt": "[system]\nDecide using only the explicit finite rules and evidence. CONFIRM means true in every compatible completion; REJECT means false in every compatible completion; ABSTAIN means both true and false completions remain possible. Missing irrelevant metadata has no effect. Output exactly one label, with no explanation. Label mapping: {\"A\":\"CONFIRM\",\"B\":\"ABSTAIN\",\"C\":\"REJECT\"}\n\n[user]\nEvaluate the following record.\nThe claim is that departure + duration is at or before the deadline. Duration is an integer 1 through 9; null means unknown.\nClaim: {\"deadline\":13,\"trip_id\":\"synthetic-b0aff3ac27fa53899436\"}\nEvidence: {\"departure\":8,\"duration\":null,\"metadata\":{\"calibration_note\":\"not relevant to this claim\",\"operator_note\":null,\"site\":\"site-850\"}}",
+  "answer_space": "CONFIRM | REJECT | ABSTAIN | uncertain"
+ },
+ {
+  "code": "AUD-V-0031",
+  "task": "V",
+  "prompt": "[system]\nDecide using only the explicit finite rules and evidence. CONFIRM means true in every compatible completion; REJECT means false in every compatible completion; ABSTAIN means both true and false completions remain possible. Missing irrelevant metadata has no effect. Output exactly one label, with no explanation. Label mapping: {\"A\":\"REJECT\",\"B\":\"ABSTAIN\",\"C\":\"CONFIRM\"}\n\n[user]\nEvaluate the following record.\nThe claim is that departure + duration is at or before the deadline. Duration is an integer 1 through 9; null means unknown.\nClaim: {\"deadline\":12,\"trip_id\":\"synthetic-161313c3ce0e6b09e32c\"}\nEvidence: {\"departure\":7,\"duration\":null,\"metadata\":{\"calibration_note\":\"not relevant to this claim\",\"operator_note\":null,\"site\":\"site-295\"}}",
+  "answer_space": "CONFIRM | REJECT | ABSTAIN | uncertain"
+ },
+ {
+  "code": "AUD-V-0032",
+  "task": "V",
+  "prompt": "[system]\nDecide using only the explicit finite rules and evidence. CONFIRM means true in every compatible completion; REJECT means false in every compatible completion; ABSTAIN means both true and false completions remain possible. Missing irrelevant metadata has no effect. Output exactly one label, with no explanation. Label mapping: {\"A\":\"REJECT\",\"B\":\"ABSTAIN\",\"C\":\"CONFIRM\"}\n\n[user]\nEvaluate the following record.\nThe claim is that ALL listed sample IDs passed. null is an unknown test result; no sample is outside the listed universe.\nClaim: {\"sample_ids\":[\"synthetic-2ba5eed0b6542445f706-s0\",\"synthetic-2ba5eed0b6542445f706-s1\",\"synthetic-2ba5eed0b6542445f706-s2\"]}\nEvidence: {\"metadata\":{\"calibration_note\":\"not relevant to this claim\",\"operator_note\":null,\"site\":\"site-890\"},\"records\":{\"synthetic-2ba5eed0b6542445f706-s0\":true,\"synthetic-2ba5eed0b6542445f706-s1\":true,\"synthetic-2ba5eed0b6542445f706-s2\":true}}",
+  "answer_space": "CONFIRM | REJECT | ABSTAIN | uncertain"
+ },
+ {
+  "code": "AUD-V-0033",
+  "task": "V",
+  "prompt": "[system]\nDecide using only the explicit finite rules and evidence. CONFIRM means true in every compatible completion; REJECT means false in every compatible completion; ABSTAIN means both true and false completions remain possible. Missing irrelevant metadata has no effect. Output exactly one label, with no explanation. Label mapping: {\"A\":\"CONFIRM\",\"B\":\"ABSTAIN\",\"C\":\"REJECT\"}\n\n[user]\nEvaluate the following record.\nThe claim is that ALL listed sample IDs passed. null is an unknown test result; no sample is outside the listed universe.\nClaim: {\"sample_ids\":[\"synthetic-cfa8ec69cb9a86d25885-s0\",\"synthetic-cfa8ec69cb9a86d25885-s1\",\"synthetic-cfa8ec69cb9a86d25885-s2\"]}\nEvidence: {\"metadata\":{\"calibration_note\":\"not relevant to this claim\",\"operator_note\":null,\"site\":\"site-562\"},\"records\":{\"synthetic-cfa8ec69cb9a86d25885-s0\":true,\"synthetic-cfa8ec69cb9a86d25885-s1\":true,\"synthetic-cfa8ec69cb9a86d25885-s2\":null}}",
+  "answer_space": "CONFIRM | REJECT | ABSTAIN | uncertain"
+ },
+ {
+  "code": "AUD-V-0034",
+  "task": "V",
+  "prompt": "[system]\nDecide using only the explicit finite rules and evidence. CONFIRM means true in every compatible completion; REJECT means false in every compatible completion; ABSTAIN means both true and false completions remain possible. Missing irrelevant metadata has no effect. Output exactly one label, with no explanation. Label mapping: {\"A\":\"CONFIRM\",\"B\":\"ABSTAIN\",\"C\":\"REJECT\"}\n\n[user]\nEvaluate the following record.\nThe claim is that departure + duration is at or before the deadline. Duration is an integer 1 through 9; null means unknown.\nClaim: {\"deadline\":13,\"trip_id\":\"synthetic-b0aff3ac27fa53899436\"}\nEvidence: {\"departure\":8,\"duration\":7,\"metadata\":{\"calibration_note\":\"not relevant to this claim\",\"operator_note\":null,\"site\":\"site-850\"}}",
+  "answer_space": "CONFIRM | REJECT | ABSTAIN | uncertain"
+ },
+ {
+  "code": "AUD-V-0035",
+  "task": "V",
+  "prompt": "[system]\nDecide using only the explicit finite rules and evidence. CONFIRM means true in every compatible completion; REJECT means false in every compatible completion; ABSTAIN means both true and false completions remain possible. Missing irrelevant metadata has no effect. Output exactly one label, with no explanation. Label mapping: {\"A\":\"CONFIRM\",\"B\":\"ABSTAIN\",\"C\":\"REJECT\"}\n\n[user]\nEvaluate the following record.\nThe claim is that this program returns true: return (trained and licensed) or supervised. Each input is boolean; null means unknown.\nClaim: {\"program_id\":\"synthetic-11d376463dd76ce7459a\",\"returns\":true}\nEvidence: {\"licensed\":null,\"metadata\":{\"calibration_note\":\"not relevant to this claim\",\"operator_note\":null,\"site\":\"site-254\"},\"supervised\":false,\"trained\":true}",
+  "answer_space": "CONFIRM | REJECT | ABSTAIN | uncertain"
+ },
+ {
+  "code": "AUD-V-0036",
+  "task": "V",
+  "prompt": "[system]\nDecide using only the explicit finite rules and evidence. CONFIRM means true in every compatible completion; REJECT means false in every compatible completion; ABSTAIN means both true and false completions remain possible. Missing irrelevant metadata has no effect. Output exactly one label, with no explanation. Label mapping: {\"A\":\"ABSTAIN\",\"B\":\"CONFIRM\",\"C\":\"REJECT\"}\n\n[user]\nEvaluate the following record.\nThe claim is that departure + duration is at or before the deadline. Duration is an integer 1 through 9; null means unknown.\nClaim: {\"deadline\":21,\"trip_id\":\"synthetic-b1e7330c057f14e61d13\"}\nEvidence: {\"departure\":16,\"duration\":null,\"metadata\":{\"calibration_note\":\"not relevant to this claim\",\"operator_note\":null,\"site\":\"site-180\"}}",
+  "answer_space": "CONFIRM | REJECT | ABSTAIN | uncertain"
+ },
+ {
+  "code": "AUD-V-0037",
+  "task": "V",
+  "prompt": "[system]\nDecide using only the explicit finite rules and evidence. CONFIRM means true in every compatible completion; REJECT means false in every compatible completion; ABSTAIN means both true and false completions remain possible. Missing irrelevant metadata has no effect. Output exactly one label, with no explanation. Label mapping: {\"A\":\"REJECT\",\"B\":\"ABSTAIN\",\"C\":\"CONFIRM\"}\n\n[user]\nEvaluate the following record.\nThe claim is that departure + duration is at or before the deadline. Duration is an integer 1 through 9; null means unknown.\nClaim: {\"deadline\":12,\"trip_id\":\"synthetic-161313c3ce0e6b09e32c\"}\nEvidence: {\"departure\":7,\"duration\":4,\"metadata\":{\"calibration_note\":\"not relevant to this claim\",\"operator_note\":null,\"site\":\"site-295\"}}",
+  "answer_space": "CONFIRM | REJECT | ABSTAIN | uncertain"
+ },
+ {
+  "code": "AUD-V-0038",
+  "task": "V",
+  "prompt": "[system]\nDecide using only the explicit finite rules and evidence. CONFIRM means true in every compatible completion; REJECT means false in every compatible completion; ABSTAIN means both true and false completions remain possible. Missing irrelevant metadata has no effect. Output exactly one label, with no explanation. Label mapping: {\"A\":\"ABSTAIN\",\"B\":\"REJECT\",\"C\":\"CONFIRM\"}\n\n[user]\nEvaluate the following record.\nThe claim is that this program returns true: return (trained and licensed) or supervised. Each input is boolean; null means unknown.\nClaim: {\"program_id\":\"synthetic-b0b02a7f13d6f8209d08\",\"returns\":true}\nEvidence: {\"licensed\":null,\"metadata\":{\"calibration_note\":\"not relevant to this claim\",\"operator_note\":null,\"site\":\"site-329\"},\"supervised\":false,\"trained\":true}",
+  "answer_space": "CONFIRM | REJECT | ABSTAIN | uncertain"
+ },
+ {
+  "code": "AUD-V-0039",
+  "task": "V",
+  "prompt": "[system]\nDecide using only the explicit finite rules and evidence. CONFIRM means true in every compatible completion; REJECT means false in every compatible completion; ABSTAIN means both true and false completions remain possible. Missing irrelevant metadata has no effect. Output exactly one label, with no explanation. Label mapping: {\"A\":\"REJECT\",\"B\":\"CONFIRM\",\"C\":\"ABSTAIN\"}\n\n[user]\nEvaluate the following record.\nThe claim is that departure + duration is at or before the deadline. Duration is an integer 1 through 9; null means unknown.\nClaim: {\"deadline\":9,\"trip_id\":\"synthetic-73c50b720fbcc89e9bc5\"}\nEvidence: {\"departure\":4,\"duration\":null,\"metadata\":{\"calibration_note\":\"not relevant to this claim\",\"operator_note\":null,\"site\":\"site-621\"}}",
+  "answer_space": "CONFIRM | REJECT | ABSTAIN | uncertain"
+ },
+ {
+  "code": "AUD-V-0040",
+  "task": "V",
+  "prompt": "[system]\nDecide using only the explicit finite rules and evidence. CONFIRM means true in every compatible completion; REJECT means false in every compatible completion; ABSTAIN means both true and false completions remain possible. Missing irrelevant metadata has no effect. Output exactly one label, with no explanation. Label mapping: {\"A\":\"CONFIRM\",\"B\":\"REJECT\",\"C\":\"ABSTAIN\"}\n\n[user]\nEvaluate the following record.\nThe claim is that this program returns true: return (trained and licensed) or supervised. Each input is boolean; null means unknown.\nClaim: {\"program_id\":\"synthetic-ae1f1e62ededc6f22e72\",\"returns\":true}\nEvidence: {\"licensed\":null,\"metadata\":{\"calibration_note\":\"not relevant to this claim\",\"operator_note\":null,\"site\":\"site-446\"},\"supervised\":true,\"trained\":null}",
+  "answer_space": "CONFIRM | REJECT | ABSTAIN | uncertain"
+ },
+ {
+  "code": "AUD-V-0041",
+  "task": "V",
+  "prompt": "[system]\nDecide using only the explicit finite rules and evidence. CONFIRM means true in every compatible completion; REJECT means false in every compatible completion; ABSTAIN means both true and false completions remain possible. Missing irrelevant metadata has no effect. Output exactly one label, with no explanation. Label mapping: {\"A\":\"REJECT\",\"B\":\"CONFIRM\",\"C\":\"ABSTAIN\"}\n\n[user]\nEvaluate the following record.\nThe claim is that departure + duration is at or before the deadline. Duration is an integer 1 through 9; null means unknown.\nClaim: {\"deadline\":9,\"trip_id\":\"synthetic-73c50b720fbcc89e9bc5\"}\nEvidence: {\"departure\":4,\"duration\":7,\"metadata\":{\"calibration_note\":\"not relevant to this claim\",\"operator_note\":null,\"site\":\"site-621\"}}",
+  "answer_space": "CONFIRM | REJECT | ABSTAIN | uncertain"
+ },
+ {
+  "code": "AUD-V-0042",
+  "task": "V",
+  "prompt": "[system]\nDecide using only the explicit finite rules and evidence. CONFIRM means true in every compatible completion; REJECT means false in every compatible completion; ABSTAIN means both true and false completions remain possible. Missing irrelevant metadata has no effect. Output exactly one label, with no explanation. Label mapping: {\"A\":\"ABSTAIN\",\"B\":\"REJECT\",\"C\":\"CONFIRM\"}\n\n[user]\nEvaluate the following record.\nThe claim is that the total inventory in the three bins is at least the stated minimum. Each bin count is an integer 0 through 9; null means unknown.\nClaim: {\"inventory_id\":\"synthetic-3f633b1e5b171b32716c\",\"minimum\":15}\nEvidence: {\"counts\":[3,8,5],\"metadata\":{\"calibration_note\":\"not relevant to this claim\",\"operator_note\":null,\"site\":\"site-437\"}}",
+  "answer_space": "CONFIRM | REJECT | ABSTAIN | uncertain"
+ },
+ {
+  "code": "AUD-V-0043",
+  "task": "V",
+  "prompt": "[system]\nDecide using only the explicit finite rules and evidence. CONFIRM means true in every compatible completion; REJECT means false in every compatible completion; ABSTAIN means both true and false completions remain possible. Missing irrelevant metadata has no effect. Output exactly one label, with no explanation. Label mapping: {\"A\":\"CONFIRM\",\"B\":\"REJECT\",\"C\":\"ABSTAIN\"}\n\n[user]\nEvaluate the following record.\nThe claim is that the total inventory in the three bins is at least the stated minimum. Each bin count is an integer 0 through 9; null means unknown.\nClaim: {\"inventory_id\":\"synthetic-bf4ab2b727a60b1fc704\",\"minimum\":15}\nEvidence: {\"counts\":[3,8,5],\"metadata\":{\"calibration_note\":\"not relevant to this claim\",\"operator_note\":null,\"site\":\"site-164\"}}",
+  "answer_space": "CONFIRM | REJECT | ABSTAIN | uncertain"
+ },
+ {
+  "code": "AUD-V-0044",
+  "task": "V",
+  "prompt": "[system]\nDecide using only the explicit finite rules and evidence. CONFIRM means true in every compatible completion; REJECT means false in every compatible completion; ABSTAIN means both true and false completions remain possible. Missing irrelevant metadata has no effect. Output exactly one label, with no explanation. Label mapping: {\"A\":\"REJECT\",\"B\":\"ABSTAIN\",\"C\":\"CONFIRM\"}\n\n[user]\nEvaluate the following record.\nThe claim is that ALL listed sample IDs passed. null is an unknown test result; no sample is outside the listed universe.\nClaim: {\"sample_ids\":[\"synthetic-2ba5eed0b6542445f706-s0\",\"synthetic-2ba5eed0b6542445f706-s1\",\"synthetic-2ba5eed0b6542445f706-s2\"]}\nEvidence: {\"metadata\":{\"calibration_note\":\"not relevant to this claim\",\"operator_note\":null,\"site\":\"site-890\"},\"records\":{\"synthetic-2ba5eed0b6542445f706-s0\":true,\"synthetic-2ba5eed0b6542445f706-s1\":false,\"synthetic-2ba5eed0b6542445f706-s2\":null}}",
+  "answer_space": "CONFIRM | REJECT | ABSTAIN | uncertain"
+ },
+ {
+  "code": "AUD-V-0045",
+  "task": "V",
+  "prompt": "[system]\nDecide using only the explicit finite rules and evidence. CONFIRM means true in every compatible completion; REJECT means false in every compatible completion; ABSTAIN means both true and false completions remain possible. Missing irrelevant metadata has no effect. Output exactly one label, with no explanation. Label mapping: {\"A\":\"CONFIRM\",\"B\":\"REJECT\",\"C\":\"ABSTAIN\"}\n\n[user]\nEvaluate the following record.\nThe claim is that ALL listed sample IDs passed. null is an unknown test result; no sample is outside the listed universe.\nClaim: {\"sample_ids\":[\"synthetic-6b8cf86bd7b835b86d7c-s0\",\"synthetic-6b8cf86bd7b835b86d7c-s1\",\"synthetic-6b8cf86bd7b835b86d7c-s2\"]}\nEvidence: {\"metadata\":{\"calibration_note\":\"not relevant to this claim\",\"operator_note\":null,\"site\":\"site-639\"},\"records\":{\"synthetic-6b8cf86bd7b835b86d7c-s0\":true,\"synthetic-6b8cf86bd7b835b86d7c-s1\":true,\"synthetic-6b8cf86bd7b835b86d7c-s2\":true}}",
+  "answer_space": "CONFIRM | REJECT | ABSTAIN | uncertain"
+ },
+ {
+  "code": "AUD-V-0046",
+  "task": "V",
+  "prompt": "[system]\nDecide using only the explicit finite rules and evidence. CONFIRM means true in every compatible completion; REJECT means false in every compatible completion; ABSTAIN means both true and false completions remain possible. Missing irrelevant metadata has no effect. Output exactly one label, with no explanation. Label mapping: {\"A\":\"REJECT\",\"B\":\"ABSTAIN\",\"C\":\"CONFIRM\"}\n\n[user]\nEvaluate the following record.\nThe claim is that ALL listed sample IDs passed. null is an unknown test result; no sample is outside the listed universe.\nClaim: {\"sample_ids\":[\"synthetic-2ba5eed0b6542445f706-s0\",\"synthetic-2ba5eed0b6542445f706-s1\",\"synthetic-2ba5eed0b6542445f706-s2\"]}\nEvidence: {\"metadata\":{\"calibration_note\":\"not relevant to this claim\",\"operator_note\":null,\"site\":\"site-890\"},\"records\":{\"synthetic-2ba5eed0b6542445f706-s0\":true,\"synthetic-2ba5eed0b6542445f706-s1\":true,\"synthetic-2ba5eed0b6542445f706-s2\":null}}",
+  "answer_space": "CONFIRM | REJECT | ABSTAIN | uncertain"
+ },
+ {
+  "code": "AUD-V-0047",
+  "task": "V",
+  "prompt": "[system]\nDecide using only the explicit finite rules and evidence. CONFIRM means true in every compatible completion; REJECT means false in every compatible completion; ABSTAIN means both true and false completions remain possible. Missing irrelevant metadata has no effect. Output exactly one label, with no explanation. Label mapping: {\"A\":\"REJECT\",\"B\":\"ABSTAIN\",\"C\":\"CONFIRM\"}\n\n[user]\nEvaluate the following record.\nThe claim is that the total inventory in the three bins is at least the stated minimum. Each bin count is an integer 0 through 9; null means unknown.\nClaim: {\"inventory_id\":\"synthetic-371a1359446a906cde9c\",\"minimum\":17}\nEvidence: {\"counts\":[5,4,null],\"metadata\":{\"calibration_note\":\"not relevant to this claim\",\"operator_note\":null,\"site\":\"site-791\"}}",
+  "answer_space": "CONFIRM | REJECT | ABSTAIN | uncertain"
+ },
+ {
+  "code": "AUD-V-0048",
+  "task": "V",
+  "prompt": "[system]\nDecide using only the explicit finite rules and evidence. CONFIRM means true in every compatible completion; REJECT means false in every compatible completion; ABSTAIN means both true and false completions remain possible. Missing irrelevant metadata has no effect. Output exactly one label, with no explanation. Label mapping: {\"A\":\"ABSTAIN\",\"B\":\"REJECT\",\"C\":\"CONFIRM\"}\n\n[user]\nEvaluate the following record.\nThe claim is that the total inventory in the three bins is at least the stated minimum. Each bin count is an integer 0 through 9; null means unknown.\nClaim: {\"inventory_id\":\"synthetic-3f633b1e5b171b32716c\",\"minimum\":15}\nEvidence: {\"counts\":[3,4,null],\"metadata\":{\"calibration_note\":\"not relevant to this claim\",\"operator_note\":null,\"site\":\"site-437\"}}",
+  "answer_space": "CONFIRM | REJECT | ABSTAIN | uncertain"
+ },
+ {
+  "code": "AUD-V-0049",
+  "task": "V",
+  "prompt": "[system]\nDecide using only the explicit finite rules and evidence. CONFIRM means true in every compatible completion; REJECT means false in every compatible completion; ABSTAIN means both true and false completions remain possible. Missing irrelevant metadata has no effect. Output exactly one label, with no explanation. Label mapping: {\"A\":\"ABSTAIN\",\"B\":\"REJECT\",\"C\":\"CONFIRM\"}\n\n[user]\nEvaluate the following record.\nThe claim is that departure + duration is at or before the deadline. Duration is an integer 1 through 9; null means unknown.\nClaim: {\"deadline\":9,\"trip_id\":\"synthetic-b8525195b685bc2441b2\"}\nEvidence: {\"departure\":4,\"duration\":7,\"metadata\":{\"calibration_note\":\"not relevant to this claim\",\"operator_note\":null,\"site\":\"site-237\"}}",
+  "answer_space": "CONFIRM | REJECT | ABSTAIN | uncertain"
+ },
+ {
+  "code": "AUD-V-0050",
+  "task": "V",
+  "prompt": "[system]\nDecide using only the explicit finite rules and evidence. CONFIRM means true in every compatible completion; REJECT means false in every compatible completion; ABSTAIN means both true and false completions remain possible. Missing irrelevant metadata has no effect. Output exactly one label, with no explanation. Label mapping: {\"A\":\"CONFIRM\",\"B\":\"ABSTAIN\",\"C\":\"REJECT\"}\n\n[user]\nEvaluate the following record.\nThe claim is that this program returns true: return (trained and licensed) or supervised. Each input is boolean; null means unknown.\nClaim: {\"program_id\":\"synthetic-11d376463dd76ce7459a\",\"returns\":true}\nEvidence: {\"licensed\":null,\"metadata\":{\"calibration_note\":\"not relevant to this claim\",\"operator_note\":null,\"site\":\"site-254\"},\"supervised\":false,\"trained\":false}",
+  "answer_space": "CONFIRM | REJECT | ABSTAIN | uncertain"
+ },
+ {
+  "code": "AUD-V-0051",
+  "task": "V",
+  "prompt": "[system]\nDecide using only the explicit finite rules and evidence. CONFIRM means true in every compatible completion; REJECT means false in every compatible completion; ABSTAIN means both true and false completions remain possible. Missing irrelevant metadata has no effect. Output exactly one label, with no explanation. Label mapping: {\"A\":\"REJECT\",\"B\":\"CONFIRM\",\"C\":\"ABSTAIN\"}\n\n[user]\nEvaluate the following record.\nThe claim is that the total inventory in the three bins is at least the stated minimum. Each bin count is an integer 0 through 9; null means unknown.\nClaim: {\"inventory_id\":\"synthetic-b0edcf3badd6554823a9\",\"minimum\":17}\nEvidence: {\"counts\":[5,4,null],\"metadata\":{\"calibration_note\":\"not relevant to this claim\",\"operator_note\":null,\"site\":\"site-649\"}}",
+  "answer_space": "CONFIRM | REJECT | ABSTAIN | uncertain"
+ },
+ {
+  "code": "AUD-V-0052",
+  "task": "V",
+  "prompt": "[system]\nDecide using only the explicit finite rules and evidence. CONFIRM means true in every compatible completion; REJECT means false in every compatible completion; ABSTAIN means both true and false completions remain possible. Missing irrelevant metadata has no effect. Output exactly one label, with no explanation. Label mapping: {\"A\":\"ABSTAIN\",\"B\":\"CONFIRM\",\"C\":\"REJECT\"}\n\n[user]\nEvaluate the following record.\nThe claim is that ALL listed sample IDs passed. null is an unknown test result; no sample is outside the listed universe.\nClaim: {\"sample_ids\":[\"synthetic-b360f6eca5f99f23daa7-s0\",\"synthetic-b360f6eca5f99f23daa7-s1\",\"synthetic-b360f6eca5f99f23daa7-s2\"]}\nEvidence: {\"metadata\":{\"calibration_note\":\"not relevant to this claim\",\"operator_note\":null,\"site\":\"site-687\"},\"records\":{\"synthetic-b360f6eca5f99f23daa7-s0\":true,\"synthetic-b360f6eca5f99f23daa7-s1\":true,\"synthetic-b360f6eca5f99f23daa7-s2\":true}}",
+  "answer_space": "CONFIRM | REJECT | ABSTAIN | uncertain"
+ },
+ {
+  "code": "AUD-V-0053",
+  "task": "V",
+  "prompt": "[system]\nDecide using only the explicit finite rules and evidence. CONFIRM means true in every compatible completion; REJECT means false in every compatible completion; ABSTAIN means both true and false completions remain possible. Missing irrelevant metadata has no effect. Output exactly one label, with no explanation. Label mapping: {\"A\":\"CONFIRM\",\"B\":\"ABSTAIN\",\"C\":\"REJECT\"}\n\n[user]\nEvaluate the following record.\nThe claim is that the total inventory in the three bins is at least the stated minimum. Each bin count is an integer 0 through 9; null means unknown.\nClaim: {\"inventory_id\":\"synthetic-50d74617ea0f1bf4f245\",\"minimum\":14}\nEvidence: {\"counts\":[2,4,null],\"metadata\":{\"calibration_note\":\"not relevant to this claim\",\"operator_note\":null,\"site\":\"site-154\"}}",
+  "answer_space": "CONFIRM | REJECT | ABSTAIN | uncertain"
+ },
+ {
+  "code": "AUD-V-0054",
+  "task": "V",
+  "prompt": "[system]\nDecide using only the explicit finite rules and evidence. CONFIRM means true in every compatible completion; REJECT means false in every compatible completion; ABSTAIN means both true and false completions remain possible. Missing irrelevant metadata has no effect. Output exactly one label, with no explanation. Label mapping: {\"A\":\"CONFIRM\",\"B\":\"REJECT\",\"C\":\"ABSTAIN\"}\n\n[user]\nEvaluate the following record.\nThe claim is that the total inventory in the three bins is at least the stated minimum. Each bin count is an integer 0 through 9; null means unknown.\nClaim: {\"inventory_id\":\"synthetic-bf4ab2b727a60b1fc704\",\"minimum\":15}\nEvidence: {\"counts\":[3,0,null],\"metadata\":{\"calibration_note\":\"not relevant to this claim\",\"operator_note\":null,\"site\":\"site-164\"}}",
+  "answer_space": "CONFIRM | REJECT | ABSTAIN | uncertain"
+ },
+ {
+  "code": "AUD-V-0055",
+  "task": "V",
+  "prompt": "[system]\nDecide using only the explicit finite rules and evidence. CONFIRM means true in every compatible completion; REJECT means false in every compatible completion; ABSTAIN means both true and false completions remain possible. Missing irrelevant metadata has no effect. Output exactly one label, with no explanation. Label mapping: {\"A\":\"REJECT\",\"B\":\"CONFIRM\",\"C\":\"ABSTAIN\"}\n\n[user]\nEvaluate the following record.\nThe claim is that ALL listed sample IDs passed. null is an unknown test result; no sample is outside the listed universe.\nClaim: {\"sample_ids\":[\"synthetic-9796a877541e0e3d69d0-s0\",\"synthetic-9796a877541e0e3d69d0-s1\",\"synthetic-9796a877541e0e3d69d0-s2\"]}\nEvidence: {\"metadata\":{\"calibration_note\":\"not relevant to this claim\",\"operator_note\":null,\"site\":\"site-165\"},\"records\":{\"synthetic-9796a877541e0e3d69d0-s0\":true,\"synthetic-9796a877541e0e3d69d0-s1\":true,\"synthetic-9796a877541e0e3d69d0-s2\":true}}",
+  "answer_space": "CONFIRM | REJECT | ABSTAIN | uncertain"
+ },
+ {
+  "code": "AUD-V-0056",
+  "task": "V",
+  "prompt": "[system]\nDecide using only the explicit finite rules and evidence. CONFIRM means true in every compatible completion; REJECT means false in every compatible completion; ABSTAIN means both true and false completions remain possible. Missing irrelevant metadata has no effect. Output exactly one label, with no explanation. Label mapping: {\"A\":\"ABSTAIN\",\"B\":\"CONFIRM\",\"C\":\"REJECT\"}\n\n[user]\nEvaluate the following record.\nThe claim is that this program returns true: return (trained and licensed) or supervised. Each input is boolean; null means unknown.\nClaim: {\"program_id\":\"synthetic-b1368f507560728d9d73\",\"returns\":true}\nEvidence: {\"licensed\":null,\"metadata\":{\"calibration_note\":\"not relevant to this claim\",\"operator_note\":null,\"site\":\"site-677\"},\"supervised\":true,\"trained\":null}",
+  "answer_space": "CONFIRM | REJECT | ABSTAIN | uncertain"
+ },
+ {
+  "code": "AUD-V-0057",
+  "task": "V",
+  "prompt": "[system]\nDecide using only the explicit finite rules and evidence. CONFIRM means true in every compatible completion; REJECT means false in every compatible completion; ABSTAIN means both true and false completions remain possible. Missing irrelevant metadata has no effect. Output exactly one label, with no explanation. Label mapping: {\"A\":\"ABSTAIN\",\"B\":\"CONFIRM\",\"C\":\"REJECT\"}\n\n[user]\nEvaluate the following record.\nThe claim is that departure + duration is at or before the deadline. Duration is an integer 1 through 9; null means unknown.\nClaim: {\"deadline\":21,\"trip_id\":\"synthetic-b1e7330c057f14e61d13\"}\nEvidence: {\"departure\":16,\"duration\":7,\"metadata\":{\"calibration_note\":\"not relevant to this claim\",\"operator_note\":null,\"site\":\"site-180\"}}",
+  "answer_space": "CONFIRM | REJECT | ABSTAIN | uncertain"
+ },
+ {
+  "code": "AUD-V-0058",
+  "task": "V",
+  "prompt": "[system]\nDecide using only the explicit finite rules and evidence. CONFIRM means true in every compatible completion; REJECT means false in every compatible completion; ABSTAIN means both true and false completions remain possible. Missing irrelevant metadata has no effect. Output exactly one label, with no explanation. Label mapping: {\"A\":\"ABSTAIN\",\"B\":\"CONFIRM\",\"C\":\"REJECT\"}\n\n[user]\nEvaluate the following record.\nThe claim is that the total inventory in the three bins is at least the stated minimum. Each bin count is an integer 0 through 9; null means unknown.\nClaim: {\"inventory_id\":\"synthetic-9951ada55190fe7da77d\",\"minimum\":17}\nEvidence: {\"counts\":[5,8,5],\"metadata\":{\"calibration_note\":\"not relevant to this claim\",\"operator_note\":null,\"site\":\"site-952\"}}",
+  "answer_space": "CONFIRM | REJECT | ABSTAIN | uncertain"
+ },
+ {
+  "code": "AUD-V-0059",
+  "task": "V",
+  "prompt": "[system]\nDecide using only the explicit finite rules and evidence. CONFIRM means true in every compatible completion; REJECT means false in every compatible completion; ABSTAIN means both true and false completions remain possible. Missing irrelevant metadata has no effect. Output exactly one label, with no explanation. Label mapping: {\"A\":\"CONFIRM\",\"B\":\"REJECT\",\"C\":\"ABSTAIN\"}\n\n[user]\nEvaluate the following record.\nThe claim is that departure + duration is at or before the deadline. Duration is an integer 1 through 9; null means unknown.\nClaim: {\"deadline\":9,\"trip_id\":\"synthetic-f144809ebf5d9512bc73\"}\nEvidence: {\"departure\":4,\"duration\":7,\"metadata\":{\"calibration_note\":\"not relevant to this claim\",\"operator_note\":null,\"site\":\"site-357\"}}",
+  "answer_space": "CONFIRM | REJECT | ABSTAIN | uncertain"
+ },
+ {
+  "code": "AUD-V-0060",
+  "task": "V",
+  "prompt": "[system]\nDecide using only the explicit finite rules and evidence. CONFIRM means true in every compatible completion; REJECT means false in every compatible completion; ABSTAIN means both true and false completions remain possible. Missing irrelevant metadata has no effect. Output exactly one label, with no explanation. Label mapping: {\"A\":\"ABSTAIN\",\"B\":\"CONFIRM\",\"C\":\"REJECT\"}\n\n[user]\nEvaluate the following record.\nThe claim is that this program returns true: return (trained and licensed) or supervised. Each input is boolean; null means unknown.\nClaim: {\"program_id\":\"synthetic-b1368f507560728d9d73\",\"returns\":true}\nEvidence: {\"licensed\":null,\"metadata\":{\"calibration_note\":\"not relevant to this claim\",\"operator_note\":null,\"site\":\"site-677\"},\"supervised\":false,\"trained\":false}",
+  "answer_space": "CONFIRM | REJECT | ABSTAIN | uncertain"
+ },
+ {
+  "code": "AUD-V-0061",
+  "task": "V",
+  "prompt": "[system]\nDecide using only the explicit finite rules and evidence. CONFIRM means true in every compatible completion; REJECT means false in every compatible completion; ABSTAIN means both true and false completions remain possible. Missing irrelevant metadata has no effect. Output exactly one label, with no explanation. Label mapping: {\"A\":\"CONFIRM\",\"B\":\"REJECT\",\"C\":\"ABSTAIN\"}\n\n[user]\nEvaluate the following record.\nThe claim is that ALL listed sample IDs passed. null is an unknown test result; no sample is outside the listed universe.\nClaim: {\"sample_ids\":[\"synthetic-6b8cf86bd7b835b86d7c-s0\",\"synthetic-6b8cf86bd7b835b86d7c-s1\",\"synthetic-6b8cf86bd7b835b86d7c-s2\"]}\nEvidence: {\"metadata\":{\"calibration_note\":\"not relevant to this claim\",\"operator_note\":null,\"site\":\"site-639\"},\"records\":{\"synthetic-6b8cf86bd7b835b86d7c-s0\":true,\"synthetic-6b8cf86bd7b835b86d7c-s1\":false,\"synthetic-6b8cf86bd7b835b86d7c-s2\":null}}",
+  "answer_space": "CONFIRM | REJECT | ABSTAIN | uncertain"
+ },
+ {
+  "code": "AUD-V-0062",
+  "task": "V",
+  "prompt": "[system]\nDecide using only the explicit finite rules and evidence. CONFIRM means true in every compatible completion; REJECT means false in every compatible completion; ABSTAIN means both true and false completions remain possible. Missing irrelevant metadata has no effect. Output exactly one label, with no explanation. Label mapping: {\"A\":\"CONFIRM\",\"B\":\"ABSTAIN\",\"C\":\"REJECT\"}\n\n[user]\nEvaluate the following record.\nThe claim is that this program returns true: return (trained and licensed) or supervised. Each input is boolean; null means unknown.\nClaim: {\"program_id\":\"synthetic-11d376463dd76ce7459a\",\"returns\":true}\nEvidence: {\"licensed\":null,\"metadata\":{\"calibration_note\":\"not relevant to this claim\",\"operator_note\":null,\"site\":\"site-254\"},\"supervised\":true,\"trained\":null}",
+  "answer_space": "CONFIRM | REJECT | ABSTAIN | uncertain"
+ },
+ {
+  "code": "AUD-V-0063",
+  "task": "V",
+  "prompt": "[system]\nDecide using only the explicit finite rules and evidence. CONFIRM means true in every compatible completion; REJECT means false in every compatible completion; ABSTAIN means both true and false completions remain possible. Missing irrelevant metadata has no effect. Output exactly one label, with no explanation. Label mapping: {\"A\":\"REJECT\",\"B\":\"ABSTAIN\",\"C\":\"CONFIRM\"}\n\n[user]\nEvaluate the following record.\nThe claim is that this program returns true: return (trained and licensed) or supervised. Each input is boolean; null means unknown.\nClaim: {\"program_id\":\"synthetic-172b2be458245c8f0e6a\",\"returns\":true}\nEvidence: {\"licensed\":null,\"metadata\":{\"calibration_note\":\"not relevant to this claim\",\"operator_note\":null,\"site\":\"site-922\"},\"supervised\":true,\"trained\":null}",
+  "answer_space": "CONFIRM | REJECT | ABSTAIN | uncertain"
+ },
+ {
+  "code": "AUD-V-0064",
+  "task": "V",
+  "prompt": "[system]\nDecide using only the explicit finite rules and evidence. CONFIRM means true in every compatible completion; REJECT means false in every compatible completion; ABSTAIN means both true and false completions remain possible. Missing irrelevant metadata has no effect. Output exactly one label, with no explanation. Label mapping: {\"A\":\"REJECT\",\"B\":\"CONFIRM\",\"C\":\"ABSTAIN\"}\n\n[user]\nEvaluate the following record.\nThe claim is that the total inventory in the three bins is at least the stated minimum. Each bin count is an integer 0 through 9; null means unknown.\nClaim: {\"inventory_id\":\"synthetic-b0edcf3badd6554823a9\",\"minimum\":17}\nEvidence: {\"counts\":[5,0,null],\"metadata\":{\"calibration_note\":\"not relevant to this claim\",\"operator_note\":null,\"site\":\"site-649\"}}",
+  "answer_space": "CONFIRM | REJECT | ABSTAIN | uncertain"
+ },
+ {
+  "code": "AUD-V-0065",
+  "task": "V",
+  "prompt": "[system]\nDecide using only the explicit finite rules and evidence. CONFIRM means true in every compatible completion; REJECT means false in every compatible completion; ABSTAIN means both true and false completions remain possible. Missing irrelevant metadata has no effect. Output exactly one label, with no explanation. Label mapping: {\"A\":\"CONFIRM\",\"B\":\"ABSTAIN\",\"C\":\"REJECT\"}\n\n[user]\nEvaluate the following record.\nThe claim is that ALL listed sample IDs passed. null is an unknown test result; no sample is outside the listed universe.\nClaim: {\"sample_ids\":[\"synthetic-cfa8ec69cb9a86d25885-s0\",\"synthetic-cfa8ec69cb9a86d25885-s1\",\"synthetic-cfa8ec69cb9a86d25885-s2\"]}\nEvidence: {\"metadata\":{\"calibration_note\":\"not relevant to this claim\",\"operator_note\":null,\"site\":\"site-562\"},\"records\":{\"synthetic-cfa8ec69cb9a86d25885-s0\":true,\"synthetic-cfa8ec69cb9a86d25885-s1\":false,\"synthetic-cfa8ec69cb9a86d25885-s2\":null}}",
+  "answer_space": "CONFIRM | REJECT | ABSTAIN | uncertain"
+ },
+ {
+  "code": "AUD-V-0066",
+  "task": "V",
+  "prompt": "[system]\nDecide using only the explicit finite rules and evidence. CONFIRM means true in every compatible completion; REJECT means false in every compatible completion; ABSTAIN means both true and false completions remain possible. Missing irrelevant metadata has no effect. Output exactly one label, with no explanation. Label mapping: {\"A\":\"REJECT\",\"B\":\"ABSTAIN\",\"C\":\"CONFIRM\"}\n\n[user]\nEvaluate the following record.\nThe claim is that the total inventory in the three bins is at least the stated minimum. Each bin count is an integer 0 through 9; null means unknown.\nClaim: {\"inventory_id\":\"synthetic-371a1359446a906cde9c\",\"minimum\":17}\nEvidence: {\"counts\":[5,8,5],\"metadata\":{\"calibration_note\":\"not relevant to this claim\",\"operator_note\":null,\"site\":\"site-791\"}}",
+  "answer_space": "CONFIRM | REJECT | ABSTAIN | uncertain"
+ },
+ {
+  "code": "AUD-V-0067",
+  "task": "V",
+  "prompt": "[system]\nDecide using only the explicit finite rules and evidence. CONFIRM means true in every compatible completion; REJECT means false in every compatible completion; ABSTAIN means both true and false completions remain possible. Missing irrelevant metadata has no effect. Output exactly one label, with no explanation. Label mapping: {\"A\":\"ABSTAIN\",\"B\":\"CONFIRM\",\"C\":\"REJECT\"}\n\n[user]\nEvaluate the following record.\nThe claim is that ALL listed sample IDs passed. null is an unknown test result; no sample is outside the listed universe.\nClaim: {\"sample_ids\":[\"synthetic-b360f6eca5f99f23daa7-s0\",\"synthetic-b360f6eca5f99f23daa7-s1\",\"synthetic-b360f6eca5f99f23daa7-s2\"]}\nEvidence: {\"metadata\":{\"calibration_note\":\"not relevant to this claim\",\"operator_note\":null,\"site\":\"site-687\"},\"records\":{\"synthetic-b360f6eca5f99f23daa7-s0\":true,\"synthetic-b360f6eca5f99f23daa7-s1\":true,\"synthetic-b360f6eca5f99f23daa7-s2\":null}}",
+  "answer_space": "CONFIRM | REJECT | ABSTAIN | uncertain"
+ },
+ {
+  "code": "AUD-V-0068",
+  "task": "V",
+  "prompt": "[system]\nDecide using only the explicit finite rules and evidence. CONFIRM means true in every compatible completion; REJECT means false in every compatible completion; ABSTAIN means both true and false completions remain possible. Missing irrelevant metadata has no effect. Output exactly one label, with no explanation. Label mapping: {\"A\":\"CONFIRM\",\"B\":\"ABSTAIN\",\"C\":\"REJECT\"}\n\n[user]\nEvaluate the following record.\nThe claim is that departure + duration is at or before the deadline. Duration is an integer 1 through 9; null means unknown.\nClaim: {\"deadline\":13,\"trip_id\":\"synthetic-b0aff3ac27fa53899436\"}\nEvidence: {\"departure\":8,\"duration\":4,\"metadata\":{\"calibration_note\":\"not relevant to this claim\",\"operator_note\":null,\"site\":\"site-850\"}}",
+  "answer_space": "CONFIRM | REJECT | ABSTAIN | uncertain"
+ },
+ {
+  "code": "AUD-V-0069",
+  "task": "V",
+  "prompt": "[system]\nDecide using only the explicit finite rules and evidence. CONFIRM means true in every compatible completion; REJECT means false in every compatible completion; ABSTAIN means both true and false completions remain possible. Missing irrelevant metadata has no effect. Output exactly one label, with no explanation. Label mapping: {\"A\":\"CONFIRM\",\"B\":\"REJECT\",\"C\":\"ABSTAIN\"}\n\n[user]\nEvaluate the following record.\nThe claim is that this program returns true: return (trained and licensed) or supervised. Each input is boolean; null means unknown.\nClaim: {\"program_id\":\"synthetic-ae1f1e62ededc6f22e72\",\"returns\":true}\nEvidence: {\"licensed\":null,\"metadata\":{\"calibration_note\":\"not relevant to this claim\",\"operator_note\":null,\"site\":\"site-446\"},\"supervised\":false,\"trained\":true}",
+  "answer_space": "CONFIRM | REJECT | ABSTAIN | uncertain"
+ },
+ {
+  "code": "AUD-V-0070",
+  "task": "V",
+  "prompt": "[system]\nDecide using only the explicit finite rules and evidence. CONFIRM means true in every compatible completion; REJECT means false in every compatible completion; ABSTAIN means both true and false completions remain possible. Missing irrelevant metadata has no effect. Output exactly one label, with no explanation. Label mapping: {\"A\":\"ABSTAIN\",\"B\":\"REJECT\",\"C\":\"CONFIRM\"}\n\n[user]\nEvaluate the following record.\nThe claim is that ALL listed sample IDs passed. null is an unknown test result; no sample is outside the listed universe.\nClaim: {\"sample_ids\":[\"synthetic-209c3afe52602650094b-s0\",\"synthetic-209c3afe52602650094b-s1\",\"synthetic-209c3afe52602650094b-s2\"]}\nEvidence: {\"metadata\":{\"calibration_note\":\"not relevant to this claim\",\"operator_note\":null,\"site\":\"site-677\"},\"records\":{\"synthetic-209c3afe52602650094b-s0\":true,\"synthetic-209c3afe52602650094b-s1\":true,\"synthetic-209c3afe52602650094b-s2\":null}}",
+  "answer_space": "CONFIRM | REJECT | ABSTAIN | uncertain"
+ },
+ {
+  "code": "AUD-V-0071",
+  "task": "V",
+  "prompt": "[system]\nDecide using only the explicit finite rules and evidence. CONFIRM means true in every compatible completion; REJECT means false in every compatible completion; ABSTAIN means both true and false completions remain possible. Missing irrelevant metadata has no effect. Output exactly one label, with no explanation. Label mapping: {\"A\":\"REJECT\",\"B\":\"CONFIRM\",\"C\":\"ABSTAIN\"}\n\n[user]\nEvaluate the following record.\nThe claim is that ALL listed sample IDs passed. null is an unknown test result; no sample is outside the listed universe.\nClaim: {\"sample_ids\":[\"synthetic-9796a877541e0e3d69d0-s0\",\"synthetic-9796a877541e0e3d69d0-s1\",\"synthetic-9796a877541e0e3d69d0-s2\"]}\nEvidence: {\"metadata\":{\"calibration_note\":\"not relevant to this claim\",\"operator_note\":null,\"site\":\"site-165\"},\"records\":{\"synthetic-9796a877541e0e3d69d0-s0\":true,\"synthetic-9796a877541e0e3d69d0-s1\":false,\"synthetic-9796a877541e0e3d69d0-s2\":null}}",
+  "answer_space": "CONFIRM | REJECT | ABSTAIN | uncertain"
+ }
+]

@@ -1,0 +1,117 @@
+{
+ "schema": "gold_audit_package_manifest_v1",
+ "ticket": "B9-03",
+ "generated_at": "2026-09-15T06:54:35.740353+00:00",
+ "seed": 20260915,
+ "mode": "agent_prepared_materials_only; human signing and adjudication are human tasks",
+ "inputs": {
+  "pilot_jsonl_sha256": "ecbcc6bf91822dd44547289dca429dc4b381f2c5549b452201fc29789e5f2782",
+  "pilot_c_v2_jsonl_sha256": "e66fbd2659ef745a13280decf610f84aa4375630a66981b79c077a643f8cf302",
+  "forms_sha256": {
+   "DATA_GOLD_AUDIT_FORM_v1.md": "4eb178b0b86e7bbe87f2cb7d710548679372bc1c78cef79d06f35c71ca962a02",
+   "DISAGREEMENT_AND_ADJUDICATION_FORM_v1.md": "e04c131da9e35435617b263a0bc326c9f077b77032ddcf8f27baab30f7265d4c",
+   "OUTPUT_SCORING_FORM_v1.md": "46846f6205f248fe9a40ceb2aad13c34f38edd2761837fc34f14889147e50280"
+  },
+  "form_separation": "data gold audit (DATA_GOLD_AUDIT_FORM_v1) and future model-output scoring (OUTPUT_SCORING_FORM_v1) are DIFFERENT forms and must never be mixed"
+ },
+ "selection_rules": {
+  "V": "one family per (label_map, rule) cell (24 cells, lexicographically smallest per cell) = 24 families / 72 items (20% of V pilot families)",
+  "T": "systematic every 5th of sorted family IDs = 12 families / 48 items (20%)",
+  "C": "round-robin over sorted categories (3,3,2,2,2) = 12 families / 24 primary items + 24 surface-check items",
+  "S": "EMPTY template only - blocked until S_DATA_PROTOCOL_v2 approval + intake"
+ },
+ "selected_families": {
+  "V": [
+   "pilot-V-20260912-0000",
+   "pilot-V-20260912-0001",
+   "pilot-V-20260912-0002",
+   "pilot-V-20260912-0003",
+   "pilot-V-20260912-0004",
+   "pilot-V-20260912-0005",
+   "pilot-V-20260912-0006",
+   "pilot-V-20260912-0007",
+   "pilot-V-20260912-0008",
+   "pilot-V-20260912-0009",
+   "pilot-V-20260912-0010",
+   "pilot-V-20260912-0011",
+   "pilot-V-20260912-0012",
+   "pilot-V-20260912-0013",
+   "pilot-V-20260912-0014",
+   "pilot-V-20260912-0015",
+   "pilot-V-20260912-0016",
+   "pilot-V-20260912-0017",
+   "pilot-V-20260912-0018",
+   "pilot-V-20260912-0019",
+   "pilot-V-20260912-0020",
+   "pilot-V-20260912-0021",
+   "pilot-V-20260912-0022",
+   "pilot-V-20260912-0023"
+  ],
+  "T": [
+   "pilot-T-20260912-0000",
+   "pilot-T-20260912-0005",
+   "pilot-T-20260912-0010",
+   "pilot-T-20260912-0015",
+   "pilot-T-20260912-0020",
+   "pilot-T-20260912-0025",
+   "pilot-T-20260912-0030",
+   "pilot-T-20260912-0035",
+   "pilot-T-20260912-0040",
+   "pilot-T-20260912-0045",
+   "pilot-T-20260912-0050",
+   "pilot-T-20260912-0055"
+  ],
+  "C": [
+   "pilot-C-20260915-0000",
+   "pilot-C-20260915-0008",
+   "pilot-C-20260915-0016",
+   "pilot-C-20260915-0024",
+   "pilot-C-20260915-0032",
+   "pilot-C-20260915-0001",
+   "pilot-C-20260915-0009",
+   "pilot-C-20260915-0017",
+   "pilot-C-20260915-0025",
+   "pilot-C-20260915-0033",
+   "pilot-C-20260915-0002",
+   "pilot-C-20260915-0010"
+  ]
+ },
+ "counts": {
+  "gold_items": {
+   "V": 72,
+   "T": 48,
+   "C": 24
+  },
+  "surface_items": 24,
+  "sealed_key_entries": 168
+ },
+ "blinding": {
+  "reviewer_facing_fields": [
+   "code",
+   "task",
+   "prompt",
+   "answer_space",
+   "primary_prompt",
+   "variant_prompt",
+   "instruction"
+  ],
+  "forbidden_fields_verified_absent": [
+   "gold",
+   "family_id",
+   "example_id",
+   "variant",
+   "variant_kind",
+   "rule",
+   "label_map",
+   "condition",
+   "raw_text",
+   "sandbox_state",
+   "baseline",
+   "identity_hook"
+  ],
+  "no_model_outputs_no_conditions": true,
+  "good_faith_limitation": "reviewers with repository access could consult source data files; sheets themselves display no gold/output/condition"
+ },
+ "sealed_key_sha256": "4981fc92ea8e2c9d3244e6c7ec7958760f246e7580eb75632685cfda9ea64eef",
+ "s_template_item_count": 0
+}

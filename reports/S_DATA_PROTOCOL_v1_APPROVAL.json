@@ -1,0 +1,17 @@
+{
+  "schema_version": "1.0",
+  "type": "protocol_approval_sidecar",
+  "protocol_path": "reports/S_DATA_PROTOCOL_v1.yaml",
+  "protocol_sha256": "b297908977d1a16a442272a20f98a84f8d53dcdd3fbd9e03bf1dc182a6454c9d",
+  "status": "pending_approval",
+  "approval_record": null,
+  "freeze": {
+    "frozen_at": null,
+    "effective": false,
+    "yaml_self_hash_not_embedded": true
+  },
+  "s_data_status": "blocked",
+  "revision_note": "same-turn pre-review regenerations only (YAML quoting fixes; exclusion definitions abstracted so the protocol text itself contains no operational-detail phrases); no approved record was ever altered; this sidecar binds the final reviewed bytes",
+  "approval_scope_note": "Approval activates ONLY the source-admission workflow (license snapshots -> channel approval -> intake filter -> human audit -> freeze). It does NOT authorize any download by itself: the acquisition channel (dataset endpoint allowlist extension) requires a separate explicit main-session decision, and S remains blocked until every item in boundaries.s_data_blocked_until is satisfied and recorded.",
+  "issued_at": "2026-09-15T06:37:46.853361+00:00"
+}

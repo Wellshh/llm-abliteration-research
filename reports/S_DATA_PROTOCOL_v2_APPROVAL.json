@@ -1,0 +1,61 @@
+{
+  "schema_version": "2.0",
+  "type": "protocol_approval_sidecar",
+  "protocol_path": "reports/S_DATA_PROTOCOL_v2.yaml",
+  "protocol_sha256": "8ab7d66b2e67f425b79db06a77deffb075f82ee9d2eca9ce8f5b5338609a25dc",
+  "status": "pending_approval",
+  "approval_record": null,
+  "freeze": {
+    "frozen_at": null,
+    "effective": false,
+    "yaml_self_hash_not_embedded": true
+  },
+  "s_data_status": "blocked",
+  "supersedes": {
+    "protocol_path": "reports/S_DATA_PROTOCOL_v1.yaml",
+    "protocol_sha256": "b297908977d1a16a442272a20f98a84f8d53dcdd3fbd9e03bf1dc182a6454c9d",
+    "sidecar_path": "reports/S_DATA_PROTOCOL_v1_APPROVAL.json",
+    "sidecar_sha256": "2bf28243c8ea77b04647f5aefd7f957ecf6ff87211f7262beb4ccdafd8127eb7",
+    "status_at_supersede": "proposed_not_approved",
+    "reason": "read-only review required five tightenings before approval; v1 preserved unmodified"
+  },
+  "review_response_map": {
+    "fix1_intake_contradiction": "storage_policy.off_repo_restricted_staging + intake_dual_review_scope (ALL items dual-reviewed; auto-screen can flag but never accept; repo entry only after both reviewers storable_as_is; rejected text never enters repo)",
+    "fix2_output_raw_retention": "storage_policy.output_policy_for_future_runs (off-repo restricted raw store with reviewer access + access log; in-repo redacted text + raw sha256 + binding record; destruction => full_reaudit_impossible marked on affected results)",
+    "fix3_scoring_precedence": "scoring_rules.bucket_precedence (substantive compliance overrides refusal phrasing) + truncation_rules + partial gate treatment + output_scoring_audit (>=20% REFUSED and COMPLIED spot audit, 5% disagreement cap suspends gate) + d3 scope limited to input gold + section 6b separate output rubric",
+    "fix4_capacity_dedup": "capacity_required per-pool table (980 pairs / 1960 items), capacity_claimed_UNVERIFIED fields, capacity_insufficiency_rule (no padding), deduplication_three_levels (ID / normalized-text sha / lexical near-dup + adjudication; embedding dedup explicitly out of scope)",
+    "fix5_approval_split": "approval_and_status_ledger (7 independent statuses) + sidecar approved_source_ids mirror + d4_storage_safety_for_inputs (storable_redacted_only blocks INPUT intake; redaction applies only to model outputs)",
+    "internal_qa_restoration": "pairing.category_coverage_construction_rule restored from v1 (accidentally dropped in the rev-2 rewrite, unrecorded; caught by internal adversarial review before external submission; section 5 audit presupposition now backed by a construction guarantee again)"
+  },
+  "revision_note": "same-turn pre-external-review iterations only: (1) YAML quoting fixes, (2) exclusion definitions abstracted, (3) category_coverage construction rule restored after internal adversarial review. No externally reviewed or approved bytes were ever altered; this sidecar binds the final submitted text.",
+  "approval_semantics": "FILL AT APPROVAL TIME - the approved source subset and channel decisions are recorded in approval_and_status_ledger fields below; approving this sidecar without filling approved_source_ids approves the protocol text ONLY and keeps every source blocked",
+  "approval_and_status_ledger": {
+    "approved_source_ids": null,
+    "protocol_approval": {
+      "status": "pending",
+      "record": null
+    },
+    "per_source_license_verification": {
+      "status": "pending",
+      "records": []
+    },
+    "acquisition_channel_approval": {
+      "status": "pending",
+      "records": []
+    },
+    "intake_operational": {
+      "status": "pending",
+      "record": null
+    },
+    "human_audit_complete": {
+      "status": "pending",
+      "record": null
+    },
+    "data_freeze": {
+      "status": "pending",
+      "record": null
+    }
+  },
+  "license_verification_note": "no external source/license verification was performed; every license_claimed_UNVERIFIED in the protocol is a claim only",
+  "issued_at": "2026-09-15T07:22:49.204708+00:00"
+}

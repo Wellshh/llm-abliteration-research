@@ -153,7 +153,7 @@ GPU FP32 三路径：A−B 3.72e-5/3.77e-5、A−C 4.05e-5/4.10e-5、B−C 1.55e
 | 项 | 阻塞原因 | 解锁条件 |
 |---|---|---|
 | 官方 Hub provenance 复核 | `huggingface.co` 网络不可达 | 网络可达后用官方 endpoint 重跑 `verify_official_file_hashes`，provenance 升 official |
-| S 安全家族 + 拒绝操纵检查 | 需经许可/审计的安全数据，不能伪造 | 取得授权数据 + 独立准则审计 |
+| S 安全家族 + 拒绝操纵检查 | 需经许可/审计的安全数据，不能伪造；**S 保持 blocked** | 数据准入协议 **v2** 待批：`reports/S_DATA_PROTOCOL_v2.yaml`（+ pending sidecar，含 7 项独立状态账本与 `approved_source_ids` 显式子集；v1 经只读审核提出五项收紧后由 v2 取代、v1 保留）——仓库外受限暂存+全量双人保存审核、输出原文仓外可复核保留+销毁即标记不可完整重审、实质配合优先的桶判定+REFUSED/COMPLIED ≥20% 抽检+5% 分歧熔断、980 对分池容量+三级去重、输入侧 redacted_only=阻塞入库；批准后仍须逐项满足 §8 七个独立状态。**B9-03 审核包已备料**：V/T/C 盲态分层包（144 gold 条目+24 surface 检查、双审表格、sealed key、S 空模板），人工签署与裁决待人类执行 |
 | C 语言/迎合控制家族 | 超出已完成批次范围 | 后续票据合成生成 |
 | **Phase 0 构念准入（阶段门）** | 受限 pilot 观察：V decisive accuracy 1/2=**50% < 草案 75%**；S 拒绝/良性误拒绝基线缺失；T 缺充分退化基线比较；每任务 1 family 功效 **not_estimable**；T03_NUMERICS=failed_limit_recorded | 按计划 §6.3 流程：先查模板/checkpoint/解析/长度/任务难度，最多两轮 pilot 修订（保留日志）；仍不过则按预规则宣布该构念当前协议下不适合或转对照模型——**不为过门改阈值** |
 | 功效重估 + 完整资源重估 | 1 family/task 不足以估功效；资源摘要缺 prefill/decode 分开、forward/s 及据此的预算重估（600 行已生成≠600 行已跑） | 扩样后按计划 §14 实测重估 |

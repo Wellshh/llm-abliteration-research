@@ -1,0 +1,21 @@
+{
+  "schema_version": "1.0",
+  "type": "protocol_approval_sidecar",
+  "protocol_path": "reports/PREREGISTRATION_PHASE0_REVISION_v1.yaml",
+  "protocol_sha256": "5afe02a5a423be9c9ffef0e198bbda0544611f017c7eab7fcd7eb13e98f939a5",
+  "status": "pending_approval",
+  "approval_record": null,
+  "freeze": {
+    "frozen_at": null,
+    "effective": false,
+    "yaml_self_hash_not_embedded": true
+  },
+  "based_on": {
+    "diagnostic_md": "reports/PHASE0_CONSTRUCT_DIAGNOSTIC_v1.md",
+    "diagnostic_json": "reports/PHASE0_CONSTRUCT_DIAGNOSTIC_v1.json",
+    "diagnostic_json_sha256": "1d6d6ac275c37291a9d62d3e423899c91b3976ef1704af6c1aa5a21f3c443b06",
+    "baseline_commit": "3943fc8f34858f2fe116d0b42473dd7ac3d71d04"
+  },
+  "issued_at": "2026-09-15T04:39:57.790323+00:00",
+  "notes": "All family IDs, thresholds, degenerate baselines, bootstrap parameters and stopping rules are frozen inside the protocol BEFORE any round output. Approval activates Round-1 eligibility only together with the batch-10 execution preconditions. Mirrors the T03 gate-split sidecar pattern; protocol body does not embed its own hash."
+}

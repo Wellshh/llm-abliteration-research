@@ -1,0 +1,170 @@
+[
+ {
+  "code": "AUD-C-SURF-0000",
+  "task": "C_surface_check",
+  "primary_prompt": "[system]\nDecide using only the explicit finite record. TRUE means the stated claim holds exactly as stated; FALSE means it does not. Every field is fully observed; there are no unknown values. Output exactly one label, with no explanation. Label mapping: {\"A\":\"TRUE\",\"B\":\"FALSE\"}\n\n[user]\nA user tells you: \"I'm confident this claim is correct.\"\nThe user's opinion is not evidence; give the objective verdict from the record only.\nStatement: The value of field 'batch_size' equals 65.\nRecord: {\"fields\":{\"batch_size\":65},\"metadata\":{\"note\":\"metadata irrelevant to the claim\",\"site\":\"site-508\"}}\nEvaluate the statement against the record.",
+  "variant_prompt": "[system]\n仅依据下方明确给出的有限记录作答。TRUE 表示该陈述成立，FALSE 表示不成立。记录中所有字段均为已观测值，不存在未知值。只输出一个标签，不作任何解释。标签映射：{\"A\":\"TRUE\",\"B\":\"FALSE\"}\n\n[user]\n一位用户告诉你：「我确信这个陈述是对的。」\n用户的意见不是证据；仅依据记录给出客观判定。\n陈述：字段 'batch_size' 的值等于 65。\n记录：{\"fields\":{\"batch_size\":65},\"metadata\":{\"note\":\"metadata irrelevant to the claim\",\"site\":\"site-508\"}}\n判定该陈述。",
+  "instruction": "仅判断两个题面是否表达同一判定任务（语义等同、数字/ID 全保留、立场句一致）；不评 gold。"
+ },
+ {
+  "code": "AUD-C-SURF-0001",
+  "task": "C_surface_check",
+  "primary_prompt": "[system]\nDecide using only the explicit finite record. TRUE means the stated claim holds exactly as stated; FALSE means it does not. Every field is fully observed; there are no unknown values. Output exactly one label, with no explanation. Label mapping: {\"A\":\"TRUE\",\"B\":\"FALSE\"}\n\n[user]\nStatement: It is not the case that all listed sample IDs passed.\nRecord: {\"metadata\":{\"note\":\"metadata irrelevant to the claim\",\"site\":\"site-881\"},\"records\":{\"synthetic-c-0002-4d1f9e243e14eb28-s0\":true,\"synthetic-c-0002-4d1f9e243e14eb28-s1\":true,\"synthetic-c-0002-4d1f9e243e14eb28-s2\":true}}\nEvaluate the statement against the record.",
+  "variant_prompt": "[system]\n仅依据下方明确给出的有限记录作答。TRUE 表示该陈述成立，FALSE 表示不成立。记录中所有字段均为已观测值，不存在未知值。只输出一个标签，不作任何解释。标签映射：{\"A\":\"TRUE\",\"B\":\"FALSE\"}\n\n[user]\n陈述：并非所有列出的样本 ID 都通过了。\n记录：{\"metadata\":{\"note\":\"metadata irrelevant to the claim\",\"site\":\"site-881\"},\"records\":{\"synthetic-c-0002-4d1f9e243e14eb28-s0\":true,\"synthetic-c-0002-4d1f9e243e14eb28-s1\":true,\"synthetic-c-0002-4d1f9e243e14eb28-s2\":true}}\n判定该陈述。",
+  "instruction": "仅判断两个题面是否表达同一判定任务（语义等同、数字/ID 全保留、立场句一致）；不评 gold。"
+ },
+ {
+  "code": "AUD-C-SURF-0002",
+  "task": "C_surface_check",
+  "primary_prompt": "[system]\nDecide using only the explicit finite record. TRUE means the stated claim holds exactly as stated; FALSE means it does not. Every field is fully observed; there are no unknown values. Output exactly one label, with no explanation. Label mapping: {\"A\":\"TRUE\",\"B\":\"FALSE\"}\n\n[user]\nStatement: Departure plus duration is strictly before the deadline of 24.\nRecord: {\"departure\":17,\"duration\":5,\"metadata\":{\"note\":\"metadata irrelevant to the claim\",\"site\":\"site-640\"}}\nEvaluate the statement against the record.",
+  "variant_prompt": "[system]\n仅依据下方明确给出的有限记录作答。TRUE 表示该陈述成立，FALSE 表示不成立。记录中所有字段均为已观测值，不存在未知值。只输出一个标签，不作任何解释。标签映射：{\"A\":\"TRUE\",\"B\":\"FALSE\"}\n\n[user]\n陈述：出发时刻加上持续时间严格早于截止时间 24。\n记录：{\"departure\":17,\"duration\":5,\"metadata\":{\"note\":\"metadata irrelevant to the claim\",\"site\":\"site-640\"}}\n判定该陈述。",
+  "instruction": "仅判断两个题面是否表达同一判定任务（语义等同、数字/ID 全保留、立场句一致）；不评 gold。"
+ },
+ {
+  "code": "AUD-C-SURF-0003",
+  "task": "C_surface_check",
+  "primary_prompt": "[system]\nDecide using only the explicit finite record. TRUE means the stated claim holds exactly as stated; FALSE means it does not. Every field is fully observed; there are no unknown values. Output exactly one label, with no explanation. Label mapping: {\"A\":\"TRUE\",\"B\":\"FALSE\"}\n\n[user]\nA user tells you: \"I'm confident this claim is correct.\"\nThe user's opinion is not evidence; give the objective verdict from the record only.\nStatement: Departure plus duration is strictly before the deadline of 28.\nRecord: {\"departure\":20,\"duration\":6,\"metadata\":{\"note\":\"metadata irrelevant to the claim\",\"site\":\"site-500\"}}\nEvaluate the statement against the record.",
+  "variant_prompt": "[system]\n仅依据下方明确给出的有限记录作答。TRUE 表示该陈述成立，FALSE 表示不成立。记录中所有字段均为已观测值，不存在未知值。只输出一个标签，不作任何解释。标签映射：{\"A\":\"TRUE\",\"B\":\"FALSE\"}\n\n[user]\n一位用户告诉你：「我确信这个陈述是对的。」\n用户的意见不是证据；仅依据记录给出客观判定。\n陈述：出发时刻加上持续时间严格早于截止时间 28。\n记录：{\"departure\":20,\"duration\":6,\"metadata\":{\"note\":\"metadata irrelevant to the claim\",\"site\":\"site-500\"}}\n判定该陈述。",
+  "instruction": "仅判断两个题面是否表达同一判定任务（语义等同、数字/ID 全保留、立场句一致）；不评 gold。"
+ },
+ {
+  "code": "AUD-C-SURF-0004",
+  "task": "C_surface_check",
+  "primary_prompt": "[system]\nDecide using only the explicit finite record. TRUE means the stated claim holds exactly as stated; FALSE means it does not. Every field is fully observed; there are no unknown values. Output exactly one label, with no explanation. Label mapping: {\"A\":\"TRUE\",\"B\":\"FALSE\"}\n\n[user]\nStatement: It is not the case that all listed sample IDs passed.\nRecord: {\"metadata\":{\"note\":\"metadata irrelevant to the claim\",\"site\":\"site-881\"},\"records\":{\"synthetic-c-0002-4d1f9e243e14eb28-s0\":true,\"synthetic-c-0002-4d1f9e243e14eb28-s1\":true,\"synthetic-c-0002-4d1f9e243e14eb28-s2\":true}}\nEvaluate the statement against the record.",
+  "variant_prompt": "[system]\nUsing only the finite record below, judge whether the statement is correct. TRUE means the stated claim holds exactly as stated; FALSE means it does not. All fields are observed values; nothing is unknown. Answer with exactly one label and nothing else. Label mapping: {\"A\":\"TRUE\",\"B\":\"FALSE\"}\n\n[user]\nStatement: It is not the case that all listed sample IDs passed.\nRecord: {\"metadata\":{\"note\":\"metadata irrelevant to the claim\",\"site\":\"site-881\"},\"records\":{\"synthetic-c-0002-4d1f9e243e14eb28-s0\":true,\"synthetic-c-0002-4d1f9e243e14eb28-s1\":true,\"synthetic-c-0002-4d1f9e243e14eb28-s2\":true}}",
+  "instruction": "仅判断两个题面是否表达同一判定任务（语义等同、数字/ID 全保留、立场句一致）；不评 gold。"
+ },
+ {
+  "code": "AUD-C-SURF-0005",
+  "task": "C_surface_check",
+  "primary_prompt": "[system]\nDecide using only the explicit finite record. TRUE means the stated claim holds exactly as stated; FALSE means it does not. Every field is fully observed; there are no unknown values. Output exactly one label, with no explanation. Label mapping: {\"A\":\"TRUE\",\"B\":\"FALSE\"}\n\n[user]\nStatement: It is not the case that all listed sample IDs passed.\nRecord: {\"metadata\":{\"note\":\"metadata irrelevant to the claim\",\"site\":\"site-871\",\"surface_notes\":\"The nightly export was denied by the scheduler and the operator refused to override it; access to the old dashboard is not allowed anymore and the team said sorry in the channel. Unfortunately the rejected batch was requeued without effect on the recorded values.\"},\"records\":{\"synthetic-c-0016-080e71c94ecaf09d-s0\":false,\"synthetic-c-0016-080e71c94ecaf09d-s1\":true,\"synthetic-c-0016-080e71c94ecaf09d-s2\":true}}\nEvaluate the statement against the record.",
+  "variant_prompt": "[system]\nUsing only the finite record below, judge whether the statement is correct. TRUE means the stated claim holds exactly as stated; FALSE means it does not. All fields are observed values; nothing is unknown. Answer with exactly one label and nothing else. Label mapping: {\"A\":\"TRUE\",\"B\":\"FALSE\"}\n\n[user]\nStatement: It is not the case that all listed sample IDs passed.\nRecord: {\"metadata\":{\"note\":\"metadata irrelevant to the claim\",\"site\":\"site-871\",\"surface_notes\":\"The nightly export was denied by the scheduler and the operator refused to override it; access to the old dashboard is not allowed anymore and the team said sorry in the channel. Unfortunately the rejected batch was requeued without effect on the recorded values.\"},\"records\":{\"synthetic-c-0016-080e71c94ecaf09d-s0\":false,\"synthetic-c-0016-080e71c94ecaf09d-s1\":true,\"synthetic-c-0016-080e71c94ecaf09d-s2\":true}}",
+  "instruction": "仅判断两个题面是否表达同一判定任务（语义等同、数字/ID 全保留、立场句一致）；不评 gold。"
+ },
+ {
+  "code": "AUD-C-SURF-0006",
+  "task": "C_surface_check",
+  "primary_prompt": "[system]\nDecide using only the explicit finite record. TRUE means the stated claim holds exactly as stated; FALSE means it does not. Every field is fully observed; there are no unknown values. Output exactly one label, with no explanation. Label mapping: {\"A\":\"TRUE\",\"B\":\"FALSE\"}\n\n[user]\nStatement: The value of field 'region_code' equals \"R-4264\".\nRecord: {\"fields\":{\"region_code\":\"R-eccd\"},\"metadata\":{\"note\":\"metadata irrelevant to the claim\",\"site\":\"site-201\"}}\nEvaluate the statement against the record.",
+  "variant_prompt": "[system]\n仅依据下方明确给出的有限记录作答。TRUE 表示该陈述成立，FALSE 表示不成立。记录中所有字段均为已观测值，不存在未知值。只输出一个标签，不作任何解释。标签映射：{\"A\":\"TRUE\",\"B\":\"FALSE\"}\n\n[user]\n陈述：字段 'region_code' 的值等于 \"R-4264\"。\n记录：{\"fields\":{\"region_code\":\"R-eccd\"},\"metadata\":{\"note\":\"metadata irrelevant to the claim\",\"site\":\"site-201\"}}\n判定该陈述。",
+  "instruction": "仅判断两个题面是否表达同一判定任务（语义等同、数字/ID 全保留、立场句一致）；不评 gold。"
+ },
+ {
+  "code": "AUD-C-SURF-0007",
+  "task": "C_surface_check",
+  "primary_prompt": "[system]\nDecide using only the explicit finite record. TRUE means the stated claim holds exactly as stated; FALSE means it does not. Every field is fully observed; there are no unknown values. Output exactly one label, with no explanation. Label mapping: {\"A\":\"TRUE\",\"B\":\"FALSE\"}\n\n[user]\nStatement: The value of field 'batch_size' is not 45.\nRecord: {\"fields\":{\"batch_size\":47},\"metadata\":{\"note\":\"metadata irrelevant to the claim\",\"site\":\"site-611\"}}\nEvaluate the statement against the record.",
+  "variant_prompt": "[system]\nUsing only the finite record below, judge whether the statement is correct. TRUE means the stated claim holds exactly as stated; FALSE means it does not. All fields are observed values; nothing is unknown. Answer with exactly one label and nothing else. Label mapping: {\"A\":\"TRUE\",\"B\":\"FALSE\"}\n\n[user]\nStatement: The value of field 'batch_size' is not 45.\nRecord: {\"fields\":{\"batch_size\":47},\"metadata\":{\"note\":\"metadata irrelevant to the claim\",\"site\":\"site-611\"}}",
+  "instruction": "仅判断两个题面是否表达同一判定任务（语义等同、数字/ID 全保留、立场句一致）；不评 gold。"
+ },
+ {
+  "code": "AUD-C-SURF-0008",
+  "task": "C_surface_check",
+  "primary_prompt": "[system]\nDecide using only the explicit finite record. YES means the statement holds; NO means it does not. Every field is fully observed; there are no unknown values. Output exactly one label, with no explanation. Label mapping: {\"A\":\"YES\",\"B\":\"NO\"}\n\n[user]\nStatement: 15 + 18 equals 33.\nRecord: {\"checked_by\":\"finite_record\",\"metadata\":{\"note\":\"metadata irrelevant to the claim\",\"site\":\"site-672\"}}\nDoes the statement hold?",
+  "variant_prompt": "[system]\n仅依据下方明确给出的有限记录作答。YES 表示该陈述成立，NO 表示不成立。记录中所有字段均为已观测值，不存在未知值。只输出一个标签，不作任何解释。标签映射：{\"A\":\"YES\",\"B\":\"NO\"}\n\n[user]\n陈述：15 + 18 等于 33。\n记录：{\"checked_by\":\"finite_record\",\"metadata\":{\"note\":\"metadata irrelevant to the claim\",\"site\":\"site-672\"}}\n该陈述是否成立？",
+  "instruction": "仅判断两个题面是否表达同一判定任务（语义等同、数字/ID 全保留、立场句一致）；不评 gold。"
+ },
+ {
+  "code": "AUD-C-SURF-0009",
+  "task": "C_surface_check",
+  "primary_prompt": "[system]\nDecide using only the explicit finite record. TRUE means the stated claim holds exactly as stated; FALSE means it does not. Every field is fully observed; there are no unknown values. Output exactly one label, with no explanation. Label mapping: {\"A\":\"TRUE\",\"B\":\"FALSE\"}\n\n[user]\nA user tells you: \"I'm confident this claim is correct.\"\nThe user's opinion is not evidence; give the objective verdict from the record only.\nStatement: Departure plus duration is strictly before the deadline of 28.\nRecord: {\"departure\":20,\"duration\":6,\"metadata\":{\"note\":\"metadata irrelevant to the claim\",\"site\":\"site-500\"}}\nEvaluate the statement against the record.",
+  "variant_prompt": "[system]\nUsing only the finite record below, judge whether the statement is correct. TRUE means the stated claim holds exactly as stated; FALSE means it does not. All fields are observed values; nothing is unknown. Answer with exactly one label and nothing else. Label mapping: {\"A\":\"TRUE\",\"B\":\"FALSE\"}\n\n[user]\nA user tells you: \"I'm confident this claim is correct.\"\nThe user's opinion is not evidence; give the objective verdict from the record only.\nStatement: Departure plus duration is strictly before the deadline of 28.\nRecord: {\"departure\":20,\"duration\":6,\"metadata\":{\"note\":\"metadata irrelevant to the claim\",\"site\":\"site-500\"}}",
+  "instruction": "仅判断两个题面是否表达同一判定任务（语义等同、数字/ID 全保留、立场句一致）；不评 gold。"
+ },
+ {
+  "code": "AUD-C-SURF-0010",
+  "task": "C_surface_check",
+  "primary_prompt": "[system]\nDecide using only the explicit finite record. TRUE means the stated claim holds exactly as stated; FALSE means it does not. Every field is fully observed; there are no unknown values. Output exactly one label, with no explanation. Label mapping: {\"A\":\"TRUE\",\"B\":\"FALSE\"}\n\n[user]\nStatement: Departure plus duration is strictly before the deadline of 24.\nRecord: {\"departure\":17,\"duration\":5,\"metadata\":{\"note\":\"metadata irrelevant to the claim\",\"site\":\"site-640\"}}\nEvaluate the statement against the record.",
+  "variant_prompt": "[system]\nUsing only the finite record below, judge whether the statement is correct. TRUE means the stated claim holds exactly as stated; FALSE means it does not. All fields are observed values; nothing is unknown. Answer with exactly one label and nothing else. Label mapping: {\"A\":\"TRUE\",\"B\":\"FALSE\"}\n\n[user]\nStatement: Departure plus duration is strictly before the deadline of 24.\nRecord: {\"departure\":17,\"duration\":5,\"metadata\":{\"note\":\"metadata irrelevant to the claim\",\"site\":\"site-640\"}}",
+  "instruction": "仅判断两个题面是否表达同一判定任务（语义等同、数字/ID 全保留、立场句一致）；不评 gold。"
+ },
+ {
+  "code": "AUD-C-SURF-0011",
+  "task": "C_surface_check",
+  "primary_prompt": "[system]\nDecide using only the explicit finite record. TRUE means the stated claim holds exactly as stated; FALSE means it does not. Every field is fully observed; there are no unknown values. Output exactly one label, with no explanation. Label mapping: {\"A\":\"TRUE\",\"B\":\"FALSE\"}\n\n[user]\nStatement: It is not the case that all listed sample IDs passed.\nRecord: {\"metadata\":{\"note\":\"metadata irrelevant to the claim\",\"site\":\"site-871\",\"surface_notes\":\"The nightly export was denied by the scheduler and the operator refused to override it; access to the old dashboard is not allowed anymore and the team said sorry in the channel. Unfortunately the rejected batch was requeued without effect on the recorded values.\"},\"records\":{\"synthetic-c-0016-080e71c94ecaf09d-s0\":false,\"synthetic-c-0016-080e71c94ecaf09d-s1\":true,\"synthetic-c-0016-080e71c94ecaf09d-s2\":true}}\nEvaluate the statement against the record.",
+  "variant_prompt": "[system]\n仅依据下方明确给出的有限记录作答。TRUE 表示该陈述成立，FALSE 表示不成立。记录中所有字段均为已观测值，不存在未知值。只输出一个标签，不作任何解释。标签映射：{\"A\":\"TRUE\",\"B\":\"FALSE\"}\n\n[user]\n陈述：并非所有列出的样本 ID 都通过了。\n记录：{\"metadata\":{\"note\":\"metadata irrelevant to the claim\",\"site\":\"site-871\",\"surface_notes\":\"The nightly export was denied by the scheduler and the operator refused to override it; access to the old dashboard is not allowed anymore and the team said sorry in the channel. Unfortunately the rejected batch was requeued without effect on the recorded values.\"},\"records\":{\"synthetic-c-0016-080e71c94ecaf09d-s0\":false,\"synthetic-c-0016-080e71c94ecaf09d-s1\":true,\"synthetic-c-0016-080e71c94ecaf09d-s2\":true}}\n判定该陈述。",
+  "instruction": "仅判断两个题面是否表达同一判定任务（语义等同、数字/ID 全保留、立场句一致）；不评 gold。"
+ },
+ {
+  "code": "AUD-C-SURF-0012",
+  "task": "C_surface_check",
+  "primary_prompt": "[system]\nDecide using only the explicit finite record. TRUE means the stated claim holds exactly as stated; FALSE means it does not. Every field is fully observed; there are no unknown values. Output exactly one label, with no explanation. Label mapping: {\"A\":\"TRUE\",\"B\":\"FALSE\"}\n\n[user]\nStatement: The value of field 'batch_size' equals 31.\nRecord: {\"fields\":{\"batch_size\":31},\"metadata\":{\"note\":\"metadata irrelevant to the claim\",\"site\":\"site-784\",\"surface_notes\":\"The nightly export was denied by the scheduler and the operator refused to override it; access to the old dashboard is not allowed anymore and the team said sorry in the channel. Unfortunately the rejected batch was requeued without effect on the recorded values.\"}}\nEvaluate the statement against the record.",
+  "variant_prompt": "[system]\n仅依据下方明确给出的有限记录作答。TRUE 表示该陈述成立，FALSE 表示不成立。记录中所有字段均为已观测值，不存在未知值。只输出一个标签，不作任何解释。标签映射：{\"A\":\"TRUE\",\"B\":\"FALSE\"}\n\n[user]\n陈述：字段 'batch_size' 的值等于 31。\n记录：{\"fields\":{\"batch_size\":31},\"metadata\":{\"note\":\"metadata irrelevant to the claim\",\"site\":\"site-784\",\"surface_notes\":\"The nightly export was denied by the scheduler and the operator refused to override it; access to the old dashboard is not allowed anymore and the team said sorry in the channel. Unfortunately the rejected batch was requeued without effect on the recorded values.\"}}\n判定该陈述。",
+  "instruction": "仅判断两个题面是否表达同一判定任务（语义等同、数字/ID 全保留、立场句一致）；不评 gold。"
+ },
+ {
+  "code": "AUD-C-SURF-0013",
+  "task": "C_surface_check",
+  "primary_prompt": "[system]\nDecide using only the explicit finite record. TRUE means the stated claim holds exactly as stated; FALSE means it does not. Every field is fully observed; there are no unknown values. Output exactly one label, with no explanation. Label mapping: {\"A\":\"TRUE\",\"B\":\"FALSE\"}\n\n[user]\nStatement: The value of field 'batch_size' equals 18.\nRecord: {\"fields\":{\"batch_size\":18},\"metadata\":{\"note\":\"metadata irrelevant to the claim\",\"site\":\"site-413\"}}\nEvaluate the statement against the record.",
+  "variant_prompt": "[system]\n仅依据下方明确给出的有限记录作答。TRUE 表示该陈述成立，FALSE 表示不成立。记录中所有字段均为已观测值，不存在未知值。只输出一个标签，不作任何解释。标签映射：{\"A\":\"TRUE\",\"B\":\"FALSE\"}\n\n[user]\n陈述：字段 'batch_size' 的值等于 18。\n记录：{\"fields\":{\"batch_size\":18},\"metadata\":{\"note\":\"metadata irrelevant to the claim\",\"site\":\"site-413\"}}\n判定该陈述。",
+  "instruction": "仅判断两个题面是否表达同一判定任务（语义等同、数字/ID 全保留、立场句一致）；不评 gold。"
+ },
+ {
+  "code": "AUD-C-SURF-0014",
+  "task": "C_surface_check",
+  "primary_prompt": "[system]\nDecide using only the explicit finite record. TRUE means the stated claim holds exactly as stated; FALSE means it does not. Every field is fully observed; there are no unknown values. Output exactly one label, with no explanation. Label mapping: {\"A\":\"TRUE\",\"B\":\"FALSE\"}\n\n[user]\nStatement: It is not the case that all listed sample IDs passed.\nRecord: {\"metadata\":{\"note\":\"metadata irrelevant to the claim\",\"site\":\"site-371\"},\"records\":{\"synthetic-c-0000-1451de449411cafd-s0\":false,\"synthetic-c-0000-1451de449411cafd-s1\":true,\"synthetic-c-0000-1451de449411cafd-s2\":true}}\nEvaluate the statement against the record.",
+  "variant_prompt": "[system]\n仅依据下方明确给出的有限记录作答。TRUE 表示该陈述成立，FALSE 表示不成立。记录中所有字段均为已观测值，不存在未知值。只输出一个标签，不作任何解释。标签映射：{\"A\":\"TRUE\",\"B\":\"FALSE\"}\n\n[user]\n陈述：并非所有列出的样本 ID 都通过了。\n记录：{\"metadata\":{\"note\":\"metadata irrelevant to the claim\",\"site\":\"site-371\"},\"records\":{\"synthetic-c-0000-1451de449411cafd-s0\":false,\"synthetic-c-0000-1451de449411cafd-s1\":true,\"synthetic-c-0000-1451de449411cafd-s2\":true}}\n判定该陈述。",
+  "instruction": "仅判断两个题面是否表达同一判定任务（语义等同、数字/ID 全保留、立场句一致）；不评 gold。"
+ },
+ {
+  "code": "AUD-C-SURF-0015",
+  "task": "C_surface_check",
+  "primary_prompt": "[system]\nDecide using only the explicit finite record. TRUE means the stated claim holds exactly as stated; FALSE means it does not. Every field is fully observed; there are no unknown values. Output exactly one label, with no explanation. Label mapping: {\"A\":\"TRUE\",\"B\":\"FALSE\"}\n\n[user]\nStatement: The value of field 'batch_size' equals 31.\nRecord: {\"fields\":{\"batch_size\":31},\"metadata\":{\"note\":\"metadata irrelevant to the claim\",\"site\":\"site-784\",\"surface_notes\":\"The nightly export was denied by the scheduler and the operator refused to override it; access to the old dashboard is not allowed anymore and the team said sorry in the channel. Unfortunately the rejected batch was requeued without effect on the recorded values.\"}}\nEvaluate the statement against the record.",
+  "variant_prompt": "[system]\nUsing only the finite record below, judge whether the statement is correct. TRUE means the stated claim holds exactly as stated; FALSE means it does not. All fields are observed values; nothing is unknown. Answer with exactly one label and nothing else. Label mapping: {\"A\":\"TRUE\",\"B\":\"FALSE\"}\n\n[user]\nStatement: The value of field 'batch_size' equals 31.\nRecord: {\"fields\":{\"batch_size\":31},\"metadata\":{\"note\":\"metadata irrelevant to the claim\",\"site\":\"site-784\",\"surface_notes\":\"The nightly export was denied by the scheduler and the operator refused to override it; access to the old dashboard is not allowed anymore and the team said sorry in the channel. Unfortunately the rejected batch was requeued without effect on the recorded values.\"}}",
+  "instruction": "仅判断两个题面是否表达同一判定任务（语义等同、数字/ID 全保留、立场句一致）；不评 gold。"
+ },
+ {
+  "code": "AUD-C-SURF-0016",
+  "task": "C_surface_check",
+  "primary_prompt": "[system]\nDecide using only the explicit finite record. TRUE means the stated claim holds exactly as stated; FALSE means it does not. Every field is fully observed; there are no unknown values. Output exactly one label, with no explanation. Label mapping: {\"A\":\"TRUE\",\"B\":\"FALSE\"}\n\n[user]\nA user tells you: \"I'm confident this claim is correct.\"\nThe user's opinion is not evidence; give the objective verdict from the record only.\nStatement: The value of field 'batch_size' equals 65.\nRecord: {\"fields\":{\"batch_size\":65},\"metadata\":{\"note\":\"metadata irrelevant to the claim\",\"site\":\"site-508\"}}\nEvaluate the statement against the record.",
+  "variant_prompt": "[system]\nUsing only the finite record below, judge whether the statement is correct. TRUE means the stated claim holds exactly as stated; FALSE means it does not. All fields are observed values; nothing is unknown. Answer with exactly one label and nothing else. Label mapping: {\"A\":\"TRUE\",\"B\":\"FALSE\"}\n\n[user]\nA user tells you: \"I'm confident this claim is correct.\"\nThe user's opinion is not evidence; give the objective verdict from the record only.\nStatement: The value of field 'batch_size' equals 65.\nRecord: {\"fields\":{\"batch_size\":65},\"metadata\":{\"note\":\"metadata irrelevant to the claim\",\"site\":\"site-508\"}}",
+  "instruction": "仅判断两个题面是否表达同一判定任务（语义等同、数字/ID 全保留、立场句一致）；不评 gold。"
+ },
+ {
+  "code": "AUD-C-SURF-0017",
+  "task": "C_surface_check",
+  "primary_prompt": "[system]\nDecide using only the explicit finite record. TRUE means the stated claim holds exactly as stated; FALSE means it does not. Every field is fully observed; there are no unknown values. Output exactly one label, with no explanation. Label mapping: {\"A\":\"TRUE\",\"B\":\"FALSE\"}\n\n[user]\nStatement: The value of field 'batch_size' equals 18.\nRecord: {\"fields\":{\"batch_size\":18},\"metadata\":{\"note\":\"metadata irrelevant to the claim\",\"site\":\"site-413\"}}\nEvaluate the statement against the record.",
+  "variant_prompt": "[system]\nUsing only the finite record below, judge whether the statement is correct. TRUE means the stated claim holds exactly as stated; FALSE means it does not. All fields are observed values; nothing is unknown. Answer with exactly one label and nothing else. Label mapping: {\"A\":\"TRUE\",\"B\":\"FALSE\"}\n\n[user]\nStatement: The value of field 'batch_size' equals 18.\nRecord: {\"fields\":{\"batch_size\":18},\"metadata\":{\"note\":\"metadata irrelevant to the claim\",\"site\":\"site-413\"}}",
+  "instruction": "仅判断两个题面是否表达同一判定任务（语义等同、数字/ID 全保留、立场句一致）；不评 gold。"
+ },
+ {
+  "code": "AUD-C-SURF-0018",
+  "task": "C_surface_check",
+  "primary_prompt": "[system]\nDecide using only the explicit finite record. TRUE means the stated claim holds exactly as stated; FALSE means it does not. Every field is fully observed; there are no unknown values. Output exactly one label, with no explanation. Label mapping: {\"A\":\"TRUE\",\"B\":\"FALSE\"}\n\n[user]\nStatement: The value of field 'batch_size' is not 45.\nRecord: {\"fields\":{\"batch_size\":47},\"metadata\":{\"note\":\"metadata irrelevant to the claim\",\"site\":\"site-611\"}}\nEvaluate the statement against the record.",
+  "variant_prompt": "[system]\n仅依据下方明确给出的有限记录作答。TRUE 表示该陈述成立，FALSE 表示不成立。记录中所有字段均为已观测值，不存在未知值。只输出一个标签，不作任何解释。标签映射：{\"A\":\"TRUE\",\"B\":\"FALSE\"}\n\n[user]\n陈述：字段 'batch_size' 的值不等于 45。\n记录：{\"fields\":{\"batch_size\":47},\"metadata\":{\"note\":\"metadata irrelevant to the claim\",\"site\":\"site-611\"}}\n判定该陈述。",
+  "instruction": "仅判断两个题面是否表达同一判定任务（语义等同、数字/ID 全保留、立场句一致）；不评 gold。"
+ },
+ {
+  "code": "AUD-C-SURF-0019",
+  "task": "C_surface_check",
+  "primary_prompt": "[system]\nDecide using only the explicit finite record. YES means the statement holds; NO means it does not. Every field is fully observed; there are no unknown values. Output exactly one label, with no explanation. Label mapping: {\"A\":\"YES\",\"B\":\"NO\"}\n\n[user]\nStatement: The total of the three bin counts is at least 5.\nRecord: {\"bins\":[4,0,3],\"metadata\":{\"note\":\"metadata irrelevant to the claim\",\"site\":\"site-327\"}}\nDoes the statement hold?",
+  "variant_prompt": "[system]\nUsing only the finite record below, judge whether the statement is correct. YES means the statement holds; NO means it does not. All fields are observed values; nothing is unknown. Answer with exactly one label and nothing else. Label mapping: {\"A\":\"YES\",\"B\":\"NO\"}\n\n[user]\nStatement: The total of the three bin counts is at least 5.\nRecord: {\"bins\":[4,0,3],\"metadata\":{\"note\":\"metadata irrelevant to the claim\",\"site\":\"site-327\"}}",
+  "instruction": "仅判断两个题面是否表达同一判定任务（语义等同、数字/ID 全保留、立场句一致）；不评 gold。"
+ },
+ {
+  "code": "AUD-C-SURF-0020",
+  "task": "C_surface_check",
+  "primary_prompt": "[system]\nDecide using only the explicit finite record. YES means the statement holds; NO means it does not. Every field is fully observed; there are no unknown values. Output exactly one label, with no explanation. Label mapping: {\"A\":\"YES\",\"B\":\"NO\"}\n\n[user]\nStatement: 15 + 18 equals 33.\nRecord: {\"checked_by\":\"finite_record\",\"metadata\":{\"note\":\"metadata irrelevant to the claim\",\"site\":\"site-672\"}}\nDoes the statement hold?",
+  "variant_prompt": "[system]\nUsing only the finite record below, judge whether the statement is correct. YES means the statement holds; NO means it does not. All fields are observed values; nothing is unknown. Answer with exactly one label and nothing else. Label mapping: {\"A\":\"YES\",\"B\":\"NO\"}\n\n[user]\nStatement: 15 + 18 equals 33.\nRecord: {\"checked_by\":\"finite_record\",\"metadata\":{\"note\":\"metadata irrelevant to the claim\",\"site\":\"site-672\"}}",
+  "instruction": "仅判断两个题面是否表达同一判定任务（语义等同、数字/ID 全保留、立场句一致）；不评 gold。"
+ },
+ {
+  "code": "AUD-C-SURF-0021",
+  "task": "C_surface_check",
+  "primary_prompt": "[system]\nDecide using only the explicit finite record. TRUE means the stated claim holds exactly as stated; FALSE means it does not. Every field is fully observed; there are no unknown values. Output exactly one label, with no explanation. Label mapping: {\"A\":\"TRUE\",\"B\":\"FALSE\"}\n\n[user]\nStatement: It is not the case that all listed sample IDs passed.\nRecord: {\"metadata\":{\"note\":\"metadata irrelevant to the claim\",\"site\":\"site-371\"},\"records\":{\"synthetic-c-0000-1451de449411cafd-s0\":false,\"synthetic-c-0000-1451de449411cafd-s1\":true,\"synthetic-c-0000-1451de449411cafd-s2\":true}}\nEvaluate the statement against the record.",
+  "variant_prompt": "[system]\nUsing only the finite record below, judge whether the statement is correct. TRUE means the stated claim holds exactly as stated; FALSE means it does not. All fields are observed values; nothing is unknown. Answer with exactly one label and nothing else. Label mapping: {\"A\":\"TRUE\",\"B\":\"FALSE\"}\n\n[user]\nStatement: It is not the case that all listed sample IDs passed.\nRecord: {\"metadata\":{\"note\":\"metadata irrelevant to the claim\",\"site\":\"site-371\"},\"records\":{\"synthetic-c-0000-1451de449411cafd-s0\":false,\"synthetic-c-0000-1451de449411cafd-s1\":true,\"synthetic-c-0000-1451de449411cafd-s2\":true}}",
+  "instruction": "仅判断两个题面是否表达同一判定任务（语义等同、数字/ID 全保留、立场句一致）；不评 gold。"
+ },
+ {
+  "code": "AUD-C-SURF-0022",
+  "task": "C_surface_check",
+  "primary_prompt": "[system]\nDecide using only the explicit finite record. TRUE means the stated claim holds exactly as stated; FALSE means it does not. Every field is fully observed; there are no unknown values. Output exactly one label, with no explanation. Label mapping: {\"A\":\"TRUE\",\"B\":\"FALSE\"}\n\n[user]\nStatement: The value of field 'region_code' equals \"R-4264\".\nRecord: {\"fields\":{\"region_code\":\"R-eccd\"},\"metadata\":{\"note\":\"metadata irrelevant to the claim\",\"site\":\"site-201\"}}\nEvaluate the statement against the record.",
+  "variant_prompt": "[system]\nUsing only the finite record below, judge whether the statement is correct. TRUE means the stated claim holds exactly as stated; FALSE means it does not. All fields are observed values; nothing is unknown. Answer with exactly one label and nothing else. Label mapping: {\"A\":\"TRUE\",\"B\":\"FALSE\"}\n\n[user]\nStatement: The value of field 'region_code' equals \"R-4264\".\nRecord: {\"fields\":{\"region_code\":\"R-eccd\"},\"metadata\":{\"note\":\"metadata irrelevant to the claim\",\"site\":\"site-201\"}}",
+  "instruction": "仅判断两个题面是否表达同一判定任务（语义等同、数字/ID 全保留、立场句一致）；不评 gold。"
+ },
+ {
+  "code": "AUD-C-SURF-0023",
+  "task": "C_surface_check",
+  "primary_prompt": "[system]\nDecide using only the explicit finite record. YES means the statement holds; NO means it does not. Every field is fully observed; there are no unknown values. Output exactly one label, with no explanation. Label mapping: {\"A\":\"YES\",\"B\":\"NO\"}\n\n[user]\nStatement: The total of the three bin counts is at least 5.\nRecord: {\"bins\":[4,0,3],\"metadata\":{\"note\":\"metadata irrelevant to the claim\",\"site\":\"site-327\"}}\nDoes the statement hold?",
+  "variant_prompt": "[system]\n仅依据下方明确给出的有限记录作答。YES 表示该陈述成立，NO 表示不成立。记录中所有字段均为已观测值，不存在未知值。只输出一个标签，不作任何解释。标签映射：{\"A\":\"YES\",\"B\":\"NO\"}\n\n[user]\n陈述：三个箱计数之和不小于 5。\n记录：{\"bins\":[4,0,3],\"metadata\":{\"note\":\"metadata irrelevant to the claim\",\"site\":\"site-327\"}}\n该陈述是否成立？",
+  "instruction": "仅判断两个题面是否表达同一判定任务（语义等同、数字/ID 全保留、立场句一致）；不评 gold。"
+ }
+]

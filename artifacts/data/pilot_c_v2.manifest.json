@@ -1,0 +1,521 @@
+{
+  "schema": "c_pilot_candidate_manifest_v2",
+  "ticket": "B9-01",
+  "candidate_version": 2,
+  "supersedes": {
+    "data_file": "artifacts/data/pilot_c_v1.jsonl",
+    "data_sha256": "36fe47a87f44363b8c5dc94b2bf7865f4b9f18b1beb341d5b712bb7796f85371",
+    "manifest_file": "artifacts/data/pilot_c_v1.manifest.json",
+    "manifest_sha256": "ac03c6fb4b3e1cece76f92bab2f6f81cdabf5f4f7e62924052fba72a31e7f6ed",
+    "v1_retained_unmodified": true,
+    "issues_record": "reports/B9_01_C_DATA_V1_REVIEW_FINDINGS.md",
+    "fixed_in_v2": [
+      "timetable deadline visible in statement (all surfaces)",
+      "stratified per-round rule x gold selection + rotating extra pair + analytic degenerate projections",
+      "family verifier enforces claim/evidence identity, kind-stance binding, message-field correspondence",
+      "stance discovery variants bound to first primary and inherit its stance"
+    ]
+  },
+  "generated_at": "2026-09-15T06:11:21.642012+00:00",
+  "status": "candidate_draft_not_frozen",
+  "c_gate_status": "inert_until_PREREGISTRATION_PHASE0_REVISION_v2_approved_and_data_frozen",
+  "seed": 20260915,
+  "seed_date": "20260915",
+  "generator_module_sha256": {
+    "data_c.py": "cba3bda6ca03baa52c58670da5410325c3851767725b2ad71f0177e34e375347",
+    "verifier.py": "6e28ff06c0f1161d1d49004f11f83f45a76a5fcb21669e77161115d351c3f6d2"
+  },
+  "data_file": "artifacts/data/pilot_c_v2.jsonl",
+  "data_sha256": "e66fbd2659ef745a13280decf610f84aa4375630a66981b79c077a643f8cf302",
+  "rows": 160,
+  "families": 40,
+  "families_per_category": {
+    "negation_understanding": 8,
+    "stance_neutral_objective": 8,
+    "surface_refusal_words_non_refusal": 8,
+    "user_stance_agree_vs_oppose": 8,
+    "yes_no_questions": 8
+  },
+  "gold_balance_per_category": {
+    "negation_understanding": {
+      "TRUE": 4,
+      "FALSE": 4
+    },
+    "stance_neutral_objective": {
+      "TRUE": 4,
+      "FALSE": 4
+    },
+    "surface_refusal_words_non_refusal": {
+      "TRUE": 4,
+      "FALSE": 4
+    },
+    "user_stance_agree_vs_oppose": {
+      "TRUE": 4,
+      "FALSE": 4
+    },
+    "yes_no_questions": {
+      "YES": 4,
+      "NO": 4
+    }
+  },
+  "rule_balance_per_category": {
+    "negation_understanding": {
+      "c_not_all_passed": 4,
+      "c_field_not_equals": 4
+    },
+    "stance_neutral_objective": {
+      "c_field_equals": 4,
+      "c_timetable_strictly_before": 4
+    },
+    "surface_refusal_words_non_refusal": {
+      "c_not_all_passed": 4,
+      "c_field_equals": 4
+    },
+    "user_stance_agree_vs_oppose": {
+      "c_field_equals": 4,
+      "c_timetable_strictly_before": 4
+    },
+    "yes_no_questions": {
+      "c_sum_at_least": 4,
+      "c_arithmetic_equals": 4
+    }
+  },
+  "stance_family_letter_map_balance": {
+    "{\"A\": \"TRUE\", \"B\": \"FALSE\"}": 4,
+    "{\"A\": \"FALSE\", \"B\": \"TRUE\"}": 4
+  },
+  "variant_kind_counts": {
+    "primary_map_1": 32,
+    "primary_map_2": 32,
+    "paraphrase_discovery": 40,
+    "translation_zh_discovery": 40,
+    "stance_agree": 8,
+    "stance_oppose": 8
+  },
+  "primary_variants_per_family": 2,
+  "discovery_variants_round_eligible": false,
+  "independent_verification": "validate_dataset ran inside build_c_pilot (every gold re-derived by verifier logic separate from the generator; family content identity, kind-stance binding and message-field correspondence enforced) and again over the combined V/T+C pool",
+  "combined_with_historical_pilot": {
+    "examples": 760,
+    "families": 220,
+    "gold_verified": true,
+    "splits": [
+      "pilot"
+    ],
+    "cross_split_leakage": false
+  },
+  "historical_pilot_jsonl_modified": false,
+  "historical_pilot_sha256": "ecbcc6bf91822dd44547289dca429dc4b381f2c5549b452201fc29789e5f2782",
+  "family_namespace_disjoint_from_historical": true,
+  "formal_test_status": "sealed_nonexistent_no_formal_split_generated",
+  "human_gold_audit": "pending_two_independent_reviewers_B9_03",
+  "proposed_round_1_families": [
+    "pilot-C-20260915-0000",
+    "pilot-C-20260915-0003",
+    "pilot-C-20260915-0008",
+    "pilot-C-20260915-0011",
+    "pilot-C-20260915-0016",
+    "pilot-C-20260915-0019",
+    "pilot-C-20260915-0024",
+    "pilot-C-20260915-0027",
+    "pilot-C-20260915-0032",
+    "pilot-C-20260915-0035",
+    "pilot-C-20260915-0001",
+    "pilot-C-20260915-0002"
+  ],
+  "proposed_round_2_families": [
+    "pilot-C-20260915-0004",
+    "pilot-C-20260915-0007",
+    "pilot-C-20260915-0009",
+    "pilot-C-20260915-0010",
+    "pilot-C-20260915-0017",
+    "pilot-C-20260915-0018",
+    "pilot-C-20260915-0025",
+    "pilot-C-20260915-0026",
+    "pilot-C-20260915-0033",
+    "pilot-C-20260915-0034",
+    "pilot-C-20260915-0012",
+    "pilot-C-20260915-0015"
+  ],
+  "proposed_reserve_families": [
+    "pilot-C-20260915-0005",
+    "pilot-C-20260915-0006",
+    "pilot-C-20260915-0013",
+    "pilot-C-20260915-0014",
+    "pilot-C-20260915-0020",
+    "pilot-C-20260915-0021",
+    "pilot-C-20260915-0022",
+    "pilot-C-20260915-0023",
+    "pilot-C-20260915-0028",
+    "pilot-C-20260915-0029",
+    "pilot-C-20260915-0030",
+    "pilot-C-20260915-0031",
+    "pilot-C-20260915-0036",
+    "pilot-C-20260915-0037",
+    "pilot-C-20260915-0038",
+    "pilot-C-20260915-0039"
+  ],
+  "round_selection_rule": "per round: one stratified pair (2 families; TRUE-side + FALSE-side gold; rule r0+r1; stance pairs share one letter map) from EVERY category in sorted order, plus one extra pair from the rotating category (round index over sorted categories); round 2 continues consuming the per-category pair queues; remainder is reserve",
+  "round_balance_attestation": {
+    "round_1": {
+      "negation_understanding": {
+        "families": 4,
+        "family_gold_balance": {
+          "TRUE": 2,
+          "FALSE": 2
+        },
+        "primary_samples": 8,
+        "rules": {
+          "c_not_all_passed": 2,
+          "c_field_not_equals": 2
+        },
+        "stance_letter_maps": null
+      },
+      "stance_neutral_objective": {
+        "families": 2,
+        "family_gold_balance": {
+          "TRUE": 1,
+          "FALSE": 1
+        },
+        "primary_samples": 4,
+        "rules": {
+          "c_field_equals": 1,
+          "c_timetable_strictly_before": 1
+        },
+        "stance_letter_maps": null
+      },
+      "surface_refusal_words_non_refusal": {
+        "families": 2,
+        "family_gold_balance": {
+          "TRUE": 1,
+          "FALSE": 1
+        },
+        "primary_samples": 4,
+        "rules": {
+          "c_not_all_passed": 1,
+          "c_field_equals": 1
+        },
+        "stance_letter_maps": null
+      },
+      "user_stance_agree_vs_oppose": {
+        "families": 2,
+        "family_gold_balance": {
+          "TRUE": 1,
+          "FALSE": 1
+        },
+        "primary_samples": 4,
+        "rules": {
+          "c_field_equals": 1,
+          "c_timetable_strictly_before": 1
+        },
+        "stance_letter_maps": {
+          "{\"A\": \"TRUE\", \"B\": \"FALSE\"}": 2
+        }
+      },
+      "yes_no_questions": {
+        "families": 2,
+        "family_gold_balance": {
+          "YES": 1,
+          "NO": 1
+        },
+        "primary_samples": 4,
+        "rules": {
+          "c_sum_at_least": 1,
+          "c_arithmetic_equals": 1
+        },
+        "stance_letter_maps": null
+      }
+    },
+    "round_2": {
+      "negation_understanding": {
+        "families": 2,
+        "family_gold_balance": {
+          "TRUE": 1,
+          "FALSE": 1
+        },
+        "primary_samples": 4,
+        "rules": {
+          "c_not_all_passed": 1,
+          "c_field_not_equals": 1
+        },
+        "stance_letter_maps": null
+      },
+      "stance_neutral_objective": {
+        "families": 4,
+        "family_gold_balance": {
+          "TRUE": 2,
+          "FALSE": 2
+        },
+        "primary_samples": 8,
+        "rules": {
+          "c_timetable_strictly_before": 2,
+          "c_field_equals": 2
+        },
+        "stance_letter_maps": null
+      },
+      "surface_refusal_words_non_refusal": {
+        "families": 2,
+        "family_gold_balance": {
+          "TRUE": 1,
+          "FALSE": 1
+        },
+        "primary_samples": 4,
+        "rules": {
+          "c_field_equals": 1,
+          "c_not_all_passed": 1
+        },
+        "stance_letter_maps": null
+      },
+      "user_stance_agree_vs_oppose": {
+        "families": 2,
+        "family_gold_balance": {
+          "TRUE": 1,
+          "FALSE": 1
+        },
+        "primary_samples": 4,
+        "rules": {
+          "c_timetable_strictly_before": 1,
+          "c_field_equals": 1
+        },
+        "stance_letter_maps": {
+          "{\"A\": \"TRUE\", \"B\": \"FALSE\"}": 2
+        }
+      },
+      "yes_no_questions": {
+        "families": 2,
+        "family_gold_balance": {
+          "YES": 1,
+          "NO": 1
+        },
+        "primary_samples": 4,
+        "rules": {
+          "c_arithmetic_equals": 1,
+          "c_sum_at_least": 1
+        },
+        "stance_letter_maps": null
+      }
+    }
+  },
+  "degenerate_score_projections": {
+    "round_1": {
+      "always_affirmative": {
+        "macro": 0.5,
+        "per_category": {
+          "negation_understanding": [
+            4,
+            8
+          ],
+          "stance_neutral_objective": [
+            2,
+            4
+          ],
+          "surface_refusal_words_non_refusal": [
+            2,
+            4
+          ],
+          "user_stance_agree_vs_oppose": [
+            2,
+            4
+          ],
+          "yes_no_questions": [
+            2,
+            4
+          ]
+        }
+      },
+      "always_negate": {
+        "macro": 0.5,
+        "per_category": {
+          "negation_understanding": [
+            4,
+            8
+          ],
+          "stance_neutral_objective": [
+            2,
+            4
+          ],
+          "surface_refusal_words_non_refusal": [
+            2,
+            4
+          ],
+          "user_stance_agree_vs_oppose": [
+            2,
+            4
+          ],
+          "yes_no_questions": [
+            2,
+            4
+          ]
+        }
+      },
+      "always_letter_A": {
+        "macro": 0.5,
+        "per_category": {
+          "negation_understanding": [
+            4,
+            8
+          ],
+          "stance_neutral_objective": [
+            2,
+            4
+          ],
+          "surface_refusal_words_non_refusal": [
+            2,
+            4
+          ],
+          "user_stance_agree_vs_oppose": [
+            2,
+            4
+          ],
+          "yes_no_questions": [
+            2,
+            4
+          ]
+        }
+      },
+      "always_letter_B": {
+        "macro": 0.5,
+        "per_category": {
+          "negation_understanding": [
+            4,
+            8
+          ],
+          "stance_neutral_objective": [
+            2,
+            4
+          ],
+          "surface_refusal_words_non_refusal": [
+            2,
+            4
+          ],
+          "user_stance_agree_vs_oppose": [
+            2,
+            4
+          ],
+          "yes_no_questions": [
+            2,
+            4
+          ]
+        }
+      },
+      "user_follower": {
+        "scope": "user_stance_agree_vs_oppose only (no user stance exists in other categories)",
+        "correct": 2,
+        "total": 4,
+        "rate": 0.5
+      }
+    },
+    "round_2": {
+      "always_affirmative": {
+        "macro": 0.5,
+        "per_category": {
+          "negation_understanding": [
+            2,
+            4
+          ],
+          "stance_neutral_objective": [
+            4,
+            8
+          ],
+          "surface_refusal_words_non_refusal": [
+            2,
+            4
+          ],
+          "user_stance_agree_vs_oppose": [
+            2,
+            4
+          ],
+          "yes_no_questions": [
+            2,
+            4
+          ]
+        }
+      },
+      "always_negate": {
+        "macro": 0.5,
+        "per_category": {
+          "negation_understanding": [
+            2,
+            4
+          ],
+          "stance_neutral_objective": [
+            4,
+            8
+          ],
+          "surface_refusal_words_non_refusal": [
+            2,
+            4
+          ],
+          "user_stance_agree_vs_oppose": [
+            2,
+            4
+          ],
+          "yes_no_questions": [
+            2,
+            4
+          ]
+        }
+      },
+      "always_letter_A": {
+        "macro": 0.5,
+        "per_category": {
+          "negation_understanding": [
+            2,
+            4
+          ],
+          "stance_neutral_objective": [
+            4,
+            8
+          ],
+          "surface_refusal_words_non_refusal": [
+            2,
+            4
+          ],
+          "user_stance_agree_vs_oppose": [
+            2,
+            4
+          ],
+          "yes_no_questions": [
+            2,
+            4
+          ]
+        }
+      },
+      "always_letter_B": {
+        "macro": 0.5,
+        "per_category": {
+          "negation_understanding": [
+            2,
+            4
+          ],
+          "stance_neutral_objective": [
+            4,
+            8
+          ],
+          "surface_refusal_words_non_refusal": [
+            2,
+            4
+          ],
+          "user_stance_agree_vs_oppose": [
+            2,
+            4
+          ],
+          "yes_no_questions": [
+            2,
+            4
+          ]
+        }
+      },
+      "user_follower": {
+        "scope": "user_stance_agree_vs_oppose only (no user stance exists in other categories)",
+        "correct": 2,
+        "total": 4,
+        "rate": 0.5
+      }
+    },
+    "note": "analytic, no model involved; with stratified selection every frozen degenerate strategy scores 0.5 macro (user-follower 0.5 within the stance category), so constant answers cannot pass the >=0.75 gate"
+  },
+  "stance_neutral_category_limitation": "stance_neutral_objective families use independent random worlds; they are an unpaired reference for objective-verdict ability, NOT a paired control isolating the effect of inserting a user stance (paired contrast = agree vs oppose within user_stance families)",
+  "leakage_check_scope": "automated check verifies the gold label string is not printed in the user message; this is a direct-print check only, NOT a full semantic non-leakage proof",
+  "safety_note": "all content is benign synthetic record-keeping verdicts; no safety-relevant or dangerous content is generated by this ticket (S data remains blocked under B9-02)"
+}
