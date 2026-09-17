@@ -1,0 +1,83 @@
+{
+  "schema": "resource_profile_prefill_decode_v1",
+  "measurement_kind": "cpu_harness_validation_NOT_a_real_profile",
+  "is_real_profile": false,
+  "device": "cpu",
+  "dtype": "torch.float32",
+  "attention_backend": "eager",
+  "timing_method": "perf_counter_no_cuda_sync",
+  "prefill": [
+    {
+      "prefill_length": 128,
+      "repeats": 3,
+      "seconds": 0.015268750488758087,
+      "forward_per_s": 196.47973173763026,
+      "tokens_per_s": 25149.405662416673
+    },
+    {
+      "prefill_length": 512,
+      "repeats": 3,
+      "seconds": 0.030698811635375023,
+      "forward_per_s": 97.72365248637259,
+      "tokens_per_s": 50034.510073022764
+    },
+    {
+      "prefill_length": 2048,
+      "repeats": 3,
+      "seconds": 0.1952178068459034,
+      "forward_per_s": 15.367450584915504,
+      "tokens_per_s": 31472.538797906953
+    }
+  ],
+  "decode": [
+    {
+      "decode_steps": 32,
+      "seconds": 0.10628074035048485,
+      "forward_per_s": 301.0893591300996
+    },
+    {
+      "decode_steps": 32,
+      "seconds": 0.10656270943582058,
+      "forward_per_s": 300.2926649427266
+    }
+  ],
+  "decode_forward_per_s_median": 300.6910120364131,
+  "allocator": {
+    "allocator_peak_allocated_bytes": null,
+    "allocator_peak_reserved_bytes": null,
+    "memory_metric": "cuda allocator peak unavailable on a cpu harness-validation run"
+  },
+  "model_load_seconds": null,
+  "model_class": "LlamaForCausalLM",
+  "measured_parameters": 22688,
+  "model_source": "random_tiny_llama_harness_control_not_MiniCPM5",
+  "ticket": "B8-02",
+  "command": [
+    "scripts/profile_resources.py",
+    "--device",
+    "cpu",
+    "--prefill-lengths",
+    "128,512,2048",
+    "--decode-steps",
+    "32",
+    "--prefill-repeats",
+    "3",
+    "--decode-repeats",
+    "2",
+    "--warmup",
+    "1",
+    "--output",
+    "artifacts/setup/RESOURCE_PROFILE_HARNESS_VALIDATION.json"
+  ],
+  "environment": {
+    "python": "3.12.1",
+    "torch": "2.6.0",
+    "transformers": "4.56.2",
+    "tokenizers": "0.22.2",
+    "safetensors": "0.6.2",
+    "huggingface-hub": "0.34.4"
+  },
+  "generated_at": "2026-09-17T02:28:22.572893+00:00",
+  "status": "harness_validation_completed",
+  "harness_note": "CPU harness-validation on a tiny random Llama. NOT a real RESOURCE_PROFILE; forward/s here do not describe MiniCPM5 on GPU. The real measurement is the gated --device cuda:0 path under an approved B8-02 ticket."
+}
