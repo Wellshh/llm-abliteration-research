@@ -36,8 +36,11 @@ class BudgetMathTests(unittest.TestCase):
     def test_reestimate_exact_arithmetic(self):
         plans = [PhasePlan(phase="P1", n_runs=10, prefill_tokens_per_run=200, decode_tokens_per_run=10)]
         out = reestimate_phase_budgets(plans, prefill_tokens_per_s=1000.0, decode_forward_per_s=50.0,
-                                       fixed_overhead_per_run_s=10.0, pre_admission_audit_s=60.0)
+                                       fixed_overhead_per_run_s=10.0, pre_admission_audit_s=60.0,
+                                       rate_provenance="real_gpu_measurement")
         ph = out["per_phase"][0]
+        self.assertTrue(out["is_real_reestimate"])
+        self.assertEqual(out["reestimate_kind"], "real_gpu_measurement_based")
         self.assertAlmostEqual(ph["prefill_s_per_run"], 0.2)          # 200/1000
         self.assertAlmostEqual(ph["decode_s_per_run"], 0.2)           # 10/50
         self.assertAlmostEqual(ph["compute_s_per_run"], 10.4)         # 10 + 0.2 + 0.2
@@ -52,7 +55,8 @@ class BudgetMathTests(unittest.TestCase):
     def test_attempts_per_run_scales_occupancy_not_charged(self):
         plans = [PhasePlan(phase="P0", n_runs=2, prefill_tokens_per_run=100, decode_tokens_per_run=4, attempts_per_run=3.0)]
         out = reestimate_phase_budgets(plans, prefill_tokens_per_s=100.0, decode_forward_per_s=10.0,
-                                       fixed_overhead_per_run_s=5.0, pre_admission_audit_s=60.0)
+                                       fixed_overhead_per_run_s=5.0, pre_admission_audit_s=60.0,
+                                       rate_provenance="real_gpu_measurement")
         ph = out["per_phase"][0]
         # compute/run = 5 + 100/100 + 4/10 = 5 + 1 + 0.4 = 6.4 ; charged = 2*6.4 = 12.8
         self.assertAlmostEqual(ph["charged_compute_s"], 12.8)
@@ -63,7 +67,7 @@ class BudgetMathTests(unittest.TestCase):
         # P0 cap = 5h = 18000s; force charged over it.
         plans = [PhasePlan(phase="P0", n_runs=100000, prefill_tokens_per_run=1000, decode_tokens_per_run=100)]
         out = reestimate_phase_budgets(plans, prefill_tokens_per_s=10.0, decode_forward_per_s=5.0,
-                                       fixed_overhead_per_run_s=1.0)
+                                       fixed_overhead_per_run_s=1.0, rate_provenance="real_gpu_measurement")
         ph = out["per_phase"][0]
         self.assertFalse(ph["charged_within_cap"])
         self.assertFalse(out["total_charged_within_main_cap"])
@@ -73,13 +77,30 @@ class BudgetMathTests(unittest.TestCase):
         for bad in (0.0, -1.0, math.inf, math.nan, True, "x", None):
             with self.assertRaises(ValueError):
                 reestimate_phase_budgets(plans, prefill_tokens_per_s=bad, decode_forward_per_s=50.0,
-                                         fixed_overhead_per_run_s=10.0)
+                                         fixed_overhead_per_run_s=10.0, rate_provenance="real_gpu_measurement")
             with self.assertRaises(ValueError):
                 reestimate_phase_budgets(plans, prefill_tokens_per_s=50.0, decode_forward_per_s=bad,
-                                         fixed_overhead_per_run_s=10.0)
+                                         fixed_overhead_per_run_s=10.0, rate_provenance="real_gpu_measurement")
 
     def test_default_audit_constant(self):
         self.assertEqual(DEFAULT_PRE_ADMISSION_AUDIT_S, 60.0)
+
+    def test_rate_provenance_required_and_stamped(self):
+        plans = [PhasePlan(phase="P1", n_runs=1, prefill_tokens_per_run=100, decode_tokens_per_run=10)]
+        with self.assertRaises(TypeError):  # required kwarg (D1)
+            reestimate_phase_budgets(plans, prefill_tokens_per_s=100.0, decode_forward_per_s=10.0,
+                                     fixed_overhead_per_run_s=1.0)
+        with self.assertRaises(ValueError):  # invalid provenance refused
+            reestimate_phase_budgets(plans, prefill_tokens_per_s=100.0, decode_forward_per_s=10.0,
+                                     fixed_overhead_per_run_s=1.0, rate_provenance="bogus")
+        for prov, kind, is_real in (("illustrative", "illustrative_not_a_real_reestimate", False),
+                                    ("cpu_harness_validation", "cpu_harness_validation_NOT_a_real_reestimate", False),
+                                    ("real_gpu_measurement", "real_gpu_measurement_based", True)):
+            out = reestimate_phase_budgets(plans, prefill_tokens_per_s=100.0, decode_forward_per_s=10.0,
+                                           fixed_overhead_per_run_s=1.0, rate_provenance=prov)
+            self.assertEqual(out["rate_provenance"], prov)
+            self.assertEqual(out["reestimate_kind"], kind)
+            self.assertEqual(out["is_real_reestimate"], is_real)
 
 
 class PhasePlanTests(unittest.TestCase):
@@ -142,7 +163,10 @@ class MeasureHarnessTests(unittest.TestCase):
             self.assertGreater(p["seconds"], 0)
         self.assertEqual(len(prof["decode"]), 1)
         self.assertEqual(prof["decode"][0]["decode_steps"], 4)
+        self.assertEqual(prof["decode"][0]["start_cache_length"], 16)   # D4: max(prefill_lengths)
+        self.assertEqual(prof["decode"][0]["end_cache_length"], 20)
         self.assertIsNotNone(prof["decode"][0]["forward_per_s"])
+        self.assertIn("decode_rate_caveat", prof)
         self.assertIsNotNone(prof["decode_forward_per_s_median"])
         # RES-05: cpu has no cuda allocator peak
         self.assertIsNone(prof["allocator"]["allocator_peak_allocated_bytes"])

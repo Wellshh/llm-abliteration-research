@@ -88,7 +88,7 @@ def _measure(args: argparse.Namespace) -> dict[str, Any]:
         if not args.model_lock:
             raise SystemExit("cuda:0 real measurement requires --model-lock (the locked official checkpoint)")
         if not args.execution_ticket:
-            raise SystemExit("cuda:0 real measurement is GATED: pass --execution-ticket <approved-id> (B8-02 §F)")
+            raise SystemExit("cuda:0 real measurement is GATED: pass --execution-ticket <B8-02 id> (intent flag; resource gate=require_admission, approval gate=§F)")
         from minicpm_research.model import load_locked_model
         t_load0 = time.perf_counter()
         model, _ = load_locked_model(args.model_lock, device=args.device, dtype=args.dtype)
@@ -132,10 +132,10 @@ def _budget_only(args: argparse.Namespace) -> dict[str, Any]:
         decode_forward_per_s=rates["decode_forward_per_s"],
         fixed_overhead_per_run_s=float(plan_doc.get("fixed_overhead_per_run_s", 12.5)),
         pre_admission_audit_s=float(plan_doc.get("pre_admission_audit_s", DEFAULT_PRE_ADMISSION_AUDIT_S)),
+        rate_provenance=("real_gpu_measurement" if is_real else "illustrative"),
     )
     result.update({
         "ticket": "B8-02", "mode": "budget_only",
-        "reestimate_kind": "real_gpu_measurement_based" if is_real else "illustrative_not_a_real_reestimate",
         "profile_source": str(args.profile), "profile_sha256": file_hash(Path(args.profile)),
         "plan_source": str(args.plan), "plan_sha256": file_hash(Path(args.plan)),
         "rates_derived": rates, "planned_prefill_len": planned_prefill_len,
@@ -152,7 +152,7 @@ def main(argv: list[str] | None = None) -> int:
     p.add_argument("--output", type=Path, default=Path("artifacts/setup/RESOURCE_PROFILE.json"))
     p.add_argument("--gpu-uuid", default="GPU-e5c246b7-afc2-cccd-e66d-fa1ca4eb089e")
     p.add_argument("--budget-gib", type=float, default=32)
-    p.add_argument("--execution-ticket", help="REQUIRED for --device cuda:0: the approved B8-02 ticket id (gate)")
+    p.add_argument("--execution-ticket", help="REQUIRED for --device cuda:0: a B8-02 execution-ticket id. INTENT FLAG ONLY — not validated against an approval here; the real resource gate is require_admission and run authorization is enforced by the §F approval process (audit D2)")
     p.add_argument("--prefill-lengths", default="128,512,2048")
     p.add_argument("--decode-steps", type=int, default=32)
     p.add_argument("--prefill-repeats", type=int, default=5)
@@ -191,7 +191,7 @@ def main(argv: list[str] | None = None) -> int:
         if not args.model_lock:
             p.error("--device cuda:0 requires --model-lock (the locked official checkpoint)")
         if not args.execution_ticket:
-            p.error("--device cuda:0 is GATED: pass --execution-ticket <approved B8-02 id> (packet §F)")
+            p.error("--device cuda:0 is GATED: pass --execution-ticket <B8-02 id> (intent flag; resource gate=require_admission, approval gate=§F packet)")
         import torch
         from minicpm_research.resources import (RuntimeResourceGuard, audit_resources, require_admission,
                                                 research_lock_path, single_worker_lock)

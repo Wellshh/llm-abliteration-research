@@ -31,7 +31,12 @@ def _example(eid, fid, task, prompt, gold, **extra):
 
 def _frozen_manifest():
     """Synthetic FROZEN in-round manifest (6 examples across V/T/C). Prompts deliberately
-    do NOT contain the example_id/family_id strings (so the blinding leak-check is meaningful)."""
+    do NOT contain the example_id/family_id strings (so the blinding leak-check is meaningful).
+    data_sha256 uses the REAL pilot-file hashes so the D3 truth-based gate is exercised."""
+    from minicpm_research.runs import file_hash
+    root = Path(__file__).resolve().parents[1]
+    data_sha = {"artifacts/data/pilot.jsonl": file_hash(root / "artifacts/data/pilot.jsonl"),
+                "artifacts/data/pilot_c_v2.jsonl": file_hash(root / "artifacts/data/pilot_c_v2.jsonl")}
     return {
         "schema": "round_in_manifest_frozen_v1",
         "round_id": "round-1-FIXTURE",
@@ -39,7 +44,7 @@ def _frozen_manifest():
         "prereg_revision": "PREREGISTRATION_PHASE0_REVISION_v2",
         "prereg_revision_approval_effective": True,
         "freeze_record": {"frozen_at": "2026-09-17T00:00:00Z",
-                          "data_sha256": {"pilot.jsonl": "aa" * 32, "pilot_c_v2.jsonl": "bb" * 32},
+                          "data_sha256": data_sha,
                           "template_sha256": "cc" * 32, "revision_record": "none"},
         "in_round_examples": [
             _example("ex-V-0001", "fam-V-0001", "V", "Reply with exactly one label: A, B, or C. Claim: sky is blue.", "CONFIRM",
@@ -163,6 +168,39 @@ class LevelBFailClosedGateTests(unittest.TestCase):
     def test_refuses_wrong_schema(self):
         m = _frozen_manifest()
         m["schema"] = "something_else"
+        with tempfile.TemporaryDirectory() as d:
+            with self.assertRaises(SystemExit):
+                self.mod.build_level_b(m, Path(d) / "x")
+
+    def test_refuses_data_sha_mismatch(self):
+        m = _frozen_manifest()
+        k = next(iter(m["freeze_record"]["data_sha256"]))
+        m["freeze_record"]["data_sha256"][k] = "00" * 32  # fabricated hash (D3 truth-based gate)
+        with tempfile.TemporaryDirectory() as d:
+            with self.assertRaises(SystemExit) as ctx:
+                self.mod.build_level_b(m, Path(d) / "x")
+            self.assertIn("mismatch", str(ctx.exception))
+
+    def test_refuses_missing_data_file(self):
+        m = _frozen_manifest()
+        m["freeze_record"]["data_sha256"]["artifacts/data/does_not_exist.jsonl"] = "ab" * 32
+        with tempfile.TemporaryDirectory() as d:
+            with self.assertRaises(SystemExit) as ctx:
+                self.mod.build_level_b(m, Path(d) / "x")
+            self.assertIn("missing", str(ctx.exception))
+
+    def test_refuses_prereg_not_effective(self):
+        for val in (False, None):
+            m = _frozen_manifest()
+            m["prereg_revision_approval_effective"] = val
+            with tempfile.TemporaryDirectory() as d:
+                with self.assertRaises(SystemExit) as ctx:
+                    self.mod.build_level_b(m, Path(d) / "x")
+                self.assertIn("prereg_revision_approval_effective", str(ctx.exception))
+
+    def test_refuses_prereg_flag_absent(self):
+        m = _frozen_manifest()
+        del m["prereg_revision_approval_effective"]
         with tempfile.TemporaryDirectory() as d:
             with self.assertRaises(SystemExit):
                 self.mod.build_level_b(m, Path(d) / "x")

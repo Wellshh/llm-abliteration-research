@@ -10,38 +10,43 @@
     {
       "prefill_length": 128,
       "repeats": 3,
-      "seconds": 0.015268750488758087,
-      "forward_per_s": 196.47973173763026,
-      "tokens_per_s": 25149.405662416673
+      "seconds": 0.012540452182292938,
+      "forward_per_s": 239.22582347038383,
+      "tokens_per_s": 30620.90540420913
     },
     {
       "prefill_length": 512,
       "repeats": 3,
-      "seconds": 0.030698811635375023,
-      "forward_per_s": 97.72365248637259,
-      "tokens_per_s": 50034.510073022764
+      "seconds": 0.02859390899538994,
+      "forward_per_s": 104.91744939398373,
+      "tokens_per_s": 53717.73408971967
     },
     {
       "prefill_length": 2048,
       "repeats": 3,
-      "seconds": 0.1952178068459034,
-      "forward_per_s": 15.367450584915504,
-      "tokens_per_s": 31472.538797906953
+      "seconds": 0.2519425358623266,
+      "forward_per_s": 11.907477194082633,
+      "tokens_per_s": 24386.51329348123
     }
   ],
   "decode": [
     {
       "decode_steps": 32,
-      "seconds": 0.10628074035048485,
-      "forward_per_s": 301.0893591300996
+      "start_cache_length": 2048,
+      "end_cache_length": 2080,
+      "seconds": 0.16333782114088535,
+      "forward_per_s": 195.91298436875027
     },
     {
       "decode_steps": 32,
-      "seconds": 0.10656270943582058,
-      "forward_per_s": 300.2926649427266
+      "start_cache_length": 2048,
+      "end_cache_length": 2080,
+      "seconds": 0.16172431409358978,
+      "forward_per_s": 197.86758830513025
     }
   ],
-  "decode_forward_per_s_median": 300.6910120364131,
+  "decode_forward_per_s_median": 196.89028633694028,
+  "decode_rate_caveat": "decode_forward_per_s is measured from start_cache_length over decode_steps; the KV cache grows during decode and across longer contexts, so this rate is CONTEXT-SPECIFIC. A budget that applies it uniformly to longer decode is optimistic (audit D4).",
   "allocator": {
     "allocator_peak_allocated_bytes": null,
     "allocator_peak_reserved_bytes": null,
@@ -77,7 +82,7 @@
     "safetensors": "0.6.2",
     "huggingface-hub": "0.34.4"
   },
-  "generated_at": "2026-09-17T02:28:22.572893+00:00",
+  "generated_at": "2026-09-17T03:22:21.107694+00:00",
   "status": "harness_validation_completed",
   "harness_note": "CPU harness-validation on a tiny random Llama. NOT a real RESOURCE_PROFILE; forward/s here do not describe MiniCPM5 on GPU. The real measurement is the gated --device cuda:0 path under an approved B8-02 ticket."
 }

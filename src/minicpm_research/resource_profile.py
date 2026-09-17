@@ -34,6 +34,12 @@ MAIN_TOTAL_CAP_HOURS: float = 120
 # RES-04: charged_seconds is admitted-worker WALL time and EXCLUDES the mandatory
 # >=60s pre-admission resource audit per attempt. True GPU occupancy adds it back.
 DEFAULT_PRE_ADMISSION_AUDIT_S: float = 60.0
+# Audit D1: a §14 re-estimate MUST declare where its rates came from; only a real GPU
+# measurement may be labelled a real re-estimate. Enforced by CODE, not by convention/free-text.
+VALID_RATE_PROVENANCE: tuple[str, ...] = ("real_gpu_measurement", "cpu_harness_validation", "illustrative")
+_REESTIMATE_KIND = {"real_gpu_measurement": "real_gpu_measurement_based",
+                    "illustrative": "illustrative_not_a_real_reestimate",
+                    "cpu_harness_validation": "cpu_harness_validation_NOT_a_real_reestimate"}
 
 
 def _sync(device: str) -> None:
@@ -127,7 +133,8 @@ def measure_prefill_decode(
                 cache = out.past_key_values
             _sync(device)
             dt = time.perf_counter() - t0
-            decode.append({"decode_steps": decode_steps, "seconds": dt,
+            decode.append({"decode_steps": decode_steps, "start_cache_length": ref_L,
+                           "end_cache_length": ref_L + decode_steps, "seconds": dt,
                            "forward_per_s": (decode_steps / dt) if dt > 0 else None})
 
     if is_cuda:
@@ -154,6 +161,9 @@ def measure_prefill_decode(
         "prefill": prefill,
         "decode": decode,
         "decode_forward_per_s_median": (statistics.median(decode_fps) if decode_fps else None),
+        "decode_rate_caveat": ("decode_forward_per_s is measured from start_cache_length over decode_steps; the KV cache "
+                               "grows during decode and across longer contexts, so this rate is CONTEXT-SPECIFIC. A budget "
+                               "that applies it uniformly to longer decode is optimistic (audit D4)."),
         "allocator": allocator,
         "model_load_seconds": model_load_seconds,
         "model_class": type(model).__name__,
@@ -203,6 +213,7 @@ def reestimate_phase_budgets(
     prefill_tokens_per_s: float,
     decode_forward_per_s: float,
     fixed_overhead_per_run_s: float,
+    rate_provenance: str,
     pre_admission_audit_s: float = DEFAULT_PRE_ADMISSION_AUDIT_S,
 ) -> dict[str, Any]:
     """PURE-CPU §14 budget re-estimation from MEASURED rates.
@@ -223,6 +234,8 @@ def reestimate_phase_budgets(
                       ("pre_admission_audit_s", pre_admission_audit_s)):
         if not isinstance(val, (int, float)) or isinstance(val, bool) or not (val > 0) or val != val or val in (float("inf"),):
             raise ValueError(f"{name} must be a finite positive number, got {val!r}")
+    if rate_provenance not in VALID_RATE_PROVENANCE:
+        raise ValueError(f"rate_provenance must be one of {VALID_RATE_PROVENANCE}, got {rate_provenance!r}")
 
     per_phase: list[dict[str, Any]] = []
     total_charged = 0.0
@@ -253,6 +266,9 @@ def reestimate_phase_budgets(
     main_cap_s = MAIN_TOTAL_CAP_HOURS * 3600.0
     return {
         "schema": "resource_budget_reestimate_v1",
+        "rate_provenance": rate_provenance,
+        "reestimate_kind": _REESTIMATE_KIND[rate_provenance],
+        "is_real_reestimate": rate_provenance == "real_gpu_measurement",
         "rates_used": {"prefill_tokens_per_s": prefill_tokens_per_s,
                        "decode_forward_per_s": decode_forward_per_s,
                        "fixed_overhead_per_run_s": fixed_overhead_per_run_s,

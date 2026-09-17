@@ -63,6 +63,20 @@ def validate_frozen_manifest(manifest: dict[str, Any]) -> None:
     fr = manifest.get("freeze_record")
     if not isinstance(fr, dict) or not fr.get("frozen_at") or not fr.get("data_sha256"):
         raise SystemExit("REFUSING to build Level B: freeze_record must carry frozen_at + data_sha256 bindings")
+    # Audit D3: truth-based, not presence-based. A self-declared 'frozen' manifest with
+    # fabricated hashes or an unapproved prereg revision must NOT pass.
+    if manifest.get("prereg_revision_approval_effective") is not True:
+        raise SystemExit("REFUSING to build Level B: prereg_revision_approval_effective must be true (PREREG v2 approval is a freeze prerequisite)")
+    data_sha = fr.get("data_sha256")
+    if not isinstance(data_sha, dict) or not data_sha:
+        raise SystemExit("REFUSING to build Level B: freeze_record.data_sha256 must be a non-empty mapping of repo-relative path -> sha256")
+    for rel, expected in data_sha.items():
+        path = ROOT / rel
+        if not path.exists():
+            raise SystemExit(f"REFUSING to build Level B: freeze_record references missing in-repo file {rel}")
+        actual = file_hash(path)
+        if actual != expected:
+            raise SystemExit(f"REFUSING to build Level B: data_sha256 mismatch for {rel} (manifest {str(expected)[:16]}… != on-disk {actual[:16]}…)")
     examples = manifest.get("in_round_examples")
     if not isinstance(examples, list) or not examples:
         raise SystemExit("REFUSING to build Level B: in_round_examples must be a non-empty list")
