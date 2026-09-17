@@ -44,3 +44,47 @@
 - Changed: `src/minicpm_research/resource_profile.py`, `scripts/profile_resources.py`, `scripts/make_audit_package_level_b.py`, `tests/test_resource_profile.py`, `tests/test_audit_package_level_b.py`, regenerated `artifacts/setup/RESOURCE_PROFILE_HARNESS_VALIDATION.json`.
 - **Unchanged:** `scripts/export_phase0_artifacts.py`, `artifacts/setup/TOKEN_ANCHORS.json` (`ecdac639…`), `artifacts/setup/ENVIRONMENT.json` (`5b8b5bf6…`) — D5 deferred, no B8-01 re-export.
 - **Caveat scoped honestly (both reviewers):** the post-gate GPU measurement path has never executed; it is verified by code order + unit tests only. The real `RESOURCE_PROFILE.json` + §14 re-estimate remain gated behind the §F ticket.
+
+---
+
+## Addendum — 2026-09-17 (later session): D5 closed as an enforcement requirement, not a re-export
+
+Appended by the follow-up session; the sections above are the original point-in-time record and are **unchanged**.
+
+D5 was left "carried forward as a T05 probing-implementer requirement", i.e. enforced by an
+instruction in a report. That is exactly the failure mode the same reviewers flagged in D1
+("enforced by convention, not code"), so the carry-forward has been converted into code
+**without touching the frozen artifacts**:
+
+- **New:** `src/minicpm_research/phase0_anchors.py` — the load/consume API for `TOKEN_ANCHORS.json`.
+  `single_token_decision_locus(anchor)` **raises `AmbiguousDecisionLocusError`** for any anchor whose
+  `decision_tokenarity` is `multi_token_native_tool_call` (all 8 T anchors), with a message naming
+  plan §6.1 / audit F-06 / D5 and pointing at `first_generated_token_locus()`;
+  `first_generated_token_locus()` returns the positional anchor with `is_single_token_decision_locus=False`
+  **by construction** — the package cannot assert where a T decision lives, because that is what T05 exists to find out.
+  `load_anchor_package()` fail-closes if any anchor's tokenarity is unknown, its task/tokenarity pair
+  disagrees, its `P_decision != P_boundary`, or its `position_definitions.P_decision` no longer contains
+  the exact phrase `NOT a single-token decision locus` — so a future re-export that quietly drops the
+  F-06 disclosure breaks the suite instead of the reader's attention.
+- **New:** `tests/test_phase0_anchors.py` (18 tests) pins all of the above against the **committed**
+  artifact (V8/T8/C8, S0 `blocked`, C still `candidate_draft_not_frozen…reexport_after_freeze`, lock binding
+  == `MODEL_MANIFEST.json`) plus the synthetic fail-closed paths. CPU-only; no tokenizer, no weights, no GPU.
+- **The deferral itself stands** and is re-affirmed, not reversed: a machine-readable
+  `p_decision_is_single_locus` flag in the artifact would change
+  `TOKEN_ANCHORS.json` (`ecdac639ab8a42aa92a5db9cd632df3a6d84e8d04f56da0c3c4562fe78174c91`) and
+  `ENVIRONMENT.json` (`5b8b5bf6cf96d68bc6c556b300dcdce09a5589db058389f81622a9e3400fd027`), invalidating this
+  record's byte-identical 24/24 anchor reproduction and the batch-10 P1–P8 precondition binding, for a
+  defense-in-depth gain the consumer-side accessor now provides. Both B8-01 artifacts remain **byte-identical**
+  (verified after this change; `git log -- artifacts/setup/TOKEN_ANCHORS.json` still `bcfd237`).
+- **Exit condition (if D5 is ever to be reversed):** re-exporting the anchors with a changed
+  anchor/invariant schema requires (i) a protocol/plan amendment approved **before** the re-export,
+  (ii) a §12 re-verification of the new bytes, (iii) updating every record that cites the old hashes, and
+  (iv) a full-suite green run. The post-freeze C re-export mandated by §C/F-07 is the natural moment to
+  bundle any such change — not a standalone hash churn.
+- **Honest limit of this enforcement (stated so nobody over-reads it):** the accessor covers the **API**
+  path. Nothing stops a consumer from `json.load`-ing `TOKEN_ANCHORS.json` and reading
+  `anchor["P_decision"]` directly — that bypass is still open, and a guard test cannot close it. What the
+  change buys is that the *default, discoverable* path refuses the wrong read and says why, and that the
+  disclosure can no longer disappear silently from a re-export. Closing the bypass would require the T05
+  extraction code to consume the accessor exclusively (a code-review rule for that ticket, recorded here).
+- Suite after this addendum: **241 OK (skipped=1)** = 223 + 18.
