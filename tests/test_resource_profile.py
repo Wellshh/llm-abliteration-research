@@ -268,6 +268,65 @@ class CliGateTests(unittest.TestCase):
             with self.assertRaises(SystemExit):
                 self._main(["--budget-only", "--profile", str(prof), "--plan", str(plan), "--output", str(Path(d) / "RESOURCE_PROFILE.json")])
 
+    # ---- §12 round-2: a profile's SELF-DECLARED labels are not provenance ----
+
+    REAL_PROF = {"is_real_profile": True, "measurement_kind": "real_gpu_measurement",
+                 "prefill": [{"prefill_length": 8, "tokens_per_s": 100.0}],
+                 "decode": [{"forward_per_s": 20.0}], "decode_forward_per_s_median": 20.0}
+    PLAN = {"phases": [{"phase": "P1", "n_runs": 1, "prefill_tokens_per_run": 8, "decode_tokens_per_run": 2}]}
+
+    def _budget_inputs(self, d, prof):
+        p = Path(d) / "prof.json"; p.write_text(json.dumps(prof))
+        pl = Path(d) / "plan.json"; pl.write_text(json.dumps(self.PLAN))
+        return p, pl
+
+    def test_budget_only_refuses_a_fabricated_real_profile(self):
+        """Hand-writing is_real_profile=true + measurement_kind=real_gpu_measurement used to mint a
+        re-estimate stamped real_gpu_measurement_based. Now the structural markers that only the
+        gated cuda:0 path writes are required."""
+        with tempfile.TemporaryDirectory() as d:
+            prof, plan = self._budget_inputs(d, dict(self.REAL_PROF))
+            with self.assertRaises(SystemExit) as ctx:
+                self._main(["--budget-only", "--profile", str(prof), "--plan", str(plan),
+                            "--model-lock", "artifacts/model/MODEL_MANIFEST.json",
+                            "--output", str(Path(d) / "BUDGET_REESTIMATE.json")])
+            self.assertIn("structural markers", str(ctx.exception))
+            self.assertFalse((Path(d) / "BUDGET_REESTIMATE.json").exists())   # refuses with zero output
+
+    def test_budget_only_real_path_still_requires_model_binding(self):
+        markers = dict(self.REAL_PROF, admission={"gpu_uuid": "GPU-x"}, budget_settlement={"charged_seconds": 1.0})
+        for case, prof in (
+            ("no admission/settlement", dict(self.REAL_PROF)),
+            ("markers but no model binding", markers),
+            ("markers but wrong model binding", dict(markers, model_manifest_sha256="00" * 32)),
+        ):
+            with self.subTest(case), tempfile.TemporaryDirectory() as d:
+                p, pl = self._budget_inputs(d, prof)
+                with self.assertRaises(SystemExit):
+                    self._main(["--budget-only", "--profile", str(p), "--plan", str(pl),
+                                "--model-lock", "artifacts/model/MODEL_MANIFEST.json",
+                                "--output", str(Path(d) / "BUDGET_REESTIMATE.json")])
+
+    def test_budget_only_accepts_a_structurally_evidenced_real_profile(self):
+        from minicpm_research.runs import file_hash
+        prof = dict(self.REAL_PROF, admission={"gpu_uuid": "GPU-e5c246b7-x", "cuda_environment": {}},
+                    budget_settlement={"charged_seconds": 12.3},
+                    model_manifest_sha256=file_hash(Path("artifacts/model/MODEL_MANIFEST.json")))
+        with tempfile.TemporaryDirectory() as d:
+            p, pl = self._budget_inputs(d, prof)
+            rc = self._main(["--budget-only", "--profile", str(p), "--plan", str(pl),
+                             "--model-lock", "artifacts/model/MODEL_MANIFEST.json",
+                             "--output", str(Path(d) / "BUDGET_REESTIMATE.json")])
+            self.assertEqual(rc, 0)
+            doc = json.loads((Path(d) / "BUDGET_REESTIMATE.json").read_text())
+            self.assertEqual(doc["reestimate_kind"], "real_gpu_measurement_based")
+            self.assertTrue(doc["is_real_reestimate"])
+            self.assertTrue(doc["real_claim_basis"]["admission_present"])
+            self.assertTrue(doc["real_claim_basis"]["budget_settlement_present"])
+            self.assertEqual(doc["real_claim_basis"]["model_manifest_sha256_verified"],
+                             file_hash(Path("artifacts/model/MODEL_MANIFEST.json")))
+            self.assertIn("not provenance", doc["real_claim_basis"]["note"])   # the basis is recorded, not assumed
+
 
 if __name__ == "__main__":
     unittest.main()

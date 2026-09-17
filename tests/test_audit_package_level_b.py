@@ -205,6 +205,38 @@ class LevelBFailClosedGateTests(unittest.TestCase):
             with self.assertRaises(SystemExit):
                 self.mod.build_level_b(m, Path(d) / "x")
 
+    # ---- §12 round-2: truth-of-listed-paths is not relevance-of-listed-paths ----
+
+    def test_refuses_absolute_path_binding(self):
+        """A hash can verify perfectly against /etc/hostname; pathlib does not confine `ROOT / rel`."""
+        from minicpm_research.runs import file_hash
+        m = _frozen_manifest()
+        m["freeze_record"]["data_sha256"] = {"/etc/hostname": file_hash(Path("/etc/hostname"))}
+        with tempfile.TemporaryDirectory() as d:
+            with self.assertRaises(SystemExit) as ctx:
+                self.mod.build_level_b(m, Path(d) / "x")
+            self.assertIn("repo-relative", str(ctx.exception))
+
+    def test_refuses_traversal_path_binding(self):
+        m = _frozen_manifest()
+        m["freeze_record"]["data_sha256"] = {"artifacts/data/../../GOAL.md": "ab" * 32}
+        with tempfile.TemporaryDirectory() as d:
+            with self.assertRaises(SystemExit) as ctx:
+                self.mod.build_level_b(m, Path(d) / "x")
+            self.assertIn("no '..'", str(ctx.exception))
+
+    def test_refuses_binding_that_covers_no_data(self):
+        """Every hash correct, zero dataset files bound — the manifest used to pass while proving
+        nothing about the in-round DATA it is supposed to freeze."""
+        from minicpm_research.runs import file_hash
+        root = Path(__file__).resolve().parents[1]
+        m = _frozen_manifest()
+        m["freeze_record"]["data_sha256"] = {"GOAL.md": file_hash(root / "GOAL.md")}
+        with tempfile.TemporaryDirectory() as d:
+            with self.assertRaises(SystemExit) as ctx:
+                self.mod.build_level_b(m, Path(d) / "x")
+            self.assertIn("binds no file under artifacts/data/", str(ctx.exception))
+
 
 if __name__ == "__main__":
     unittest.main()

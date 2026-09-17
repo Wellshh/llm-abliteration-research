@@ -24,9 +24,21 @@ going through an API that raises. `tests/test_phase0_anchors.py` pins the disclo
 against the COMMITTED artifact, so a future re-export that silently drops it fails the
 suite rather than the reader's attention.
 
-Exposure scope: this constrains how the anchor package may be *consumed*. It is not a
-provenance credential and it does not make any claim about where T decisions are
-represented in the model — that is what T05 is supposed to find out.
+Exposure scope, stated so nobody over-reads it (§12 round-2 audit):
+
+* This constrains how the anchor package may be *loaded and consumed through this API*. It is not a
+  provenance credential and asserts nothing about where any decision is represented in the model —
+  that is what T05 exists to find out.
+* **Nothing imports this module yet.** `scripts/run_pilot.py` builds and consumes its own anchors via
+  `build_token_anchor` (the T04-lineage code a T05 implementer would most likely extend). Until the
+  T05 ticket makes consuming this accessor mandatory (a review rule, or a CI grep banning raw
+  `json.load` of `TOKEN_ANCHORS.json`), "the API" is guidance plus tests, not an enforced path.
+* A consumer can still `json.load` the file and read `anchor["P_decision"]` directly; no test can
+  prevent that. What the API removes is the *default* way of getting it wrong.
+* Checks are consistency-of-disclosure checks, not truth-of-content checks — see
+  `validate_anchor_disclosure`'s docstring for the three demonstrated gaps (mis-constructed
+  single-token content, an inverted-but-phrase-preserving reword, and positions that are only as
+  correct as the exporter's tokenizer work upstream).
 """
 from __future__ import annotations
 
@@ -41,6 +53,8 @@ SCHEMA = "phase0_token_anchors_v1"
 SINGLE_TOKEN_LOCUS = "single_token_start_label"
 MULTI_TOKEN_LOCUS = "multi_token_native_tool_call"
 TOKENARITY_BY_TASK = {"V": SINGLE_TOKEN_LOCUS, "C": SINGLE_TOKEN_LOCUS, "T": MULTI_TOKEN_LOCUS}
+#: (coverage.S.status, coverage.S.anchors) required while S intake is blocked. See load_anchor_package.
+S_COVERAGE_POLICY = ("blocked", 0)
 #: The D5/F-06 caveat must survive any future re-export verbatim enough to be greppable.
 REQUIRED_P_DECISION_CAVEAT = "NOT a single-token decision locus"
 #: What a caller must do before using a multi-token locus as a probing site.
@@ -57,12 +71,31 @@ class AmbiguousDecisionLocusError(ValueError):
     missing or malformed enough that the request cannot be answered safely."""
 
 
+def _position(value: Any) -> bool:
+    """A locus index must be a real non-negative int. `True == 1` and `'7' == 7` are the two
+    ways a weak check passes on data that cannot be used as an index (§12 round-2 audit)."""
+    return isinstance(value, int) and not isinstance(value, bool) and value >= 0
+
+
 def validate_anchor_disclosure(anchor: dict[str, Any]) -> list[str]:
     """Return a list of disclosure violations for one anchor (empty == admissible).
 
-    Fail-closed by construction: an unknown `decision_tokenarity`, a missing
-    `position_definitions.P_decision`, or a stripped caveat is a violation, not a default.
+    Fail-closed by construction: a non-dict anchor, an unknown `decision_tokenarity`, a task
+    outside the V/T/C allow-list, a missing or non-integer position, a broken
+    `P_decision == P_boundary` equality, or a stripped caveat is a violation, never a default.
+
+    WHAT THIS DOES NOT CHECK, and cannot from CPU-side JSON: whether the anchor's CONTENT really
+    is a single-token decision. `TOKENARITY_BY_TASK` pins the per-task class the exporter assigns,
+    so a V anchor whose gold/label was itself mis-constructed as multi-token still passes — that
+    is an upstream construct-validity question (the B9-03 human audit), not a locus-disclosure one.
+    Likewise a rewording of `position_definitions.P_decision` that keeps the required substring
+    while asserting the opposite meaning passes the substring check; the phrase pin catches
+    *silencing*, not *inversion*. Confirming the numbers themselves are the right positions
+    requires the locked tokenizer and `run_pilot.build_token_anchor`'s two-path equality (F-08),
+    which is upstream of this module and out of scope for a CPU-only consumer gate.
     """
+    if not isinstance(anchor, dict):
+        return [f"anchor is {type(anchor).__name__}, not an object; locus semantics cannot be established"]
     problems: list[str] = []
     example_id = anchor.get("example_id", "<no example_id>")
     tokenarity = anchor.get("decision_tokenarity")
@@ -71,13 +104,22 @@ def validate_anchor_disclosure(anchor: dict[str, Any]) -> list[str]:
         problems.append(f"{example_id}: decision_tokenarity is {tokenarity!r}, not a known tokenarity class")
         return problems
     expected = TOKENARITY_BY_TASK.get(task)
-    if expected is not None and tokenarity != expected:
-        problems.append(f"{example_id}: task {task} declares {tokenarity!r}, expected {expected!r}")
-    if anchor.get("P_decision") != anchor.get("P_boundary"):
+    if expected is None:
         problems.append(
-            f"{example_id}: P_decision ({anchor.get('P_decision')}) != P_boundary ({anchor.get('P_boundary')}); "
-            "the exported equality invariant no longer holds, so locus semantics cannot be assumed"
+            f"{example_id}: task {task!r} is not one of {sorted(TOKENARITY_BY_TASK)}; this package declares no "
+            "locus semantics for it (an S anchor here would also violate the S-blocked invariant)"
         )
+    elif tokenarity != expected:
+        problems.append(f"{example_id}: task {task} declares {tokenarity!r}, expected {expected!r}")
+    for key in ("P_user", "P_boundary", "P_decision"):
+        if not _position(anchor.get(key)):
+            problems.append(f"{example_id}: {key} is {anchor.get(key)!r}; must be a non-negative int")
+    if all(_position(anchor.get(k)) for k in ("P_boundary", "P_decision")):
+        if anchor["P_decision"] != anchor["P_boundary"]:
+            problems.append(
+                f"{example_id}: P_decision ({anchor['P_decision']}) != P_boundary ({anchor['P_boundary']}); "
+                "the exported equality invariant no longer holds, so locus semantics cannot be assumed"
+            )
     definition = (anchor.get("position_definitions") or {}).get("P_decision")
     if not isinstance(definition, str) or not definition.strip():
         problems.append(f"{example_id}: position_definitions.P_decision is missing; locus semantics undeclared")
@@ -90,7 +132,16 @@ def validate_anchor_disclosure(anchor: dict[str, Any]) -> list[str]:
 
 
 def load_anchor_package(path: Path | None = None) -> dict[str, Any]:
-    """Load TOKEN_ANCHORS.json and refuse (fail-closed) if any anchor's disclosure is broken."""
+    """Load TOKEN_ANCHORS.json, refusing (fail-closed) on a broken disclosure or a violated
+    coverage policy.
+
+    The coverage policy is part of what this gate means: with `S_DATA_PROTOCOL_v3` still
+    `pending_approval` the package MUST contain zero S anchors and MUST say so. Pinning that here
+    rather than only in a test means a smuggled S anchor cannot be loaded through the API that
+    §12 D5 designates as the consumer path. If S intake ever legitimately completes (§E step 9)
+    and the export is re-run under a §12 re-verification, `S_COVERAGE_POLICY` is the single
+    constant that changes — the change is deliberate and greppable, never incidental.
+    """
     path = Path(path) if path is not None else DEFAULT_ANCHORS
     doc = json.loads(path.read_text(encoding="utf-8"))
     if doc.get("schema") != SCHEMA:
@@ -103,6 +154,27 @@ def load_anchor_package(path: Path | None = None) -> dict[str, Any]:
         raise AmbiguousDecisionLocusError(
             f"{path}: {len(violations)} anchor disclosure violation(s):\n  " + "\n  ".join(violations)
         )
+    problems: list[str] = []
+    coverage = doc.get("coverage") or {}
+    if not isinstance(coverage, dict) or not coverage:
+        problems.append("coverage block is missing; per-task coverage cannot be verified")
+    else:
+        per_task: dict[str, int] = {}
+        for a in anchors:
+            per_task[a["task"]] = per_task.get(a["task"], 0) + 1
+        for task, entry in coverage.items():
+            if isinstance(entry, dict) and isinstance(entry.get("anchors"), int) and entry["anchors"] != per_task.get(task, 0):
+                problems.append(f"coverage.{task}.anchors declares {entry['anchors']} but {per_task.get(task, 0)} anchors of that task exist")
+        s_entry = coverage.get("S") or {}
+        s_status, s_declared = s_entry.get("status"), s_entry.get("anchors")
+        if (s_status, s_declared, per_task.get("S", 0)) != (S_COVERAGE_POLICY[0], S_COVERAGE_POLICY[1], 0):
+            problems.append(
+                f"S coverage is (status={s_status!r}, declared anchors={s_declared!r}, actual={per_task.get('S', 0)}), "
+                f"expected {S_COVERAGE_POLICY!r} while S intake is blocked; an S anchor in this package would mean "
+                "either S content entered without the §E chain completing, or the policy was changed without a §12 record"
+            )
+    if problems:
+        raise AmbiguousDecisionLocusError(f"{path}: coverage policy violated:\n  " + "\n  ".join(problems))
     return doc
 
 

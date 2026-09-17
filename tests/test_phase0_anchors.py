@@ -10,6 +10,7 @@ Two halves:
 from __future__ import annotations
 
 import copy
+import hashlib
 import json
 import sys
 import tempfile
@@ -182,6 +183,108 @@ class FailClosedTests(unittest.TestCase):
         with self.assertRaises(AmbiguousDecisionLocusError) as ctx:
             load_anchor_package(self._write(doc))
         self.assertIn("violation", str(ctx.exception))
+
+    # ---- §12 round-2 hardening: type strictness, non-dict inputs, coverage policy ----
+
+    def test_string_position_is_a_violation_not_a_vacuous_equality(self):
+        """'7' == 7 is False, but a missing type check let a str locus through the equality test."""
+        a = _anchor(P_decision="7", P_boundary="7")
+        problems = validate_anchor_disclosure(a)
+        self.assertTrue(any("must be a non-negative int" in p for p in problems), problems)
+        with self.assertRaises(AmbiguousDecisionLocusError):
+            single_token_decision_locus(a)
+
+    def test_bool_position_is_a_violation(self):
+        """True == 1 in Python; a bool locus must not read as index 1."""
+        a = _anchor(P_decision=True, P_boundary=True)
+        self.assertTrue(any("must be a non-negative int" in p for p in validate_anchor_disclosure(a)))
+
+    def test_missing_positions_violate_instead_of_raising_keyerror(self):
+        a = _anchor()
+        for k in ("P_user", "P_boundary", "P_decision"):
+            a.pop(k)
+        self.assertTrue(any("must be a non-negative int" in p for p in validate_anchor_disclosure(a)))
+        with self.assertRaises(AmbiguousDecisionLocusError):
+            single_token_decision_locus(a)      # documented exception, not KeyError
+
+    def test_non_dict_anchor_is_a_violation(self):
+        self.assertTrue(validate_anchor_disclosure("oops"))
+        doc = copy.deepcopy(self_doc())
+        doc["anchors"].append("oops")
+        with self.assertRaises(AmbiguousDecisionLocusError):
+            load_anchor_package(self._write(doc))
+
+    def test_unknown_task_is_a_violation(self):
+        """The old code only checked tokenarity when the task was known, so an unseen task could
+        carry any class — including a task='S' anchor smuggled into a package that claims S is blocked."""
+        a = _anchor(task="S", decision_tokenarity=SINGLE_TOKEN_LOCUS)
+        self.assertTrue(any("not one of" in p for p in validate_anchor_disclosure(a)), )
+
+    def test_load_refuses_a_smuggled_S_anchor(self):
+        doc = copy.deepcopy(self_doc())
+        doc["anchors"].append(_anchor(example_id="smuggled-S-0", family_id="smuggled-S", task="S",
+                                      decision_tokenarity=SINGLE_TOKEN_LOCUS))
+        with self.assertRaises(AmbiguousDecisionLocusError) as ctx:
+            load_anchor_package(self._write(doc))
+        # refused at the anchor layer (unknown task) before the package layer could be reached
+        self.assertIn("task 'S'", str(ctx.exception))
+
+    def test_load_refuses_an_S_coverage_claim_that_is_not_blocked(self):
+        """The package-level half of the same invariant: an S coverage block that no longer says
+        'blocked / 0 anchors' cannot load either, even with every anchor individually valid."""
+        doc = copy.deepcopy(self_doc())
+        doc["coverage"]["S"] = {"required_min": 8, "anchors": 0, "status": "intake_complete"}
+        with self.assertRaises(AmbiguousDecisionLocusError) as ctx:
+            load_anchor_package(self._write(doc))
+        self.assertIn("coverage policy", str(ctx.exception))
+
+    def test_load_refuses_coverage_counts_that_lie(self):
+        doc = copy.deepcopy(self_doc())
+        doc["coverage"]["V"]["anchors"] = 99          # declares 9, ships 8
+        with self.assertRaises(AmbiguousDecisionLocusError) as ctx:
+            load_anchor_package(self._write(doc))
+        self.assertIn("coverage.V.anchors", str(ctx.exception))
+
+
+class ProvenancePinTests(unittest.TestCase):
+    """§12 round-2 falsification test (skeptic RT-3): the record's strongest present-tense claim is
+    'both B8-01 artifacts are byte-unchanged'. Until now that was human-verified prose only, with the
+    hashes appearing in no test. Pinning them converts it into code: ANY byte change fails here
+    immediately, including a re-export that preserves every semantic check below.
+
+    ESCAPE HATCH, deliberately loud: these pins are EXPECTED to fail the moment the mandated
+    post-freeze C re-export (§C / audit F-07) or an approved S intake re-export runs. That failure is
+    the gate working — update these values only together with (i) the approved amendment that
+    authorised the re-export, (ii) a new §12 re-verification record of the new bytes, and (iii)
+    updates to every report citing the old hashes (INDEPENDENT_REVERIFICATION_20260917.md,
+    B8_01_EXECUTION_NOTE_20260916.md, CURRENT_STATE §12, APPROVAL_PACKETS §F).
+    """
+
+    PINNED_SHA256 = {
+        "TOKEN_ANCHORS.json": "ecdac639ab8a42aa92a5db9cd632df3a6d84e8d04f56da0c3c4562fe78174c91",
+        "ENVIRONMENT.json": "5b8b5bf6cf96d68bc6c556b300dcdce09a5589db058389f81622a9e3400fd027",
+    }
+    # Independent of the file hash: catches an off-by-one that shifts every locus index while
+    # leaving the disclosure shape intact, and says so in its own message.
+    PINNED_LOCUS_DIGEST = "b3eb7eedcdb4447b5efa24247c1bfbd58b67d0a0cf123c92c2034582d415580f"
+
+    def test_artifact_bytes_match_the_recorded_hashes(self):
+        for name, expected in self.PINNED_SHA256.items():
+            with self.subTest(artifact=name):
+                actual = hashlib.sha256((DEFAULT_ANCHORS.parents[0] / name).read_bytes()).hexdigest()
+                self.assertEqual(actual, expected,
+                                 f"{name} changed on disk. If this was an authorised re-export, follow "
+                                 "the escape hatch in this class docstring; otherwise STOP — an "
+                                 "hash-pinned Phase-0 precondition artifact was silently modified.")
+
+    def test_locus_positions_match_the_recorded_digest(self):
+        doc = json.loads(DEFAULT_ANCHORS.read_text(encoding="utf-8"))
+        rows = sorted((a["example_id"], a["task"], a["P_user"], a["P_boundary"], a["P_decision"]) for a in doc["anchors"])
+        digest = hashlib.sha256(json.dumps(rows, sort_keys=True).encode("utf-8")).hexdigest()
+        self.assertEqual(digest, self.PINNED_LOCUS_DIGEST,
+                         "P_user/P_boundary/P_decision changed for at least one anchor while the file may "
+                         "still look structurally valid — this is exactly the semantic re-export that "
+                         "disclosure checks cannot see.")
 
 
 _DOC_CACHE: dict | None = None

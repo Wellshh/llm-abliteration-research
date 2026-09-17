@@ -21,9 +21,14 @@ Three modes (plan §14 / §6.3 RESOURCE_PROFILE; audits RES-01/RES-05/RES-06):
 
   --budget-only         PURE CPU. Consumes an already-measured profile JSON + a plan
                         JSON and emits the §14 per-phase GPU-second re-estimate. A
-                        real re-estimate requires a real_gpu_measurement profile; a
-                        cpu/illustrative profile is accepted only with --illustrative
-                        and is then labelled illustrative_not_a_real_reestimate.
+                        real re-estimate requires a real_gpu_measurement profile —
+                        and a profile's own labels are NOT sufficient: a real claim
+                        is accepted only if the structural markers only the gated
+                        cuda:0 path writes are present (live `admission`,
+                        `budget_settlement`) and `model_manifest_sha256` re-verifies
+                        against `--model-lock`. A cpu/illustrative profile is accepted
+                        only with --illustrative and is then labelled
+                        illustrative_not_a_real_reestimate.
 
 All outputs are content-addressed, written atomically, and refuse to overwrite.
 """
@@ -111,8 +116,39 @@ def _budget_only(args: argparse.Namespace) -> dict[str, Any]:
     """Pure-CPU §14 budget re-estimate from a measured profile + a plan."""
     profile = json.loads(Path(args.profile).read_text(encoding="utf-8"))
     plan_doc = json.loads(Path(args.plan).read_text(encoding="utf-8"))
-    is_real = bool(profile.get("is_real_profile")) and profile.get("measurement_kind") == "real_gpu_measurement"
-    if not is_real and not args.illustrative:
+    real_claim = bool(profile.get("is_real_profile")) and profile.get("measurement_kind") == "real_gpu_measurement"
+    real_claim_basis: dict[str, Any] | None = None
+    if real_claim:
+        # §12 round-2 audit (2026-09-17): a profile's SELF-DECLARED labels are not provenance —
+        # hand-writing {"is_real_profile": true, "measurement_kind": "real_gpu_measurement"} into a
+        # JSON file used to mint a real_gpu_measurement_based §14 re-estimate (the same
+        # self-declared-label failure that D3 closed on the Level-B side). A real claim is now
+        # accepted only on STRUCTURAL evidence that only the gated cuda:0 path produces:
+        # live admission + budget settlement + a model binding re-verified against the lock file.
+        missing = [k for k in ("admission", "budget_settlement")
+                   if not isinstance(profile.get(k), dict) or not profile.get(k)]
+        if missing:
+            raise SystemExit(
+                f"profile claims real_gpu_measurement but lacks the structural markers only the gated "
+                f"cuda:0 path writes: {missing}. Refusing to emit a §14 re-estimate labelled real from a "
+                "profile whose 'real' status is self-declared. Run the measurement under an approved §F "
+                "ticket, or pass --illustrative to demonstrate the math (output is then labelled "
+                "illustrative_not_a_real_reestimate).")
+        if not args.model_lock:
+            raise SystemExit("profile claims real_gpu_measurement: pass --model-lock so the recorded "
+                             "model_manifest_sha256 can be re-verified against the lock file")
+        bound = profile.get("model_manifest_sha256")
+        actual = file_hash(args.model_lock)
+        if not bound or bound != actual:
+            raise SystemExit(f"profile claims real_gpu_measurement but its model_manifest_sha256 "
+                             f"({str(bound)[:16]}…) does not match --model-lock on disk ({actual[:16]}…)")
+        real_claim_basis = {
+            "admission_present": True, "budget_settlement_present": True,
+            "admission_gpu_uuid": (profile.get("admission") or {}).get("gpu_uuid"),
+            "model_manifest_sha256_verified": actual,
+            "note": "structural markers required in addition to the profile's own labels; labels alone are not provenance",
+        }
+    if not real_claim and not args.illustrative:
         raise SystemExit(
             "profile is not a real_gpu_measurement; a §14 re-estimate from it would be invalid. "
             "Re-run with --device cuda:0 under an approved ticket, or pass --illustrative to "
@@ -132,10 +168,11 @@ def _budget_only(args: argparse.Namespace) -> dict[str, Any]:
         decode_forward_per_s=rates["decode_forward_per_s"],
         fixed_overhead_per_run_s=float(plan_doc.get("fixed_overhead_per_run_s", 12.5)),
         pre_admission_audit_s=float(plan_doc.get("pre_admission_audit_s", DEFAULT_PRE_ADMISSION_AUDIT_S)),
-        rate_provenance=("real_gpu_measurement" if is_real else "illustrative"),
+        rate_provenance=("real_gpu_measurement" if real_claim else "illustrative"),
     )
     result.update({
         "ticket": "B8-02", "mode": "budget_only",
+        "real_claim_basis": real_claim_basis,
         "profile_source": str(args.profile), "profile_sha256": file_hash(Path(args.profile)),
         "plan_source": str(args.plan), "plan_sha256": file_hash(Path(args.plan)),
         "rates_derived": rates, "planned_prefill_len": planned_prefill_len,

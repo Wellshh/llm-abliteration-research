@@ -26,7 +26,7 @@ import random
 import sys
 from collections import Counter
 from datetime import datetime, timezone
-from pathlib import Path
+from pathlib import Path, PurePath
 from typing import Any
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -70,13 +70,29 @@ def validate_frozen_manifest(manifest: dict[str, Any]) -> None:
     data_sha = fr.get("data_sha256")
     if not isinstance(data_sha, dict) or not data_sha:
         raise SystemExit("REFUSING to build Level B: freeze_record.data_sha256 must be a non-empty mapping of repo-relative path -> sha256")
+    # §12 round-2 audit (2026-09-17): truth-of-listed-paths is not enough. Bound paths must stay
+    # INSIDE the repo (no absolute or '..' entries, which pathlib happily resolves elsewhere), and
+    # the binding must actually cover dataset files — a manifest that hash-verifies only unrelated
+    # files (e.g. GOAL.md) used to pass while binding zero data.
+    bounded = 0
     for rel, expected in data_sha.items():
+        if not isinstance(rel, str) or not rel or PurePath(rel).is_absolute() or ".." in PurePath(rel).parts:
+            raise SystemExit(f"REFUSING to build Level B: freeze_record.data_sha256 key {rel!r} must be a repo-relative path with no '..' segments")
         path = ROOT / rel
+        try:
+            path.resolve().relative_to(ROOT.resolve())
+        except ValueError:
+            raise SystemExit(f"REFUSING to build Level B: freeze_record path {rel!r} resolves outside the repository root")
         if not path.exists():
             raise SystemExit(f"REFUSING to build Level B: freeze_record references missing in-repo file {rel}")
         actual = file_hash(path)
         if actual != expected:
             raise SystemExit(f"REFUSING to build Level B: data_sha256 mismatch for {rel} (manifest {str(expected)[:16]}… != on-disk {actual[:16]}…)")
+        if PurePath(rel).as_posix().startswith("artifacts/data/"):
+            bounded += 1
+    if bounded == 0:
+        raise SystemExit("REFUSING to build Level B: freeze_record.data_sha256 binds no file under artifacts/data/; "
+                         "a freeze record must bind the in-round DATA, not arbitrary repo files")
     examples = manifest.get("in_round_examples")
     if not isinstance(examples, list) or not examples:
         raise SystemExit("REFUSING to build Level B: in_round_examples must be a non-empty list")

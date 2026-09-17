@@ -225,3 +225,38 @@ Full evidence + diff-ready texts: **`reports/PREREG_V2_PROSPECTIVE_FIXES_2026091
 `phase0_construct_admission_met = **false**` — V decisive 1/2 < draft 75 % at n=1 family; S baselines missing (S blocked, 9-step chain all pending); power `not_estimable`; `T03_NUMERICS = failed_limit_recorded`; **measured** prefill/decode re-estimation still missing (§F unapproved). PREREG still `draft_not_registered`; revision v2 still `proposed_not_approved` / `effective=false`; C still `candidate_draft_not_frozen`; B9-03 still Level-A agent-prepared with **blank/unsigned** R1/R2 sheets; T05 / formal test / intervention selection / test unsealing remain gated. §A's heartbeat-gitignore and `5e8f769`-provenance questions remain open; `artifacts/reservation/gpu3_reservation.jsonl` remains permanently dirty (append-only heartbeat, deliberately not committed).
 
 **Constraints honored this session:** no GPU or model process, no S content acquired or generated, no historical threshold/artifact edited, no pending-approval protocol text edited, no GPU5/other-process contact. §12 status of this addendum itself: the D1–D4 code and the new anchor accessor are scheduled for independent re-verification (GOAL §12); until that record exists, §12.1–§12.3 are lead-authored claims, not independently confirmed ones.
+
+### 12.5 Round B closed the loop — and found a real defect in §12.3 (2026-09-17, appended)
+
+The scheduled §12 re-verification ran as three independent read-only reviewers. **All three returned
+`confirmed_with_minor_issues`**; full record: **`reports/INDEPENDENT_REVERIFICATION_20260917B.md`**. What it changed:
+
+- **The one that mattered (major, in §12.3's own packet):** both proposed C-18 texts fixed an expected pair count but
+  left the **consistency denominator output-dependent** — under v2's `missing_or_invalid_side` clause a model that
+  emits malformed output on the pairs it fails *lowers its own requirement* (9/10 → 7/8 → 6/7). Packet §4.1 now adds
+  the fix (denominator frozen at freeze time; an invalid side counts as NOT consistent and stays in the denominator),
+  matching `t_round_gate`'s gold-frozen pattern and GOAL §6. Also corrected in the packet: the "keeps both nominal
+  floors exact" claim (consistency is 9/10 = **90 %**, not 85 %), a family-cost figure that matched no unit (whole-family
+  miss = **50 pp** of a 4-row cell, not 12.5), "satisfies both properties" (it satisfies *size + balance* by dropping
+  equal counts), the undefined `n_category` row membership, the missing C-08 pointer, and a rejected third C-18 option
+  that a constant answerer would pass with certainty.
+- **Code hardening (+16 tests, suite now 257 / OK / skipped=1):** `--budget-only` no longer accepts a profile's
+  *self-declared* `is_real_profile`/`measurement_kind` as provenance — a real claim now requires the structural
+  markers only the gated path writes (`admission` + `budget_settlement`) plus a `model_manifest_sha256` re-verified
+  against `--model-lock`; the anchor loader enforces the S-blocked coverage policy and integer-typed positions; the
+  Level-B freeze binding refuses absolute/`..` paths and manifests that bind no file under `artifacts/data/`.
+- **The record's own strongest claim is now code, not prose** (skeptic RT-3): `ProvenancePinTests` pins both B8-01
+  sha256s **and** a digest of all 24 `(example_id, task, P_user, P_boundary, P_decision)` tuples, with an explicit
+  escape hatch — it is *expected* to fail when the §C/F-07 post-freeze C re-export runs, and may be updated only with
+  the approving amendment, a fresh §12 record, and every citing report updated.
+- **Honest residuals:** `phase0_anchors` is still imported by nothing but its tests (making consumption mandatory is a
+  T05 review rule); its checks are disclosure-consistency, not truth-of-content; and **the round-B fixes are
+  themselves lead-authored code tested only by their author** — a round C is owed before anything in §12.5 is treated
+  as independently confirmed.
+- **Sync note (RT-1, and a standing rule):** §12.1's "HEAD `fbb363c` / dev == origin/dev" was already stale at the
+  moment of its own commit. Actual sequence: `fbb363c` → `8c229ca` (D5 accessor) → `a688149` (state refresh + packet,
+  then pushed) → the round-B remediation commit. **Re-derive HEAD with `git rev-parse`; never trust a recorded hash
+  over the repository.**
+- **Test-count reconciliation for future agents (RA-5):** unittest reports **`Ran 257`** while `grep -c 'def test_'`
+  gives **258** — the difference is the single always-skipped `test_resources.py:209` platform skip, which Python 3.12
+  excludes from `testsRun`. Same off-by-one explains the historical "187 tests" vs 188 definitions.

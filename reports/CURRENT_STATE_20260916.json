@@ -128,7 +128,7 @@
       "why_not_a_reexport": "a machine-readable p_decision_is_single_locus flag would change TOKEN_ANCHORS.json sha256 ecdac639ab8a42aa92a5db9cd632df3a6d84e8d04f56da0c3c4562fe78174c91 and ENVIRONMENT.json sha256 5b8b5bf6cf96d68bc6c556b300dcdce09a5589db058389f81622a9e3400fd027, invalidating the 2026-09-17 §12 byte-identical 24/24 anchor reproduction and the batch-10 P1-P8 precondition binding, for a defense-in-depth gain the consumer accessor now provides",
       "artifact_hashes_after_this_change": {"TOKEN_ANCHORS.json": "ecdac639ab8a42aa92a5db9cd632df3a6d84e8d04f56da0c3c4562fe78174c91", "ENVIRONMENT.json": "5b8b5bf6cf96d68bc6c556b300dcdce09a5589db058389f81622a9e3400fd027", "changed": false},
       "exit_condition": "any anchor/invariant schema change requires (i) an approved protocol/plan amendment BEFORE the re-export, (ii) a §12 re-verification of the new bytes, (iii) updates to every record citing the old hashes, (iv) a green full suite; the mandated post-freeze C re-export (§C/F-07) is the natural moment to bundle it",
-      "t05_requirement_now_enforced": "a T05 probing/activation-extraction implementation cannot treat a T anchor as a single-token decision locus without going through an API that refuses it",
+      "t05_requirement_consumer_boundary_refusal": "the default load/consume path refuses to hand a T anchor to a single-token-locus caller and says why; this is a refusal on the API path, NOT a guarantee that no consumer can obtain the value (see honest_limit). Reworded on 2026-09-17 from the earlier key name 't05_requirement_now_enforced', which §12 round-B reviewer RT-2 correctly judged status-inflating relative to its own sibling key.",
       "honest_limit": "the accessor covers the API path only; json.load of TOKEN_ANCHORS.json and reading anchor['P_decision'] directly remains possible and is not blockable by a test. The T05 extraction code must consume phase0_anchors exclusively (code-review rule for that ticket)."
     },
     "test_count": {
@@ -179,6 +179,12 @@
       "'C-06/C-07/C-10/C-18 are fixed' - false: no pending-approval text was edited; reports/PREREG_V2_PROSPECTIVE_FIXES_20260917.md is PROPOSED and ineffective until signed",
       "'the GPU measurement path works' - unverified: verified by code order + unit tests only, never executed"
     ],
+    "review_rounds": {
+      "round_A_20260917_am": {"scope": "bcfd237 B8-01 v2 + 8ac8c61 B8-02 + 84f1952 Level-B builder", "record": "reports/INDEPENDENT_REVERIFICATION_20260917.md", "reproducibility_reviewer": "confirmed_sound", "skeptic": "confirmed_with_minor_issues (5 defects D1-D5; D1-D4 fixed at fbb363c, D5 deferred)"},
+      "round_B_20260917_pm": {"scope": "fbb363c D1-D4 code + phase0_anchors D5 accessor + CURRENT_STATE/README/errata/PREREG prospective-fix packet", "record": "reports/INDEPENDENT_REVERIFICATION_20260917B.md", "reproducibility_audit_reviewer": "confirmed_with_minor_issues", "construct_stats_researcher": "confirmed_with_minor_issues (1 MAJOR: C-18 texts left the consistency denominator output-dependent)", "skeptical_red_team": "confirmed_with_minor_issues (RT-1..RT-6)"},
+      "round_B_disposition": "major + 8 minor fixed (4 in code with 16 new tests, 5 in the packet); 5 info recorded/disclosed/deferred; the round-B fixes are themselves lead-authored and untested by a fourth agent",
+      "sync_note": "self-referential git claims in this addendum (git_head fbb363c / 'dev == origin/dev') were stale at the moment of their own commit (round-B RT-1). Actual sequence: fbb363c -> 8c229ca (D5 accessor) -> a688149 (state refresh + packet) -> pushed -> this round-B remediation commit. Re-derive HEAD with git rev-parse; never trust a recorded hash over the repository."
+    },
     "session_constraints_honored": {
       "gpu_or_model_processes_run": false,
       "s_content_acquired_or_generated": false,
