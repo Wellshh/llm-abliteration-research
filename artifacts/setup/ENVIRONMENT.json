@@ -1,0 +1,67 @@
+{
+ "schema": "phase0_environment_v1",
+ "ticket": "B8-01",
+ "generated_at": "2026-09-16T15:54:39.882894+00:00",
+ "python": "3.12.1",
+ "platform": "Linux-4.18.0-553.5.1.el8_10.x86_64-x86_64-with-glibc2.28",
+ "packages": {
+  "torch": "2.6.0",
+  "transformers": "4.56.2",
+  "tokenizers": "0.22.2",
+  "safetensors": "0.6.2",
+  "huggingface-hub": "0.34.4"
+ },
+ "torch_cuda_build_version": "12.4",
+ "nvidia": {
+  "driver_version": "550.54.14",
+  "cuda_version_nvidia_smi": "12.4",
+  "source_audit": "artifacts/audits/20260912-readonly/RESOURCE_AUDIT.json",
+  "source_kind": "historical_read_only_audit"
+ },
+ "primary_attention_backend": "eager",
+ "primary_dtype": "bfloat16",
+ "tf32_state_at_export": {
+  "cuda_matmul_allow_tf32": false,
+  "cudnn_allow_tf32": true,
+  "float32_matmul_precision": "highest",
+  "note": "ambient torch state at this CPU-tokenizer-only export; NO GPU compute occurred here. Per-run GPU TF32 state is recorded in each run's own artifact. The T03 FP32 characterization explicitly disabled TF32 (matmul+cudnn) and is NOT represented by this ambient snapshot (audit F-11)."
+ },
+ "compile_enabled": false,
+ "model": {
+  "repo_id": "openbmb/MiniCPM5-2B",
+  "revision_sha": "62b9b3bd4308e72905c5bce38c1d6689549c525d",
+  "provenance": "mirror_file_hashes_verified",
+  "official_hub_reverification": "pending_network_access",
+  "model_manifest_sha256": "96985947da620361aed5a16d5352ce507efc68b769cc5e5ff360ddec1e34fb46"
+ },
+ "gpu_authorization": {
+  "primary_uuid": "GPU-e5c246b7-afc2-cccd-e66d-fa1ca4eb089e",
+  "primary_physical_index": 3,
+  "backup_uuid": "GPU-500c112e-cdd9-4e0d-d709-63de81493d96",
+  "backup_physical_index": 5,
+  "forbidden_physical_indices": [
+   0,
+   1,
+   2,
+   4,
+   6,
+   7
+  ],
+  "max_formal_workers": 1,
+  "budget_gib_per_gpu": 32,
+  "reserve_gib": 12,
+  "authorization_valid_until": "administrator_explicit_revocation"
+ },
+ "source": {
+  "git_commit": "5e8f7698fa55173c27f896857324037e1de06c14",
+  "git_scope_note": "git_diff/git_status scoped to SOURCE_PATHSPECS; artifact/reservation churn excluded from run identity",
+  "source_sha256_count": 29,
+  "uncommitted_source_changes_present": true
+ },
+ "secrets_scan": {
+  "env_variables_embedded": 0,
+  ".env_read": false,
+  "note": "no environment variable values, SSH config, tokens or account credentials are embedded; hub endpoints are public URLs"
+ },
+ "gpu_execution_in_this_export": false
+}

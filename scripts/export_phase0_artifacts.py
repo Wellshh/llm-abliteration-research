@@ -128,25 +128,37 @@ def build_anchor(tokenizer: Any, example: dict[str, Any], source_file: str, sour
         "P_user": p_user,
         "P_boundary": p_boundary,
         "P_decision": p_boundary,
+        "decision_tokenarity": ("single_token_start_label" if task in ("V", "C") else "multi_token_native_tool_call"),
         "position_definitions": {
-            "P_user": "last real user-content token (index), before the closing role marker of the final user turn",
-            "P_boundary": "last token of the full assistant prefix; its hidden state predicts the first generated token",
-            "P_decision": "state before generating the decision; for these single-token-start decisions it coincides with P_boundary (plan §6.1)",
+            "P_user": "index of the last token before the final user-turn role terminator (STRUCTURAL anchor; may land on punctuation/JSON, not guaranteed semantically decision-relevant - audit F-09)",
+            "P_boundary": "last token of the full assistant prefix; its hidden state predicts the FIRST generated token",
+            "P_decision": "state before generating the decision. For V/C single-token-start label decisions it is the decision locus and coincides with P_boundary. For T native tool calls the action is distributed over multiple generated tokens, so P_decision==P_boundary is the FIRST-generated-token locus, NOT a single-token decision locus (plan §6.1; audit F-06).",
         },
         "assistant_prefix": {"token_span": [len(ids_no_gen), len(ids) - 1], "token_ids": assistant_prefix_ids,
                               "decoded_text": assistant_prefix_text},
         "decode_replay": {"round_trip_ids_equal": replay_ids == ids,
-                           "note": "detokenize(retokenize(prompt)) == prompt ids under the locked tokenizer"},
+                           "note": "detokenize->retokenize(prompt)==prompt ids under the locked tokenizer; a low-value sanity check (near-tautological for template-generated prompts). The MEANINGFUL integrity assertion is run_pilot.build_token_anchor's two-path equality (anchor ids == the actual generation encoding path), enforced upstream (audit F-08)."},
         "label_contexts": anchors_ctx.get("label_contexts") if task in ("V", "C") else None,
         "label_contexts_note": ("A/B/C single-token continuation contexts for label tasks" if task in ("V", "C")
                                  else "T decisions are native tool calls / contract text, not single-letter labels"),
-        "lock_binding": {"revision_sha": lock["revision_sha"], "tokenizer_sha256": lock["tokenizer_sha256"],
+        "lock_binding": {"revision_sha": lock["revision_sha"],
+                          "tokenizer_file_sha256": lock["files"]["tokenizer.json"]["sha256"],
+                          "tokenizer_config_sha256": lock["files"]["tokenizer_config.json"]["sha256"],
+                          "special_tokens_map_sha256": lock["files"]["special_tokens_map.json"]["sha256"],
                           "chat_template_sha256": lock["chat_template_sha256"]},
     }
 
 
 def _driver_from_latest_audit() -> dict[str, Any]:
-    """Extract driver/CUDA version from the most recent read-only RESOURCE_AUDIT (no new GPU query)."""
+    """Extract driver/CUDA version from the most recent read-only RESOURCE_AUDIT (no new GPU query).
+
+    nvidia-smi -q emits 'Driver Version' and 'CUDA Version' on SEPARATE lines as
+    'Key   : Value'. Parse each with a regex over the whole stdout; the prior
+    single-line split-on-3-spaces parse silently yielded None (audit F-03).
+    """
+    import re
+    drv_re = re.compile(r"Driver Version\s*:\s*(\S+)")
+    cuda_re = re.compile(r"CUDA Version\s*:\s*(\S+)")
     audits = sorted(ROOT.glob("artifacts/runs/*/*/audit-*/RESOURCE_AUDIT.json"), key=lambda p: p.stat().st_mtime)
     audits += sorted(ROOT.glob("artifacts/hooks/*_resource_audit/RESOURCE_AUDIT.json"), key=lambda p: p.stat().st_mtime)
     audits += sorted(ROOT.glob("artifacts/audits/*/RESOURCE_AUDIT.json"), key=lambda p: p.stat().st_mtime)
@@ -154,12 +166,14 @@ def _driver_from_latest_audit() -> dict[str, Any]:
         try:
             doc = json.loads(path.read_text(encoding="utf-8"))
             for cmd in doc.get("initial_commands", []):
-                if "-q" in cmd.get("argv", []) and "Driver Version" in cmd.get("stdout", ""):
-                    line = next(l for l in cmd["stdout"].splitlines() if "Driver Version" in l)
-                    parts = {kv.split(":")[0].strip(): kv.split(":")[1].strip() for kv in line.strip().split("   ") if ":" in kv}
-                    return {"driver_version": parts.get("Driver Version"), "cuda_version_nvidia_smi": parts.get("CUDA Version"),
+                stdout = cmd.get("stdout", "")
+                if "-q" in cmd.get("argv", []) and "Driver Version" in stdout:
+                    drv = drv_re.search(stdout)
+                    cuda = cuda_re.search(stdout)
+                    return {"driver_version": drv.group(1) if drv else None,
+                            "cuda_version_nvidia_smi": cuda.group(1) if cuda else None,
                             "source_audit": str(path.relative_to(ROOT)), "source_kind": "historical_read_only_audit"}
-        except (OSError, ValueError, StopIteration, KeyError):
+        except (OSError, ValueError, KeyError):
             continue
     return {"driver_version": None, "cuda_version_nvidia_smi": None,
             "source_audit": None, "source_kind": "no_historical_audit_found; no new GPU query issued"}
@@ -199,14 +213,17 @@ def main(argv: list[str] | None = None) -> int:
         "coverage": {
             "V": {"required_min": PER_TASK, "anchors": per_task.get("V", 0), "status": "complete"},
             "T": {"required_min": PER_TASK, "anchors": per_task.get("T", 0), "status": "complete"},
-            "C": {"required_min": PER_TASK, "anchors": per_task.get("C", 0), "status": "complete_from_candidate_draft_not_frozen"},
+            "C": {"required_min": PER_TASK, "anchors": per_task.get("C", 0), "status": "provisional_8of8_from_candidate_draft_not_frozen__reexport_after_freeze"},
             "S": {"required_min": PER_TASK, "anchors": 0,
                    "status": "blocked",
                    "blocked_reason": "S_DATA_PROTOCOL_v3 proposed_not_approved; no licensed intake; per B8-01 the exporter fails closed for S rather than duplicating V/T",
                    "unblock_path": "protocol approval -> steps 3-7 -> accepted_items exist -> re-export"},
         },
         "lock_binding": {"model_manifest_sha256": file_hash(args.model_lock), "revision_sha": lock["revision_sha"],
-                          "tokenizer_sha256": lock["tokenizer_sha256"], "chat_template_sha256": lock["chat_template_sha256"],
+                          "tokenizer_file_sha256": lock["files"]["tokenizer.json"]["sha256"],
+                          "tokenizer_config_sha256": lock["files"]["tokenizer_config.json"]["sha256"],
+                          "special_tokens_map_sha256": lock["files"]["special_tokens_map.json"]["sha256"],
+                          "chat_template_sha256": lock["chat_template_sha256"],
                           "snapshot_path": str(snapshot)},
         "device": "cpu_tokenizer_only_no_model_weights_no_gpu",
         "anchors": anchors,
@@ -217,7 +234,8 @@ def main(argv: list[str] | None = None) -> int:
     env = environment_versions()
     tf32 = {"cuda_matmul_allow_tf32": bool(torch.backends.cuda.matmul.allow_tf32),
             "cudnn_allow_tf32": bool(torch.backends.cudnn.allow_tf32),
-            "float32_matmul_precision": str(torch.get_float32_matmul_precision())}
+            "float32_matmul_precision": str(torch.get_float32_matmul_precision()),
+            "note": "ambient torch state at this CPU-tokenizer-only export; NO GPU compute occurred here. Per-run GPU TF32 state is recorded in each run's own artifact. The T03 FP32 characterization explicitly disabled TF32 (matmul+cudnn) and is NOT represented by this ambient snapshot (audit F-11)."}
     driver = _driver_from_latest_audit()
     forbidden = sorted(set(range(8)) - {AUTHORIZED_GPUS[PRIMARY_GPU_UUID], AUTHORIZED_GPUS[BACKUP_GPU_UUID]})
     env_doc = {

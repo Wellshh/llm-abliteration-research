@@ -1,0 +1,111 @@
+{
+  "schema": "minicpm5_current_state_v1",
+  "date": "2026-09-16",
+  "branch": "dev",
+  "git_base_commit": "5e8f7698fa55173c27f896857324037e1de06c14",
+  "authority": "authoritative_present_tense_record; supersedes lower-tier present-tense claims; preserves all historical documents unchanged",
+  "human_readable_twin": "reports/CURRENT_STATE_20260916.md",
+  "prepared_by": "research_lead_after_4_role_independent_readonly_audit",
+  "source_of_truth_hierarchy": [
+    "raw_run_artifacts_manifests_hashes",
+    "approval_sidecars_and_frozen_protocol_yaml_json",
+    "this_CURRENT_STATE_record_and_json_twin",
+    "errata_sidecars",
+    "point_in_time_reports_ALIGNMENT_INCREMENTAL_T04_handoff",
+    "README_and_docs_research_external_priors"
+  ],
+  "tasks": {
+    "T00": {"status": "aligned", "resource_audit": "complete_60s_12samples_0errors", "gpu3_reservation_pid": 3772767, "gpu3_reservation_live": true},
+    "T01": {"status": "done_via_mirror", "model": "openbmb/MiniCPM5-2B", "revision_sha": "62b9b3bd4308e72905c5bce38c1d6689549c525d", "model_manifest_sha256": "96985947da620361aed5a16d5352ce507efc68b769cc5e5ff360ddec1e34fb46", "weights_sha256": "14fb8e7f0a18d53d1f239773758bf581cee7e456a4523a54622c3a245b64402c", "stored_tensor_element_count": 2516756480, "provenance": "mirror_file_hashes_verified", "official_hub_reverification": "pending_network_access", "huggingface_co_reachable": false, "hf_mirror_reachable": true},
+    "T02": {"status": "partial", "pilot_jsonl_rows": 600, "pilot_jsonl_families": 180, "pilot_jsonl_sha256": "ecbcc6bf91822dd44547289dca429dc4b381f2c5549b452201fc29789e5f2782", "families_present": ["V120", "T60"], "families_absent": ["S80", "C40"], "native_parser": "native_xml_v1_verified_on_real_model_output_at_pilot_scale_n4"},
+    "T03": {"historical_T03_bf16_gate": "failed", "historical_gate_immutable": true, "bf16_AB_batched": [0.375, 0.75], "bf16_threshold": 0.5, "threshold_origin": "64_eps_bf16_implementation_choice_not_retroactively_preregistered", "T03_HOOK": "passed_under_gate_split_v1", "T03_HOOK_scope": "engineering_control_call_accounting_integrity_only", "T03_HOOK_GATE_type": "evidence_aggregation_not_runtime_credential", "real_model_HOOK_VALIDATION_passed_artifact_exists": false, "T03_NUMERICS": "failed_limit_recorded", "new_full_cache_pass_threshold": null, "fp32_characterization": {"role": "characterization_not_validation", "gpu_AB_batched": [3.72e-05, 3.77e-05], "does_not_unlock_t04": true, "fp32_is_formal_credential": false, "kernel_trace_done": false, "supported_claim": "consistent_with_precision_sensitive_gpu_computation_effect_within_tested_shapes_mechanism_unresolved", "overclaim_risk_F01": "2x2_matrix_at_least_as_consistent_with_gpu_x_dtype_x_shape_interaction_as_with_bf16_rounding"}},
+    "T04": {"status": "pilot_only_complete", "n_families_per_task": 1, "power_estimation": "not_estimable", "authoritative_runs": {"V_baseline": "887571efd14d08b46a94", "V_identity": "939ad1d5254ed2960bd9", "T_baseline": "7b0b4c88c0af90449723", "T_identity": "3ec2805afe33d3ef9ee9"}, "superseded_T_runs": ["e40e1134fd4d256d9b45", "f4e278b2ef66a5b5a7fc"], "supersede_reason": "token_aware_decode_fix", "metrics": {"V_accuracy": "1/3", "V_decisive": "1/2=50%", "V_parse_valid": 1.0, "T_next_action": "2/4", "T_parse_valid": 1.0, "T_write": "2/4", "T_PE3": "1/3", "sandbox": {"WRITE_OK": 1, "READ_OK": 2, "BLOCKED": 1}}, "baseline_identity_equal_row_for_row": true, "ledger_total_charged_seconds": 234.42904100380838, "ledger_itemization": {"T03_hooks": 128.706021592021, "T04_authoritative": 58.41640244983137, "T04_superseded_t": 29.78392337448895, "post_admission_setup_failures": 17.522693587467074, "pre_admission": 0.0}, "overclaim_risk_F04": "baseline_eq_identity_cannot_distinguish_hook_fired_vs_never_engaged; supported_claim_only_shared_deterministic_pipeline_alpha0_did_not_corrupt_logits", "RES04_charged_seconds_excludes_pre_admission_audit": true, "RES05_sampled_memory_is_not_allocator_peak": true, "sampled_own_gpu_memory_max_bytes": 5752487936},
+    "T05": {"status": "not_started_gated", "requires": ["PREREG_v2_approval", "phase0_admission", "separate_execution_ticket"]}
+  },
+  "phase0_construct_admission": {
+    "met": false,
+    "reasons": ["V_decisive_50pct_lt_draft_75pct", "S_refusal_and_benign_baselines_missing", "power_not_estimable_1_family_per_task", "T03_NUMERICS_failed_limit_recorded", "prefill_decode_separated_resource_reestimation_missing"],
+    "threshold_may_be_changed_to_pass": false,
+    "remediation": "plan_6.3_max_two_pilot_revision_rounds_with_logs_else_declare_construct_unsuitable_or_contrast_model_never_relax_threshold",
+    "b7_01_diagnostic": {"threshold_change_proposed": false, "V_observation": "constant_B_token_ids_55_130073_all_3_variants_both_conditions", "T_observation": "t-3_premature_write_fabricated_id_SKU_as_item_id_on_CLARIFY_gold_sandbox_BLOCKED_PE3_event", "identity_eq_baseline": true, "model_decision_locus_warranted_only_negative_sense": true, "distinguishable_now": false, "constant_B_and_constant_CONFIRM_observationally_equivalent": true}
+  },
+  "data_families": {
+    "S": {"status": "blocked", "protocol": "S_DATA_PROTOCOL_v3", "protocol_sidecar_status": "pending_approval", "effective": false, "s_data_status": "blocked", "ledger_steps_pending": 9, "approved_source_ids": null, "license_status": "pending_verification", "capacity_verified": false, "restricted_dirs_exist": true, "restricted_dirs": ["/data/restricted/minicpm5_s_intake", "/data/restricted/minicpm5_s_outputs"], "restricted_dirs_owner_mode": "jybai:jybai_700", "restricted_dirs_empty": true, "infra_ready_does_not_equal_authorized": true, "s_template_item_count": 0, "acquisition_permitted": false},
+    "V": {"status": "pilot_pool_only", "formal_split_generated": false, "test_sealed": true},
+    "T": {"status": "pilot_pool_only", "formal_split_generated": false, "test_sealed": true},
+    "C": {"status": "candidate_draft_not_frozen", "version": 2, "pilot_c_v2_jsonl_rows": 160, "pilot_c_v2_families": 40, "pilot_c_v2_sha256": "e66fbd2659ef745a13280decf610f84aa4375630a66981b79c077a643f8cf302", "v1_status": "DISCARDED", "c_gates": {"macro_semantic_accuracy_min": 0.75, "label_swap_consistency_min": 0.85, "status": "inert_until_PREREG_v2_approved_and_data_frozen", "runnable_code_path_applies_c_gate": false}, "open_findings": {"C06_allocation_incompatible": "12_over_5_equal_per_category_needs_5k_12_k_2.4_non_integer_and_two_sided_balance_needs_k_even", "C07_semantic_accuracy_ambiguous": "macro_compensatory_vs_per_category_must_disambiguate_before_freeze", "C10_integer_rule_direction_bug": "max_direction_needs_k_le_floor_not_k_ge_ceil"}, "gold_verifier_independence": "implementation_level_not_source_level_same_author_codebase; B9_03_human_audit_hard_prerequisite", "degenerate_projections": {"always_affirmative": 0.5, "always_negate": 0.5, "always_letter_A": 0.5, "always_letter_B": 0.5, "user_follower": 0.5, "constants_cannot_pass_macro_0.75": true, "non_gameable_claim_scope": "narrow_enumerated_strategies_only_not_a_proof"}}
+  },
+  "approvals": {
+    "PREREG": {"status": "draft_not_registered", "registration_A_frozen": false, "registration_B_frozen": false, "revision_v2_status": "proposed_not_approved", "revision_v2_effective": false, "revision_v2_is_keystone_gate": true, "revision_v1_status": "superseded_pre_approval", "v1_overall_intent_T_gate_usable": false},
+    "B9_03": {"gold_audit_v2_mode": "agent_prepared_materials_only", "level_A_this_package": true, "level_A_unlocks_runs": false, "level_A_proves_in_round_files_audited": false, "level_B_status": "future_package", "level_B_exists": false, "level_B_blocked_on": ["C_freeze", "round_allocation_final", "frozen_in_round_files"], "R1_R2_sheets": "blank_unsigned", "manifest_auto_tests_are_human_acceptance_credential": false},
+    "test_count": {"verified_total": 187, "verified_passed": 186, "verified_skipped": 1, "verified_failed": 0, "exit": 0, "command": "CUDA_VISIBLE_DEVICES='' PYTHONPATH=src .venv/bin/python -m unittest discover -s tests -q", "decomposition": "151_closeout_pre_C + 24_test_data_c + 12_test_audit_packages = 187", "retire": [151, 175, 183], "handoff_183_reachable_from_current_tree": false, "discovery_collects_ids": 188, "runner_total_includes_1_platform_skip": true}
+  },
+  "session_work_b8_01": {
+    "ticket": "B8-01",
+    "status": "done_v2_audit_corrected_pending_commit_and_v2_reverify",
+    "script": "scripts/export_phase0_artifacts.py",
+    "original_defect": "fabricated_lock_tokenizer_sha256_KeyError_committed_5e8f769_never_executed",
+    "lead_fix_confirmed_correct_by_skeptic_F10": true,
+    "v2_audit_fixes_applied": ["F-03_driver_parse_regex", "F-B8-LOCK-02_full_tokenizer_binding", "F-06_decision_tokenarity", "F-07_C_coverage_relabel", "F-08_decode_replay_note", "F-09_P_user_structural_note", "F-11_tf32_note"],
+    "outputs": {
+      "TOKEN_ANCHORS.json": {"sha256_prefix": "ecdac639ab8a42aa", "anchors": 24, "per_task": {"V": 8, "T": 8, "C": 8}, "S_anchors": 0, "S_status": "blocked", "position_invariant_violations": 0, "decode_replay_mismatches": 0, "device": "cpu_tokenizer_only_no_model_weights_no_gpu"},
+      "ENVIRONMENT.json": {"sha256_prefix": "5b8b5bf6cf96d68b", "gpu_execution_in_this_export": false, "nvidia_driver_version": "550.54.14", "nvidia_cuda_version": "12.4", "provenance": "mirror_file_hashes_verified"}
+    },
+    "v1_hashes_superseded": {"TOKEN_ANCHORS": "a4bc59954e20b8a4", "ENVIRONMENT": "78331cfb155f319b"},
+    "execution_note": "reports/B8_01_EXECUTION_NOTE_20260916.md",
+    "batch10_precondition_artifacts_now_exist": ["project_level_TOKEN_ANCHORS.json", "independent_ENVIRONMENT.json"]
+  },
+  "open_findings_routing": {
+    "F-B8-REPRO-01": "COMMIT_needed_for_durability",
+    "RES-01_RES-05_RES-06": "B8-02_GPU_measurement_ticket_gated",
+    "F-01_F-02": "T03_disposition_packet_language_downgraded",
+    "F-04": "language_scoped",
+    "C-07": "C_freeze_packet_approver_must_disambiguate",
+    "C-08": "PREREG_v2_packet_predeclare_small_sample_corrected_interval",
+    "C-10": "fix_before_any_future_S_freeze",
+    "F-HEARTBEAT-07": "gitignore_decision",
+    "F-COMMIT-08": "commit_hygiene_note",
+    "F-LEAK-09": "state_as_namespace_disjoint_no_direct_gold_print; semantic_leakage_open_until_human_audit",
+    "F-ALIGN-06_F-HANDOFF-05": "DOCUMENTATION_DRIFT_ERRATA",
+    "C-17": "extra_V_baseline_dirs_27a5f2e_51f6ad0_are_aborted_failed_attempts_reconcile_in_run_chain"
+  },
+  "gated_decisions_needing_human_root_approval": [
+    "PREREG_revision_v2_approval_KEYSTONE",
+    "S_DATA_PROTOCOL_v3_approval_plus_approved_source_ids",
+    "C_v2_freeze_incl_12_over_5_allocation_resolution_and_C07_disambiguation",
+    "T03_numerics_disposition",
+    "B9-03_human_blind_review_R1_R2_signoff",
+    "B8-02_GPU_prefill_decode_measurement_ticket",
+    "commit_scope_for_B8-01_evidence_and_session_docs"
+  ],
+  "overclaim_watchlist": [
+    "never_write_T03_passed",
+    "never_write_FP32_proves_precision_dominant_root_cause",
+    "never_write_T04_pilot_shows_power_or_mechanism_or_admission",
+    "never_write_baseline_eq_identity_validates_hook",
+    "never_write_B9-03_LevelA_as_LevelB_or_human_accepted",
+    "never_write_S_approved_or_S_data_acquired",
+    "never_write_C_frozen_or_C_gate_evaluable",
+    "never_write_PREREG_registered_or_phase0_admission_met",
+    "never_write_model_lock_official",
+    "never_write_no_leakage_only_namespace_disjoint_no_direct_print",
+    "never_write_preserved_independent_shared_circuit_no_effect_without_predeclared_noninferiority_and_power",
+    "never_write_docs_research_external_priors_as_project_findings"
+  ],
+  "provenance": {
+    "head_commit": "5e8f7698fa55173c27f896857324037e1de06c14",
+    "head_subject": "research architecture",
+    "head_author": "wells",
+    "head_date": "2026-09-16T22:17:32+08:00",
+    "head_postdates_handoff": true,
+    "handoff_claims_no_commit": true,
+    "handoff_claims_no_local_git": true,
+    "both_handoff_claims_false_of_authoritative_repo": true,
+    "commit_provenance_authorization": "unresolved",
+    "uncommitted_this_session": ["scripts/export_phase0_artifacts.py", "artifacts/setup/TOKEN_ANCHORS.json", "artifacts/setup/ENVIRONMENT.json", "reports/B8_01_EXECUTION_NOTE_20260916.md", "reports/CURRENT_STATE_20260916.md", "reports/CURRENT_STATE_20260916.json", "reports/DOCUMENTATION_DRIFT_ERRATA_20260916.md", "reports/APPROVAL_PACKETS_20260916.md"],
+    "gitignored_not_committed": [".claude/settings.local.json"],
+    "pre_existing_dirty": ["artifacts/reservation/gpu3_reservation.jsonl"],
+    "commit_requires_root_specified_scope": true,
+    "committed_by_lead_unilaterally": false
+  }
+}
