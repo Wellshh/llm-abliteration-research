@@ -1,5 +1,10 @@
 # CURRENT STATE — MiniCPM5 refusal-decision audit (authoritative present-tense record)
 
+> **READ §12 FIRST (2026-09-17 addendum).** Sections §0–§11 below are the 2026-09-16 record at HEAD `5e8f769`, preserved
+> verbatim. Their present-tense claims about **test count, commit state, B8-01/B8-02/B9-03 status, RES-01/05/06 and D5**
+> have been superseded by `§12 ADDENDUM (2026-09-17)` at the end of this file (machine twin:
+> `CURRENT_STATE_20260916.json → addendum_20260917`). Nothing below was edited to make later work look compliant.
+
 **Date:** 2026-09-16 · **Branch:** `dev` · **Git base:** HEAD `5e8f7698fa55173c27f896857324037e1de06c14`
 **Status of this document:** AUTHORITATIVE PRESENT-TENSE STATE. Created per GOAL.md §1/§14 to resolve documentation drift by provenance and chronology. It **supersedes the present-tense claims** of older summaries where they conflict, but **preserves all historical documents unchanged** (no historical record, threshold, artifact, failure or erratum was edited to produce this file). Machine-readable twin: `reports/CURRENT_STATE_20260916.json`.
 **Prepared by:** Research Lead, after an independent 4-role read-only team audit (Reproducibility & Audit Reviewer; Construct/Data/Statistics Researcher; Experimental Systems Engineer; Skeptical/Red-Team Scientist) per GOAL §0/§12.
@@ -178,3 +183,45 @@ Do **NOT** write, in any report or claim:
 ---
 
 *This record is the lead's synthesis. The independent audit's per-role findings, verified-pass lists, and disagreements are preserved in the team-audit transcript and summarized in §7/§9. No historical document was altered to produce it.*
+
+---
+
+## 12. ADDENDUM (2026-09-17) — present-tense refresh at HEAD `fbb363c` + this session
+
+**Why:** GOAL §1/§14 — the §0–§11 record above had drifted in exactly the way it warns about (it says 187 tests, "B8-01 pending commit + re-verification", "RESOURCE_PROFILE production code does not exist", "HEAD `5e8f769`"). All four are now false of the tree. The sections above are preserved verbatim; this addendum is the current present tense.
+
+### 12.1 What changed since `5e8f769` (all committed and pushed; `dev` == `origin/dev`)
+
+| commit | content | present-tense status |
+|---|---|---|
+| `bcfd237` | B8-01 v2 exporter + `TOKEN_ANCHORS.json` + `ENVIRONMENT.json` + this record | **committed** → closes **F-B8-REPRO-01** (reproducibility no longer depends on a working tree) |
+| `8ac8c61` | B8-02 `resource_profile.py` + `profile_resources.py` + CPU harness artifact | **committed**; RES-01/05/06 now have real code, **still no measured `RESOURCE_PROFILE.json`** |
+| `84f1952` | B9-03 Level-B builder (`make_audit_package_level_b.py`), fail-closed pre-freeze | **committed**; Level-B **content** still does not exist (needs C freeze + frozen in-round files) |
+| `fbb363c` | §12 re-verification hardening D1–D4 + `INDEPENDENT_REVERIFICATION_20260917.md` | **committed**; D5 deferred by decision |
+
+- **CPU suite (verified this session):** `CUDA_VISIBLE_DEVICES='' PYTHONPATH=src .venv/bin/python -m unittest discover -s tests -q` → **241 tests, OK (skipped=1)**. Decomposition: 187 (§6, 2026-09-16) + 21 (B8-02) + 10 (Level-B) + 5 (D1/D3 hardening) + 18 (`tests/test_phase0_anchors.py`, this session). §6's `187/186/1` is historical.
+- **§12 independent re-verification of B8-01 v2 / B8-02 / Level-B:** Reproducibility & Audit Reviewer `confirmed_sound`; Skeptic `confirmed_with_minor_issues` (5 defense-in-depth/disclosure gaps, "not correctness errors in what shipped"). D1–D4 fixed at `fbb363c`; both reviewers' honest caveat stands: **the post-gate GPU measurement path has never executed** — it is verified by code order + unit tests only.
+- **RES-01/05/06 disposition:** code exists (prefill/decode timed in separate loops with `cuda.synchronize` brackets; allocator peak via `torch.cuda.max_memory_allocated/reserved`; `rate_provenance` enum now required so cpu/illustrative rates cannot be stamped as a real §14 re-estimate). The real `RESOURCE_PROFILE.json` + §14 re-estimate remain behind the **§F ticket**.
+
+### 12.2 D5 — deferral re-affirmed, requirement converted from prose into code
+
+`P_decision == P_boundary` for T remains a **first-generated-token** locus, not a single-token decision locus (plan §6.1; audit F-06). The 2026-09-17 deferral reasoning still holds — a machine-readable single-locus flag would change `TOKEN_ANCHORS.json` (`ecdac639ab8a42aa…`) and `ENVIRONMENT.json` (`5b8b5bf6cf96d68b…`), invalidating the byte-identical 24/24 anchor reproduction in `INDEPENDENT_REVERIFICATION_20260917.md` and the batch-10 P1–P8 precondition binding — **but** the carry-forward was "the T05 implementer MUST read the disclosure", i.e. enforced by reading discipline, the very pattern the reviewers flagged in D1.
+
+New: `src/minicpm_research/phase0_anchors.py` is the load/consume API. `single_token_decision_locus()` **raises** `AmbiguousDecisionLocusError` for any anchor with `decision_tokenarity=multi_token_native_tool_call` (all 8 T anchors); `first_generated_token_locus()` returns `is_single_token_decision_locus=False` **by construction** (where a T decision lives is what T05 must find out, not what an anchor file may assert); `load_anchor_package()` fail-closes if a future re-export drops the phrase `NOT a single-token decision locus`, mislabels a T anchor as single-token, or breaks `P_decision == P_boundary`. Pinned by `tests/test_phase0_anchors.py` against the **committed** artifact (V8/T8/C8, S0 `blocked`, C still `candidate_draft_not_frozen…reexport_after_freeze`, lock binding == `MODEL_MANIFEST.json`). **Both B8-01 artifact hashes are byte-unchanged.** Exit condition for reversing the deferral: approved amendment **before** re-export → §12 re-verification of the new bytes → update every record citing the old hashes → green suite; the mandated post-freeze C re-export (§C / F-07) is the natural moment to bundle it.
+
+**Honest limit:** this enforces the **API** path. `json.load("artifacts/setup/TOKEN_ANCHORS.json")` + `anchor["P_decision"]` is still available to anyone and no test can block it. What changed is that the default, discoverable route now refuses the wrong read and explains why, and that the F-06 disclosure can no longer vanish silently from a re-export. Making the T05 extraction code consume `phase0_anchors` exclusively is a **code-review rule for that ticket**, not something this commit can guarantee.
+
+### 12.3 New findings routed out of the §B/§C decision queue
+
+Full evidence + diff-ready texts: **`reports/PREREG_V2_PROSPECTIVE_FIXES_20260917.md`** (PROPOSED; it edited **no** pending-approval text).
+
+- **C-06 corrected (the §C trichotomy is wrong).** Families are single-gold (verified 40/40) and each contributes exactly 2 in-round rows, so the implemented generator allocates **gold-balanced pairs**: `propose_round_families()` reproduces **both** round lists in `C_DATA_FREEZE_DRAFT_v2.md` byte-exactly, disjoint, 16 reserve families, per-category families `{4,2,2,2,2}`. 12 families/round **does** satisfy two-sided family-level balance — §C's option **C `{3,3,2,2,2}` is infeasible** (a 3-family single-gold cell cannot be 1.5T/1.5F) and option **B `{3,3,3,3,3}` silently tightens** accuracy to 5/6 = 83.3 % and consistency to 11/12 = 91.7 %. Degenerate projection on the **actual** round sets: all four constant strategies macro = 0.500.
+- **C-18 (new, freeze-blocking for the C gate text).** `label_swap_consistency.pair_set` is undefined for `user_stance_agree_vs_oppose`: those 8 families have **no** `primary_map_*` pair (they pair by stance with identical gold, verified 8/8), so the denominator is ambiguous — **10 pairs → 9/10 = 90.0 %** vs **12 pairs → 11/12 = 91.7 %** per round. The approver must pick a definition; recommendation is to keep `label_swap_consistency` literal and report `stance_consistency` separately (two constructs, one number each — GOAL §7).
+- **C-10 confirmed text-only, direction bug.** Zero code paths evaluate `s_round_gate`/`integer_rule` (grep over `src`, `scripts`, `tests` → 0 hits). `benign_false_refusal_rate_max=0.15` needs `k ≤ floor(0.15·n)`; the written `k ≥ ceil(0.15·n)` **inverts** it (n=10 would fail a model with zero benign false refusals). Direction fix, no threshold value changes.
+- **C-07** still requires the approver to state one reading; under the implemented `{8,4,4,4,4}` cells the two readings actually differ in verdict (one category at 2/4 with four perfect: macro 0.90 passes the compensatory reading, fails the per-category-floor reading). Note macro ≡ micro **only** for equal-sized cells, which this allocation is not.
+
+### 12.4 What is still true and still blocked (unchanged by any of the above)
+
+`phase0_construct_admission_met = **false**` — V decisive 1/2 < draft 75 % at n=1 family; S baselines missing (S blocked, 9-step chain all pending); power `not_estimable`; `T03_NUMERICS = failed_limit_recorded`; **measured** prefill/decode re-estimation still missing (§F unapproved). PREREG still `draft_not_registered`; revision v2 still `proposed_not_approved` / `effective=false`; C still `candidate_draft_not_frozen`; B9-03 still Level-A agent-prepared with **blank/unsigned** R1/R2 sheets; T05 / formal test / intervention selection / test unsealing remain gated. §A's heartbeat-gitignore and `5e8f769`-provenance questions remain open; `artifacts/reservation/gpu3_reservation.jsonl` remains permanently dirty (append-only heartbeat, deliberately not committed).
+
+**Constraints honored this session:** no GPU or model process, no S content acquired or generated, no historical threshold/artifact edited, no pending-approval protocol text edited, no GPU5/other-process contact. §12 status of this addendum itself: the D1–D4 code and the new anchor accessor are scheduled for independent re-verification (GOAL §12); until that record exists, §12.1–§12.3 are lead-authored claims, not independently confirmed ones.

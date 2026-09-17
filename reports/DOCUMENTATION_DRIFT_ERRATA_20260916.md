@@ -37,6 +37,13 @@
 
 - **Note (no specific line correction):** `README.md` is tier-6 in the §0 hierarchy. Its "最小 CUDA smoke test" wording was already corrected in ALIGNMENT batch-1 to "CPU hook 验证 + 只读 GPU 审计，无 CUDA/模型 smoke run". Future agents must **not** mistake README statements for current empirical status; read `CURRENT_STATE_20260916.md` instead.
 
+## E-6 — 2026-09-17 addendum: this errata's own **187** figure is superseded (**241**), and `README.md` now carries a pointer banner
+
+- **Original (preserved, E-2):** "Adopt **187/186/1** as authoritative". **Original (preserved, E-5):** "The originals (`ALIGNMENT_T00-T04.md`, `handoff.md`, `T03_FP32_CONTROL_PLAN.md`, `README.md`) remain byte-for-byte unchanged."
+- **Correction:** The authoritative CPU suite is now **241 tests / OK / skipped=1 / 0 failed** (verified by re-run on 2026-09-17): 187 + 21 (B8-02 `test_resource_profile`) + 10 (`test_audit_package_level_b`) + 5 (D1/D3 hardening at `fbb363c`) + 18 (`test_phase0_anchors`, §12 D5 consumer gate). **187/186/1 is historical as of `fbb363c`.** Separately, per GOAL §14 ("ensure future agents cannot mistake stale README statements for current empirical status"), a **pointer banner was prepended to `README.md`** directing readers to `CURRENT_STATE_20260916.md §12`; the README body text itself is unchanged, so E-5's "byte-for-byte unchanged" statement is true of the 2026-09-16 session but no longer of the file on disk.
+- **Provenance/chronology:** commits `bcfd237` → `8ac8c61` → `84f1952` → `fbb363c` postdate this errata (2026-09-16); the test-count growth is theirs, and the D5 consumer accessor plus its tests are this session's. No gate, threshold, failure record or artifact hash changed; `TOKEN_ANCHORS.json`/`ENVIRONMENT.json` remain `ecdac639…`/`5b8b5bf6…`.
+- **Downstream impact:** present-tense figures come from `CURRENT_STATE_20260916.md §12` / `addendum_20260917`. `handoff.md`, `ALIGNMENT_T00-T04.md`, this errata's E-2/E-5 and the README body remain preserved historical text; the README banner is navigation, not a finding.
+
 ---
 
 **Discipline statement:** These errata annotate; they do not overwrite. The originals (`ALIGNMENT_T00-T04.md`, `handoff.md`, `T03_FP32_CONTROL_PLAN.md`, `README.md`) remain byte-for-byte unchanged. No historical threshold, gate, failure record, artifact, or provenance was altered. Where a present-tense claim is corrected, the authoritative replacement lives in `CURRENT_STATE_20260916.{md,json}`.

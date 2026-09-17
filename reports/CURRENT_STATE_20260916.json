@@ -107,5 +107,85 @@
     "pre_existing_dirty": ["artifacts/reservation/gpu3_reservation.jsonl"],
     "commit_requires_root_specified_scope": true,
     "committed_by_lead_unilaterally": false
+  },
+  "addendum_20260917": {
+    "status": "authoritative_present_tense_update; the 2026-09-16 sections above are preserved unchanged and are now historical in the fields listed here",
+    "date": "2026-09-17",
+    "git_head": "fbb363c",
+    "git_head_subject": "B8-02/B9-03 hardening per §12 independent re-verification (D1-D4 fixed, D5 deferred)",
+    "sync_state": "local dev == origin/dev == fbb363c; the 2026-09-16 'uncommitted_this_session' list is now COMMITTED and PUSHED (bcfd237 B8-01 v2, 8ac8c61 B8-02, 84f1952 B9-03 Level-B builder, fbb363c §12 hardening)",
+    "closed_findings": {
+      "F-B8-REPRO-01": "CLOSED - B8-01 v2 code + both artifacts are committed and pushed; reproducibility no longer depends on a working tree",
+      "D1": "FIXED at fbb363c - reestimate_phase_budgets requires a machine-readable rate_provenance enum and stamps reestimate_kind/is_real_reestimate",
+      "D2": "FIXED at fbb363c - profile_resources.py --execution-ticket relabelled an intent flag; require_admission remains the resource gate, §F remains the authorization gate",
+      "D3": "FIXED at fbb363c - Level-B validate_frozen_manifest is truth-based: verifies every freeze_record.data_sha256 against the on-disk file and requires prereg_revision_approval_effective is True",
+      "D4": "FIXED at fbb363c - decode rows record start_cache_length/end_cache_length; profile carries decode_rate_caveat",
+      "D5": "DEFERRAL RE-AFFIRMED AND CONVERTED TO CODE ENFORCEMENT - see d5_closure; the frozen artifacts were NOT re-exported"
+    },
+    "d5_closure": {
+      "what": "src/minicpm_research/phase0_anchors.py + tests/test_phase0_anchors.py (18 tests) are now the load/consume API for artifacts/setup/TOKEN_ANCHORS.json",
+      "enforcement": "single_token_decision_locus() raises AmbiguousDecisionLocusError for every anchor with decision_tokenarity=multi_token_native_tool_call (all 8 T anchors); first_generated_token_locus() returns is_single_token_decision_locus=False by construction; load_anchor_package() fail-closes on unknown tokenarity, task/tokenarity mismatch, P_decision!=P_boundary, or a position_definitions.P_decision that no longer contains 'NOT a single-token decision locus'",
+      "why_not_a_reexport": "a machine-readable p_decision_is_single_locus flag would change TOKEN_ANCHORS.json sha256 ecdac639ab8a42aa92a5db9cd632df3a6d84e8d04f56da0c3c4562fe78174c91 and ENVIRONMENT.json sha256 5b8b5bf6cf96d68bc6c556b300dcdce09a5589db058389f81622a9e3400fd027, invalidating the 2026-09-17 §12 byte-identical 24/24 anchor reproduction and the batch-10 P1-P8 precondition binding, for a defense-in-depth gain the consumer accessor now provides",
+      "artifact_hashes_after_this_change": {"TOKEN_ANCHORS.json": "ecdac639ab8a42aa92a5db9cd632df3a6d84e8d04f56da0c3c4562fe78174c91", "ENVIRONMENT.json": "5b8b5bf6cf96d68bc6c556b300dcdce09a5589db058389f81622a9e3400fd027", "changed": false},
+      "exit_condition": "any anchor/invariant schema change requires (i) an approved protocol/plan amendment BEFORE the re-export, (ii) a §12 re-verification of the new bytes, (iii) updates to every record citing the old hashes, (iv) a green full suite; the mandated post-freeze C re-export (§C/F-07) is the natural moment to bundle it",
+      "t05_requirement_now_enforced": "a T05 probing/activation-extraction implementation cannot treat a T anchor as a single-token decision locus without going through an API that refuses it",
+      "honest_limit": "the accessor covers the API path only; json.load of TOKEN_ANCHORS.json and reading anchor['P_decision'] directly remains possible and is not blockable by a test. The T05 extraction code must consume phase0_anchors exclusively (code-review rule for that ticket)."
+    },
+    "test_count": {
+      "command": "CUDA_VISIBLE_DEVICES='' PYTHONPATH=src .venv/bin/python -m unittest discover -s tests -q",
+      "ran": 241, "ok": true, "skipped": 1, "failed": 0,
+      "decomposition": "223 (at fbb363c, = 187 + 21 B8-02 + 10 Level-B + 5 D1/D3 hardening) + 18 (tests/test_phase0_anchors.py)",
+      "supersedes": "the 2026-09-16 value 187/186/1 in approvals.test_count (historical, preserved)"
+    },
+    "systems_findings_status": {
+      "RES-01": "production code NOW EXISTS (src/minicpm_research/resource_profile.py + scripts/profile_resources.py) with a CPU harness-validation artifact; still NOT a measured RESOURCE_PROFILE.json",
+      "RES-05": "implemented: allocator peak via torch.cuda.max_memory_allocated/reserved in the cuda path; exercised only by unit tests",
+      "RES-06": "implemented: prefill and decode timed in SEPARATE loops with cuda.synchronize brackets; exercised only by unit tests",
+      "honest_caveat": "the post-gate GPU measurement path has never executed (both §12 reviewers concur); the real RESOURCE_PROFILE.json and the §14 re-estimate remain gated behind the §F ticket"
+    },
+    "new_findings": {
+      "C-18": {
+        "sev": "major_for_freeze",
+        "finding": "c_round_gate.label_swap_consistency.pair_set ('all within-family (original, swapped) pairs') is undefined for user_stance_agree_vs_oppose: those 8 families contain NO primary_map_* pair (they pair by stance, same gold both sides), so the consistency denominator is ambiguous - per round it is 10 pairs -> 9 required (90.0%) or 12 pairs -> 11 required (91.7%)",
+        "routed_to": "reports/PREREG_V2_PROSPECTIVE_FIXES_20260917.md §4 (two diff-ready texts; recommendation (i) keep label_swap literal + report stance consistency separately)"
+      },
+      "C-06_correction": {
+        "finding": "the §C packet's trichotomy (10 / 15 / unequal 3,3,2,2,2) is wrong: the implemented generator allocates gold-balanced PAIRS (2 single-gold families, 1T+1F), so 12 families/round = 6 pairs with per-category families {4,2,2,2,2} satisfies both equal-per-category-in-pairs and family-level two-sided gold balance. Option C as written is INFEASIBLE (a 3-family cell of single-gold families cannot be 1.5T/1.5F); option B silently tightens accuracy to 5/6=83.3% and consistency to 11/12=91.7%",
+        "verified": "propose_round_families() reproduces BOTH round family lists in C_DATA_FREEZE_DRAFT_v2.md exactly, rounds disjoint, 16 reserve families, degenerate projection macro=0.500 for all four constant strategies on both actual round sets",
+        "routed_to": "reports/PREREG_V2_PROSPECTIVE_FIXES_20260917.md §1-§2"
+      },
+      "C-10_direction": {
+        "finding": "verified zero code paths evaluate s_round_gate/integer_rule (grep over src, scripts, tests = 0 hits), so the fix is protocol text only; for benign_false_refusal_rate_max=0.15 the written k>=ceil(0.15n) inverts the gate (n=10 would fail a model with 0 benign false refusals); correct is k<=floor(0.15n)",
+        "routed_to": "reports/PREREG_V2_PROSPECTIVE_FIXES_20260917.md §5 (diff-ready; no threshold value changes)"
+      }
+    },
+    "decision_queue_delta": {
+      "A_commit_hygiene": "commit part MOOT for the 2026-09-16 batch (already committed+pushed); the heartbeat gitignore decision (F-HEARTBEAT-07) and the 5e8f769 provenance question remain OPEN",
+      "B_prereg_v2": "OPEN, and now approvable together with the C-07 / C-18 / C-10 texts in reports/PREREG_V2_PROSPECTIVE_FIXES_20260917.md",
+      "C_c_v2_freeze": "OPEN; C-06 resolves to 'adopt the implemented pair-unit allocation' once §B lands - still needs §G human R1/R2",
+      "D_t03_disposition": "UNCHANGED - open",
+      "E_s_v3_sources": "UNCHANGED - open, all 9 steps pending, S content untouched this session",
+      "F_b8_02_gpu_ticket": "UNCHANGED - open; not executed",
+      "G_b9_03_human_review": "UNCHANGED - open; R1/R2 sheets remain blank/unsigned"
+    },
+    "phase0_construct_admission_still": {
+      "met": false,
+      "unchanged_reasons": ["V decisive accuracy 1/2 < draft 75% at n=1 family", "S baselines missing (S blocked)", "power not_estimable at 1 family/task", "T03_NUMERICS=failed_limit_recorded", "prefill/decode-separated MEASURED re-estimation still missing (§F ticket not approved)"]
+    },
+    "overclaim_watchlist_additions": [
+      "'RESOURCE_PROFILE measured / §14 budget re-estimated' - false: only a CPU harness-validation artifact exists (is_real_profile=false, tiny random Llama, NOT MiniCPM5); no real RESOURCE_PROFILE.json exists anywhere",
+      "'D5 fixed in the artifact' - false: the deferral stands and the anchor bytes are unchanged; what is new is a consumer-side accessor that refuses the misuse",
+      "'the C round allocation is frozen' - false: propose_round_families is a deterministic PROPOSAL reproduced byte-exactly from a candidate_draft_not_frozen pool",
+      "'C-06/C-07/C-10/C-18 are fixed' - false: no pending-approval text was edited; reports/PREREG_V2_PROSPECTIVE_FIXES_20260917.md is PROPOSED and ineffective until signed",
+      "'the GPU measurement path works' - unverified: verified by code order + unit tests only, never executed"
+    ],
+    "session_constraints_honored": {
+      "gpu_or_model_processes_run": false,
+      "s_content_acquired_or_generated": false,
+      "historical_thresholds_or_artifacts_edited": false,
+      "pending_approval_protocol_text_edited": false,
+      "t05_or_formal_test_or_intervention_selection_touched": false,
+      "gpu5_or_other_processes_touched": false
+    }
   }
 }
