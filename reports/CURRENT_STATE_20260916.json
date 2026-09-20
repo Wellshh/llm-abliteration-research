@@ -161,8 +161,8 @@
     },
     "decision_queue_delta": {
       "A_commit_hygiene": "commit part MOOT for the 2026-09-16 batch (already committed+pushed); the heartbeat gitignore decision (F-HEARTBEAT-07) and the 5e8f769 provenance question remain OPEN",
-      "B_prereg_v2": "OPEN, and now approvable together with the C-07 / C-18 / C-10 texts in reports/PREREG_V2_PROSPECTIVE_FIXES_20260917.md",
-      "C_c_v2_freeze": "OPEN; C-06 resolves to 'adopt the implemented pair-unit allocation' once §B lands - still needs §G human R1/R2",
+      "B_prereg_v2": "APPROVED 2026-09-20 as v2.1 (commit bdc17db, effective=true) with C-07=(a)/C-08=(P)/C-18=(i)+(iv) - see v2_1_approval_20260920. Protocol only; C freeze / Level-B / GPU / S / Round 1 NOT authorized. (Was: OPEN, approvable together with the C-07/C-18/C-10 texts in reports/PREREG_V2_PROSPECTIVE_FIXES_20260917.md.)",
+      "C_c_v2_freeze": "STILL OPEN/NOT authorized. C-06 allocation adopted in the approved v2.1, but the C freeze additionally requires §G human R1/R2 sign-off AND the RC-C3 mechanical sidecar validator (an explicit freeze-ticket prerequisite). C remains candidate_draft_not_frozen.",
       "D_t03_disposition": "UNCHANGED - open",
       "E_s_v3_sources": "UNCHANGED - open, all 9 steps pending, S content untouched this session",
       "F_b8_02_gpu_ticket": "UNCHANGED - open; not executed",
@@ -180,15 +180,37 @@
       "'the GPU measurement path works' - unverified: verified by code order + unit tests only, never executed"
     ],
     "session_20260917_later_artifacts": {
-      "status": "all PROPOSED/DRAFT - NOT approved, NOT effective, NOTHING applied; PREREG v2 + its sidecar byte-unchanged; C unfrozen; S blocked; no GPU authorized",
+      "status": "as of the 2026-09-17 later session these were all PROPOSED/DRAFT (NOT approved, NOT effective, nothing applied). SUPERSEDED for v2_1 by the 2026-09-20 approval - see v2_1_approval_20260920. The analysis/draft documents (prospective-fixes, sensitivity, amendment draft) remain decision-support, not themselves effective. PREREG v2 + its sidecar byte-unchanged throughout; C unfrozen; S blocked; no GPU authorized.",
       "PREREG_V2_PROSPECTIVE_FIXES_20260917.md": "v3 - the §B/§C decision-queue analysis with diff-ready texts; §4 carries the two corrected argumentation blocks (pooling never relaxes swap; constants pass both consistencies); §8 records the review provenance",
       "SMALL_SAMPLE_SENSITIVITY_20260917.md": "pre-declared C-08/C-07 small-sample analysis (+ analysis_small_sample_20260917.py/.out, byte-deterministic at fixed seed); CPU-only synthetic DGP, NO model output, NO MiniCPM5 behaviour claim; round-C BCa-1 formula fix applied",
       "PREREG_V2_1_AMENDMENT_DRAFT_20260917.md": "decision-ready amendment: C-06 + C-10 diff-ready (choice-independent); C-07/C-08/C-18 left as approver ticks (verdict-affecting, not lead-committable)",
-      "PREREGISTRATION_PHASE0_REVISION_v2_1.yaml": "the signable draft protocol (sha256 739e14fe499089e647404a088ea93f0eaf5a0dfcfb794fa612c8a29109a54978); status proposed_not_approved; supersedes v2 (6225cfd4...) which is preserved byte-unchanged",
-      "PREREGISTRATION_PHASE0_REVISION_v2_1_APPROVAL.json": "sidecar; status pending_approval, approval_record null, approver_choice_record null, freeze.effective false; protocol_sha256 binds the current v2_1 bytes; signature_requires makes active confirmation of C-07/C-08/C-18 mandatory (silence does NOT adopt the pre-filled defaults)",
+      "PREREGISTRATION_PHASE0_REVISION_v2_1.yaml": "APPROVED 2026-09-20 (was the signable draft). status=approved_data_after_amendment; approved bytes sha256 7bbd58cae219508702de6293a99ffb8ee1aeb275d29f43aae83a1eaa7d4f1196 (the pre-approval draft was 739e14fe...; editing the approved bytes would break the sidecar binding and require re-approval). supersedes v2 (6225cfd4...) preserved byte-unchanged. See v2_1_approval_20260920.",
+      "PREREGISTRATION_PHASE0_REVISION_v2_1_APPROVAL.json": "sidecar; status=approved_data_after_amendment, approval_record present (root_review=approved, approved_at 2026-09-20T10:56:40+08:00), approver_choice_record={C-07:(a),C-08:(P),C-18:(i)+(iv)}, freeze.effective=true; protocol_sha256 binds the approved yaml bytes. authorization_scope='protocol approval only; no C freeze, Level-B, model/GPU, S, or Round 1'. See v2_1_approval_20260920.",
       "INDEPENDENT_REVERIFICATION_20260917C.md": "the fresh round-C record (this pass)",
-      "open_approver_decisions": ["C-07 semantic_accuracy aggregation: (a) macro vs (b) per-category floor", "C-08 T-gate uncertainty: (P) percentile+power-caveat vs (W) wild cluster bootstrap (W not yet implemented/simulated)", "C-18 consistency pair-set: (i) swap-only literal + ungated stance vs (ii) merged paired_invariant; clause (iv) frozen-denominator mandatory under either"],
+      "open_approver_decisions": "DECIDED 2026-09-20 (see v2_1_approval_20260920): C-07=(a) macro>=0.75 gate, per-category report-only; C-08=(P) family-clustered percentile LB, screening/non-confirmatory + power caveat; C-18=(i) swap-only gated + stance ungated, with (iv) frozen denominator mandatory. (W) wild-cluster was NOT chosen and remains unimplemented.",
       "no_choice_items_ready_to_sign": ["C-06 allocation {4,2,2,2,2} pair-unit (reproduces the freeze draft byte-exactly)", "C-10 *_max integer direction fix (0.60/0.15 byte-unchanged)"]
+    },
+    "v2_1_approval_20260920": {
+      "event": "human/root approver approved PREREG Phase-0 revision v2.1 and recorded the three verdict-affecting choices",
+      "approved_at": "2026-09-20T10:56:40+08:00",
+      "commit": "bdc17db15217d608ca4d2b35f3f5bbf4f327ffef (pushed; origin/dev == local HEAD == bdc17db, verified by ls-remote)",
+      "yaml_status": "approved_data_after_amendment",
+      "sidecar_status": "approved_data_after_amendment",
+      "freeze_effective": true,
+      "approved_protocol_sha256": "7bbd58cae219508702de6293a99ffb8ee1aeb275d29f43aae83a1eaa7d4f1196",
+      "sha_binding_verified": "sidecar.protocol_sha256 == sha256(v2_1.yaml bytes) == the approver-stated 7bbd58ca... (re-derived this session)",
+      "approver_choice_record": {"C-07": "(a) macro>=0.75 gate; per-category report-only, no category-level pass claim", "C-08": "(P) family-clustered percentile one-sided 95% LB; screening/revision-protocol only, non-confirmatory, power caveat retained", "C-18": "(i) label_swap gated swap-only + stance_consistency separate and ungated; (iv) frozen denominator mandatory (invalid/missing remain in denominator, never numerator)"},
+      "approved_body_matches_choices": "verified by parse: per_category_floor=null (reading a); label_swap pair_set swap-only + stance_consistency.min=null + denominator_semantics frozen (i+iv); c08_uncertainty_rule percentile (P); allocation pair-unit (C-06); integer_rule_min/max (C-10)",
+      "authorization_scope": "PROTOCOL APPROVAL ONLY. The approver explicitly did NOT authorize: C freeze, Level-B, any model/GPU run, S, or Round 1. Recorded in yaml approval_scope (C_freeze_authorized/level_B_authorized/model_gpu_authorized/S_authorized/round1_authorized all false) and sidecar approval_record.authorization_scope.",
+      "phase0_construct_admission_met": false,
+      "remaining_prerequisites_before_any_freeze_or_run": [
+        "RC-C3 (carried by the approver as an explicit freeze-ticket prerequisite): implement a MECHANICAL validator that reads the sidecar directly (status/approval_record/approver_choice_record non-null + freeze.effective + protocol_sha256 == sha256(yaml)) instead of trusting the human-transcribed prereg_revision_approval_effective boolean in make_audit_package_level_b.py",
+        "C freeze additionally requires B9-03 human R1/R2 gold-audit sign-off (§G) and the frozen in-round files",
+        "Round 1 additionally requires the batch-10 execution preconditions satisfied and recorded",
+        "any model/GPU run requires its own §F-style ticket + live admission audit"
+      ],
+      "known_stale_provenance_NOT_edited": "the approved yaml's header comment (lines ~10-16) still summarises round C as '1 major + 1 major_error' and does not mention the fresh round-C pass or the BCa-1 formula fix (the authoritative accounting is 1 major + 3 minor in INDEPENDENT_REVERIFICATION_20260917C.md). The bytes are SHA-bound by the approval, so editing even a comment would break the binding and require re-approval; left unchanged and recorded here as an erratum. A future v2.1.1 may correct the comment under a fresh approval if the approver wants the header self-consistent.",
+      "invariants_held_this_session": "suite 257 OK (skipped=1); TOKEN_ANCHORS.json ecdac639... and ENVIRONMENT.json 5b8b5bf6... byte-unchanged; PREREG v2 + its sidecar byte-unchanged; no model/GPU/S; only the v2_1 sidecar is effective=true among PREREG sidecars (T03 split amendment effective=true is historical, git-clean)"
     },
     "review_rounds": {
       "round_A_20260917_am": {"scope": "bcfd237 B8-01 v2 + 8ac8c61 B8-02 + 84f1952 Level-B builder", "record": "reports/INDEPENDENT_REVERIFICATION_20260917.md", "reproducibility_reviewer": "confirmed_sound", "skeptic": "confirmed_with_minor_issues (5 defects D1-D5; D1-D4 fixed at fbb363c, D5 deferred)"},

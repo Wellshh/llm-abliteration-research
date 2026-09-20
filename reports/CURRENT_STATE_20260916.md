@@ -364,3 +364,48 @@ Governance/Code; Skeptical/Red-Team) on the corrected working tree. Full record:
   would be owed before those are treated as independently confirmed.
 - **Unchanged:** `phase0_construct_admission_met=false`; PREREG v2 + v2_1 `proposed_not_approved`/`effective=false`; C
   `candidate_draft_not_frozen`; S blocked; no GPU/model/S this session; the approver still must actively tick C-07/C-08/C-18.
+
+### 12.8 PREREG v2.1 APPROVED by the human/root approver (2026-09-20) — protocol only; nothing else unblocked
+
+The §12.7 line "the approver still must actively tick C-07/C-08/C-18" is **superseded**: on 2026-09-20 the human/root
+approver approved Phase-0 revision **v2.1** and recorded the three verdict-affecting choices. Committed by the approver
+as **`bdc17db`** ("Approve Phase 0 revision v2.1 protocol choices"); pushed and verified (`origin/dev == local HEAD ==
+bdc17db` via `ls-remote`). This addendum records it; the approved bytes are **not** edited.
+
+- **Choices (approver's, recorded in `approver_choice_record`):** **C-07 = (a)** macro ≥ 0.75 gates, per-category
+  report-only with **no category-level pass claim**; **C-08 = (P)** family-clustered percentile one-sided 95 % LB,
+  **screening / revision-protocol only, non-confirmatory**, power caveat retained; **C-18 = (i)** label-swap gated
+  swap-only + `stance_consistency` reported **ungated**, with **(iv) frozen denominator mandatory** (invalid/missing
+  stay in the denominator, never the numerator). The approver's stated rationale is restrained and matches the
+  sensitivity analysis: a macro gate can compensate a weak category (hence the explicit bar on category-level ability
+  claims); at 12 families the C-08 risk is mainly **false negatives / low power**, not manufactured false positives;
+  a hard gate on 2 stance pairs would amplify chance error into a zero-tolerance verdict; splitting swap from stance
+  keeps label-map invariance and sycophancy-sensitivity from being blurred into one construct.
+- **Verified by re-derivation this session (not taken on report):** sidecar `protocol_sha256`
+  `7bbd58cae219508702de6293a99ffb8ee1aeb275d29f43aae83a1eaa7d4f1196` **== sha256 of the approved yaml bytes == the
+  approver-stated value**; yaml + sidecar both `approved_data_after_amendment`, `freeze.effective=true`,
+  `approval_record` present; the approved **gate body matches the recorded choices** (parse-confirmed:
+  `per_category_floor=null` ⇒ (a); swap-only `pair_set` + `stance_consistency.min=null` + frozen `denominator_semantics`
+  ⇒ (i)+(iv); percentile `c08_uncertainty_rule` ⇒ (P); pair-unit allocation ⇒ C-06; `integer_rule_min/max` ⇒ C-10);
+  `PREREGISTRATION_PHASE0_REVISION_v2.yaml` + its sidecar **byte-unchanged**; suite **257 OK (skipped=1)**; B8-01
+  artifacts unchanged. Among PREREG sidecars only v2_1 is `effective=true` (the T03 split-amendment `effective=true` is
+  historical and git-clean) — no unrelated sidecar was flipped.
+- **Authorization scope — PROTOCOL ONLY (the approver's own explicit limit, recorded in `approval_scope`):**
+  `phase0_construct_admission_met=false`, `C_freeze_authorized=false`, `level_B_authorized=false`,
+  `model_gpu_authorized=false`, `S_authorized=false`, `round1_authorized=false`. **Nothing is unblocked beyond the
+  protocol text.** C remains `candidate_draft_not_frozen`; S remains blocked; no model/GPU/Round-1 is authorized.
+- **Remaining prerequisites the approver carried forward (still required before any freeze or run):**
+  1. **RC-C3 — mechanical sidecar validator (an explicit freeze-ticket prerequisite):** the freeze path must read the
+     sidecar directly (status / `approval_record` / `approver_choice_record` non-null + `freeze.effective` +
+     `protocol_sha256 == sha256(yaml)`) rather than trust the human-transcribed `prereg_revision_approval_effective`
+     boolean in `make_audit_package_level_b.py`. This is the disclosed-not-closed residual from §12.7; the approver
+     made it a hard prerequisite, so it must be implemented in the freeze ticket, not deferred again.
+  2. **C freeze** additionally needs B9-03 human R1/R2 gold-audit sign-off (§G) + the frozen in-round files.
+  3. **Round 1** additionally needs the batch-10 execution preconditions satisfied and recorded.
+  4. **Any model/GPU run** needs its own §F-style ticket + live admission audit.
+- **Known stale provenance in the approved bytes, NOT edited (erratum):** the approved yaml's header comment
+  (lines ~10–16) still summarises round C as "1 major + 1 major_error" and predates the fresh round-C / BCa-1 fix; the
+  authoritative accounting is **1 major + 3 minor** in `INDEPENDENT_REVERIFICATION_20260917C.md`. Because the bytes are
+  SHA-bound by the approval, editing even a comment would break the binding and require re-approval, so it is left
+  unchanged and recorded here. A future **v2.1.1** may correct the comment under a fresh approval if the approver wants
+  the header self-consistent; it is a narrative imprecision, not a protocol-semantics defect (the gate text is correct).
