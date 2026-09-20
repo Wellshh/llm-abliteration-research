@@ -123,8 +123,13 @@ def _budget_only(args: argparse.Namespace) -> dict[str, Any]:
         # hand-writing {"is_real_profile": true, "measurement_kind": "real_gpu_measurement"} into a
         # JSON file used to mint a real_gpu_measurement_based §14 re-estimate (the same
         # self-declared-label failure that D3 closed on the Level-B side). A real claim is now
-        # accepted only on STRUCTURAL evidence that only the gated cuda:0 path produces:
-        # live admission + budget settlement + a model binding re-verified against the lock file.
+        # accepted only on STRUCTURAL markers that, IN PIPELINE OPERATION, only the gated cuda:0
+        # path writes: live admission + budget settlement + a model binding re-verified against the
+        # lock file. This raises the bar from "any label" to "must forge a consistent admission +
+        # settlement + a hash matching a real lock file"; it is NOT cryptographic unforgeability — a
+        # human with a text editor can still fabricate all three on CPU. Such forgery is evidence
+        # fabrication, and it stays traceable: the output binds profile_source + profile_sha256 +
+        # real_claim_basis (round-C RC-C4: do not overstate this as unforgeable).
         missing = [k for k in ("admission", "budget_settlement")
                    if not isinstance(profile.get(k), dict) or not profile.get(k)]
         if missing:

@@ -12,7 +12,17 @@ rather than read-the-conclusion, CPU-only, no repo writes, no S, no GPU.
 repro reviewer explicitly re-verified its artifact-hash and structure claims *after* those commits landed, so the
 concurrency did not stale-date its findings.
 
-## Verdicts (all three: `confirmed_with_minor_issues`)
+## Verdict — one **major** statistical defect found; author-fixed; **the fix is pending round-C re-verification**
+
+**How to read this section (corrected after the 2026-09-17 human/root review).** This round did **not** independently
+close the loop on this session's work. The honest summary is: **the reviewers found one major defect (CS-1, a
+statistical flaw in the lead's own proposed C-18 fix texts) plus minor issues; the lead then authored the fix; that
+fix — the corrected §4 text and the new fail-closed code — has had no independent look and is owed a round C.** The
+three per-reviewer statuses below describe the *finding* verdicts, **not** a confirmed closure of the remediation:
+the remediation is lead-authored and self-tested only (see "What this round did *not* achieve"). Do not read this
+section as "the fixes are independently verified."
+
+**Per-reviewer finding verdicts:**
 
 - **Reproducibility & Audit Reviewer** — "Every load-bearing claim reproduced from raw bytes … None is a correctness
   error in what shipped, and the Addendum's own claims — including its 'honest limit' — are supported."

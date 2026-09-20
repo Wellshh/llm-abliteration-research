@@ -65,8 +65,16 @@ def validate_frozen_manifest(manifest: dict[str, Any]) -> None:
         raise SystemExit("REFUSING to build Level B: freeze_record must carry frozen_at + data_sha256 bindings")
     # Audit D3: truth-based, not presence-based. A self-declared 'frozen' manifest with
     # fabricated hashes or an unapproved prereg revision must NOT pass.
+    # round-C RC-C3 (residual, disclosed not closed): this checks a HUMAN-TRANSCRIBED boolean carried
+    # in the manifest; it does NOT read the approval sidecar, so it cannot by itself enforce the
+    # sidecar's signature_requires clause (approver_choice_record non-null for C-07/C-08/C-18,
+    # protocol_sha256 == sha256(yaml), freeze.effective). A signer who set this boolean true with a
+    # null approver_choice_record would violate the sidecar's invalidation clause but face no refusal
+    # HERE. The machine authority is the sidecar; a freeze-time validator must read it directly. That
+    # validator is deferred to the freeze ticket (same consumer-boundary theme as D5) — this gate is
+    # necessary, not sufficient.
     if manifest.get("prereg_revision_approval_effective") is not True:
-        raise SystemExit("REFUSING to build Level B: prereg_revision_approval_effective must be true (PREREG v2 approval is a freeze prerequisite)")
+        raise SystemExit("REFUSING to build Level B: prereg_revision_approval_effective must be true (an effective PREREG approval — v2 or its v2_1 amendment — is a freeze prerequisite)")
     data_sha = fr.get("data_sha256")
     if not isinstance(data_sha, dict) or not data_sha:
         raise SystemExit("REFUSING to build Level B: freeze_record.data_sha256 must be a non-empty mapping of repo-relative path -> sha256")

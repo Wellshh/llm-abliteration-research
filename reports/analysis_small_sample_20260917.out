@@ -1,0 +1,63 @@
+================================================================================
+PART A — C-08: T-gate family-clustered bootstrap, 12 clusters, 2 items/fam
+GATE (the real rule) = point>=.15 margin AND one-sided-95% LB>0. Columns are
+CONJUNCTIVE unless marked marginal. LB5 = one-sided 95% lower bound at p=0.05.
+DGP: per-family success prob = clip(p + cluster_sd*Z); degenerate = 1/2/family.
+================================================================================
+
+--- iid items (cluster_sd=0) ---
+ true p | P(point) | P(pctLB5>0)*marg | GATE(pct) | GATE(BCa)
+   0.50 |    0.055 |            0.035 |     0.020 |     0.007 <== NULL (model==degenerate; a 5% one-sided test rejects ~0.05)
+   0.60 |    0.340 |            0.220 |     0.203 |     0.113
+   0.65 |    0.515 |            0.395 |     0.375 |     0.233
+   0.70 |    0.735 |            0.623 |     0.615 |     0.407
+   0.75 |    0.880 |            0.777 |     0.777 |     0.608
+   0.80 |    0.953 |            0.900 |     0.895 |     0.767
+
+--- clustered (cluster_sd=0.15) ---
+ true p | P(point) | P(pctLB5>0)*marg | GATE(pct) | GATE(BCa)
+   0.50 |    0.077 |            0.055 |     0.050 |     0.020 <== NULL (model==degenerate; a 5% one-sided test rejects ~0.05)
+   0.60 |    0.328 |            0.225 |     0.217 |     0.115
+   0.65 |    0.502 |            0.380 |     0.365 |     0.205
+   0.70 |    0.728 |            0.555 |     0.550 |     0.343
+   0.75 |    0.853 |            0.715 |     0.713 |     0.500
+   0.80 |    0.940 |            0.873 |     0.865 |     0.632
+
+Reading: at the NULL the conjunctive gate fires ~0.02-0.05 -> percentile LB is NOT
+anti-conservative at 12 clusters; power at p=0.65-0.75 is only ~0.37-0.78 (screening,
+not confirmatory); textbook BCa (round-C BCa-1 fix) LOWERS both further (null 0.007-0.020,
+p=0.80 power 0.632-0.767 vs percentile 0.865-0.895) -> it over-corrects at n=12.
+
+================================================================================
+PART B — C-07: macro vs per-category floor, exact, cells rows=[8,4,4,4,4]
+reading (a)=macro>=.75; (b)=every cell>=ceil(.75*nrows) (3/4 in a 4-row
+cell, 6/8 in the 8-row cell). Cell RATE and (b) FLOOR use ROW counts.
+DGP-FREE THEOREM: (b) => (a), so P(b and not a)=0 under BOTH regimes.
+================================================================================
+
+--- REGIME C (family fully correlated)  (q = P(whole family correct)) ---
+   q | P(a) macro>=.75 | P(b) per-category | P(a and ~b) | P(b and ~a)
+0.75 |           0.596 |             0.074 |       0.522 |       0.000
+0.80 |           0.743 |             0.137 |       0.606 |       0.000
+0.85 |           0.869 |             0.243 |       0.626 |       0.000
+0.90 |           0.954 |             0.408 |       0.546 |       0.000
+
+--- REGIME I (rows independent)  (q = P(single row correct)) ---
+   q | P(a) macro>=.75 | P(b) per-category | P(a and ~b) | P(b and ~a)
+0.75 |           0.570 |             0.202 |       0.369 |       0.000
+0.80 |           0.775 |             0.359 |       0.416 |       0.000
+0.85 |           0.922 |             0.563 |       0.359 |       0.000
+0.90 |           0.987 |             0.776 |       0.211 |       0.000
+
+Reachability differs by regime, NOT by arithmetic:
+  Regime C: 4-row cell scores only {0,2,4}/4 -> 3/4 UNREACHABLE -> (b) floor there
+            == both-families-correct (a 2/2 gate). 8-row cell {0,2,4,6,8}/8 -> 6/8
+            == '>=3 of 4 families'.
+  Regime I: 4-row cell scores {0,1,2,3,4}/4 -> 3/4 REACHABLE -> (b) is a genuine
+            3-of-4 gate (much more permissive; see higher P(b) above).
+  Within-family OUTCOME correlation is an assumption (never observed: no model has
+  run C); always_letter_A/B already splits every swap family (1/2), so partial
+  correlation is real. Read the (b) strictness as regime-dependent, n=2 families.
+
+Done. Analysis of the RULES under declared synthetic models. NO model output;
+NO claim about MiniCPM5 behaviour; no p/q value is asserted as observed.

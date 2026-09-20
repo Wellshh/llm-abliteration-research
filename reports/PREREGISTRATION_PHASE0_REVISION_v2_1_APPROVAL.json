@@ -1,0 +1,69 @@
+{
+  "schema_version": "2.1",
+  "type": "protocol_approval_sidecar",
+  "protocol_path": "reports/PREREGISTRATION_PHASE0_REVISION_v2_1.yaml",
+  "protocol_sha256": "739e14fe499089e647404a088ea93f0eaf5a0dfcfb794fa612c8a29109a54978",
+  "status": "pending_approval",
+  "approval_record": null,
+  "approver_choice_record": null,
+  "signature_requires": "Approval is NOT valid by silence. The three open_choices (C-07, C-08, C-18) change verdicts and are pre-decisions the lead may NOT make (GOAL §6); the defaults below are a CONVENIENCE PRE-FILL only. A valid approval must populate approver_choice_record with the approver's active pick for each of C-07/C-08/C-18 (confirming or changing the default), set approval_record, and re-hash protocol_sha256 if any default was edited. freeze.effective must remain false until approver_choice_record is non-null and matches the applied yaml.",
+  "freeze": {
+    "frozen_at": null,
+    "effective": false,
+    "yaml_self_hash_not_embedded": true
+  },
+  "draft_notice": "DRAFT prepared from the 2026-09-17 review chain. Three verdict-affecting choices (C-07, C-08, C-18) are filled with RECOMMENDED DEFAULTS and are EDITABLE; they are NOT adopted by silence (see signature_requires + approver_choice_record). Editing a default must be re-hashed before freeze. This sidecar authorizes no run and no freeze; C freeze additionally needs B9-03 human R1/R2 sign-off; C-08 is about the T gate.",
+  "open_choices": {
+    "C-07_semantic_accuracy_aggregation": {
+      "default_applied": "(a) macro >= 0.75 gates; per-category is reporting-only",
+      "editable_to": "(b) every category >= ceil(0.75*n) becomes the gate; must add n=2-family / correlated-cell caveat",
+      "where": "c_round_gate.semantic_accuracy (per_category_floor: null -> 'required')",
+      "basis": "reports/SMALL_SAMPLE_SENSITIVITY_20260917.md §2 (readings disagree P=0.2-0.6; must be pre-declared)"
+    },
+    "C-08_t_gate_uncertainty": {
+      "default_applied": "(P) keep percentile family-clustered LB, with stated power caveat + screening-not-confirmatory framing",
+      "editable_to": "(W) pre-declare wild cluster bootstrap interval — REQUIRES a separate CPU ticket to implement+simulate; NOT evaluated this session",
+      "where": "t_round_gate.c08_uncertainty_rule",
+      "basis": "reports/SMALL_SAMPLE_SENSITIVITY_20260917.md §1 (null 0.02-0.05, power ~0.37 at floor; BCa loses power at n=12)",
+      "threshold_values_changed": false
+    },
+    "C-18_consistency_pair_set": {
+      "default_applied": "(i) label_swap_consistency literal (swap pairs only) + separate ungated stance_consistency",
+      "editable_to": "(ii) merged paired_invariant_consistency over both pair types with mandatory per-type breakdown",
+      "mandatory_regardless": "(iv) frozen-denominator semantics (denominator_semantics) applies under either option; do not remove",
+      "basis": "reports/PREREG_V2_PROSPECTIVE_FIXES_20260917.md §4 (corrected: pooling holds/tightens swap at 9/10, never relaxes; recommendation on construct-purity grounds)"
+    }
+  },
+  "no_choice_items": {
+    "C-06_allocation": "adopted pair-unit {4,2,2,2,2} families / {8,4,4,4,4} rows; reproduces C_DATA_FREEZE_DRAFT_v2.md byte-exactly; packet options A/B/C superseded-by-analysis",
+    "C-10_integer_direction": "s_round_gate split into integer_rule_min (k>=ceil) / integer_rule_max (k<=floor); fixes the *_max inversion; 0.60 and 0.15 byte-unchanged"
+  },
+  "supersedes": {
+    "protocol_path": "reports/PREREGISTRATION_PHASE0_REVISION_v2.yaml",
+    "protocol_sha256": "6225cfd49904110aca6560b94d7d8c38348a5c6262928d51e6e5ac86fc4b2d73",
+    "sidecar_path": "reports/PREREGISTRATION_PHASE0_REVISION_v2_APPROVAL.json",
+    "sidecar_sha256": "667f4e47afa0324780cb680ceb5f376e3d8d15123696433d433aef34e367f776",
+    "status_at_supersede": "proposed_not_approved",
+    "reason": "prospective fixes C-06/C-07/C-10/C-18 + C-08 disposition, from the 2026-09-17 review chain; v2 preserved unmodified"
+  },
+  "review_chain_provenance": {
+    "round_c_prefix": "GOAL §12 round C, FIRST pass = THREE independent read-only workflows on a PRE-FIX draft (an earlier one-line summary '0 defects confirmed, 6 refuted' was an over-generalisation true only of the code-path red-team and has been corrected). (1) Sensitivity-analysis re-derivation found 1 MAJOR (an earlier draft asserted within-family rows 'perfectly correlated (verified)' and the 4-row 3/4 floor 'unreachable' as structural fact - only gold/world/rule sharing is verified, outcome correlation is a DGP assumption, and the frozen always_letter_* degenerate splits every swap family) + 2 MINOR (the BCa column was the CONJUNCTIVE gate but labelled marginal; an unused non-standard wild_cluster_lb the docstring implied had been run) - all fixed in place: SMALL_SAMPLE_SENSITIVITY §2 now reports dual regimes C/I and keeps only the (b)=>(a) theorem as DGP-free, the BCa column is relabelled conjunctive, wild_cluster_lb removed. (2) Amendment/sidecar verification found several MINORs - per_category_floor:'none' parsed as a truthy string (now null), date '2026-09-15' stale (now '2026-09-17' with v2_date preserved in supersedes), the consistent_but_wrong clause edit (disclosed), and this provenance summary itself over-claiming (now corrected) - all addressed. (3) Round-B fail-closed CODE red-team: 6 adversarial bypass attempts on RA-1 budget-only structural-provenance, RA-3 anchor coverage policy, RA-4 Level-B path confinement - all 6 REFUTED, the code held; that is the only sense in which '0 confirmed, 6 refuted' was true. NOTE: this pass ran on a PRE-FIX draft, so a fresh round-C on the corrected bytes was owed - see round_c_fresh.",
+    "round_c_fresh": "GOAL §12 round C, SECOND (fresh) pass = THREE independent read-only reviewers on the CORRECTED bytes (this sidecar re-bound to protocol_sha256 739e14fe...). Verdicts: statistics/construct = confirmed_with_minor_issues; governance/code = confirmed_with_minor_issues (ZERO majors; every fail-closed code attack refuted; every integer re-derived; NOT-APPROVED integrity + all hash bindings confirmed); over-claim skeptic = material_defects_found. Confirmed-and-fixed this pass: (minor BCa-1) the bca_lb formula was a NON-STANDARD variant Phi(2*z0+...) with an a==0->alpha branch - fixed to textbook BCa Phi(z0+(z0+za)/(1-a(z0+za))), .out regenerated byte-deterministically, BCa numbers updated, qualitative conclusion independently confirmed robust and no recommendation rests on BCa; (MAJOR D-C1) the machine twin CURRENT_STATE_20260916.json had NOT been updated to match the corrected prose - still labelled all three round-B reviewers confirmed_with_minor_issues and had no round_C entry - now corrected; (minor RC-C2) the yaml header/amendment undercounted the verdict-affecting choices as 'two' when there are three (C-07/C-08/C-18) - fixed; (minor D-C2) BCa severity was classified inconsistently across docs - aligned to 1 major + 3 minor; (minor D-C3/RC-C1) §12.6 cited INDEPENDENT_REVERIFICATION_20260917C.md in present tense before it existed - now created as the record of this pass; (minor RC-C4) the budget-only provenance comment overstated unforgeability ('only the gated path produces') - softened to acknowledge hand-forgery is possible on CPU and traceable via profile_source/sha; (minor RC-C3) make_audit_package_level_b's error message said 'PREREG v2' (stale for v2_1) and the active-confirmation mandate is de-jure only - message fixed and the residual disclosed; (info D-C4/RC-C5) bare-word 'none' in sidecar prose and the prospective-fixes snippet - set to null. INDEPENDENTLY CONFIRMED CORRECT (not merely accepted): the two §4 argumentative corrections (pooling truth-table pass-cells exactly {(9,2),(10,1),(10,2)}, all swap>=9, so pooling never relaxes swap; semantic constants 10/10 swap + 2/2 stance, letter constants 0/10 + 2/2), the sensitivity script byte-identical determinism, the exact binomial 0.0758, the C-07 tables and (b)=>(a) theorem under independent Fraction enumeration, and all v2_1 integers. RESIDUAL (honest): these reviewers are read-only and the fixes are lead-authored; RC-C3's mechanical enforcement (a freeze-time validator that reads the sidecar rather than a human-transcribed boolean) is deferred to the freeze ticket, disclosed not closed.",
+    "sensitivity_analysis": "reports/SMALL_SAMPLE_SENSITIVITY_20260917.md (+ analysis_small_sample_20260917.py/.out); lead caught a sqrt(pi) bug, then independent adversarial re-derivation caught 1 major + 3 minor (perfect-correlation overclaim -> dual-regime; BCa column labelled marginal not conjunctive; BCa-1 bca_lb formula was a non-standard variant -> fixed to textbook BCa + .out regenerated; unused wild_cluster_lb removed) — all fixed; C-08 percentile calibration/power and C-07 exact probabilities re-derived independently and matched (script output byte-identical at fixed seed)",
+    "packet_analysis": "reports/PREREG_V2_PROSPECTIVE_FIXES_20260917.md (v3: §4 argumentation corrections + §8 provenance)",
+    "amendment_draft": "reports/PREREG_V2_1_AMENDMENT_DRAFT_20260917.md",
+    "no_model_no_gpu_no_C_data": true
+  },
+  "based_on": {
+    "diagnostic": "reports/PHASE0_CONSTRUCT_DIAGNOSTIC_v1.md",
+    "diagnostic_json_sha256": "1d6d6ac275c37291a9d62d3e423899c91b3976ef1704af6c1aa5a21f3c443b06",
+    "baseline_commit": "3943fc8f34858f2fe116d0b42473dd7ac3d71d04"
+  },
+  "review_response_map": {
+    "C-06_allocation": "c_round_gate.allocation (pair-unit {4,2,2,2,2}; A/B/C superseded)",
+    "C-07_aggregation": "c_round_gate.semantic_accuracy (default (a); denominator_rows=in_round_eligible; reading_note; per_category_floor=null)",
+    "C-18_pairset": "c_round_gate.label_swap_consistency (pair_set=swap-only, denominator_semantics frozen) + stance_consistency (ungated); option (ii) alternative in-file",
+    "C-10_direction": "s_round_gate.integer_rule_min / integer_rule_max / integer_rule_worked_example",
+    "C-08_uncertainty": "t_round_gate.c08_uncertainty_rule (percentile + power caveat + screening framing; decision_rule text and thresholds unchanged)"
+  }
+}

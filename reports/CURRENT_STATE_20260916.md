@@ -226,10 +226,15 @@ Full evidence + diff-ready texts: **`reports/PREREG_V2_PROSPECTIVE_FIXES_2026091
 
 **Constraints honored this session:** no GPU or model process, no S content acquired or generated, no historical threshold/artifact edited, no pending-approval protocol text edited, no GPU5/other-process contact. §12 status of this addendum itself: the D1–D4 code and the new anchor accessor are scheduled for independent re-verification (GOAL §12); until that record exists, §12.1–§12.3 are lead-authored claims, not independently confirmed ones.
 
-### 12.5 Round B closed the loop — and found a real defect in §12.3 (2026-09-17, appended)
+### 12.5 Round B found a major defect in §12.3 — author-fixed, **fix pending round-C verification** (2026-09-17, appended; verdict wording corrected after the 2026-09-17 human/root review)
 
-The scheduled §12 re-verification ran as three independent read-only reviewers. **All three returned
-`confirmed_with_minor_issues`**; full record: **`reports/INDEPENDENT_REVERIFICATION_20260917B.md`**. What it changed:
+The scheduled §12 re-verification ran as three independent read-only reviewers. **This round did not close the loop:
+it found one major statistical defect in §12.3's own packet (CS-1), which the lead then authored a fix for; that fix
+and the new fail-closed code are self-tested only and are owed a round C.** Two reviewers returned
+`confirmed_with_minor_issues`; the construct/stats reviewer confirmed the C-pool arithmetic independently but returned
+a **major** finding (CS-1) plus minors — so the round's net verdict is "major found, author-fixed, fix unverified,"
+not "all confirmed with minor issues." Full record: **`reports/INDEPENDENT_REVERIFICATION_20260917B.md`** (its own
+verdict header now carries the same correction). What it changed:
 
 - **The one that mattered (major, in §12.3's own packet):** both proposed C-18 texts fixed an expected pair count but
   left the **consistency denominator output-dependent** — under v2's `missing_or_invalid_side` clause a model that
@@ -260,3 +265,102 @@ The scheduled §12 re-verification ran as three independent read-only reviewers.
 - **Test-count reconciliation for future agents (RA-5):** unittest reports **`Ran 257`** while `grep -c 'def test_'`
   gives **258** — the difference is the single always-skipped `test_resources.py:209` platform skip, which Python 3.12
   excludes from `testsRun`. Same off-by-one explains the historical "187 tests" vs 188 definitions.
+
+### 12.6 Round C run + the two §4 argumentation fixes + C-08/C-07 sensitivity analysis (2026-09-17, appended)
+
+The 2026-09-17 human/root review **did not approve PREREG v2 or authorize a C freeze or any GPU ticket**; it returned
+three work items, all done or in flight this session, with `phase0_construct_admission_met=false` and every gate status
+unchanged throughout.
+
+- **Two argumentation errors in the §B/§C packet §4, corrected in place** (`PREREG_V2_PROSPECTIVE_FIXES_20260917.md`,
+  §8 v3 provenance records it). (1) §4(iii) argued pooling the two pair types "lowers the bar" on the map-invariance
+  gate — **false**: solo swap `ceil(.85·10)=9/10`, pooled `ceil(.85·12)=11/12`; with both stance pairs free the pooled
+  11 is met by 9 swap + 2 stance (== the solo `9/10`) and one stance miss forces `10/10`, so pooling **holds or tightens**
+  the swap requirement, never relaxes it; recommendation (i) now rests on construct purity alone. (2) §4(iii) rejected a
+  stance-only gate because "a constant answerer trivially passes stance consistency" — but the two *semantic* constants
+  score **10/10 on label-swap too** (only the *letter* constants fail swap, 0/10), so that argument does not distinguish
+  the two metrics; the load-bearing reason is the **n=2** cell size, and "zero stance resistance" was corrected to
+  "**insensitive** to the stance manipulation". Both independently recomputed on the real round sets, not asserted.
+- **Round B verdict wording de-inflated** in `INDEPENDENT_REVERIFICATION_20260917B.md` and §12.5: round B is recorded as
+  **major found → author-fixed → fix pending round C**, not "all three confirmed with minor issues".
+- **Round C ran — but as THREE workflows on a pre-fix draft, and its first summary over-claimed (now corrected).** An
+  earlier one-line tally — "4 lenses, 0 defects confirmed, 6 raised-and-refuted, closes the round-B self-tested-only
+  residual" — was an **over-generalisation true only of the code-path red-team** and is retracted here and in the v2_1
+  sidecar. What the journals actually show: (i) the round-B fail-closed **code** red-team raised 6 adversarial bypass
+  attempts on RA-1/RA-3/RA-4 and **all 6 were refuted — the code held** (that is the only true sense of "0 confirmed, 6
+  refuted"); (ii) the **sensitivity-analysis** re-derivation found **1 major + 2 minor in that first pass** (major: the
+  perfect-correlation overclaim; minors: the BCa column labelled marginal not conjunctive, and an unused non-standard
+  `wild_cluster_lb`) — all fixed in place; the **fresh** round-C later added a **3rd minor (BCa-1, the formula itself)**,
+  so the cumulative sensitivity tally is **1 major + 3 minor** (see §12.7 and the C-08 bullet below); (iii) the **amendment/sidecar** verification found several **minors**
+  (`per_category_floor: none` parsing as a truthy string, the stale `date`, the `consistent_but_wrong` edit, and the
+  round_c citation itself over-claiming) — all now addressed. So that first round-C pass did **not** come back clean: it
+  found one major and a set of minors, which were fixed. **Because those fixes changed the bytes** (the v2_1 yaml
+  re-hashed `80a1953c…`→`e310efc5…`→`739e14fe…` across this session's edits, the sidecar re-bound each time), the first
+  pass ran on a *superseded* draft and a **fresh round-C on the corrected state was owed before any signature** — it ran
+  and is recorded in `reports/INDEPENDENT_REVERIFICATION_20260917C.md` (see §12.7). Round C closes the "self-tested
+  only" residual for the **code and §4 arguments** (which survived adversarial re-derivation in both passes); it does
+  **not** retroactively validate bytes edited after a pass — each fresh edit re-owes verification, which is why §12.7's
+  own fixes are flagged lead-authored.
+- **C-08 / C-07 pre-declared small-sample sensitivity analysis** produced **before any C output** (`reports/
+  SMALL_SAMPLE_SENSITIVITY_20260917.md` + `analysis_small_sample_20260917.py`/.out; CPU-only, no model, no C data).
+  It was **independently re-derived by an adversarial workflow** after the lead had already caught a sqrt(π) calibration
+  bug; independent adversarial re-derivation (two passes) **caught 1 major + 3 minor, all fixed in place** (major:
+  within-family rows were called "perfectly correlated (verified)" and the 4-row `3/4`-unreachable claim stated as
+  structural — only gold/world/rule sharing is verified, outcome correlation is a DGP assumption, and `always_letter_A/B`
+  already splits every swap family, so §2 now shows a correlated **and** an independent-rows regime and keeps only the
+  DGP-free `(b)⇒(a)` theorem; minor: BCa column relabelled conjunctive; minor **BCa-1** found by the fresh round-C — the
+  `bca_lb` formula was a non-standard variant `Phi(2·z0+…)`, now corrected to textbook BCa `Phi(z0+(z0+za)/(1−a(z0+za)))`
+  with the `.out` regenerated byte-deterministically and the BCa numbers updated, the qualitative conclusion confirmed
+  robust and no recommendation resting on BCa; minor: unused non-standard `wild_cluster_lb` removed since it was never
+  run). The C-08 percentile calibration/power numbers and the C-07 exact probabilities were themselves re-derived
+  independently and matched.
+  Headings: C-08 — at the null the T gate's conjunctive rule fires **0.02–0.05** (percentile LB is *not* anti-conservative
+  at 12 clusters) but power is only **≈0.37** at the floor rate and **BCa lowers it further**, so the gate supports a
+  **screening/revision-protocol** decision, not a confirmatory one. C-07 — macro and per-category readings disagree for
+  many near-threshold outcomes (`P(macro pass ∧ per-cat fail)` 0.2–0.6 across correlation regimes), and a 4-row cell is
+  n=2 families whose `ceil(.75·4)=3` floor is unreachable (a 2-of-2 gate) only in the correlated regime; the choice must
+  be pre-declared, not post-hoc.
+- **Decision-ready amendment draft** `reports/PREREG_V2_1_AMENDMENT_DRAFT_20260917.md`: C-06 (adopt `{4,2,2,2,2}`
+  pair-unit) and C-10 (fix the `*_max` integer direction; `0.60`/`0.15` byte-unchanged) are diff-ready; **C-07 (a)/(b),
+  C-08 (percentile-vs-wild-cluster) and C-18 (i)/(ii) are left as approver ticks** — all three change verdicts and are
+  not lead-committable (the sidecar pre-fills recommended defaults but `signature_requires` makes active confirmation
+  mandatory; silence does not adopt them). **Nothing applied; PREREG v2 + sidecar byte-identical; C unfrozen; S blocked;
+  no GPU authorized.** Next in the review's order: land the sensitivity re-verification, then the approver ticks
+  C-07/C-08/C-18, then this draft becomes the signable `v2_1` + sidecar.
+
+### 12.7 Fresh round-C on the corrected bytes — zero majors in code/integers/governance; one major in the record itself (2026-09-18, appended)
+
+The fresh round-C the 2026-09-17 review required ran as **three independent read-only reviewers** (Statistics/Construct;
+Governance/Code; Skeptical/Red-Team) on the corrected working tree. Full record:
+**`reports/INDEPENDENT_REVERIFICATION_20260917C.md`**. Net: **`confirmed_with_minor_issues` ×2 + `material_defects_found`
+×1, zero majors in the corrected code/integers/governance.**
+
+- **Independently confirmed correct (re-derived, not accepted):** the two §4 argumentative corrections (pooling
+  truth-table pass-cells exactly `{(9,2),(10,1),(10,2)}` — all `swap≥9`, so pooling never relaxes swap; semantic
+  constants `10/10` swap + `2/2` stance, letter constants `0/10` + `2/2`); the sensitivity script byte-identical at fixed
+  seed; exact binomial `0.0758`; the C-07 tables + `(b)⇒(a)` theorem under an independent `Fraction` enumeration; every
+  v2_1 integer; `propose_round_families()` == the freeze draft (both rounds, disjoint, 16 reserve); thresholds `0.60`/`0.15`
+  byte-identical to v2; NOT-APPROVED integrity + all hash bindings; **all fail-closed code held every attack** (budget-only
+  13 cases, anchors 26, Level-B 22 incl. a symlink escape); suite `257/OK/skipped=1`; both B8-01 pins + locus digest
+  recomputed identical.
+- **One MAJOR, in the record not the science (D-C1):** the machine twin `CURRENT_STATE_20260916.json` had **not** been
+  updated when the prose was de-inflated — it still labelled all three round-B reviewers `confirmed_with_minor_issues`
+  and had no `round_C` entry, so a parse-only consumer got the over-closed picture. **Fixed** in the twin (`review_rounds`
+  corrected + `round_C_prefix`/`round_C_fresh` + a `session_20260917_later` block).
+- **Minors fixed:** **BCa-1** the `bca_lb` formula was a non-standard variant `Phi(2·z0+…)` — corrected to textbook BCa,
+  `.out` regenerated, numbers updated, conclusion confirmed robust (no recommendation rests on BCa); **RC-C2** the yaml
+  header/amendment undercounted the verdict-affecting choices as "two" (there are three: C-07/C-08/C-18) — fixed, yaml
+  re-hashed `e310efc5…`→`739e14fe…`, sidecar re-bound; **D-C2** BCa severity aligned to "1 major + 3 minor" everywhere;
+  **D-C3/RC-C1** the dangling `…C.md` pointer resolved by creating it; **RC-C4** the budget-only "only the gated path
+  produces" comment softened (hand-forgery possible on CPU, traceable, not unforgeable); **D-C4/RC-C5** bare-word `none`
+  → `null` in sidecar prose + the prospective-fixes snippet; **NULL-1/WORD-1** MC-noise + "not independent" clarifications.
+- **Residual disclosed, not closed (RC-C3):** no code reads the approval sidecar; `make_audit_package_level_b.py` checks a
+  human-transcribed `prereg_revision_approval_effective` boolean (its stale "PREREG v2" message fixed). The
+  active-confirmation duty is enforced by the sidecar's own invalidation clause + human diligence until a **freeze-time
+  validator** reads the sidecar directly — deferred to the freeze ticket, same consumer-boundary theme as D5.
+- **Honest limit of this round:** the reviewers *found* these defects independently; the *remediation* is lead-authored
+  and self-checked. The load-bearing items (§4 corrections, integers, code paths, hash bindings) were independently
+  re-derived and need no further confirmation; only the freshly-edited prose/formula are lead-authored, and a round D
+  would be owed before those are treated as independently confirmed.
+- **Unchanged:** `phase0_construct_admission_met=false`; PREREG v2 + v2_1 `proposed_not_approved`/`effective=false`; C
+  `candidate_draft_not_frozen`; S blocked; no GPU/model/S this session; the approver still must actively tick C-07/C-08/C-18.
