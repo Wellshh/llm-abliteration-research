@@ -2,17 +2,37 @@
   "schema_version": "2.1",
   "type": "protocol_approval_sidecar",
   "protocol_path": "reports/PREREGISTRATION_PHASE0_REVISION_v2_1.yaml",
-  "protocol_sha256": "739e14fe499089e647404a088ea93f0eaf5a0dfcfb794fa612c8a29109a54978",
-  "status": "pending_approval",
-  "approval_record": null,
-  "approver_choice_record": null,
-  "signature_requires": "Approval is NOT valid by silence. The three open_choices (C-07, C-08, C-18) change verdicts and are pre-decisions the lead may NOT make (GOAL §6); the defaults below are a CONVENIENCE PRE-FILL only. A valid approval must populate approver_choice_record with the approver's active pick for each of C-07/C-08/C-18 (confirming or changing the default), set approval_record, and re-hash protocol_sha256 if any default was edited. freeze.effective must remain false until approver_choice_record is non-null and matches the applied yaml.",
+  "protocol_sha256": "7bbd58cae219508702de6293a99ffb8ee1aeb275d29f43aae83a1eaa7d4f1196",
+  "status": "approved_data_after_amendment",
+  "approval_record": {
+    "approved_at": "2026-09-20T10:56:40+08:00",
+    "approval_semantics": "user_approved_phase0_revision_v2_1_choices_C07_C08_C18",
+    "root_review": "approved",
+    "authorization_scope": "protocol approval only; no C freeze, Level-B, model/GPU, S, or Round 1 authorization",
+    "phase0_construct_admission_met": false
+  },
+  "approver_choice_record": {
+    "C-07": {
+      "choice": "(a)",
+      "semantics": "macro >= 0.75 gate; per-category results report-only and no category-level pass claim"
+    },
+    "C-08": {
+      "choice": "(P)",
+      "semantics": "family-clustered percentile one-sided 95% lower bound; screening/revision-protocol only, non-confirmatory; power caveat retained"
+    },
+    "C-18": {
+      "choice": "(i)",
+      "semantics": "swap-only gated; stance consistency separate and ungated",
+      "mandatory_denominator": "(iv) frozen denominator; invalid/missing remain in denominator and never numerator"
+    }
+  },
+  "signature_requires": "Satisfied by explicit approval_record and approver_choice_record; this sidecar activates the protocol text only. C freeze still requires B9-03 human R1/R2 sign-off and RC-C3 mechanical sidecar validation.",
   "freeze": {
-    "frozen_at": null,
-    "effective": false,
+    "frozen_at": "2026-09-20T10:56:40+08:00",
+    "effective": true,
     "yaml_self_hash_not_embedded": true
   },
-  "draft_notice": "DRAFT prepared from the 2026-09-17 review chain. Three verdict-affecting choices (C-07, C-08, C-18) are filled with RECOMMENDED DEFAULTS and are EDITABLE; they are NOT adopted by silence (see signature_requires + approver_choice_record). Editing a default must be re-hashed before freeze. This sidecar authorizes no run and no freeze; C freeze additionally needs B9-03 human R1/R2 sign-off; C-08 is about the T gate.",
+  "draft_notice": "Historical draft notice retained as provenance; this sidecar records explicit approval and effective=true.",
   "open_choices": {
     "C-07_semantic_accuracy_aggregation": {
       "default_applied": "(a) macro >= 0.75 gates; per-category is reporting-only",

@@ -1,19 +1,12 @@
 # =============================================================================
 # PREREGISTRATION_PHASE0_REVISION_v2_1 — Phase 0 pilot 修订协议（B7-02，rev 2.1）
-# 状态：proposed_not_approved —— DRAFT，等待主会话审核；批准前不得修改任何 prompt/数据。
+# 状态：approved_data_after_amendment —— 已获批准并生效；本批准不授权任何运行。
 #
-# ⚠ 这是把 2026-09-17 审核链的最后一步做成"可签字草稿"。**三处**真正影响判定结果的
-#   选择已按**推荐默认值**填入，但**均可改**，须由审批人确认或改写后才生效（silent 不采纳，
-#   见 sidecar `signature_requires` / `approver_choice_record`）：
-#     - C-07 语义准确率聚合规则：默认 **(a) macro 门**（`c_round_gate.semantic_accuracy`）。
-#       若选 (b) 每类下限，见 §3 text(b)/`PREREG_V2_1_AMENDMENT_DRAFT` Item 4，须同时写明
-#       4-row 格 = n=2 family（相关情形下 3/4 不可达，等价两类都对）。
-#     - C-08 T 门不确定度规则：默认 **(P) 保留 percentile 下界 + 明示功效告诫**
-#       （`t_round_gate.c08_uncertainty_rule`）。若选 (W) wild cluster bootstrap，须先另开
-#       CPU 票据实现并模拟，当前**未评估**。
-#     - C-18 一致性 pair 集：默认 **(i)** 拆分 label_swap（字面）+ 单独 ungated stance；
-#       备选 (ii) 合并重命名见 `PREREG…_PROSPECTIVE_FIXES` §4。冻结分母条款 (iv) 为**强制**，不随选择改变。
-#   C-06 分配与 C-10 方向修正无选择、可直接采纳。任何阈值数值均未改变。
+# 三项影响判定的选择已由审批人明确确认并随本版本生效：
+#   - C-07：选择 (a)，macro >= 0.75 为门槛；逐类结果仅报告，不作类别级通过主张。
+#   - C-08：选择 (P)，family-clustered percentile 下界；仅作 screening/revision-protocol，非 confirmatory，保留功效告诫。
+#   - C-18：选择 (i)，仅 swap pairs gated；stance consistency 单独 ungated；(iv) 冻结分母强制，invalid/missing 留在分母且不进分子。
+# 后续改变上述选择必须新开版本化 amendment 并重新批准；任何阈值数值均未改变。
 #   独立复核链：round C = 三个独立 workflow（非"0 confirmed"——那是早期过度概括，已更正）：
 #     (1) 小样本敏感性分析查出 1 major（"完全相关"过度断言→改双 regime）+1 major_error（BCa 列
 #         实为合取门、曾误标边际）——均已在 `SMALL_SAMPLE_SENSITIVITY_20260917.md` 改正；
@@ -36,13 +29,25 @@ revision: '2.1'
 supersedes: {document: PREREGISTRATION_PHASE0_REVISION_v2.yaml, protocol_sha256: 6225cfd49904110aca6560b94d7d8c38348a5c6262928d51e6e5ac86fc4b2d73, v2_date: '2026-09-15', status_at_supersede: proposed_not_approved, reason: prospective_fixes_C06_C07_C10_C18_C08}
 ticket: B7-02
 date: '2026-09-17'                   # v2_1 drafting date (the 2026-09-17 review chain); v2's own 2026-09-15 date is preserved in supersedes.v2_date above
-status: proposed_not_approved
+status: approved_data_after_amendment
+
+approval_scope:
+  approval_semantics: user_approved_phase0_revision_v2_1_choices_C07_C08_C18
+  approved_at: '2026-09-20T10:56:40+08:00'
+  approver_choice_record: {C-07: '(a)', C-08: '(P)', C-18: '(i)', C-18_denominator: '(iv) mandatory'}
+  phase0_construct_admission_met: false
+  C_freeze_authorized: false
+  level_B_authorized: false
+  model_gpu_authorized: false
+  S_authorized: false
+  round1_authorized: false
+  RC-C3: freeze_ticket_mechanical_sidecar_validator_remains_prerequisite
 
 scope_statement: >
   Freezes the at-most-two-round Phase 0 pilot revision protocol: allowed and
   forbidden revision dimensions, per-round gates and stopping rules, fully
   reproducible frozen T degenerate baselines, and pre-declared statistical
-  rules. This document authorizes no run by itself; Round 1 additionally
+  rules. This document authorizes no run by itself; this approval authorizes no C freeze, Level-B, model/GPU, S, or Round 1; Round 1 additionally
   requires the batch-10 execution preconditions below to be satisfied and
   recorded.
 
