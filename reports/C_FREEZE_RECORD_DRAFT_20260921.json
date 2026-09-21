@@ -1,0 +1,591 @@
+{
+  "schema": "c_freeze_record_draft_v1",
+  "freeze_status": "draft_not_frozen",
+  "this_document_freezes_nothing": true,
+  "ticket": "C-freeze preparation (approver-issued 2026-09-21, step 1 of 3)",
+  "generated_at": "2026-09-21T08:57:22.466249+00:00",
+  "generated_by": {
+    "script": "scripts/prepare_c_freeze.py",
+    "git_head": "5fad7030126f7214a3b38fb87d08c6949da641ae",
+    "mode": "dry_run_draft_only"
+  },
+  "prereg_approval_audit": {
+    "status": "approved_data_after_amendment",
+    "effective": true,
+    "protocol_sha256": "7bbd58cae219508702de6293a99ffb8ee1aeb275d29f43aae83a1eaa7d4f1196",
+    "sidecar_sha256": "5255be431add85e29eccb29892b7bc4c912f94ed03b0c886c8213689c251d96b",
+    "choices": {
+      "C-07": "(a)",
+      "C-08": "(P)",
+      "C-18": "(i)"
+    },
+    "phase0_construct_admission_met": false
+  },
+  "data_binding": {
+    "data_file": "artifacts/data/pilot_c_v2.jsonl",
+    "data_sha256": "e66fbd2659ef745a13280decf610f84aa4375630a66981b79c077a643f8cf302",
+    "manifest_file": "artifacts/data/pilot_c_v2.manifest.json",
+    "manifest_sha256": "550d262ad462fd17a54ad3e9f31ed88a5c074d3d09b4cb2d31208b4d194468c1",
+    "rows": 160,
+    "families": 40
+  },
+  "module_binding": {
+    "data_c.py": {
+      "path": "src/minicpm_research/data_c.py",
+      "sha256_manifest": "cba3bda6ca03baa52c58670da5410325c3851767725b2ad71f0177e34e375347",
+      "sha256_recomputed": "cba3bda6ca03baa52c58670da5410325c3851767725b2ad71f0177e34e375347",
+      "match": true
+    },
+    "verifier.py": {
+      "path": "src/minicpm_research/verifier.py",
+      "sha256_manifest": "6e28ff06c0f1161d1d49004f11f83f45a76a5fcb21669e77161115d351c3f6d2",
+      "sha256_recomputed": "6e28ff06c0f1161d1d49004f11f83f45a76a5fcb21669e77161115d351c3f6d2",
+      "match": true
+    }
+  },
+  "rounds": {
+    "round_1": {
+      "families_ordered": [
+        "pilot-C-20260915-0000",
+        "pilot-C-20260915-0003",
+        "pilot-C-20260915-0008",
+        "pilot-C-20260915-0011",
+        "pilot-C-20260915-0016",
+        "pilot-C-20260915-0019",
+        "pilot-C-20260915-0024",
+        "pilot-C-20260915-0027",
+        "pilot-C-20260915-0032",
+        "pilot-C-20260915-0035",
+        "pilot-C-20260915-0001",
+        "pilot-C-20260915-0002"
+      ],
+      "eligible_example_ids": [
+        "pilot-C-20260915-0000-0",
+        "pilot-C-20260915-0000-1",
+        "pilot-C-20260915-0001-0",
+        "pilot-C-20260915-0001-1",
+        "pilot-C-20260915-0002-0",
+        "pilot-C-20260915-0002-1",
+        "pilot-C-20260915-0003-0",
+        "pilot-C-20260915-0003-1",
+        "pilot-C-20260915-0008-0",
+        "pilot-C-20260915-0008-1",
+        "pilot-C-20260915-0011-0",
+        "pilot-C-20260915-0011-1",
+        "pilot-C-20260915-0016-0",
+        "pilot-C-20260915-0016-1",
+        "pilot-C-20260915-0019-0",
+        "pilot-C-20260915-0019-1",
+        "pilot-C-20260915-0024-0",
+        "pilot-C-20260915-0024-1",
+        "pilot-C-20260915-0027-0",
+        "pilot-C-20260915-0027-1",
+        "pilot-C-20260915-0032-0",
+        "pilot-C-20260915-0032-1",
+        "pilot-C-20260915-0035-0",
+        "pilot-C-20260915-0035-1"
+      ],
+      "attestation": {
+        "negation_understanding": {
+          "families": 4,
+          "family_gold_balance": {
+            "TRUE": 2,
+            "FALSE": 2
+          },
+          "primary_samples": 8,
+          "rules": {
+            "c_not_all_passed": 2,
+            "c_field_not_equals": 2
+          },
+          "stance_letter_maps": null
+        },
+        "stance_neutral_objective": {
+          "families": 2,
+          "family_gold_balance": {
+            "TRUE": 1,
+            "FALSE": 1
+          },
+          "primary_samples": 4,
+          "rules": {
+            "c_field_equals": 1,
+            "c_timetable_strictly_before": 1
+          },
+          "stance_letter_maps": null
+        },
+        "surface_refusal_words_non_refusal": {
+          "families": 2,
+          "family_gold_balance": {
+            "TRUE": 1,
+            "FALSE": 1
+          },
+          "primary_samples": 4,
+          "rules": {
+            "c_not_all_passed": 1,
+            "c_field_equals": 1
+          },
+          "stance_letter_maps": null
+        },
+        "user_stance_agree_vs_oppose": {
+          "families": 2,
+          "family_gold_balance": {
+            "TRUE": 1,
+            "FALSE": 1
+          },
+          "primary_samples": 4,
+          "rules": {
+            "c_field_equals": 1,
+            "c_timetable_strictly_before": 1
+          },
+          "stance_letter_maps": {
+            "{\"A\": \"TRUE\", \"B\": \"FALSE\"}": 2
+          }
+        },
+        "yes_no_questions": {
+          "families": 2,
+          "family_gold_balance": {
+            "YES": 1,
+            "NO": 1
+          },
+          "primary_samples": 4,
+          "rules": {
+            "c_sum_at_least": 1,
+            "c_arithmetic_equals": 1
+          },
+          "stance_letter_maps": null
+        }
+      }
+    },
+    "round_2": {
+      "families_ordered": [
+        "pilot-C-20260915-0004",
+        "pilot-C-20260915-0007",
+        "pilot-C-20260915-0009",
+        "pilot-C-20260915-0010",
+        "pilot-C-20260915-0017",
+        "pilot-C-20260915-0018",
+        "pilot-C-20260915-0025",
+        "pilot-C-20260915-0026",
+        "pilot-C-20260915-0033",
+        "pilot-C-20260915-0034",
+        "pilot-C-20260915-0012",
+        "pilot-C-20260915-0015"
+      ],
+      "eligible_example_ids": [
+        "pilot-C-20260915-0004-0",
+        "pilot-C-20260915-0004-1",
+        "pilot-C-20260915-0007-0",
+        "pilot-C-20260915-0007-1",
+        "pilot-C-20260915-0009-0",
+        "pilot-C-20260915-0009-1",
+        "pilot-C-20260915-0010-0",
+        "pilot-C-20260915-0010-1",
+        "pilot-C-20260915-0012-0",
+        "pilot-C-20260915-0012-1",
+        "pilot-C-20260915-0015-0",
+        "pilot-C-20260915-0015-1",
+        "pilot-C-20260915-0017-0",
+        "pilot-C-20260915-0017-1",
+        "pilot-C-20260915-0018-0",
+        "pilot-C-20260915-0018-1",
+        "pilot-C-20260915-0025-0",
+        "pilot-C-20260915-0025-1",
+        "pilot-C-20260915-0026-0",
+        "pilot-C-20260915-0026-1",
+        "pilot-C-20260915-0033-0",
+        "pilot-C-20260915-0033-1",
+        "pilot-C-20260915-0034-0",
+        "pilot-C-20260915-0034-1"
+      ],
+      "attestation": {
+        "negation_understanding": {
+          "families": 2,
+          "family_gold_balance": {
+            "TRUE": 1,
+            "FALSE": 1
+          },
+          "primary_samples": 4,
+          "rules": {
+            "c_not_all_passed": 1,
+            "c_field_not_equals": 1
+          },
+          "stance_letter_maps": null
+        },
+        "stance_neutral_objective": {
+          "families": 4,
+          "family_gold_balance": {
+            "TRUE": 2,
+            "FALSE": 2
+          },
+          "primary_samples": 8,
+          "rules": {
+            "c_timetable_strictly_before": 2,
+            "c_field_equals": 2
+          },
+          "stance_letter_maps": null
+        },
+        "surface_refusal_words_non_refusal": {
+          "families": 2,
+          "family_gold_balance": {
+            "TRUE": 1,
+            "FALSE": 1
+          },
+          "primary_samples": 4,
+          "rules": {
+            "c_field_equals": 1,
+            "c_not_all_passed": 1
+          },
+          "stance_letter_maps": null
+        },
+        "user_stance_agree_vs_oppose": {
+          "families": 2,
+          "family_gold_balance": {
+            "TRUE": 1,
+            "FALSE": 1
+          },
+          "primary_samples": 4,
+          "rules": {
+            "c_timetable_strictly_before": 1,
+            "c_field_equals": 1
+          },
+          "stance_letter_maps": {
+            "{\"A\": \"TRUE\", \"B\": \"FALSE\"}": 2
+          }
+        },
+        "yes_no_questions": {
+          "families": 2,
+          "family_gold_balance": {
+            "YES": 1,
+            "NO": 1
+          },
+          "primary_samples": 4,
+          "rules": {
+            "c_arithmetic_equals": 1,
+            "c_sum_at_least": 1
+          },
+          "stance_letter_maps": null
+        }
+      }
+    },
+    "reserve_families_sorted": [
+      "pilot-C-20260915-0005",
+      "pilot-C-20260915-0006",
+      "pilot-C-20260915-0013",
+      "pilot-C-20260915-0014",
+      "pilot-C-20260915-0020",
+      "pilot-C-20260915-0021",
+      "pilot-C-20260915-0022",
+      "pilot-C-20260915-0023",
+      "pilot-C-20260915-0028",
+      "pilot-C-20260915-0029",
+      "pilot-C-20260915-0030",
+      "pilot-C-20260915-0031",
+      "pilot-C-20260915-0036",
+      "pilot-C-20260915-0037",
+      "pilot-C-20260915-0038",
+      "pilot-C-20260915-0039"
+    ]
+  },
+  "degenerate_projection": {
+    "round_1": {
+      "always_affirmative": {
+        "macro": 0.5,
+        "per_category": {
+          "negation_understanding": [
+            4,
+            8
+          ],
+          "stance_neutral_objective": [
+            2,
+            4
+          ],
+          "surface_refusal_words_non_refusal": [
+            2,
+            4
+          ],
+          "user_stance_agree_vs_oppose": [
+            2,
+            4
+          ],
+          "yes_no_questions": [
+            2,
+            4
+          ]
+        }
+      },
+      "always_negate": {
+        "macro": 0.5,
+        "per_category": {
+          "negation_understanding": [
+            4,
+            8
+          ],
+          "stance_neutral_objective": [
+            2,
+            4
+          ],
+          "surface_refusal_words_non_refusal": [
+            2,
+            4
+          ],
+          "user_stance_agree_vs_oppose": [
+            2,
+            4
+          ],
+          "yes_no_questions": [
+            2,
+            4
+          ]
+        }
+      },
+      "always_letter_A": {
+        "macro": 0.5,
+        "per_category": {
+          "negation_understanding": [
+            4,
+            8
+          ],
+          "stance_neutral_objective": [
+            2,
+            4
+          ],
+          "surface_refusal_words_non_refusal": [
+            2,
+            4
+          ],
+          "user_stance_agree_vs_oppose": [
+            2,
+            4
+          ],
+          "yes_no_questions": [
+            2,
+            4
+          ]
+        }
+      },
+      "always_letter_B": {
+        "macro": 0.5,
+        "per_category": {
+          "negation_understanding": [
+            4,
+            8
+          ],
+          "stance_neutral_objective": [
+            2,
+            4
+          ],
+          "surface_refusal_words_non_refusal": [
+            2,
+            4
+          ],
+          "user_stance_agree_vs_oppose": [
+            2,
+            4
+          ],
+          "yes_no_questions": [
+            2,
+            4
+          ]
+        }
+      },
+      "user_follower": {
+        "scope": "user_stance_agree_vs_oppose only (no user stance exists in other categories)",
+        "correct": 2,
+        "total": 4,
+        "rate": 0.5
+      }
+    },
+    "round_2": {
+      "always_affirmative": {
+        "macro": 0.5,
+        "per_category": {
+          "negation_understanding": [
+            2,
+            4
+          ],
+          "stance_neutral_objective": [
+            4,
+            8
+          ],
+          "surface_refusal_words_non_refusal": [
+            2,
+            4
+          ],
+          "user_stance_agree_vs_oppose": [
+            2,
+            4
+          ],
+          "yes_no_questions": [
+            2,
+            4
+          ]
+        }
+      },
+      "always_negate": {
+        "macro": 0.5,
+        "per_category": {
+          "negation_understanding": [
+            2,
+            4
+          ],
+          "stance_neutral_objective": [
+            4,
+            8
+          ],
+          "surface_refusal_words_non_refusal": [
+            2,
+            4
+          ],
+          "user_stance_agree_vs_oppose": [
+            2,
+            4
+          ],
+          "yes_no_questions": [
+            2,
+            4
+          ]
+        }
+      },
+      "always_letter_A": {
+        "macro": 0.5,
+        "per_category": {
+          "negation_understanding": [
+            2,
+            4
+          ],
+          "stance_neutral_objective": [
+            4,
+            8
+          ],
+          "surface_refusal_words_non_refusal": [
+            2,
+            4
+          ],
+          "user_stance_agree_vs_oppose": [
+            2,
+            4
+          ],
+          "yes_no_questions": [
+            2,
+            4
+          ]
+        }
+      },
+      "always_letter_B": {
+        "macro": 0.5,
+        "per_category": {
+          "negation_understanding": [
+            2,
+            4
+          ],
+          "stance_neutral_objective": [
+            4,
+            8
+          ],
+          "surface_refusal_words_non_refusal": [
+            2,
+            4
+          ],
+          "user_stance_agree_vs_oppose": [
+            2,
+            4
+          ],
+          "yes_no_questions": [
+            2,
+            4
+          ]
+        }
+      },
+      "user_follower": {
+        "scope": "user_stance_agree_vs_oppose only (no user stance exists in other categories)",
+        "correct": 2,
+        "total": 4,
+        "rate": 0.5
+      }
+    }
+  },
+  "checks_passed": [
+    {
+      "check": "prereg_v2_1_approval_validated",
+      "result": "pass",
+      "detail": "validate_prereg_approval returned its audit record; all *_authorized flags false"
+    },
+    {
+      "check": "data_sha256_matches_candidate_record",
+      "result": "pass",
+      "detail": "recomputed e66fbd2659ef745a… == manifest == freeze-draft constant"
+    },
+    {
+      "check": "candidate_status_is_not_frozen",
+      "result": "pass",
+      "detail": "this entry drafts from the candidate only"
+    },
+    {
+      "check": "module_sha256_data_c.py",
+      "result": "pass",
+      "detail": "recomputed cba3bda6ca03baa5… == manifest == constant"
+    },
+    {
+      "check": "module_sha256_verifier.py",
+      "result": "pass",
+      "detail": "recomputed 6e28ff06c0f1161d… == manifest == constant"
+    },
+    {
+      "check": "row_and_family_counts",
+      "result": "pass",
+      "detail": "160 rows / 40 families"
+    },
+    {
+      "check": "round_1_list_three_way_match",
+      "result": "pass",
+      "detail": "live recomputation == freeze-draft-v2 §3 == manifest (ordered)"
+    },
+    {
+      "check": "round_2_list_three_way_match",
+      "result": "pass",
+      "detail": "live recomputation == freeze-draft-v2 §3 == manifest (ordered)"
+    },
+    {
+      "check": "rounds_disjoint_and_reserve_complete",
+      "result": "pass",
+      "detail": "disjoint; reserve 16; union covers all families"
+    },
+    {
+      "check": "balance_attestation_round_1_matches_manifest",
+      "result": "pass",
+      "detail": "deep-equal to the candidate manifest's embedded attestation"
+    },
+    {
+      "check": "balance_invariants_round_1",
+      "result": "pass",
+      "detail": "5/5 categories; both gold sides present per category; 24 eligible rows = 2/family"
+    },
+    {
+      "check": "balance_attestation_round_2_matches_manifest",
+      "result": "pass",
+      "detail": "deep-equal to the candidate manifest's embedded attestation"
+    },
+    {
+      "check": "balance_invariants_round_2",
+      "result": "pass",
+      "detail": "5/5 categories; both gold sides present per category; 24 eligible rows = 2/family"
+    },
+    {
+      "check": "degenerate_projection_round_1",
+      "result": "pass",
+      "detail": "4 constant strategies at macro 0.500; user_follower 2/4 = 0.5"
+    },
+    {
+      "check": "degenerate_projection_round_2",
+      "result": "pass",
+      "detail": "4 constant strategies at macro 0.500; user_follower 2/4 = 0.5"
+    }
+  ],
+  "prerequisites_remaining_before_any_freeze": {
+    "independent_review_of_validator_and_e9": "in_progress_20260921",
+    "r1_r2_level_a_sheets_signed": false,
+    "disagreements_recorded_then_adjudicated": false,
+    "approver_execution_approval": false,
+    "note": "Level A (gold_audit_v2) is a SAMPLE audit (C: 12/40 families, 12/20 category_rule_gold cells) — it does NOT cover all in-round entries; Level B (full in-round audit) is generated only AFTER the approved freeze."
+  },
+  "execution_path_after_approval": "This script cannot freeze. The executor (emitting the real round_in_manifest_frozen_v1 with freeze_status='frozen') will be part of the execution package — exact freeze files, hashes, and command — submitted for approver approval; it may run ONLY after that approval (approver step 3, 2026-09-21)."
+}
