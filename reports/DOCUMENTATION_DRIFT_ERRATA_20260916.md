@@ -44,6 +44,20 @@
 - **Provenance/chronology:** commits `bcfd237` → `8ac8c61` → `84f1952` → `fbb363c` postdate this errata (2026-09-16); the test-count growth is theirs, and the D5 consumer accessor plus its tests are this session's. No gate, threshold, failure record or artifact hash changed; `TOKEN_ANCHORS.json`/`ENVIRONMENT.json` remain `ecdac639…`/`5b8b5bf6…`.
 - **Downstream impact:** present-tense figures come from `CURRENT_STATE_20260916.md §12` / `addendum_20260917`. `handoff.md`, `ALIGNMENT_T00-T04.md`, this errata's E-2/E-5 and the README body remain preserved historical text; the README banner is navigation, not a finding.
 
+## E-7 — approved `PREREGISTRATION_PHASE0_REVISION_v2_1.yaml` header comment carries a stale round-C severity tally (SHA-frozen; NOT edited)
+
+- **Original (preserved, approved bytes, header lines ~10–16):** summarises the small-sample sensitivity re-derivation as "1 major（…）+1 major_error（BCa 列…）".
+- **Correction:** the authoritative **sensitivity-analysis** accounting is **1 major (perfect-correlation overclaim) + 3 minor (BCa label; BCa formula BCa-1; wild_cluster_lb)** per `INDEPENDENT_REVERIFICATION_20260917C.md` / `SMALL_SAMPLE_SENSITIVITY_20260917.md` §3; the fresh round-C pass additionally found its own major (D-C1, the stale machine twin). The header predates the fresh round-C pass and the BCa-1 formula fix. Round-C's D-C2 alignment ("aligned everywhere") **missed this header** while the same commit (RC-C2) concurrently edited the same header block — the counterexample is now permanent in SHA-bound bytes (round-D SKP-4).
+- **Provenance/chronology:** the yaml bytes are bound by the 2026-09-20 approval (`protocol_sha256` `7bbd58ca…`, commit `bdc17db`); editing even a comment would break the binding and require re-approval. The erratum has lived in `CURRENT_STATE_20260916.md` §12.8 + JSON `known_stale_provenance_NOT_edited` since `479b6c9`; this ledger entry is the round-D discoverability hardening the over-claim skeptic recommended (reasoned verdict: disclosure adequate, **v2.1.1 NOT required** — the drift *overstates* severity and omits BCa-1/D-C1, so it does not flatter the lead, and the gate text is correct).
+- **Downstream impact:** a reader who opens ONLY the yaml sees an overstated "+1 major_error" tally; the stale sentence's own one-hop pointer ("均已在 `SMALL_SAMPLE_SENSITIVITY_20260917.md` 改正") leads to the canonical accounting. A future **v2.1.1** may correct the header under fresh approval; until then this entry + §12.8 are the authoritative reading.
+
+## E-8 — `PREREG_V2_1_AMENDMENT_DRAFT_20260917.md` Item 5 quotes pre-BCa-1-fix BCa numbers ("null 0.005–0.015")
+
+- **Original (preserved + inline-annotated, line ~116):** "and **BCa lowers power further** at `n=12` (null 0.005–0.015)".
+- **Correction:** those digits came from the non-standard variant fixed by BCa-1; textbook BCa gives null **0.007–0.020** at MC=400 (≈0.019/0.019 at MC=2000 — the BCa column carries its own MC noise, RD-6). Same-commit artifacts (`analysis_small_sample_20260917.out`, sensitivity §1 point 3) and the `ac2d6d4` commit message already said 0.007–0.020, so the draft contradicted its own delta (round-D SKP-1). An inline round-D annotation marks the line; the original digits stay visible per §10.
+- **Provenance/chronology:** the draft is approver decision-support material committed in `ac2d6d4`; it is not SHA-bound, but as a record of what the approver saw, the original text is preserved and annotated rather than silently rewritten.
+- **Downstream impact:** none on any decision — BCa was never an approver option (the C-08 tick was (P) vs (W)); the approver ticked **(P)**; no recommendation rests on the BCa column.
+
 ---
 
 **Discipline statement:** These errata annotate; they do not overwrite. The originals (`ALIGNMENT_T00-T04.md`, `handoff.md`, `T03_FP32_CONTROL_PLAN.md`, `README.md`) remain byte-for-byte unchanged. No historical threshold, gate, failure record, artifact, or provenance was altered. Where a present-tense claim is corrected, the authoritative replacement lives in `CURRENT_STATE_20260916.{md,json}`.

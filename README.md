@@ -2,8 +2,9 @@
 
 > **本文档是 tier-6 便利摘要（GOAL §14 / errata E-5），已知过期。** 例如以下「模型实验未运行」一句已被后续 GPU pilot 记录取代
 > （T03 split-gate hook 工程证据 + T04 restricted pilot，`historical_T03_bf16_gate=failed` 永久不变）。
-> **当前权威现状：`reports/CURRENT_STATE_20260916.md` §12 ADDENDUM (2026-09-17)**（机器可读孪生 `CURRENT_STATE_20260916.json → addendum_20260917`）。
-> 待批决策队列：`reports/APPROVAL_PACKETS_20260916.md` + `reports/PREREG_V2_PROSPECTIVE_FIXES_20260917.md`。以下正文按原样保留，不作为现状依据。
+> **当前权威现状：`reports/CURRENT_STATE_20260916.md` §12 ADDENDUM（§12.1–§12.9，至 2026-09-21）**（机器可读孪生 `CURRENT_STATE_20260916.json → addendum_20260917`）。
+> PREREG v2.1 已于 2026-09-20 获批准（**仅协议文本**：C freeze、Level-B、S、任何模型/GPU/Round 1 仍未授权，见 §12.8）；
+> 其余待批决策：`reports/APPROVAL_PACKETS_20260916.md`（§A/§C–§G）。以下正文按原样保留，不作为现状依据。
 
 日期：2026-09-10（最后对齐 2026-09-12）。状态：详细设计与预注册草案；未注册。已完成 GPU 3 只读资源审计与合成小模型的 **CPU** hook 验证；**无 CUDA/模型 smoke run，模型实验未运行**。模型已锁定到官方 revision `62b9b3bd4308e72905c5bce38c1d6689549c525d`，hash 绑定经 `hf-mirror.com` 完成（`provenance=mirror_file_hashes_verified`，弱于官方 Hub；官方 Hub 复核 pending 网络）。详见 `reports/ALIGNMENT_T00-T04.md`。
 

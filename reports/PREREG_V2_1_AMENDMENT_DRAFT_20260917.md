@@ -113,7 +113,10 @@ Full self-consistent YAML for each is in `PREREG_V2_PROSPECTIVE_FIXES_20260917.m
 
 Sensitivity §1 (independent re-derivation running this session): at the null the conjunctive T gate fires **0.02–0.05**
 (so the percentile LB is not anti-conservative at 12 clusters), but power is only **≈0.37** at the floor rate `p≈0.65`,
-and **BCa lowers power further** at `n=12` (null 0.005–0.015). Whatever is ticked, record the gate as a
+and **BCa lowers power further** at `n=12` (null 0.005–0.015). *(Round-D erratum 2026-09-21, E-8: 0.005–0.015 were
+pre-BCa-1-fix numbers of a non-standard variant; textbook BCa gives null **0.007–0.020** at MC=400 (≈0.019/0.019 at
+MC=2000) — see `SMALL_SAMPLE_SENSITIVITY_20260917.md` §1 point 3. Decision direction unaffected: BCa was never an
+approver option ((P) vs (W)); the approver ticked (P).)* Whatever is ticked, record the gate as a
 **revision-protocol / screening** decision, **not** a confirmatory population claim.
 
 **☐ (P)** keep the percentile family-clustered LB, **with a stated power caveat** and the screening framing in text.

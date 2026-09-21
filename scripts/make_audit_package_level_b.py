@@ -8,7 +8,9 @@ hash stays valid).
 This is TOOLING-PREP (audit AUD-03). It is fail-closed: it REFUSES to build unless
 given an in-round manifest with freeze_status=="frozen" + a complete freeze_record,
 so it CANNOT emit Level-B content before the C freeze + round-allocation +
-PREREG v2 approval land. It reuses the EXACT blinding contract from the Level-A
+an effective PREREG approval (v2 or its v2_1 amendment — round-D GOV-1: v2 alone is
+superseded and can never "land"; the approval that exists is v2_1) land.
+It reuses the EXACT blinding contract from the Level-A
 builder (FORBIDDEN_IN_ITEMS / BLINDED_ITEM_KEYS / ident-leak check) so Level B
 blinds identically. Human signing and adjudication remain human tasks
 (mode=agent_prepared_materials_only); this prepares materials and proves 100%
@@ -59,7 +61,8 @@ def validate_frozen_manifest(manifest: dict[str, Any]) -> None:
         raise SystemExit(
             f"REFUSING to build Level B: freeze_status={manifest.get('freeze_status')!r} != 'frozen'. "
             "Level B is a PRE-FREEZE FULL audit of FINAL in-round files; it cannot be built from "
-            "candidate/unfrozen data (C freeze + round-allocation + PREREG v2 approval must land first).")
+            "candidate/unfrozen data (C freeze + round-allocation + an effective PREREG approval "
+            "— v2 or its v2_1 amendment — must land first).")
     fr = manifest.get("freeze_record")
     if not isinstance(fr, dict) or not fr.get("frozen_at") or not fr.get("data_sha256"):
         raise SystemExit("REFUSING to build Level B: freeze_record must carry frozen_at + data_sha256 bindings")

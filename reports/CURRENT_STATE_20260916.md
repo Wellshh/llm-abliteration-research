@@ -369,18 +369,23 @@ Governance/Code; Skeptical/Red-Team) on the corrected working tree. Full record:
 
 The §12.7 line "the approver still must actively tick C-07/C-08/C-18" is **superseded**: on 2026-09-20 the human/root
 approver approved Phase-0 revision **v2.1** and recorded the three verdict-affecting choices. Committed by the approver
-as **`bdc17db`** ("Approve Phase 0 revision v2.1 protocol choices"); pushed and verified (`origin/dev == local HEAD ==
-bdc17db` via `ls-remote`). This addendum records it; the approved bytes are **not** edited.
+as **`bdc17db`** ("Approve Phase 0 revision v2.1 protocol choices"); pushed earlier that session and verified by
+`ls-remote` **while HEAD was still `bdc17db`** — the equality is scoped to that moment, and `origin/dev` has since
+advanced (round-D SKP-3: a recorded hash equation is stale at the moment of its own commit — the RT-1 pattern the JSON
+`sync_note` warns about; re-derive with `git rev-parse`/`ls-remote`). This addendum records it; the approved bytes are
+**not** edited.
 
 - **Choices (approver's, recorded in `approver_choice_record`):** **C-07 = (a)** macro ≥ 0.75 gates, per-category
   report-only with **no category-level pass claim**; **C-08 = (P)** family-clustered percentile one-sided 95 % LB,
   **screening / revision-protocol only, non-confirmatory**, power caveat retained; **C-18 = (i)** label-swap gated
   swap-only + `stance_consistency` reported **ungated**, with **(iv) frozen denominator mandatory** (invalid/missing
-  stay in the denominator, never the numerator). The approver's stated rationale is restrained and matches the
-  sensitivity analysis: a macro gate can compensate a weak category (hence the explicit bar on category-level ability
-  claims); at 12 families the C-08 risk is mainly **false negatives / low power**, not manufactured false positives;
-  a hard gate on 2 stance pairs would amplify chance error into a zero-tolerance verdict; splitting swap from stance
-  keeps label-map invariance and sycophancy-sensitivity from being blurred into one construct.
+  stay in the denominator, never the numerator). The approver's stated rationale — verbatim in the approval message,
+  recovered from the session transcript and verified word-for-word on 2026-09-21 (round-D SKP-2/GOV-4; quoted in full
+  in §12.9) — is restrained and matches the sensitivity analysis: a macro gate can compensate a weak category (hence
+  the explicit bar on category-level ability claims); at 12 families the C-08 risk is mainly **false negatives / low
+  power**, not manufactured false positives; a hard gate on 2 stance pairs would amplify chance error into a
+  zero-tolerance verdict; splitting swap from stance keeps label-map invariance and sycophancy-sensitivity from being
+  blurred into one construct.
 - **Verified by re-derivation this session (not taken on report):** sidecar `protocol_sha256`
   `7bbd58cae219508702de6293a99ffb8ee1aeb275d29f43aae83a1eaa7d4f1196` **== sha256 of the approved yaml bytes == the
   approver-stated value**; yaml + sidecar both `approved_data_after_amendment`, `freeze.effective=true`,
@@ -405,7 +410,118 @@ bdc17db` via `ls-remote`). This addendum records it; the approved bytes are **no
   4. **Any model/GPU run** needs its own §F-style ticket + live admission audit.
 - **Known stale provenance in the approved bytes, NOT edited (erratum):** the approved yaml's header comment
   (lines ~10–16) still summarises round C as "1 major + 1 major_error" and predates the fresh round-C / BCa-1 fix; the
-  authoritative accounting is **1 major + 3 minor** in `INDEPENDENT_REVERIFICATION_20260917C.md`. Because the bytes are
+  authoritative **sensitivity-analysis** accounting is **1 major + 3 minor**, while the fresh round-C pass's own major
+  (D-C1, the stale machine twin) and its remaining minors are itemised separately in
+  `INDEPENDENT_REVERIFICATION_20260917C.md`'s defect table (round-D SKP-6: the two accountings must not be conflated;
+  SKP-4: round-C's D-C2 "aligned everywhere" missed this header). Because the bytes are
   SHA-bound by the approval, editing even a comment would break the binding and require re-approval, so it is left
   unchanged and recorded here. A future **v2.1.1** may correct the comment under a fresh approval if the approver wants
   the header self-consistent; it is a narrative imprecision, not a protocol-semantics defect (the gate text is correct).
+  Round-D discoverability hardening: errata ledger **E-7** (`DOCUMENTATION_DRIFT_ERRATA_20260916.md`) now carries the
+  same erratum, per the over-claim skeptic's reasoned verdict that the disclosure is adequate and v2.1.1 is **not**
+  required.
+
+### 12.9 §12 round D (2026-09-21): round-C remediation + approval record independently re-verified — zero majors; 8 minors + 9 info found, all fixed or erratumized
+
+**Mechanism.** The user authorized round D. Three fresh independent read-only reviewers (no shared notes; re-derive,
+not read-the-conclusion; CPU-only, zero repo writes, no S, no GPU, no network; round-C report read last):
+**Statistics/Formula**, **Governance/Twin-sync/Approval-record**, **Skeptical/Over-claim**. Scope: the lead-authored
+remediation delta (`ac2d6d4`) + the approval-turn record (`479b6c9`); `bdc17db` (approver-authored approved bytes)
+integrity-only. Git base HEAD `479b6c9` (each reviewer re-derived it). Full record:
+**`INDEPENDENT_REVERIFICATION_20260921D.md`**.
+
+**Verdicts: all three `confirmed_with_minor_issues`. Zero majors.**
+
+**Independently confirmed (reviewer-re-derived; these items are no longer lead-attested):**
+
+- **The BCa-1 fix is textbook-correct** — `bca_lb` verified line-by-line against Efron & Tibshirani (1993)
+  eq. 14.10/14.15 (leave-one-**cluster**-out jackknife acceleration, one-sided `z_α=Φ⁻¹(0.05)` for a lower bound,
+  `a==0` branch = bias-corrected percentile `Φ(2z0+za)` to 1 ulp). The statistics reviewer's own from-the-literature
+  re-implementation (no repo code reused; RNG stream validated by reproducing all 36 non-BCa cells) reproduces
+  **all 12 committed BCa cells** (incl. null 0.007/0.020, p=0.80 0.767/0.632). Script double-run byte-identical to
+  the committed `.out` (sha `81e4b702…`, empty stderr). This discharges C.md's "remediation is lead-authored"
+  honest-limit **for the formula and the numbers**.
+- **The approval record is faithful** to the approver's message — recorded triply (yaml `approval_scope` + sidecar +
+  both twins); every addition found is constraint-**tightening** only; all `*_authorized` parse **false**;
+  gate body ↔ recorded choices match by parse; full hash chain v1→v2→v2.1 closes (incl. the `739e14fe` intermediate
+  and the v1 `5afe02a5…`/`84aaffd7…` links); 13-sidecar sweep: nothing flipped since the initial commit.
+- **Twin sync holds (the D-C1 lesson):** zero divergences and zero optimistic skew between md §12.5–§12.8 and the
+  JSON; the machine-readable record is nowhere more optimistic than the prose.
+- **No authorization creep, no silent scope change:** every file touched in `ac2d6d4` + `479b6c9` maps to the round-C
+  defect table or the approval-recording duty; all 9 threshold decimals byte-identical v2↔v2.1; approved bytes
+  git-clean; no test deleted; script diffs are comment/message-only; suite **257 OK (skipped=1)** re-run
+  independently by two reviewers (plus the 258-vs-257 platform-skip reconciliation re-derived).
+- **Round-B de-inflation and round-C story are clean:** no optimistic residue outside clearly-marked historical
+  quotes; every path/hash/section reference in the delta resolves; no round-D pre-writing (every remediation mention
+  carried the pending qualifier until this section).
+
+**Defects found → disposition** (reviewer ID prefixes disambiguate the two colliding "D-D*" tables):
+
+- **GOV-1 (minor)** `make_audit_package_level_b.py:11,:62` still said "PREREG v2 approval" (the RC-C3 message fix had
+  landed only on the `:77` boolean gate; probe-confirmed the stale refusal text) — **FIXED**: both now read "an
+  effective PREREG approval (v2 or its v2_1 amendment)". Behavior unchanged (both paths still fail closed).
+- **GOV-2 (minor)** the approved yaml's stale header tally — already erratumized (§12.8 + JSON); round D verified the
+  erratum's line refs/quotes/tally exact — **HARDENED** with errata-ledger entry **E-7** (skeptic's reasoned verdict:
+  disclosure adequate, v2.1.1 **not** required).
+- **GOV-3 (info)** README banner still listed the PREREG decision as pending — **FIXED** (banner now points to
+  §12.1–§12.9 and states the protocol-only approval; body untouched, E-5 discipline).
+- **GOV-4 (info)** §12.8's rationale attribution exceeded what repo content let a reviewer verify — **RESOLVED**: the
+  full approval message was recovered from the session transcript; the four rationale clauses are **verbatim approver
+  text** (quoted below); §12.8 now cites that provenance. The elision lived in the lead's working summary, not in the
+  record.
+- **SKP-1 (minor)** `PREREG_V2_1_AMENDMENT_DRAFT_20260917.md:116` kept the pre-BCa-1-fix digits "null 0.005–0.015",
+  contradicting the same commit's corrected 0.007–0.020 (and the `ac2d6d4` commit message) — **FIXED**: inline
+  round-D annotation (original preserved per §10) + errata **E-8**.
+- **SKP-2 (minor)** = GOV-2's attribution-inflation risk on §12.8's rationale sentence — resolved identically
+  (provenance citation; the attribution itself verified true).
+- **SKP-3 (minor)** RT-1 recurrence: "origin/dev == local HEAD == bdc17db via ls-remote" was false at the moment of
+  its own commit (`479b6c9`) — **FIXED**: claim scoped to its moment in md + JSON, with the re-derive instruction.
+- **SKP-4 (minor)** C.md's D-C2 disposition said "aligned everywhere" but the v2_1 yaml header — listed in D-C2's own
+  finding column — was missed by that alignment and is now SHA-frozen — **FIXED** by correcting clause (here + E-7);
+  C.md itself is a historical record and stays unedited.
+- **SKP-5 (info)** "an independent re-derivation confirmed" (C.md:31 / sensitivity §1.3) was unattributed at round-C
+  time (the fixed `.out` was lead-regenerated after the reviewers finished) — **FIXED** in sensitivity §1.3, which now
+  attributes the independent confirmation to round D's from-literature re-implementation; C.md stays unedited with the
+  correction recorded here.
+- **SKP-6 (info)** §12.8's "authoritative accounting is 1 major + 3 minor" could be misread as the whole round-C
+  accounting (losing D-C1) — **FIXED** (scoped to the sensitivity accounting, md + JSON).
+- **SKP-7 (info)** JSON `invariants_held_this_session` parenthetical omitted the historical T04/hook-gate
+  `effective=true` entries that C.md's sweep names — **FIXED** (parenthetical aligned: T03/T04 entries from the
+  initial commit, git-clean).
+- **RD-1 (minor)** sensitivity NULL-1 caveat: "an MC=2000 re-run converges to ≈0.073" was not reproducible from the
+  documented configuration — same-seed MC=2000 gives **0.067** (0.073 could only come from an undocumented variant
+  stream) — **FIXED** (0.067 quoted, exact iid limit 0.0758 retained, "converges" withdrawn).
+- **RD-2 (minor)** "The clustered 0.077 matches the exact value" used the wrong reference distribution: the clustered
+  DGP is overdispersed (`pe=clip(0.5+0.15Z)`), its exact point-rule null is **≈0.0852** (reviewer's closed-form
+  truncated-normal-moment + 12-fold-convolution computation, validated in the csd→0 limit; same-stream MC=2000
+  corroboration 0.084), so 0.077 sits ~0.6 se below its own exact value — **FIXED** (caveat rewritten; the
+  "not anti-conservative" conclusion unchanged: conjunctive clustered gate 0.050 at MC=400, 0.045 at MC=2000, ≤ nominal).
+- **RD-3…RD-6 (info)** disclosed; the script and `.out` are deliberately **NOT** regenerated (byte-stability of the
+  committed, independently-reproduced artifact outranks cosmetic alignment): (RD-3) the two compared estimators use
+  quantile-index conventions one order statistic apart (`ceil(αB)−1` vs `floor(adj·B)`; flipped 1/400 gate decisions
+  in two clustered cells at the 0.497/0.500 boundary); (RD-4) `z0` continuity correction, `adj` clamp, and the
+  never-firing `denom==0` fallback (min |denom| observed 0.66/4800 iterations) are documented practical guards, so
+  the accurate claim is "textbook formula + disclosed guards"; (RD-5) the BCa column draws a fresh bootstrap, so
+  GATE(pct) and GATE(BCa) are unpaired per iteration; (RD-6) BCa-null MC noise — annotation added to §1.3.
+
+**Approver rationale, verbatim** (recovered from the session transcript 2026-09-21; source of the GOV-4/SKP-2
+resolution — the elision was in the lead's working summary, not in the approval message):
+
+> 这组选择相对克制：
+> - macro 门可能补偿某个弱类别，因此明确禁止类别级能力结论；
+> - C-08 在 12 个 family 下主要风险是假阴性和功效不足，没有证据显示它会大量制造假阳性；
+> - stance 只有 2 个 pair，设硬门会把偶然误差放大成零容忍判决；
+> - swap 与 stance 分开避免把标签映射不变性和迎合敏感性混成一个构念。
+
+**Honest limit of round D (the chain does not self-close).** The reviewers confirmed the **pre-fix** state of this
+delta. The eight fixes above are again **lead-authored and self-checked**; per the skeptic's forward-looking note,
+treating them as independently confirmed requires a round E or the approver's explicit sign-off. The load-bearing
+items need nothing further: the BCa formula and all 12 cells, every hash binding, the twin sync, the approval
+fidelity, and the absence of authorization creep were reviewer-re-derived, not read. Reviewers could not verify: the
+live remote state (no network for two of them; corroborated by the local tracking ref), `bdc17db`'s approver
+attribution from git metadata (shared git identity — attribution is process-level), and round-C's process claims
+(independence of the three reviewers; only the record attests).
+
+**Unchanged:** `phase0_construct_admission_met=false`; C `candidate_draft_not_frozen`; S blocked; no model/GPU/S/
+Round-1 authorized or run; RC-C3's mechanical sidecar validator remains a freeze-ticket prerequisite (task #14); the
+untracked 366KB transcript's disposition remains the user's.

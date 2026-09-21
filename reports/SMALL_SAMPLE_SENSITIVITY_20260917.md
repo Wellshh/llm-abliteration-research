@@ -54,10 +54,17 @@ and this table + the `.out` regenerated, so these are now standard-BCa numbers, 
    percentile bootstrap is statistically fragile at small cluster counts") is **real but bounded**: it does not
    manufacture false passes at the null. (Family correlation nudges the point rule up to 0.077, above nominal —
    clustering *is* the thing the cluster-bootstrap exists to handle, and here it roughly holds.) **MC-noise caveat
-   (round-C NULL-1):** at MC=400 the iid point-rule null estimate 0.055 is a noisy low draw — the exact population
-   value is `P(Bin(24,0.5)≥16)=0.0758` and the MC se is ≈0.013, so 0.055 sits ~1.6 se low; an MC=2000 re-run converges
-   to ≈0.073. The clustered 0.077 matches the exact value. The "not anti-conservative" conclusion holds either way;
-   the low-MC iid figures should not be read as precise to the third decimal.
+   (round-C NULL-1; corrected in round D, RD-1/RD-2):** at MC=400 the iid point-rule null estimate 0.055 is a noisy
+   low draw — the exact **iid** population value is `P(Bin(24,0.5)≥16)=0.0758` and the MC se is ≈0.013, so 0.055 sits
+   ~1.6 se low; a same-seed MC=2000 re-run of the committed script gives **0.067** (still ~1.5 se low — the "≈0.073 an
+   MC=2000 re-run converges to" that an earlier draft of this caveat quoted came from an undocumented variant stream
+   and is superseded, RD-1). The **clustered** regime's exact null is **not** `P(Bin(24,0.5)≥16)`: with
+   `pe=clip(0.5+0.15Z)` the family scores are overdispersed, and an independent round-D computation (closed-form
+   truncated-normal moments + 12-fold convolution, validated against the csd→0 limit; same-stream MC=2000
+   corroboration **0.084**) gives **≈0.085**, so the measured 0.077 sits ~0.6 se below **its own** exact value — the
+   earlier "the clustered 0.077 matches the exact value" compared against the wrong reference distribution (RD-2).
+   The "not anti-conservative" conclusion holds either way (the conjunctive clustered gate is 0.050 at MC=400 and
+   0.045 at MC=2000, still ≤ nominal); the low-MC figures should not be read as precise to the third decimal.
 2. **Power is the binding constraint, not calibration.** A model that genuinely clears the floor sits at `p≈0.65`; the
    conjunctive gate admits it only **≈ 0.37** of the time, reaching ≈ 0.78 only by `p=0.75`. At 12 families the test
    **cannot separate "just clears the floor" from "clears it comfortably"** — the confidence band is wider than the
@@ -66,9 +73,15 @@ and this table + the `.out` regenerated, so these are now standard-BCa numbers, 
    **0.007–0.020** — it *under-rejects the null*, i.e. it over-corrects at `n=12` and throws away power the percentile
    rule had: at `p=0.80` BCa admits **0.767 (iid) / 0.632 (clustered)** vs the percentile rule's **0.895 / 0.865**.
    Adopting BCa "because small samples" would lower the pass rate for good models without buying calibration the
-   percentile rule lacked. (These are now standard-BCa numbers per the BCa-1 formula fix; an independent re-derivation
-   confirmed the qualitative conclusion is robust — textbook BCa still under-rejects the null and still loses power to
-   the percentile rule at `n=12` — so no recommendation rests on the exact digits.)
+   percentile rule lacked. (These are now standard-BCa numbers per the BCa-1 formula fix. Attribution — round-D SKP-5:
+   at round-C time the corrected bytes were lead-regenerated and self-checked; as of round D (2026-09-21) the
+   statistics reviewer independently re-implemented textbook BCa from the literature (E&T 1993 eq. 14.10/14.15, no
+   repo code reused) and reproduced **all 12 committed BCa cells** plus byte-identical determinism, so the qualitative
+   conclusion — textbook BCa still under-rejects the null and still loses power to the percentile rule at `n=12` — is
+   now independently confirmed. The BCa null cells carry their own MC noise, symmetric with the point rule's: the
+   0.007 low end is 3/400 events (se≈0.004) and a same-stream MC=2000 re-run gives ≈**0.019 (iid) / 0.019
+   (clustered)**, so neither BCa range should be read to the third decimal (RD-6). No recommendation rests on the
+   exact digits.)
 4. **Not tested here (do not read as endorsed):** the wild cluster bootstrap (the third option packet §B lists). It is
    the theory-preferred interval for few clusters, but implementing and simulating it correctly is its own CPU task;
    this analysis deliberately reports only what it actually ran.
