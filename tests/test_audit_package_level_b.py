@@ -41,7 +41,7 @@ def _frozen_manifest():
         "schema": "round_in_manifest_frozen_v1",
         "round_id": "round-1-FIXTURE",
         "freeze_status": "frozen",
-        "prereg_revision": "PREREGISTRATION_PHASE0_REVISION_v2",
+        "prereg_revision": "PREREGISTRATION_PHASE0_REVISION_v2_1",
         "prereg_revision_approval_effective": True,
         "freeze_record": {"frozen_at": "2026-09-17T00:00:00Z",
                           "data_sha256": data_sha,
@@ -78,6 +78,8 @@ class LevelBBuilderTests(unittest.TestCase):
             # honest: NOT unlocked, human sign-off NOT done
             self.assertFalse(pkg["acceptance"]["unlocks_runs"])
             self.assertFalse(pkg["acceptance"]["human_signoff_complete"])
+            self.assertTrue(pkg["prereg_approval_verified"]["effective"])
+            self.assertEqual(pkg["prereg_approval_verified"]["choices"]["C-07"], "(a)")
             self.assertEqual(pkg["mode"].split(";")[0], "agent_prepared_materials_only")
             # artifacts exist
             self.assertTrue((out / "manifest.json").exists())
@@ -188,6 +190,14 @@ class LevelBFailClosedGateTests(unittest.TestCase):
             with self.assertRaises(SystemExit) as ctx:
                 self.mod.build_level_b(m, Path(d) / "x")
             self.assertIn("missing", str(ctx.exception))
+
+    def test_refuses_old_v2_manifest_revision(self):
+        m = _frozen_manifest()
+        m["prereg_revision"] = "PREREGISTRATION_PHASE0_REVISION_v2"
+        with tempfile.TemporaryDirectory() as d:
+            with self.assertRaises(SystemExit) as ctx:
+                self.mod.build_level_b(m, Path(d) / "x")
+            self.assertIn("prereg_revision", str(ctx.exception))
 
     def test_refuses_prereg_not_effective(self):
         for val in (False, None):

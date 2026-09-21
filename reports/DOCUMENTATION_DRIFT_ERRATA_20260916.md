@@ -61,3 +61,12 @@
 ---
 
 **Discipline statement:** These errata annotate; they do not overwrite. The originals (`ALIGNMENT_T00-T04.md`, `handoff.md`, `T03_FP32_CONTROL_PLAN.md`, `README.md`) remain byte-for-byte unchanged. No historical threshold, gate, failure record, artifact, or provenance was altered. Where a present-tense claim is corrected, the authoritative replacement lives in `CURRENT_STATE_20260916.{md,json}`.
+
+
+## E-9 — C-08 clustered-null calibration wording tightened (2026-09-21)
+
+- **Historical original:** the stronger “not anti-conservative” / “still ≤ nominal” sentence is preserved in the `a73a6b2` historical commit; the current sensitivity report has been tightened.
+- **Correction:** the MC=2000 estimate is approximately 90/2000, with two-sided 95% Wilson interval approximately **[0.0368, 0.0550]**; neither estimate proves a true null rejection rate ≤0.05. The revised wording says only that the pre-specified DGP simulation did not observe obvious excess rejection, retains MC uncertainty, and does not generalize to all dependence structures. It also preserves the iid exact 0.0758, MC=2000 0.067, and clustered exact ≈0.085 derivations and clarifies that `p=0.5` is the null equal to the degenerate baseline, not a test of the 15pp margin.
+- **Approved-byte pointer:** the approved `reports/PREREGISTRATION_PHASE0_REVISION_v2_1.yaml` remains byte-unchanged; its `t_round_gate.c08_uncertainty_rule.power_caveat` still contains the stronger “NOT anti-conservative” wording. Read that approved field together with this E-9 limitation; this erratum does not alter the approved protocol bytes.
+- **Scope note:** the earlier “originals remain unchanged” statement applies to the E1–E8 historical documents and does not prohibit this explicitly authorized update to the sensitivity report or this append-only E-9 entry.
+- **Downstream impact:** no threshold, script, `.out`, approved v2.1 YAML/sidecar, or C-08(P) scope changed. C-08 remains a screening/revision-protocol rule and is not confirmatory.

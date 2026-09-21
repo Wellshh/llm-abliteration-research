@@ -228,6 +228,10 @@
       "pending_approval_protocol_text_edited": false,
       "t05_or_formal_test_or_intervention_selection_touched": false,
       "gpu5_or_other_processes_touched": false
-    }
+    },
+    "round_d_root_receipt": "Root signed off on non-load-bearing Round-D repairs; no Round-E started.",
+    "rc_c3_consumer_validator": {"implemented": true,"cpu_tests": 265,"skipped": 1,"yaml_sidecar_hashes_and_choices_pinned": true,"scope": "consumer validator only; real C freeze script and R1/R2 human sign-off remain undone"},
+    "e9_calibration_erratum": "The 0.045 estimate does not prove true null rejection <=0.05; approved YAML bytes unchanged and must be read with E-9.",
+    "current_status": {"phase0_construct_admission_met": false,"C": "candidate_draft_not_frozen","S": "blocked","gpu_model_runs": false,"C_freeze_workflow_complete": false}
   }
 }

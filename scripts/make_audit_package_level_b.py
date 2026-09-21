@@ -8,8 +8,7 @@ hash stays valid).
 This is TOOLING-PREP (audit AUD-03). It is fail-closed: it REFUSES to build unless
 given an in-round manifest with freeze_status=="frozen" + a complete freeze_record,
 so it CANNOT emit Level-B content before the C freeze + round-allocation +
-an effective PREREG approval (v2 or its v2_1 amendment — round-D GOV-1: v2 alone is
-superseded and can never "land"; the approval that exists is v2_1) land.
+the effective approved PREREG v2.1 protocol and sidecar land.
 It reuses the EXACT blinding contract from the Level-A
 builder (FORBIDDEN_IN_ITEMS / BLINDED_ITEM_KEYS / ident-leak check) so Level B
 blinds identically. Human signing and adjudication remain human tasks
@@ -39,6 +38,7 @@ sys.path.insert(0, str(ROOT / "src"))
 # Single-source the blinding contract from Level A so Level B blinds IDENTICALLY.
 import make_audit_packages as levelA  # noqa: E402
 from minicpm_research.runs import file_hash  # noqa: E402
+from validate_prereg_approval import validate_prereg_approval  # noqa: E402
 
 _write = levelA._write
 _read_jsonl = levelA._read_jsonl
@@ -51,33 +51,29 @@ SEED = 20260917
 _REQUIRED_EXAMPLE_FIELDS = ("example_id", "family_id", "task", "messages", "gold")
 
 
-def validate_frozen_manifest(manifest: dict[str, Any]) -> None:
+def validate_frozen_manifest(manifest: dict[str, Any]) -> dict[str, Any]:
     """Fail-closed gate: Level B may only be built from a FROZEN in-round manifest."""
     if not isinstance(manifest, dict):
         raise SystemExit("in-round manifest must be a JSON object")
     if manifest.get("schema") != "round_in_manifest_frozen_v1":
         raise SystemExit(f"unexpected in-round manifest schema {manifest.get('schema')!r}; expected round_in_manifest_frozen_v1")
+    if manifest.get("prereg_revision") != "PREREGISTRATION_PHASE0_REVISION_v2_1":
+        raise SystemExit("REFUSING to build Level B: prereg_revision must be the approved PREREGISTRATION_PHASE0_REVISION_v2_1")
     if manifest.get("freeze_status") != "frozen":
         raise SystemExit(
             f"REFUSING to build Level B: freeze_status={manifest.get('freeze_status')!r} != 'frozen'. "
             "Level B is a PRE-FREEZE FULL audit of FINAL in-round files; it cannot be built from "
-            "candidate/unfrozen data (C freeze + round-allocation + an effective PREREG approval "
-            "— v2 or its v2_1 amendment — must land first).")
+            "candidate/unfrozen data; C freeze, round allocation, and the effective approved PREREG v2.1 protocol and sidecar are required.")
     fr = manifest.get("freeze_record")
     if not isinstance(fr, dict) or not fr.get("frozen_at") or not fr.get("data_sha256"):
         raise SystemExit("REFUSING to build Level B: freeze_record must carry frozen_at + data_sha256 bindings")
     # Audit D3: truth-based, not presence-based. A self-declared 'frozen' manifest with
     # fabricated hashes or an unapproved prereg revision must NOT pass.
-    # round-C RC-C3 (residual, disclosed not closed): this checks a HUMAN-TRANSCRIBED boolean carried
-    # in the manifest; it does NOT read the approval sidecar, so it cannot by itself enforce the
-    # sidecar's signature_requires clause (approver_choice_record non-null for C-07/C-08/C-18,
-    # protocol_sha256 == sha256(yaml), freeze.effective). A signer who set this boolean true with a
-    # null approver_choice_record would violate the sidecar's invalidation clause but face no refusal
-    # HERE. The machine authority is the sidecar; a freeze-time validator must read it directly. That
-    # validator is deferred to the freeze ticket (same consumer-boundary theme as D5) — this gate is
-    # necessary, not sufficient.
+    # RC-C3: the consumer reads and validates the approved v2.1 sidecar directly;
+    # the manifest boolean below is retained only as a second, explicit declaration.
+    prereg_approval_verified = validate_prereg_approval(ROOT)
     if manifest.get("prereg_revision_approval_effective") is not True:
-        raise SystemExit("REFUSING to build Level B: prereg_revision_approval_effective must be true (an effective PREREG approval — v2 or its v2_1 amendment — is a freeze prerequisite)")
+        raise SystemExit("REFUSING to build Level B: prereg_revision_approval_effective must be true (the effective approved PREREG v2.1 protocol and sidecar are freeze prerequisites)")
     data_sha = fr.get("data_sha256")
     if not isinstance(data_sha, dict) or not data_sha:
         raise SystemExit("REFUSING to build Level B: freeze_record.data_sha256 must be a non-empty mapping of repo-relative path -> sha256")
@@ -113,6 +109,7 @@ def validate_frozen_manifest(manifest: dict[str, Any]) -> None:
             raise SystemExit(f"in-round example missing required fields {missing}: {e.get('example_id', '<no id>')}")
         if e.get("in_round_eligible") is False:
             raise SystemExit(f"in-round example {e['example_id']} is marked in_round_eligible=false; cannot be in a frozen in-round set")
+    return prereg_approval_verified
 
 
 def build_items_full(examples: list[dict[str, Any]], rng: random.Random) -> tuple[list[dict[str, Any]], dict[str, dict[str, Any]]]:
@@ -176,7 +173,7 @@ def _sheet_md_b(task: str, codes: list[str], reviewer: str, bind: dict[str, str]
 
 def build_level_b(manifest: dict[str, Any], out: Path, seed: int = SEED) -> dict[str, Any]:
     """Build the Level-B package from a FROZEN in-round manifest. Returns the manifest dict."""
-    validate_frozen_manifest(manifest)
+    prereg_approval_verified = validate_frozen_manifest(manifest)
     if out.exists():
         raise SystemExit(f"REFUSING overwrite of existing package dir: {out}")
     examples = manifest["in_round_examples"]
@@ -220,6 +217,7 @@ def build_level_b(manifest: dict[str, Any], out: Path, seed: int = SEED) -> dict
         "seed_role": "presentation order (item shuffle + code assignment) ONLY; coverage is 100% full in-round, seed-independent",
         "mode": "agent_prepared_materials_only; human signing and adjudication are human tasks",
         "round_id": manifest.get("round_id"),
+        "prereg_approval_verified": prereg_approval_verified,
         "built_from_frozen_manifest": {"freeze_status": manifest["freeze_status"], "frozen_at": fr.get("frozen_at"),
                                        "data_sha256": fr.get("data_sha256"), "prereg_revision": manifest.get("prereg_revision"),
                                        "prereg_revision_approval_effective": manifest.get("prereg_revision_approval_effective")},

@@ -49,23 +49,21 @@ earlier draft computed a non-standard variant `Phi(2·z0 + …)` with an `a==0 �
 and this table + the `.out` regenerated, so these are now standard-BCa numbers, reproducible byte-identically.)
 
 **What it shows.**
-1. **Type-I error is in the right neighbourhood, so the gate is not a broken test.** Under the null the conjunctive rule
-   fires **0.020–0.050** — at or below the nominal 5 % one-sided rate, not inflated. The packet's stated worry ("the
-   percentile bootstrap is statistically fragile at small cluster counts") is **real but bounded**: it does not
-   manufacture false passes at the null. (Family correlation nudges the point rule up to 0.077, above nominal —
-   clustering *is* the thing the cluster-bootstrap exists to handle, and here it roughly holds.) **MC-noise caveat
-   (round-C NULL-1; corrected in round D, RD-1/RD-2):** at MC=400 the iid point-rule null estimate 0.055 is a noisy
-   low draw — the exact **iid** population value is `P(Bin(24,0.5)≥16)=0.0758` and the MC se is ≈0.013, so 0.055 sits
-   ~1.6 se low; a same-seed MC=2000 re-run of the committed script gives **0.067** (still ~1.5 se low — the "≈0.073 an
-   MC=2000 re-run converges to" that an earlier draft of this caveat quoted came from an undocumented variant stream
-   and is superseded, RD-1). The **clustered** regime's exact null is **not** `P(Bin(24,0.5)≥16)`: with
-   `pe=clip(0.5+0.15Z)` the family scores are overdispersed, and an independent round-D computation (closed-form
-   truncated-normal moments + 12-fold convolution, validated against the csd→0 limit; same-stream MC=2000
-   corroboration **0.084**) gives **≈0.085**, so the measured 0.077 sits ~0.6 se below **its own** exact value — the
-   earlier "the clustered 0.077 matches the exact value" compared against the wrong reference distribution (RD-2).
-   The "not anti-conservative" conclusion holds either way (the conjunctive clustered gate is 0.050 at MC=400 and
-   0.045 at MC=2000, still ≤ nominal); the low-MC figures should not be read as precise to the third decimal.
-2. **Power is the binding constraint, not calibration.** A model that genuinely clears the floor sits at `p≈0.65`; the
+1. **The pre-specified simulation did not show obvious excess rejection, but it cannot establish a null upper bound.**
+   Under the null the conjunctive clustered estimate is **0.050 at MC=400 and ≈0.045 at MC=2000** (about 90/2000).
+   For 90/2000, the two-sided 95% Wilson interval is approximately **[0.0368, 0.0550]**, so these simulations do not
+   prove that the true null rejection rate is ≤0.05; the MC=400 estimate is likewise not an upper bound. The statement
+   is limited to this pre-specified DGP: the simulation did not observe obvious excess rejection, calibration retains MC
+   uncertainty, and the result cannot be extrapolated to all possible dependence structures. At MC=400 the iid point-rule
+   null estimate is 0.055, while the exact iid population value is `P(Bin(24,0.5)≥16)=0.0758`; the MC standard error
+   is ≈0.013. A same-seed MC=2000 rerun gives 0.067; the earlier ≈0.073 figure came from an undocumented stream.
+   The clustered regime's exact null is **not** `P(Bin(24,0.5)≥16)`: with `pe=clip(0.5+0.15Z)` the family scores are
+   overdispersed, and an independent round-D computation using truncated-normal moments plus 12-fold convolution,
+   validated against the csd→0 limit, gives **≈0.085** (same-stream MC=2000 corroboration 0.084); the measured 0.077
+   sits below its own exact value. Here `p=0.5` is the null where the model equals the degenerate baseline; it is not a
+   test of the 15 percentage-point margin. C-08(P) remains a screening/revision-protocol rule, not a confirmatory inference.
+
+2. **Power is low at the floor; calibration still has MC uncertainty.** A model that genuinely clears the floor sits at `p≈0.65`; the
    conjunctive gate admits it only **≈ 0.37** of the time, reaching ≈ 0.78 only by `p=0.75`. At 12 families the test
    **cannot separate "just clears the floor" from "clears it comfortably"** — the confidence band is wider than the
    effect the gate is meant to certify.

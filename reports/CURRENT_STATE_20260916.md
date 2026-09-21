@@ -525,3 +525,11 @@ attribution from git metadata (shared git identity — attribution is process-le
 **Unchanged:** `phase0_construct_admission_met=false`; C `candidate_draft_not_frozen`; S blocked; no model/GPU/S/
 Round-1 authorized or run; RC-C3's mechanical sidecar validator remains a freeze-ticket prerequisite (task #14); the
 untracked 366KB transcript's disposition remains the user's.
+
+
+## §12.10 — Round-D receipt, RC-C3 consumer validator, and C-08 calibration erratum (2026-09-21)
+
+- **Round-D receipt:** root has signed off on the non-load-bearing Round-D repairs; no Round-E work was started.
+- **RC-C3:** the Level-B consumer-side validator is implemented and passed the remote CPU suite (**265 tests, 1 skip**). It directly validates the approved v2.1 YAML/sidecar bytes, pinned hashes, and C-07(a)/C-08(P)/C-18(i)+(iv) choices. This closes the consumer validator item only; the real C freeze script, frozen C data, and independent R1/R2 human gold review/sign-off remain undone.
+- **E-9:** the sensitivity report now corrects the over-strong inference that 0.045≤0.05 proves non-anti-conservatism; the approved YAML bytes remain unchanged and must be read with E-9.
+- **Current gates:** `phase0_construct_admission_met=false`; C remains `candidate_draft_not_frozen`; S remains blocked; no GPU/model run occurred. The validator is not a completed C-freeze workflow or human gold audit.
