@@ -1,8 +1,10 @@
 # MATERIAL_VERIFICATION — Level-A 盲审材料核验（智能体备料，2026-09-21）
 
-**性质**：这是智能体对 `artifacts/audit/gold_audit_v2/`（B9-03 Level-A 抽检包，generated 2026-09-15）的**材料完整性核验记录**，不是人工验收，不解锁任何运行。方法：对每个文件重算 sha256 并与包 manifest（`gold_audit_v2/manifest.json`）内嵌绑定逐项比对；对 sheets 做空白/未签/无 gold 字样检查；`SEALED_KEY.json` **只取哈希与大小，内容未读**。
+**性质**：这是智能体对 `artifacts/audit/gold_audit_v2/`（B9-03 Level-A 抽检包，generated 2026-09-15）的**材料完整性核验记录**，不是人工验收，不解锁任何运行。方法：对每个文件重算 sha256 并与包 manifest（`gold_audit_v2/manifest.json`）内嵌绑定逐项比对；对 sheets 做空白/未签检查与 gold **值**泄漏检查；`SEALED_KEY.json` **只取哈希与大小，内容未读**。
 
-## 1. 哈希绑定核验（18/18 全配）
+> **Round-F 更正（2026-09-28，随独立复核 F-1/F-2 入账，原文保留）：** 原头部与下表曾写 **"18/18 全配"**，实际逐项和为 **19**（items×4 + sheets×8 + sealed key×1 + 数据×2 + forms×4）；独立复核方以 19/19 全配复算确认，无一文件漏验——错的是计数标签。原 §2 的"正文无 gold 字样"表述不精确（sheets 标题即 `GOLD AUDIT SHEET`、列头含"我的独立 gold（语义）"，为设计使然）；**成立的实质结论**是：无任何 gold **值/答案**泄漏——item 键 ⊆ 盲态契约、判决列全部为空、密封钥匙未读。
+
+## 1. 哈希绑定核验（19/19 全配；原误记 18/18，见上方更正）
 
 | 绑定项 | manifest 期望 | 实算 | 结果 |
 |---|---|---|---|
@@ -21,9 +23,9 @@
 
 包 manifest 自身的 sha256（供表头绑定引用）：`dc71425fa8ed1562a1f823085e12e27925c6bdeb6de50f4773d1e244fd78be36`。
 
-## 2. 空白/盲态检查
+## 2. 空白/盲态检查（round-F 后表述精确化，见上方更正）
 
-- 8 张 sheets（R1×4 + R2×4）：**全部未签**（签署栏为空）、正文无 `"gold"`/`gold:`/`正确答案` 字样。
+- 8 张 sheets（R1×4 + R2×4）：**全部未签**（签署栏为空）；无任何 gold **值/答案**泄漏——item 键 ⊆ 盲态契约、判决列全部为空（sheets 含 `GOLD AUDIT SHEET` 标题与"我的独立 gold"列头，为表格设计使然，不构成泄漏）。
 - counts 与 §G 记录一致：gold_items V=72 / T=48 / C=24，surface_items=24，sealed_key_entries=168，`s_template_item_count=0`。
 - `s_template_EMPTY/` 保持空模板（S blocked，批准 + intake 前不得填充）。
 

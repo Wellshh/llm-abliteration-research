@@ -2,7 +2,7 @@
 
 > **本文档是 tier-6 便利摘要（GOAL §14 / errata E-5），已知过期。** 例如以下「模型实验未运行」一句已被后续 GPU pilot 记录取代
 > （T03 split-gate hook 工程证据 + T04 restricted pilot，`historical_T03_bf16_gate=failed` 永久不变）。
-> **当前权威现状：`reports/CURRENT_STATE_20260916.md` §12 ADDENDUM（§12.1–§12.11，至 2026-09-28）**（机器可读孪生 `CURRENT_STATE_20260916.json → addendum_20260917`）。
+> **当前权威现状：`reports/CURRENT_STATE_20260916.md` §12 ADDENDUM（§12.1–§12.12，至 2026-09-28）**（机器可读孪生 `CURRENT_STATE_20260916.json → addendum_20260917`）。
 > PREREG v2.1 已于 2026-09-20 获批准（**仅协议文本**：C freeze、Level-B、S、任何模型/GPU/Round 1 仍未授权，见 §12.8）；
 > 其余待批决策：`reports/APPROVAL_PACKETS_20260916.md`（§A/§C–§G）。以下正文按原样保留，不作为现状依据。
 

@@ -105,7 +105,9 @@ def _git_head(root: Path) -> str | None:
 
 def _check(checks: list[dict[str, Any]], name: str, ok: bool, detail: str = "") -> None:
     if not ok:
-        _fail(f"check '{name}' failed" + (f": {detail}" if detail else ""))
+        # round-F F-3: the detail string states the SUCCESS invariant; interpolating it
+        # verbatim into a refusal reads as a false equality claim. Label it as violated.
+        _fail(f"check '{name}' failed" + (f"; violated invariant (as asserted on pass): {detail}" if detail else ""))
     checks.append({"check": name, "result": "pass", **({"detail": detail} if detail else {})})
 
 
