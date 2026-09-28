@@ -96,5 +96,59 @@ class PreregApprovalValidatorTests(unittest.TestCase):
                 self._call(root)
 
 
+class SemanticPinTests(unittest.TestCase):
+    """Review-F1 regression battery: the semantic battery must refuse CS-1-class
+    denominator/pair/threshold regressions even when they are crafted to keep the
+    magic substrings. Tests the extracted _validate_semantics directly — the pin
+    layer already refuses tampered bytes from reaching it upstream (see
+    PreregApprovalValidatorTests); these protect the future re-pin moment."""
+
+    @classmethod
+    def setUpClass(cls):
+        import copy
+        import yaml
+        cls.mod = _load()
+        root = Path(__file__).resolve().parents[1]
+        cls.base_proto = yaml.safe_load((root / 'reports/PREREGISTRATION_PHASE0_REVISION_v2_1.yaml').read_text(encoding='utf-8'))
+        cls.card = json.loads((root / 'reports/PREREGISTRATION_PHASE0_REVISION_v2_1_APPROVAL.json').read_text(encoding='utf-8'))
+        cls.copy = copy
+
+    def _refuse(self, mutate):
+        proto = self.copy.deepcopy(self.base_proto)
+        mutate(proto)
+        with self.assertRaises(SystemExit):
+            self.mod._validate_semantics(proto, self.card)
+
+    def test_approved_semantics_pass(self):
+        self.mod._validate_semantics(self.copy.deepcopy(self.base_proto), self.card)  # must not raise
+
+    def test_output_dependent_denominator_missing_required_clauses_refused(self):
+        evil = ("The consistency denominator is the FROZEN pair count recorded at freeze; it "
+                "REMAINS in the denominator; invalid pairs are DROPPED and the count is "
+                "recomputed from the outputs.")
+        self._refuse(lambda p: p['c_round_gate']['label_swap_consistency'].__setitem__('denominator_semantics', evil))
+
+    def test_reversal_sentence_appended_to_approved_text_refused(self):
+        base = self.base_proto['c_round_gate']['label_swap_consistency']['denominator_semantics']
+        reversal = base + " Exception: pairs with an invalid side are DROPPED and the count is recomputed from the outputs."
+        self._refuse(lambda p: p['c_round_gate']['label_swap_consistency'].__setitem__('denominator_semantics', reversal))
+
+    def test_swap_threshold_relaxation_refused(self):
+        self._refuse(lambda p: p['c_round_gate']['label_swap_consistency'].__setitem__('min', 0.50))
+        self._refuse(lambda p: p['c_round_gate']['label_swap_consistency'].__setitem__('min', True))
+
+    def test_pair_count_shrinkage_refused(self):
+        self._refuse(lambda p: p['c_round_gate']['label_swap_consistency'].__setitem__('expected_pair_count_round1', 3))
+        self._refuse(lambda p: p['c_round_gate']['label_swap_consistency'].__setitem__('expected_pair_count_round1', True))
+
+    def test_merged_pair_set_refused(self):
+        self._refuse(lambda p: p['c_round_gate']['label_swap_consistency'].__setitem__(
+            'pair_set', 'within-family (primary_map_1, primary_map_2, stance_agree, stance_oppose) pairs; merged invariant consistency'))
+
+    def test_stance_gating_refused(self):
+        self._refuse(lambda p: p['c_round_gate']['stance_consistency'].__setitem__('min', 0.85))
+        self._refuse(lambda p: p['c_round_gate'].__setitem__('stance_consistency', None))
+
+
 if __name__ == '__main__':
     unittest.main()
